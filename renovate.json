@@ -1,0 +1,17 @@
+{
+  "extends": ["config:base"],
+  "baseBranches": ["next"],
+  "major": false,
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "enabled": false,
+      "excludePackageNames": []
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "enabled": false,
+      "excludePackageNames": []
+    }
+  ]
+}
