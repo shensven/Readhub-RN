@@ -11,7 +11,7 @@
     {
       "matchDepTypes": ["dependencies"],
       "enabled": false,
-      "excludePackageNames": []
+      "excludePackageNames": ["react-native-flipper"]
     }
   ]
 }
