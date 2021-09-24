@@ -1,0 +1,29 @@
+name: Build
+
+on:
+    push:
+        branches: [main]
+
+    workflow_dispatch:
+
+jobs:
+    assem-release:
+        runs-on: ubuntu-latest
+        container: reactnativecommunity/react-native-android
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install yarn dependencies
+              run: yarn install
+
+            - name: Init awetributionsBuild
+              run: yarn json -I -f package.json -e "this.awetributionsBuild=${GITHUB_RUN_NUMBER}"
+
+            - name: Build application
+              run: cd android && chmod +x gradlew && ./gradlew assembleRelease
+
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: app-release
+                  path: android/app/build/outputs/apk/release
