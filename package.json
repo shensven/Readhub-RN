@@ -1,6 +1,7 @@
 {
   "name": "readhubn",
   "version": "0.0.1",
+  "readhubnBuild": 1,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -23,6 +24,7 @@
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
+    "json": "^11.0.0",
     "metro-react-native-babel-preset": "^0.66.0",
     "react-native-codegen": "^0.0.7",
     "react-native-flipper": "^0.112.0",
