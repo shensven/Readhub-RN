@@ -16,8 +16,8 @@ jobs:
             - name: Install yarn dependencies
               run: yarn install
 
-            - name: Init awetributionsBuild
-              run: yarn json -I -f package.json -e "this.awetributionsBuild=${GITHUB_RUN_NUMBER}"
+            - name: Init readhubnBuild
+              run: yarn json -I -f package.json -e "this.readhubnBuild=${GITHUB_RUN_NUMBER}"
 
             - name: Build application
               run: cd android && chmod +x gradlew && ./gradlew assembleRelease
