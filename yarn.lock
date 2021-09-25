@@ -5458,7 +5458,7 @@ react-native-codegen@^0.0.7:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-collapsible-tab-view@^4.2.1:
+react-native-collapsible-tab-view@4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-native-collapsible-tab-view/-/react-native-collapsible-tab-view-4.2.1.tgz#ba06db56dbb96d362e7c25a0755516cd9dc2fa3f"
   integrity sha512-Fzz9Jk0aNBSwCo0ig2LuW3mbHbcssa65GZ1TNK+moKekdJZFwFvMdTyYtaG1RMTfPAntwd4qlrF+hvdBoIAynw==
@@ -5486,7 +5486,7 @@ react-native-pager-view@5.4.4:
   resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.4.tgz#83a873a82748440696ca0e0fd07a77477b854a78"
   integrity sha512-5zyol+FZ9X4N4OEz92IyaFFROR3KtgAgTmgqlUvG59Eigf+f6aWs5fvcbWwzuz/AlLZbrxIDrnLmSpMUOK57ww==
 
-react-native-reanimated@^2.2.2:
+react-native-reanimated@2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.2.2.tgz#8bc81c7ee93d599991507bb826050a5eeee1e7f2"
   integrity sha512-Lfv4ogbNLU9x3DqhXUFza9pnzyTvPrw5xGC1wWA6aGXqZgyaikNLgC5dNWzxVbfEwRdOuLPFsai3LAcIM92TCg==
