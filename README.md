@@ -5,6 +5,7 @@
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/ReadHubn/react-native)](./package.json)
 [![Test](https://github.com/shensven/ReadHubn/actions/workflows/next.yml/badge.svg?branch=next)](https://github.com/shensven/ReadHubn/actions/workflows/next.yml)
 [![Build](https://github.com/shensven/ReadHubn/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/shensven/ReadHubn/actions/workflows/main.yml)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/ReadHubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/ReadHubn&utm_campaign=Badge_Grade_Settings)
 
 ## Run instructions for Android
 
