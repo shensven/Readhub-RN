@@ -1,65 +1,37 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Tabs} from 'react-native-collapsible-tab-view';
 
-const Topics: React.FC = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ScrollView>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-        <Text>T</Text>
-      </ScrollView>
-    </View>
-  );
-};
-
-const News: React.FC = () => {
-  return (
-    <View>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-      <Text>N</Text>
-    </View>
-  );
-};
-
-const Tech: React.FC = () => {
-  return (
-    <View>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-      <Text>T</Text>
-    </View>
-  );
-};
-
 const Home: React.FC = () => {
+  const renderCard = () => {
+    return (
+      <View>
+        <Text>Test</Text>
+      </View>
+    );
+  };
   return (
     <Tabs.Container>
       <Tabs.Tab name="Topics">
-        <Topics />
+        <Tabs.FlatList
+          data={[0, 1, 2, 3, 4]}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderCard}
+        />
       </Tabs.Tab>
       <Tabs.Tab name="News">
-        <News />
+        <Tabs.FlatList
+          data={[0, 1, 2, 3, 4]}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderCard}
+        />
       </Tabs.Tab>
       <Tabs.Tab name="Tech">
-        <Tech />
+        <Tabs.FlatList
+          data={[0, 1, 2, 3, 4]}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderCard}
+        />
       </Tabs.Tab>
     </Tabs.Container>
   );
