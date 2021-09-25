@@ -1,5 +1,6 @@
 # ReadHubn
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/ReadHubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/ReadHubn&utm_campaign=Badge_Grade_Settings)
 [![GitHub](https://img.shields.io/github/license/shensven/ReadHubn)](./LICENSE)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/ReadHubn/react)](./package.json)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/ReadHubn/react-native)](./package.json)
