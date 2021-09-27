@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "0.2.6",
-    "@react-navigation/material-top-tabs": "6.0.2",
-    "@react-navigation/native": "6.0.2",
-    "@react-navigation/stack": "6.0.7",
+    "@react-navigation/material-top-tabs": "6.0.4",
+    "@react-navigation/native": "6.0.4",
+    "@react-navigation/stack": "6.0.9",
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-collapsible-tab-view": "4.2.1",
