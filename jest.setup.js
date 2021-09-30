@@ -10,8 +10,18 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
-jest.mock('react-native-tab-view', () => ({
-  TabView: mockView,
-}));
+jest.mock('react-native-tab-view', () => {
+  return {
+    TabView: mockView,
+  };
+});
+
+jest.doMock('react-native-bootsplash', () => {
+  return {
+    hide: jest.fn().mockResolvedValueOnce(),
+    show: jest.fn().mockResolvedValueOnce(),
+    getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
+  };
+});
 
 jest.useFakeTimers();
