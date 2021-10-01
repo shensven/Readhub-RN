@@ -51,37 +51,32 @@ const Home: React.FC = () => {
   const [topics, setTopics] = useState<Feed[]>([]);
   const [news, setNews] = useState<Feed[]>([]);
   const [technews, setTechnews] = useState<Feed[]>([]);
-  const [blockchain, setBlockchain] = useState<Feed[]>([]);
 
   const getTopics = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
+    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
+    const resp: any = await appAxios.get('/topic');
     // console.log(resp);
     setTopics(resp.data.data);
   };
 
   const getNews = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
+    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
+    const resp: any = await appAxios.get('/news');
     // console.log(resp);
     setNews(resp.data.data);
   };
 
   const getTechnews = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
+    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
+    const resp: any = await appAxios.get('/technews');
     // console.log(resp);
     setTechnews(resp.data.data);
-  };
-
-  const getBlockchain = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
-    // console.log(resp);
-    setBlockchain(resp.data.data);
   };
 
   useLayoutEffect(() => {
     getTopics();
     getNews();
     getTechnews();
-    getBlockchain();
   }, []);
 
   //----------------------------------------------------------------------------
@@ -166,26 +161,13 @@ const Home: React.FC = () => {
           )}
         />
       </Tabs.Tab>
-      <Tabs.Tab name="Blockchain" label="区块链资讯">
-        <Tabs.FlatList
-          data={blockchain}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={styles.flatlist_footer}
-          ItemSeparatorComponent={() => (
-            <View style={styles.flatlist_separator} />
-          )}
-        />
-      </Tabs.Tab>
     </Tabs.Container>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {},
+  // root: {},
+
   tab_label: {
     fontWeight: 'bold',
   },
@@ -200,13 +182,13 @@ const styles = StyleSheet.create({
     height: 16,
   },
   flatlist_separator: {
-    height: 12,
+    height: 16,
   },
 
   card: {
     backgroundColor: '#FFFFFF',
-    marginLeft: 16,
-    marginRight: 16,
+    marginLeft: 20,
+    marginRight: 20,
     padding: 16,
     borderRadius: 12,
   },

@@ -49,6 +49,7 @@
     "@types/react": "^17"
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "preset": "react-native",
     "setupFiles": [
       "<rootDir>/jest.setup.js"

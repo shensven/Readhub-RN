@@ -9,7 +9,12 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer onReady={() => RNBootSplash.hide({fade: true})}>
+    <NavigationContainer
+      onReady={() =>
+        setTimeout(() => {
+          RNBootSplash.hide({fade: true});
+        }, 200)
+      }>
       <StatusBar barStyle="dark-content" />
       <Stack.Navigator
         initialRouteName="Home"
