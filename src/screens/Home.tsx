@@ -53,22 +53,19 @@ const Home: React.FC = () => {
   const [technews, setTechnews] = useState<Feed[]>([]);
 
   const getTopics = async () => {
-    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
-    const resp: any = await appAxios.get('/topic');
+    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
     // console.log(resp);
     setTopics(resp.data.data);
   };
 
   const getNews = async () => {
-    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
-    const resp: any = await appAxios.get('/news');
+    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
     // console.log(resp);
     setNews(resp.data.data);
   };
 
   const getTechnews = async () => {
-    // const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
-    const resp: any = await appAxios.get('/technews');
+    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
     // console.log(resp);
     setTechnews(resp.data.data);
   };
@@ -131,6 +128,7 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => (
             <View style={styles.flatlist_separator} />
           )}
+          showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>
       <Tabs.Tab name="News" label="科技动态">
@@ -145,6 +143,7 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => (
             <View style={styles.flatlist_separator} />
           )}
+          showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>
       <Tabs.Tab name="Tech" label="技术资讯">
@@ -159,6 +158,7 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => (
             <View style={styles.flatlist_separator} />
           )}
+          showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>
     </Tabs.Container>
