@@ -15,6 +15,7 @@
     "@react-navigation/material-top-tabs": "6.0.4",
     "@react-navigation/native": "6.0.4",
     "@react-navigation/stack": "6.0.9",
+    "axios": "^0.22.0",
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-bootsplash": "^3.2.6",
