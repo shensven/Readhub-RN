@@ -1,5 +1,5 @@
-import React, {useLayoutEffect} from 'react';
-import {View, Text} from 'react-native';
+import React, {useLayoutEffect, useState} from 'react';
+import {View, Text, StatusBar, StyleSheet} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import appAxios from '../utils/appAxios';
 
@@ -10,9 +10,18 @@ type StackParamList = {
 };
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 
+interface InstantDetail {
+  content: string;
+  siteName: string;
+  title: string;
+  url: string;
+}
+
 const FeedDetail: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
+
+  const [instantDetail, setInstantDetail] = useState<InstantDetail>();
 
   const getInstantDetail = async () => {
     const resp: any = await appAxios.get(
@@ -23,7 +32,8 @@ const FeedDetail: React.FC = () => {
         },
       },
     );
-    console.log(resp.data);
+    // console.log('getInstantDetail', resp.data);
+    setInstantDetail(resp.data);
   };
 
   useLayoutEffect(() => {
@@ -38,9 +48,22 @@ const FeedDetail: React.FC = () => {
 
   return (
     <View>
-      <Text>detail</Text>
+      <StatusBar barStyle="light-content" />
+      <View>
+        <Text style={styles.title}>{instantDetail?.title}</Text>
+        <Text style={styles.content}>{instantDetail?.content}</Text>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {},
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  content: {},
+});
 
 export default FeedDetail;
