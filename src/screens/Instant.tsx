@@ -1,13 +1,18 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Text, StatusBar, StyleSheet} from 'react-native';
+import {View, Text, useWindowDimensions} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import RenderHtml from 'react-native-render-html';
 import appAxios from '../utils/appAxios';
 
 type StackParamList = {
   Params: {
     id: string;
+    title: string;
+    summary: string;
+    publishDate: string;
   };
 };
+
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 
 interface InstantDetail {
@@ -17,11 +22,18 @@ interface InstantDetail {
   url: string;
 }
 
-const FeedDetail: React.FC = () => {
+const Instant: React.FC = () => {
+  const {width} = useWindowDimensions();
+
   const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
 
-  const [instantDetail, setInstantDetail] = useState<InstantDetail>();
+  const [instantDetail, setInstantDetail] = useState<InstantDetail>({
+    content: '',
+    siteName: '',
+    title: '',
+    url: '',
+  });
 
   const getInstantDetail = async () => {
     const resp: any = await appAxios.get(
@@ -32,7 +44,7 @@ const FeedDetail: React.FC = () => {
         },
       },
     );
-    // console.log('getInstantDetail', resp.data);
+    console.log('getInstantDetail', resp.data);
     setInstantDetail(resp.data);
   };
 
@@ -42,28 +54,22 @@ const FeedDetail: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: '话题详情',
+      title: '即时预览',
+      cardStyle: {
+        backgroundColor: '#FFFFFF',
+      },
     });
   }, [navigation, route]);
 
   return (
     <View>
-      <StatusBar barStyle="light-content" />
-      <View>
-        <Text style={styles.title}>{instantDetail?.title}</Text>
-        <Text style={styles.content}>{instantDetail?.content}</Text>
-      </View>
+      <Text>Instant</Text>
+      <RenderHtml
+        contentWidth={width - 32}
+        source={{html: instantDetail.content}}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  root: {},
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  content: {},
-});
-
-export default FeedDetail;
+export default Instant;

@@ -6,7 +6,7 @@ import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 
-interface Feed {
+interface TopicsFeed {
   createdAt: string;
   eventData: {
     createdAt: string;
@@ -45,35 +45,54 @@ interface Feed {
   updatedAt: string;
 }
 
-type RootStackParamList = {
-  FeedDetail: {id: string};
+interface NewsFeed {
+  authorName: string;
+  id: number;
+  language: string;
+  mobileUrl: string;
+  publishDate: string;
+  siteName: string;
+  summary: string;
+  summaryAuto: string;
+  title: string;
+  url: string;
+}
+
+interface TechnewsFeed extends NewsFeed {}
+
+type StackParamList = {
+  Summary: {id: string; title: string; summary: string; publishDate: string};
 };
-type Props = StackScreenProps<RootStackParamList, 'FeedDetail'>;
+type Props = StackScreenProps<StackParamList, 'Summary'>;
 type ScreenNavigationProp = Props['navigation'];
 
 const Home: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
 
-  const [topics, setTopics] = useState<Feed[]>([]);
-  const [news, setNews] = useState<Feed[]>([]);
-  const [technews, setTechnews] = useState<Feed[]>([]);
+  const [topics, setTopics] = useState<TopicsFeed[]>([]);
+  const [news, setNews] = useState<any[]>([]);
+  const [technews, setTechnews] = useState<any[]>([]);
 
   const getTopics = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
-    // console.log('getTopics', resp.data.data);
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get(
+      '/topic',
+    );
+    console.log('getTopics', resp.data.data);
     setTopics(resp.data.data);
   };
 
   const getNews = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
-    // console.log('getNews', resp.data.data);
+    const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news');
+    console.log('getNews', resp.data.data);
     setNews(resp.data.data);
   };
 
   const getTechnews = async () => {
-    const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
-    // console.log('getTechnews', resp.data.data);
+    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get(
+      '/technews',
+    );
+    console.log('getTechnews', resp.data.data);
     setTechnews(resp.data.data);
   };
 
@@ -102,21 +121,30 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
-  const renderCard = ({item}: {item: Feed}) => {
+  const renderCard = ({item}: {item: any}) => {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate('FeedDetail', {id: item.id})}>
+        onPress={() =>
+          navigation.navigate('Summary', {
+            id: item.id,
+            title: item.title,
+            summary: item.summary,
+            publishDate: item.publishDate,
+          })
+        }>
         <Text style={styles.card_title}>{item.title}</Text>
-        <Text numberOfLines={30} style={styles.card_summary}>
+        <Text numberOfLines={3} style={styles.card_summary}>
           {item.summary}
         </Text>
+        {/* <Text>{item.newsArray[0]?.siteName}</Text> */}
       </TouchableOpacity>
     );
   };
 
   return (
     <Tabs.Container
+      onTabChange={({index}) => console.log('index')}
       renderTabBar={props => (
         <MaterialTabBar
           {...props}
@@ -208,6 +236,7 @@ const styles = StyleSheet.create({
   card_summary: {
     marginTop: 12,
     lineHeight: 24,
+    fontSize: 15,
   },
 });
 

@@ -4,7 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
-import FeedDetail from './src/screens/FeedDetail';
+import Summary from './src/screens/Summary';
+import Instant from './src/screens/Instant';
 
 const Stack = createStackNavigator();
 
@@ -31,8 +32,15 @@ const App: React.FC = () => {
         }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
-          name="FeedDetail"
-          component={FeedDetail}
+          name="Summary"
+          component={Summary}
+          options={{
+            ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+        <Stack.Screen
+          name="Instant"
+          component={Instant}
           options={{
             ...TransitionPresets.ModalPresentationIOS,
           }}
