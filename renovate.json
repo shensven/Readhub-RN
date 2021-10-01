@@ -17,6 +17,7 @@
         "@react-navigation/native",
         "@react-navigation/stack",
         "axios",
+        "dayjs",
         "react-native-bootsplash",
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
