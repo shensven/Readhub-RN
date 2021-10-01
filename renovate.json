@@ -16,6 +16,8 @@
         "@react-navigation/material-top-tabs",
         "@react-navigation/native",
         "@react-navigation/stack",
+        "axios",
+        "react-native-bootsplash",
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
         "react-native-pager-view",
