@@ -1,6 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
@@ -44,8 +45,14 @@ interface Feed {
   updatedAt: string;
 }
 
+type RootStackParamList = {
+  FeedDetail: {id: string};
+};
+type Props = StackScreenProps<RootStackParamList, 'FeedDetail'>;
+type ScreenNavigationProp = Props['navigation'];
+
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
 
   const [topics, setTopics] = useState<Feed[]>([]);
@@ -54,19 +61,19 @@ const Home: React.FC = () => {
 
   const getTopics = async () => {
     const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/topic');
-    // console.log(resp);
+    // console.log('getTopics', resp.data.data);
     setTopics(resp.data.data);
   };
 
   const getNews = async () => {
     const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/news');
-    // console.log(resp);
+    // console.log('getNews', resp.data.data);
     setNews(resp.data.data);
   };
 
   const getTechnews = async () => {
     const resp: AxiosResponse<{data: Feed[]}> = await appAxios.get('/technews');
-    // console.log(resp);
+    // console.log('getTechnews', resp.data.data);
     setTechnews(resp.data.data);
   };
 
@@ -97,12 +104,14 @@ const Home: React.FC = () => {
 
   const renderCard = ({item}: {item: Feed}) => {
     return (
-      <View style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => navigation.navigate('FeedDetail', {id: item.id})}>
         <Text style={styles.card_title}>{item.title}</Text>
-        <Text numberOfLines={3} style={styles.card_summary}>
+        <Text numberOfLines={30} style={styles.card_summary}>
           {item.summary}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
 
