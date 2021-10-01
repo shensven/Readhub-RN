@@ -75,9 +75,7 @@ const Home: React.FC = () => {
   const [technews, setTechnews] = useState<any[]>([]);
 
   const getTopics = async () => {
-    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get(
-      '/topic',
-    );
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic');
     console.log('getTopics', resp.data.data);
     setTopics(resp.data.data);
   };
@@ -89,9 +87,7 @@ const Home: React.FC = () => {
   };
 
   const getTechnews = async () => {
-    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get(
-      '/technews',
-    );
+    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews');
     console.log('getTechnews', resp.data.data);
     setTechnews(resp.data.data);
   };
@@ -146,12 +142,7 @@ const Home: React.FC = () => {
     <Tabs.Container
       onTabChange={({index}) => console.log('index')}
       renderTabBar={props => (
-        <MaterialTabBar
-          {...props}
-          scrollEnabled
-          labelStyle={styles.tab_label}
-          indicatorStyle={styles.tab_indicator}
-        />
+        <MaterialTabBar {...props} scrollEnabled labelStyle={styles.tab_label} indicatorStyle={styles.tab_indicator} />
       )}>
       <Tabs.Tab name="Topics" label="热门话题">
         <Tabs.FlatList
@@ -162,9 +153,7 @@ const Home: React.FC = () => {
           ListHeaderComponentStyle={styles.flatlist_header}
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={styles.flatlist_footer}
-          ItemSeparatorComponent={() => (
-            <View style={styles.flatlist_separator} />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>
@@ -177,9 +166,7 @@ const Home: React.FC = () => {
           ListHeaderComponentStyle={styles.flatlist_header}
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={styles.flatlist_footer}
-          ItemSeparatorComponent={() => (
-            <View style={styles.flatlist_separator} />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>
@@ -192,9 +179,7 @@ const Home: React.FC = () => {
           ListHeaderComponentStyle={styles.flatlist_header}
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={styles.flatlist_footer}
-          ItemSeparatorComponent={() => (
-            <View style={styles.flatlist_separator} />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           showsVerticalScrollIndicator={false}
         />
       </Tabs.Tab>

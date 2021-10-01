@@ -36,14 +36,11 @@ const Instant: React.FC = () => {
   });
 
   const getInstantDetail = async () => {
-    const resp: any = await appAxios.get(
-      'https://api.readhub.cn/topic/instantview',
-      {
-        params: {
-          topicId: route.params.id,
-        },
+    const resp: any = await appAxios.get('https://api.readhub.cn/topic/instantview', {
+      params: {
+        topicId: route.params.id,
       },
-    );
+    });
     console.log('getInstantDetail', resp.data);
     setInstantDetail(resp.data);
   };
@@ -64,10 +61,7 @@ const Instant: React.FC = () => {
   return (
     <View>
       <Text>Instant</Text>
-      <RenderHtml
-        contentWidth={width - 32}
-        source={{html: instantDetail.content}}
-      />
+      <RenderHtml contentWidth={width - 32} source={{html: instantDetail.content}} />
     </View>
   );
 };

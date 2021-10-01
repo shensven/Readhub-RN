@@ -1,11 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {
-  Text,
-  StatusBar,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, StatusBar, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import dayjs from 'dayjs';
@@ -47,9 +41,7 @@ const Summary: React.FC = () => {
     <ScrollView contentContainerStyle={styles.root}>
       <StatusBar barStyle="light-content" />
       <Text style={styles.title}>{route.params.title}</Text>
-      <Text style={styles.publishDate}>
-        {dayjs(route.params.publishDate).fromNow()}
-      </Text>
+      <Text style={styles.publishDate}>{dayjs(route.params.publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>
         {route.params.summary}
       </Text>
