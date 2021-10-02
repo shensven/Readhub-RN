@@ -1,7 +1,8 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Text, useWindowDimensions} from 'react-native';
+import {View, Text, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import appAxios from '../utils/appAxios';
 
 type StackParamList = {
@@ -15,7 +16,7 @@ type StackParamList = {
 
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 
-interface InstantDetail {
+interface Instant {
   content: string;
   siteName: string;
   title: string;
@@ -28,25 +29,25 @@ const Instant: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
 
-  const [instantDetail, setInstantDetail] = useState<InstantDetail>({
+  const [instant, setInstant] = useState<Instant>({
     content: '',
     siteName: '',
     title: '',
     url: '',
   });
 
-  const getInstantDetail = async () => {
+  const getInstant = async () => {
     const resp: any = await appAxios.get('https://api.readhub.cn/topic/instantview', {
       params: {
         topicId: route.params.id,
       },
     });
-    console.log('getInstantDetail', resp.data);
-    setInstantDetail(resp.data);
+    console.log('getInstant', resp.data);
+    setInstant(resp.data);
   };
 
   useLayoutEffect(() => {
-    getInstantDetail();
+    getInstant();
   }, [navigation, route]);
 
   useLayoutEffect(() => {
@@ -59,11 +60,46 @@ const Instant: React.FC = () => {
   }, [navigation, route]);
 
   return (
-    <View>
-      <Text>Instant</Text>
-      <RenderHtml contentWidth={width - 32} source={{html: instantDetail.content}} />
-    </View>
+    <ScrollView contentContainerStyle={styles.root}>
+      <Text>来源{' ' + instant.siteName}</Text>
+      <View style={styles.header_divider} />
+      <Text style={styles.title}>{instant.title}</Text>
+      <RenderHtml contentWidth={width - 32} source={{html: instant.content}} />
+      <View style={styles.bottom}>
+        <View style={styles.divider} />
+        <Ionicons name="glasses-outline" size={24} color="rgba(0,0,0,0.1)" />
+        <View style={styles.divider} />
+      </View>
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    padding: 16,
+  },
+  header_divider: {
+    height: 1,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    marginTop: 16,
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'justify',
+  },
+  content: {},
+  bottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    width: '42%',
+  },
+});
 
 export default Instant;
