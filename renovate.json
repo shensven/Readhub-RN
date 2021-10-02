@@ -22,6 +22,7 @@
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
         "react-native-pager-view",
+        "react-native-paper",
         "react-native-render-html",
         "react-native-safe-area-context",
         "react-native-reanimated",
