@@ -147,8 +147,8 @@ const Home: React.FC = () => {
           {item.summary}
         </Text>
         <View style={styles.card_bottom}>
-          <View>
-            <View style={styles.card_siteName}>
+          <View style={styles.card_bottom_left}>
+            <Text numberOfLines={1} style={styles.card_siteName}>
               {'newsArray' in item && (
                 <>
                   <Text style={styles.card_siteName_unit}>{item.newsArray[0]?.siteName + ' '}</Text>
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
               )}
               {item.siteName?.length > 1 && <Text style={styles.card_siteName_unit}>{item.siteName}</Text>}
               {item.authorName?.length > 1 && <Text style={styles.card_siteName_unit}>{' / ' + item.authorName}</Text>}
-            </View>
+            </Text>
           </View>
           <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.card_iconbtn} onPress={() => {}} />
         </View>
@@ -267,6 +267,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  card_bottom_left: {
+    width: '80%',
   },
   card_siteName: {
     flexDirection: 'row',
