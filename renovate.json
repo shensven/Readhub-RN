@@ -6,7 +6,7 @@
     {
       "matchDepTypes": ["devDependencies"],
       "enabled": false,
-      "excludePackageNames": ["json", "react-native-flipper"]
+      "excludePackageNames": ["@types/react-native-vector-icons", "json", "react-native-flipper"]
     },
     {
       "matchDepTypes": ["dependencies"],
@@ -26,7 +26,8 @@
         "react-native-safe-area-context",
         "react-native-reanimated",
         "react-native-screens",
-        "react-native-tab-view"
+        "react-native-tab-view",
+        "react-native-vector-icons"
       ]
     }
   ]
