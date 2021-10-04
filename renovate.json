@@ -18,6 +18,8 @@
         "@react-navigation/stack",
         "axios",
         "dayjs",
+        "lottie-ios",
+        "lottie-react-native",
         "react-native-bootsplash",
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
