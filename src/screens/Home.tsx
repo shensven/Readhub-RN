@@ -1,14 +1,15 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
-import {IconButton} from 'react-native-paper';
+import {IconButton, TouchableRipple} from 'react-native-paper';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
+import Loading from './components/Loading';
 
 interface TopicsFeed {
   createdAt: string;
@@ -83,21 +84,40 @@ const Home: React.FC = () => {
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
+  const [topicLastCursor, setTopicLastCursor] = useState<number>();
+
   const getTopics = async () => {
-    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic');
-    console.log('getTopics', resp.data.data);
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {
+      params: {
+        pageSize: 20,
+      },
+    });
+    console.log('getTopics', resp.data);
     setTopics(resp.data.data);
+    setTopicLastCursor(resp.data.data[19].order);
+  };
+
+  const getNextTopic = async () => {
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {
+      params: {
+        pageSize: 20,
+        lastCursor: topicLastCursor,
+      },
+    });
+    console.log('getNextTopic', resp.data);
+    setTopics([...topics, ...resp.data.data]);
+    setTopicLastCursor(resp.data.data[19].order);
   };
 
   const getNews = async () => {
     const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news');
-    console.log('getNews', resp.data.data);
+    console.log('getNews', resp.data);
     setNews(resp.data.data);
   };
 
   const getTechnews = async () => {
     const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews');
-    console.log('getTechnews', resp.data.data);
+    console.log('getTechnews', resp.data);
     setTechnews(resp.data.data);
   };
 
@@ -109,6 +129,7 @@ const Home: React.FC = () => {
 
   const handleRefresh = () => {
     setRefreshing(true);
+    setTopicLastCursor(undefined);
     getTopics();
     setRefreshing(false);
   };
@@ -130,7 +151,8 @@ const Home: React.FC = () => {
 
   const renderCard = ({item}: {item: any}) => {
     return (
-      <TouchableOpacity
+      <TouchableRipple
+        borderless={true}
         style={styles.card}
         onPress={() =>
           navigation.navigate('Summary', {
@@ -141,30 +163,34 @@ const Home: React.FC = () => {
             hasInstantView: item.hasInstantView,
           })
         }>
-        <Text style={styles.card_title}>{item.title}</Text>
-        <Text style={styles.caed_publishDate}>{dayjs(item.publishDate).fromNow()}</Text>
-        <Text numberOfLines={3} style={styles.card_summary}>
-          {item.summary}
-        </Text>
-        <View style={styles.card_bottom}>
-          <View style={styles.card_bottom_left}>
-            <Text numberOfLines={1} style={styles.card_siteName}>
-              {'newsArray' in item && (
-                <>
-                  <Text style={styles.card_siteName_unit}>{item.newsArray[0]?.siteName + ' '}</Text>
-                  {item.newsArray.length > 1 && (
-                    <Text style={styles.card_siteName_unit}>等{' ' + item.newsArray.length + ' '}家媒体</Text>
-                  )}
-                  <Text style={styles.card_siteName_unit}>报道</Text>
-                </>
-              )}
-              {item.siteName?.length > 1 && <Text style={styles.card_siteName_unit}>{item.siteName}</Text>}
-              {item.authorName?.length > 1 && <Text style={styles.card_siteName_unit}>{' / ' + item.authorName}</Text>}
-            </Text>
+        <View>
+          <Text style={styles.card_title}>{item.title}</Text>
+          <Text style={styles.caed_publishDate}>{dayjs(item.publishDate).fromNow()}</Text>
+          <Text numberOfLines={3} style={styles.card_summary}>
+            {item.summary}
+          </Text>
+          <View style={styles.card_bottom}>
+            <View style={styles.card_bottom_left}>
+              <Text numberOfLines={1} style={styles.card_siteName}>
+                {'newsArray' in item && (
+                  <>
+                    <Text style={styles.card_siteName_unit}>{item.newsArray[0]?.siteName + ' '}</Text>
+                    {item.newsArray.length > 1 && (
+                      <Text style={styles.card_siteName_unit}>等{' ' + item.newsArray.length + ' '}家媒体</Text>
+                    )}
+                    <Text style={styles.card_siteName_unit}>报道</Text>
+                  </>
+                )}
+                {item.siteName?.length > 1 && <Text style={styles.card_siteName_unit}>{item.siteName}</Text>}
+                {item.authorName?.length > 1 && (
+                  <Text style={styles.card_siteName_unit}>{' / ' + item.authorName}</Text>
+                )}
+              </Text>
+            </View>
+            <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.card_iconbtn} onPress={() => {}} />
           </View>
-          <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.card_iconbtn} onPress={() => {}} />
         </View>
-      </TouchableOpacity>
+      </TouchableRipple>
     );
   };
 
@@ -180,11 +206,12 @@ const Home: React.FC = () => {
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header}
-          ListFooterComponent={() => <View />}
+          ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleRefresh} />}
           showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextTopic()}
         />
       </Tabs.Tab>
       <Tabs.Tab name="News" label="科技动态">
@@ -221,6 +248,7 @@ const Home: React.FC = () => {
 
 const styles = StyleSheet.create({
   // root: {},
+  RNHeaderRight: {},
 
   tab_label: {
     fontWeight: 'bold',
@@ -233,7 +261,8 @@ const styles = StyleSheet.create({
     height: 16,
   },
   flatlist_footer: {
-    height: 24,
+    marginTop: 16,
+    marginBottom: 16,
   },
   flatlist_separator: {
     height: 16,
