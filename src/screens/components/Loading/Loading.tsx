@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 const Loading: React.FC = () => {
   return (
     <View style={styles.root}>
-      <LottieView source={require('./loading5.json')} autoPlay loop style={styles.lottie} />
+      <LottieView source={require('./Bodymovin_export/data.json')} autoPlay loop style={styles.lottie} />
     </View>
   );
 };
@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lottie: {
-    width: 56,
-    height: 56,
+    width: 36,
+    height: 36,
   },
 });
 

@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
-import Loading from './components/Loading';
+import Loading from './components/Loading/Loading';
 
 interface TopicsFeed {
   createdAt: string;
@@ -71,6 +71,8 @@ type StackParamList = {
 type Props = StackScreenProps<StackParamList, 'Summary'>;
 type ScreenNavigationProp = Props['navigation'];
 
+//----------------------------------------------------------------------------
+
 const Home: React.FC = () => {
   dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
@@ -85,17 +87,35 @@ const Home: React.FC = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const [topicLastCursor, setTopicLastCursor] = useState<number>();
+  const [newsLastCursor, setNewsLastCursor] = useState<number>();
+  const [technewsLastCursor, setTechnewsLastCursor] = useState<number>();
+
+  //----------------------------------------------------------------------------
 
   const getTopics = async () => {
-    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {
-      params: {
-        pageSize: 20,
-      },
-    });
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {params: {pageSize: 20}});
     console.log('getTopics', resp.data);
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
   };
+
+  const getNews = async () => {
+    const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news', {params: {pageSize: 20}});
+    console.log('getNews', resp.data);
+    setNews(resp.data.data);
+    const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
+    setNewsLastCursor(timestamp);
+  };
+
+  const getTechnews = async () => {
+    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews', {params: {pageSize: 20}});
+    console.log('getTechnews', resp.data);
+    setTechnews(resp.data.data);
+    const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
+    setTechnewsLastCursor(timestamp);
+  };
+
+  //----------------------------------------------------------------------------
 
   const getNextTopic = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {
@@ -109,17 +129,33 @@ const Home: React.FC = () => {
     setTopicLastCursor(resp.data.data[19].order);
   };
 
-  const getNews = async () => {
-    const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news');
-    console.log('getNews', resp.data);
-    setNews(resp.data.data);
+  const getNextNews = async () => {
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/news', {
+      params: {
+        pageSize: 20,
+        lastCursor: newsLastCursor,
+      },
+    });
+    console.log('getNextNews', resp.data);
+    setNews([...news, ...resp.data.data]);
+    const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
+    setNewsLastCursor(timestamp);
   };
 
-  const getTechnews = async () => {
-    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews');
-    console.log('getTechnews', resp.data);
-    setTechnews(resp.data.data);
+  const getNextTechnews = async () => {
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/technews', {
+      params: {
+        pageSize: 20,
+        lastCursor: technewsLastCursor,
+      },
+    });
+    console.log('getNextTechnews', resp.data);
+    setTechnews([...technews, ...resp.data.data]);
+    const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
+    setTechnewsLastCursor(timestamp);
   };
+
+  //----------------------------------------------------------------------------
 
   useLayoutEffect(() => {
     getTopics();
@@ -127,10 +163,24 @@ const Home: React.FC = () => {
     getTechnews();
   }, []);
 
-  const handleRefresh = () => {
+  const handleTopicRefresh = () => {
     setRefreshing(true);
     setTopicLastCursor(undefined);
     getTopics();
+    setRefreshing(false);
+  };
+
+  const handleNewsRefresh = () => {
+    setRefreshing(true);
+    setNewsLastCursor(undefined);
+    getNews();
+    setRefreshing(false);
+  };
+
+  const handleTechnewsRefresh = () => {
+    setRefreshing(true);
+    setTechnewsLastCursor(undefined);
+    getTechnews();
     setRefreshing(false);
   };
 
@@ -209,7 +259,7 @@ const Home: React.FC = () => {
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleRefresh} />}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTopicRefresh()} />}
           showsVerticalScrollIndicator={false}
           onEndReached={() => getNextTopic()}
         />
@@ -221,11 +271,12 @@ const Home: React.FC = () => {
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header}
-          ListFooterComponent={() => <View />}
+          ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleRefresh} />}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleNewsRefresh()} />}
           showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextNews()}
         />
       </Tabs.Tab>
       <Tabs.Tab name="Tech" label="技术资讯">
@@ -235,11 +286,12 @@ const Home: React.FC = () => {
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header}
-          ListFooterComponent={() => <View />}
+          ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleRefresh} />}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTechnewsRefresh()} />}
           showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextTechnews()}
         />
       </Tabs.Tab>
     </Tabs.Container>
@@ -248,7 +300,7 @@ const Home: React.FC = () => {
 
 const styles = StyleSheet.create({
   // root: {},
-  RNHeaderRight: {},
+  // RNHeaderRight: {},
 
   tab_label: {
     fontWeight: 'bold',
