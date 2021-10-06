@@ -4,6 +4,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, TouchableRipple} from 'react-native-paper';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
@@ -66,6 +67,7 @@ interface NewsFeed {
 interface TechnewsFeed extends NewsFeed {}
 
 type StackParamList = {
+  Settings: undefined;
   Summary: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
 type Props = StackScreenProps<StackParamList, 'Summary'>;
@@ -187,7 +189,12 @@ const Home: React.FC = () => {
   //----------------------------------------------------------------------------
 
   const RNHeaderRight: React.FC = () => {
-    return null;
+    return (
+      <IconButton
+        icon={() => <Ionicons name="cog-outline" size={24} />}
+        onPress={() => navigation.navigate('Settings')}
+      />
+    );
   };
 
   useLayoutEffect(() => {

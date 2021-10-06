@@ -6,6 +6,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
 import Summary from './src/screens/Summary';
 import Instant from './src/screens/Instant';
+import Settings from './src/screens/Settings';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ const App: React.FC = () => {
             ...TransitionPresets.ModalPresentationIOS,
           }}
         />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
