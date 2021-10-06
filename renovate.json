@@ -5,16 +5,6 @@
   "major": false,
   "packageRules": [
     {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackageNames": [
-        "@types/react-native-background-timer",
-        "@types/react-native-vector-icons",
-        "json",
-        "react-native-flipper"
-      ]
-    },
-    {
-      "matchDepTypes": ["dependencies"],
       "matchPackageNames": [
         "@react-native-masked-view/masked-view",
         "@react-navigation/material-top-tabs",
@@ -36,6 +26,31 @@
         "react-native-screens",
         "react-native-tab-view",
         "react-native-vector-icons"
+      ],
+      "excludePackageNames": ["react", "react-native"]
+    },
+    {
+      "matchPackageNames": [
+        "@types/jest",
+        "@types/react",
+        "@types/react-native",
+        "@types/react-native-background-timer",
+        "@types/react-native-vector-icons",
+        "@types/react-test-renderer",
+        "json",
+        "react-native-flipper"
+      ],
+      "excludePackageNames": [
+        "@babel/core",
+        "@babel/runtime",
+        "@react-native-community/eslint-config",
+        "babel-jest",
+        "eslint",
+        "jest",
+        "metro-react-native-babel-preset",
+        "react-native-codegen",
+        "react-test-renderer",
+        "typescript"
       ]
     }
   ]
