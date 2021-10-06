@@ -1,12 +1,12 @@
 {
   "extends": ["config:base"],
   "baseBranches": ["next"],
+  "semanticCommits": "enabled",
   "major": false,
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
-      "enabled": false,
-      "excludePackageNames": [
+      "matchPackageNames": [
         "@types/react-native-background-timer",
         "@types/react-native-vector-icons",
         "json",
@@ -15,8 +15,7 @@
     },
     {
       "matchDepTypes": ["dependencies"],
-      "enabled": false,
-      "excludePackageNames": [
+      "matchPackageNames": [
         "@react-native-masked-view/masked-view",
         "@react-navigation/material-top-tabs",
         "@react-navigation/native",
