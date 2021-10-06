@@ -6,7 +6,12 @@
     {
       "matchDepTypes": ["devDependencies"],
       "enabled": false,
-      "excludePackageNames": ["@types/react-native-vector-icons", "json", "react-native-flipper"]
+      "excludePackageNames": [
+        "@types/react-native-background-timer",
+        "@types/react-native-vector-icons",
+        "json",
+        "react-native-flipper"
+      ]
     },
     {
       "matchDepTypes": ["dependencies"],
@@ -20,6 +25,7 @@
         "dayjs",
         "lottie-ios",
         "lottie-react-native",
+        "react-native-background-timer",
         "react-native-bootsplash",
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
