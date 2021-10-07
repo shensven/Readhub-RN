@@ -12,6 +12,13 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+jest.doMock('react-native-background-timer', () => {
+  return {
+    stopBackgroundTimer: jest.fn(),
+    runBackgroundTimer: jest.fn(),
+  };
+});
+
 // jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 // jest.mock('react-native-tab-view', () => {
