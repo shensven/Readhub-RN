@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
 
   const getTopics = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {params: {pageSize: 20}});
-    console.log('getTopics', resp.data);
+    // console.log('getTopics', resp.data);
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
     setTopicsNewCount(0);
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
 
   const getNews = async () => {
     const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news', {params: {pageSize: 20}});
-    console.log('getNews', resp.data);
+    // console.log('getNews', resp.data);
     setNews(resp.data.data);
     const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
     setNewsLastCursor(timestamp);
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
 
   const getTechnews = async () => {
     const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews', {params: {pageSize: 20}});
-    console.log('getTechnews', resp.data);
+    // console.log('getTechnews', resp.data);
     setTechnews(resp.data.data);
     const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
     setTechnewsLastCursor(timestamp);
@@ -133,7 +133,7 @@ const Home: React.FC = () => {
         lastCursor: topicLastCursor,
       },
     });
-    console.log('getNextTopic', resp.data);
+    // console.log('getNextTopic', resp.data);
     setTopics([...topics, ...resp.data.data]);
     setTopicLastCursor(resp.data.data[19].order);
   };
@@ -145,7 +145,7 @@ const Home: React.FC = () => {
         lastCursor: newsLastCursor,
       },
     });
-    console.log('getNextNews', resp.data);
+    // console.log('getNextNews', resp.data);
     setNews([...news, ...resp.data.data]);
     const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
     setNewsLastCursor(timestamp);
@@ -158,7 +158,7 @@ const Home: React.FC = () => {
         lastCursor: technewsLastCursor,
       },
     });
-    console.log('getNextTechnews', resp.data);
+    // console.log('getNextTechnews', resp.data);
     setTechnews([...technews, ...resp.data.data]);
     const timestamp = dayjs(resp.data.data[19].publishDate).valueOf();
     setTechnewsLastCursor(timestamp);
@@ -199,7 +199,7 @@ const Home: React.FC = () => {
     const resp: {data: {count: number}} = await appAxios.get('/topic/newCount', {
       params: {latestCursor: topics[0]?.order ?? ''},
     });
-    console.log('getTopicsNewCount', resp.data.count);
+    // console.log('getTopicsNewCount', resp.data.count);
     setTopicsNewCount(resp.data.count);
   };
 

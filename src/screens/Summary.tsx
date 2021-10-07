@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {Text, StatusBar, StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
+import {Text, StatusBar, StyleSheet, ScrollView, View} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';

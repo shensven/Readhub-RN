@@ -42,7 +42,7 @@ const Instant: React.FC = () => {
         topicId: route.params.id,
       },
     });
-    console.log('getInstant', resp.data);
+    // console.log('getInstant', resp.data);
     setInstant(resp.data);
   };
 
