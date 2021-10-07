@@ -7,6 +7,8 @@ import Home from './src/screens/Home';
 import Summary from './src/screens/Summary';
 import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
+import Help from './src/screens/Help';
+import About from './src/screens/About';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +49,8 @@ const App: React.FC = () => {
           }}
         />
         <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Help" component={Help} />
+        <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   );
