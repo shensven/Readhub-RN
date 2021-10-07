@@ -22,10 +22,7 @@ type StackParamList = {
 };
 
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
-
-type Props = StackScreenProps<StackParamList, 'Instant'>;
-
-type ScreenNavigationProp = Props['navigation'];
+type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 const Summary: React.FC = () => {
   dayjs.extend(relativeTime);

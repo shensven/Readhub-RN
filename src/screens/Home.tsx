@@ -72,8 +72,7 @@ type StackParamList = {
   Settings: undefined;
   Summary: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
-type Props = StackScreenProps<StackParamList, 'Summary'>;
-type ScreenNavigationProp = Props['navigation'];
+type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 //----------------------------------------------------------------------------
 

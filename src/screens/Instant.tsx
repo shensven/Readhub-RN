@@ -5,6 +5,13 @@ import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import appAxios from '../utils/appAxios';
 
+interface Instant {
+  content: string;
+  siteName: string;
+  title: string;
+  url: string;
+}
+
 type StackParamList = {
   Params: {
     id: string;
@@ -15,13 +22,6 @@ type StackParamList = {
 };
 
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
-
-interface Instant {
-  content: string;
-  siteName: string;
-  title: string;
-  url: string;
-}
 
 const Instant: React.FC = () => {
   const {width} = useWindowDimensions();
