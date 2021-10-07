@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Text, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -61,6 +61,7 @@ const Instant: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.root}>
+      <StatusBar barStyle="light-content" />
       <Text>来源{' ' + instant.siteName}</Text>
       <View style={styles.header_divider} />
       <Text style={styles.title}>{instant.title}</Text>

@@ -34,13 +34,7 @@ const App: React.FC = () => {
           ...TransitionPresets.SlideFromRightIOS,
         }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen
-          name="Summary"
-          component={Summary}
-          options={{
-            ...TransitionPresets.ModalPresentationIOS,
-          }}
-        />
+        <Stack.Screen name="Summary" component={Summary} />
         <Stack.Screen
           name="Instant"
           component={Instant}

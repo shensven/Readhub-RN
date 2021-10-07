@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {Text, StatusBar, StyleSheet, ScrollView, View} from 'react-native';
+import {Text, StyleSheet, ScrollView, View} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -42,7 +42,6 @@ const Summary: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.root}>
-      <StatusBar barStyle="light-content" />
       <Text style={styles.title}>{route.params.title}</Text>
       <Text style={styles.publishDate}>{dayjs(route.params.publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>
