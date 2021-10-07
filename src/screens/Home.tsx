@@ -1,16 +1,18 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface TopicsFeed {
   createdAt: string;
@@ -76,8 +78,10 @@ type ScreenNavigationProp = Props['navigation'];
 //----------------------------------------------------------------------------
 
 const Home: React.FC = () => {
-  dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
+  dayjs.extend(relativeTime);
+
+  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
@@ -92,6 +96,8 @@ const Home: React.FC = () => {
   const [newsLastCursor, setNewsLastCursor] = useState<number>();
   const [technewsLastCursor, setTechnewsLastCursor] = useState<number>();
 
+  const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
+
   //----------------------------------------------------------------------------
 
   const getTopics = async () => {
@@ -99,6 +105,7 @@ const Home: React.FC = () => {
     console.log('getTopics', resp.data);
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
+    setTopicsNewCount(0);
   };
 
   const getNews = async () => {
@@ -188,6 +195,24 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
+  const getTopicsNewCount = async () => {
+    const resp: {data: {count: number}} = await appAxios.get('/topic/newCount', {
+      params: {latestCursor: topics[0]?.order ?? ''},
+    });
+    console.log('getTopicsNewCount', resp.data.count);
+    setTopicsNewCount(resp.data.count);
+  };
+
+  useEffect(() => {
+    BackgroundTimer.stopBackgroundTimer();
+    BackgroundTimer.runBackgroundTimer(() => {
+      // console.log(topics[0]?.order ?? '空');
+      getTopicsNewCount();
+    }, 30000);
+  }, [topics]);
+
+  //----------------------------------------------------------------------------
+
   const RNHeaderRight: React.FC = () => {
     return (
       <IconButton
@@ -223,9 +248,11 @@ const Home: React.FC = () => {
         <View>
           <Text style={styles.card_title}>{item.title}</Text>
           <Text style={styles.caed_publishDate}>{dayjs(item.publishDate).fromNow()}</Text>
-          <Text numberOfLines={3} style={styles.card_summary}>
-            {item.summary}
-          </Text>
+          {item.summary.length > 0 && (
+            <Text numberOfLines={3} style={styles.card_summary}>
+              {item.summary}
+            </Text>
+          )}
           <View style={styles.card_bottom}>
             <View style={styles.card_bottom_left}>
               <Text numberOfLines={1} style={styles.card_siteName}>
@@ -251,6 +278,17 @@ const Home: React.FC = () => {
     );
   };
 
+  const TopicsHeader: React.FC = () => {
+    if (topicsNewCount === 0) {
+      return <View />;
+    }
+    return (
+      <TouchableRipple style={styles.flatlist_header_btn} borderless={true} onPress={() => getTopics()}>
+        <Text style={styles.flatlist_header_label}>有 {topicsNewCount} 个新话题，点击刷新</Text>
+      </TouchableRipple>
+    );
+  };
+
   return (
     <Tabs.Container
       renderTabBar={props => (
@@ -261,10 +299,10 @@ const Home: React.FC = () => {
           data={topics}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header}
+          ListHeaderComponent={() => <TopicsHeader />}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
           ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={styles.flatlist_footer}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTopicRefresh()} />}
           showsVerticalScrollIndicator={false}
@@ -277,7 +315,7 @@ const Home: React.FC = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
@@ -292,7 +330,7 @@ const Home: React.FC = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={styles.flatlist_footer}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
@@ -316,12 +354,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#4A6C91',
   },
 
-  flatlist_header: {
-    height: 16,
+  flatlist_header_root: {
+    minHeight: 16,
+  },
+  flatlist_header_btn: {
+    backgroundColor: '#FFFFFF',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 16,
+    marginBottom: 16,
+    padding: 8,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  flatlist_header_label: {
+    fontSize: 12,
+    includeFontPadding: false,
   },
   flatlist_footer: {
     marginTop: 16,
-    marginBottom: 16,
   },
   flatlist_separator: {
     height: 16,
