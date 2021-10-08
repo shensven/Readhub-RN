@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, StyleSheet, Text, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
@@ -176,6 +176,7 @@ const Home: React.FC = () => {
     setTopicLastCursor(undefined);
     getTopics();
     setRefreshing(false);
+    Vibration.vibrate([0, 50, 40, 40]);
   };
 
   const handleNewsRefresh = () => {
@@ -183,6 +184,7 @@ const Home: React.FC = () => {
     setNewsLastCursor(undefined);
     getNews();
     setRefreshing(false);
+    Vibration.vibrate([0, 50, 40, 40]);
   };
 
   const handleTechnewsRefresh = () => {
@@ -190,6 +192,7 @@ const Home: React.FC = () => {
     setTechnewsLastCursor(undefined);
     getTechnews();
     setRefreshing(false);
+    Vibration.vibrate([0, 50, 40, 40]);
   };
 
   //----------------------------------------------------------------------------
@@ -282,7 +285,13 @@ const Home: React.FC = () => {
       return <View />;
     }
     return (
-      <TouchableRipple style={styles.flatlist_header_btn} borderless={true} onPress={() => getTopics()}>
+      <TouchableRipple
+        style={styles.flatlist_header_btn}
+        borderless={true}
+        onPress={() => {
+          getTopics();
+          Vibration.vibrate([0, 50, 40, 40]);
+        }}>
         <Text style={styles.flatlist_header_label}>有 {topicsNewCount} 个新话题，点击刷新</Text>
       </TouchableRipple>
     );
