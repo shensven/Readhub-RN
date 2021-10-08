@@ -17,7 +17,7 @@ interface Item {
   leftIcon: string;
   leftIconSize?: number;
   rightIcon: string;
-  screen: keyof StackParamList;
+  onPress: () => void;
 }
 
 const Settings: React.FC = () => {
@@ -39,20 +39,20 @@ const Settings: React.FC = () => {
       leftIcon: 'help-circle-outline',
       leftIconSize: 24,
       rightIcon: 'chevron-forward-outline',
-      screen: 'Help',
+      onPress: () => navigation.navigate('Help'),
     },
     {
       title: '关于',
       leftIcon: 'code-slash-outline',
       leftIconSize: 21,
       rightIcon: 'chevron-forward-outline',
-      screen: 'About',
+      onPress: () => navigation.navigate('About'),
     },
   ];
 
   const renderCard = ({item}: {item: Item}) => {
     return (
-      <TouchableRipple onPress={() => navigation.navigate(item.screen)}>
+      <TouchableRipple onPress={item.onPress}>
         <List.Item
           title={item.title}
           titleStyle={styles.title}
