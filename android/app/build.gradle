@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
+import groovy.json.JsonSlurper
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -121,6 +122,18 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+def getNpmVersionName() {
+    def inputFilea = new File("$rootDir/../package.json")
+    def packageJsona = new JsonSlurper().parseText(inputFilea.text)
+    return packageJsona["version"]
+}
+
+def getNpmVersionCode() {
+    def inputFileb = new File("$rootDir/../package.json")
+    def packageJsonb = new JsonSlurper().parseText(inputFileb.text)
+    return packageJsonb["readhubnBuild"]
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -130,8 +143,8 @@ android {
         applicationId "com.readhubn"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode getNpmVersionCode()
+        versionName getNpmVersionName()
     }
     splits {
         abi {

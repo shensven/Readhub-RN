@@ -3,6 +3,8 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+const packageJson = require('../../package.json');
+
 const About: React.FC = () => {
   const insets = useSafeAreaInsets();
 
@@ -23,7 +25,9 @@ const About: React.FC = () => {
       <View style={styles.top}>
         <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
         <Text style={styles.app_name}>ReadHubn</Text>
-        <Text style={styles.app_ver}>Version 1.0 (1)</Text>
+        <Text style={styles.app_ver}>
+          Version {packageJson.version} ({packageJson.readhubnBuild})
+        </Text>
       </View>
       <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text>
     </View>
