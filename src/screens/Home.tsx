@@ -2,7 +2,7 @@ import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {RefreshControl, StyleSheet, Text, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
+import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundTimer from 'react-native-background-timer';
@@ -85,9 +85,11 @@ const Home: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
 
+  const tabRef = React.useRef<CollapsibleRef>();
+
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
-  const [news, setNews] = useState<any[]>([]);
-  const [technews, setTechnews] = useState<any[]>([]);
+  const [news, setNews] = useState<NewsFeed[]>([]);
+  const [technews, setTechnews] = useState<TechnewsFeed[]>([]);
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
@@ -138,7 +140,7 @@ const Home: React.FC = () => {
   };
 
   const getNextNews = async () => {
-    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/news', {
+    const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news', {
       params: {
         pageSize: 20,
         lastCursor: newsLastCursor,
@@ -151,7 +153,7 @@ const Home: React.FC = () => {
   };
 
   const getNextTechnews = async () => {
-    const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/technews', {
+    const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews', {
       params: {
         pageSize: 20,
         lastCursor: technewsLastCursor,
@@ -176,7 +178,6 @@ const Home: React.FC = () => {
     setTopicLastCursor(undefined);
     getTopics();
     setRefreshing(false);
-    Vibration.vibrate([0, 50, 40, 40]);
   };
 
   const handleNewsRefresh = () => {
@@ -184,7 +185,6 @@ const Home: React.FC = () => {
     setNewsLastCursor(undefined);
     getNews();
     setRefreshing(false);
-    Vibration.vibrate([0, 50, 40, 40]);
   };
 
   const handleTechnewsRefresh = () => {
@@ -192,8 +192,25 @@ const Home: React.FC = () => {
     setTechnewsLastCursor(undefined);
     getTechnews();
     setRefreshing(false);
-    Vibration.vibrate([0, 50, 40, 40]);
   };
+
+  useEffect(() => {
+    if (topics.length > 0 && topics.length <= 20 && tabRef.current?.getFocusedTab() === 'Topics') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
+  }, [topics]);
+
+  useEffect(() => {
+    if (news.length > 0 && news.length <= 20 && tabRef.current?.getFocusedTab() === 'News') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
+  }, [news]);
+
+  useEffect(() => {
+    if (technews.length > 0 && technews.length <= 20 && tabRef.current?.getFocusedTab() === 'Tech') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
+  }, [technews]);
 
   //----------------------------------------------------------------------------
 
@@ -285,13 +302,7 @@ const Home: React.FC = () => {
       return <View />;
     }
     return (
-      <TouchableRipple
-        style={styles.flatlist_header_btn}
-        borderless={true}
-        onPress={() => {
-          getTopics();
-          Vibration.vibrate([0, 50, 40, 40]);
-        }}>
+      <TouchableRipple style={styles.flatlist_header_btn} borderless={true} onPress={() => getTopics()}>
         <Text style={styles.flatlist_header_label}>有 {topicsNewCount} 个新话题，点击刷新</Text>
       </TouchableRipple>
     );
@@ -299,6 +310,7 @@ const Home: React.FC = () => {
 
   return (
     <Tabs.Container
+      ref={tabRef}
       renderTabBar={props => (
         <MaterialTabBar {...props} scrollEnabled labelStyle={styles.tab_label} indicatorStyle={styles.tab_indicator} />
       )}>
@@ -325,7 +337,7 @@ const Home: React.FC = () => {
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header_root}
           ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={styles.flatlist_footer}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleNewsRefresh()} />}
           showsVerticalScrollIndicator={false}
@@ -340,7 +352,7 @@ const Home: React.FC = () => {
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header_root}
           ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={styles.flatlist_footer}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTechnewsRefresh()} />}
           showsVerticalScrollIndicator={false}
