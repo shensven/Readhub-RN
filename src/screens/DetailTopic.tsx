@@ -109,7 +109,7 @@ const DetailTopic: React.FC = () => {
 
   const getTopicSummary = async () => {
     const resp: {data: Detail} = await appAxios.get(`/topic/${route.params.id}`);
-    console.log('getTopicSummary', resp.data);
+    // console.log('getTopicSummary', resp.data);
     setDetail(resp.data);
   };
 
@@ -139,7 +139,7 @@ const DetailTopic: React.FC = () => {
             borderless={true}
             rippleColor="rgba(46,117,213,0.8)"
             style={styles.instant}
-            onPress={() => navigation.navigate('Instant', {id: id})}>
+            onPress={() => navigation.navigate('Instant', {id})}>
             <>
               <Ionicons name="glasses-outline" size={24} color="rgb(46,117,213)" />
               <Text style={styles.instant_label}>即时预览</Text>

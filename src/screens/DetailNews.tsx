@@ -54,7 +54,7 @@ const DetailNews: React.FC = () => {
             borderless={true}
             rippleColor="rgba(46,117,213,0.8)"
             style={styles.instant}
-            onPress={() => navigation.navigate('Instant', {id: id})}>
+            onPress={() => navigation.navigate('Instant', {id})}>
             <>
               <Ionicons name="glasses-outline" size={24} color="rgb(46,117,213)" />
               <Text style={styles.instant_label}>即时预览</Text>

@@ -104,7 +104,7 @@ const Home: React.FC = () => {
 
   const getTopics = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {params: {pageSize: 20}});
-    console.log('getTopics', resp.data);
+    // console.log('getTopics', resp.data);
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
     setTopicsNewCount(0);
