@@ -26,7 +26,7 @@ const Help: React.FC = () => {
   return (
     <View style={styles.root}>
       <Text style={styles.description}>
-        我们十分在意您的隐私，无论您身处何方，居于何处，是何国籍，我们承诺不会采集和上传您的任何数据，所有网络请求均只用于接收数据。
+        我们十分尊重您的隐私，无论您身处何方，居于何处，是何国籍，我们承诺不会采集和上传您的任何数据，所有网络请求均只用于接收数据。
       </Text>
     </View>
   );
