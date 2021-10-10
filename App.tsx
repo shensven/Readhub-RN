@@ -22,6 +22,7 @@ const App: React.FC = () => {
       }>
       <StatusBar barStyle="dark-content" />
       <Stack.Navigator
+        detachInactiveScreens={!__DEV__}
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
