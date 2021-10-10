@@ -7,7 +7,7 @@ import Home from './src/screens/Home';
 import Summary from './src/screens/Summary';
 import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
-import Help from './src/screens/Help';
+import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import About from './src/screens/About';
 
 const Stack = createStackNavigator();
@@ -42,7 +42,7 @@ const App: React.FC = () => {
           }}
         />
         <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="Help" component={Help} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>

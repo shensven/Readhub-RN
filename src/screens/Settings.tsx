@@ -1,12 +1,13 @@
 import React, {useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, Linking, StyleSheet} from 'react-native';
 import {List, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type StackParamList = {
-  Help: undefined;
+  PrivacyPolicy: undefined;
+  OpenSourceLibrary: undefined;
   About: undefined;
 };
 
@@ -17,6 +18,8 @@ interface Item {
   leftIcon: string;
   leftIconSize?: number;
   rightIcon: string;
+  rightIconSize?: number;
+  description?: string;
   onPress: () => void;
 }
 
@@ -35,16 +38,32 @@ const Settings: React.FC = () => {
 
   const itemData: Item[] = [
     {
-      title: '帮助',
-      leftIcon: 'help-circle-outline',
-      leftIconSize: 24,
+      title: '反馈',
+      leftIcon: 'mail-outline',
+      leftIconSize: 22,
+      rightIcon: 'open-outline',
+      rightIconSize: 16,
+      description: 'https://github.com/shensven/ReadHubn/issues',
+      onPress: () => Linking.openURL('https://github.com/shensven/ReadHubn/issues'),
+    },
+    {
+      title: '隐私政策',
+      leftIcon: 'shield-outline',
+      leftIconSize: 22,
       rightIcon: 'chevron-forward-outline',
-      onPress: () => navigation.navigate('Help'),
+      onPress: () => navigation.navigate('PrivacyPolicy'),
+    },
+    {
+      title: '开源库',
+      leftIcon: 'code-slash-outline',
+      leftIconSize: 22,
+      rightIcon: 'chevron-forward-outline',
+      onPress: () => navigation.navigate('OpenSourceLibrary'),
     },
     {
       title: '关于',
-      leftIcon: 'code-slash-outline',
-      leftIconSize: 21,
+      leftIcon: 'shapes-outline',
+      leftIconSize: 22,
       rightIcon: 'chevron-forward-outline',
       onPress: () => navigation.navigate('About'),
     },
@@ -56,8 +75,10 @@ const Settings: React.FC = () => {
         <List.Item
           title={item.title}
           titleStyle={styles.title}
+          description={item.description}
+          descriptionStyle={styles.description}
           left={() => <List.Icon icon={() => <Ionicons name={item.leftIcon} size={item.leftIconSize ?? 24} />} />}
-          right={() => <List.Icon icon={() => <Ionicons name="chevron-forward-outline" size={20} />} />}
+          right={() => <List.Icon icon={() => <Ionicons name={item.rightIcon} size={item.rightIconSize ?? 20} />} />}
         />
       </TouchableRipple>
     );
@@ -68,6 +89,11 @@ const Settings: React.FC = () => {
 
 const styles = StyleSheet.create({
   title: {
+    includeFontPadding: false,
+  },
+  description: {
+    fontSize: 10,
+    fontWeight: 'bold',
     includeFontPadding: false,
   },
 });
