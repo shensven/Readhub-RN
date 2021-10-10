@@ -24,12 +24,13 @@ type StackParamList = {
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
-const Summary: React.FC = () => {
+const DetailNews: React.FC = () => {
   dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
 
-  const route = useRoute<ScreenRouteProp>();
   const navigation = useNavigation<ScreenNavigationProp>();
+  const route = useRoute<ScreenRouteProp>();
+  const {id, title, publishDate, summary, hasInstantView} = route.params;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -42,18 +43,18 @@ const Summary: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.root}>
-      <Text style={styles.title}>{route.params.title}</Text>
-      <Text style={styles.publishDate}>{dayjs(route.params.publishDate).fromNow()}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.publishDate}>{dayjs(publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>
-        {route.params.summary}
+        {summary}
       </Text>
-      <View style={styles.bottom}>
-        {route.params.hasInstantView ? (
+      <View style={styles.mid}>
+        {hasInstantView ? (
           <TouchableRipple
             borderless={true}
             rippleColor="rgba(46,117,213,0.8)"
             style={styles.instant}
-            onPress={() => navigation.navigate('Instant', {id: route.params.id})}>
+            onPress={() => navigation.navigate('Instant', {id: id})}>
             <>
               <Ionicons name="glasses-outline" size={24} color="rgb(46,117,213)" />
               <Text style={styles.instant_label}>即时预览</Text>
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     textAlign: 'justify',
   },
-  bottom: {
+  mid: {
     marginTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
@@ -113,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Summary;
+export default DetailNews;

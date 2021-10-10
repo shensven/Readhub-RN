@@ -4,7 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
-import Summary from './src/screens/Summary';
+import DetailTopic from './src/screens/DetailTopic';
+import DetailNews from './src/screens/DetailNews';
 import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
@@ -34,7 +35,8 @@ const App: React.FC = () => {
           ...TransitionPresets.SlideFromRightIOS,
         }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Summary" component={Summary} />
+        <Stack.Screen name="DetailTopic" component={DetailTopic} />
+        <Stack.Screen name="DetailNews" component={DetailNews} />
         <Stack.Screen
           name="Instant"
           component={Instant}

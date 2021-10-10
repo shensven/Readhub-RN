@@ -70,7 +70,8 @@ interface TechnewsFeed extends NewsFeed {}
 
 type StackParamList = {
   Settings: undefined;
-  Summary: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
+  DetailTopic: {id: string};
+  DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
@@ -103,7 +104,7 @@ const Home: React.FC = () => {
 
   const getTopics = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {params: {pageSize: 20}});
-    // console.log('getTopics', resp.data);
+    console.log('getTopics', resp.data);
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
     setTopicsNewCount(0);
@@ -251,19 +252,28 @@ const Home: React.FC = () => {
   //----------------------------------------------------------------------------
 
   const renderCard = ({item}: {item: any}) => {
-    return (
-      <TouchableRipple
-        borderless={true}
-        style={styles.card}
-        onPress={() =>
-          navigation.navigate('Summary', {
+    const goDetail = () => {
+      switch (tabRef.current?.getFocusedTab()) {
+        case 'Topics':
+          navigation.navigate('DetailTopic', {id: item.id});
+          break;
+        case 'News':
+        case 'Tech':
+          navigation.navigate('DetailNews', {
             id: item.id,
             title: item.title,
             summary: item.summary,
             publishDate: item.publishDate,
             hasInstantView: item.hasInstantView,
-          })
-        }>
+          });
+          break;
+        default:
+          return null;
+      }
+    };
+
+    return (
+      <TouchableRipple borderless={true} style={styles.card} onPress={() => goDetail()}>
         <View>
           <Text style={styles.card_title}>{item.title}</Text>
           <Text style={styles.caed_publishDate}>{dayjs(item.publishDate).fromNow()}</Text>
