@@ -1,4 +1,4 @@
-package com.readhubn;
+package com.shensven.readhubn;
 
 import android.os.Bundle; // <- add this necessary import
 import com.facebook.react.ReactActivity;
