@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Text, StyleSheet, ScrollView, View, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -165,7 +165,9 @@ const DetailTopic: React.FC = () => {
                 <View key={newsReporterIndex} style={styles.bottom_item}>
                   <Text>・</Text>
                   <View>
-                    <Text>{newsReporterItem.title}</Text>
+                    <TouchableOpacity onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
+                      <Text>{newsReporterItem.title}</Text>
+                    </TouchableOpacity>
                     <Text style={styles.bottom_subTitle}>{newsReporterItem.siteName}</Text>
                   </View>
                 </View>
@@ -177,20 +179,20 @@ const DetailTopic: React.FC = () => {
                 <Text style={styles.bottom_title_right}>事件追踪</Text>
               </View>
               {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
-                <TouchableOpacity
-                  key={topicIndex}
-                  style={styles.bottom_item}
-                  onPress={() => {
-                    if (detail.id !== topicsItem.id) {
-                      navigation.push('DetailTopic', {id: topicsItem.id});
-                    }
-                  }}>
+                <View key={topicIndex} style={styles.bottom_item}>
                   <Text>・</Text>
                   <View>
-                    <Text>{topicsItem.title}</Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        if (detail.id !== topicsItem.id) {
+                          navigation.push('DetailTopic', {id: topicsItem.id});
+                        }
+                      }}>
+                      <Text>{topicsItem.title}</Text>
+                    </TouchableOpacity>
                     <Text style={styles.bottom_subTitle}>{dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}</Text>
                   </View>
-                </TouchableOpacity>
+                </View>
               ))}
             </View>
           </ScrollView>
