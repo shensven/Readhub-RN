@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Text, StyleSheet, ScrollView, View} from 'react-native';
+import {Text, StyleSheet, ScrollView, View, TouchableOpacity} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,6 +12,7 @@ import appAxios from '../utils/appAxios';
 type StackParamList = {
   Params: {id: string};
   Instant: {id: string};
+  DetailTopic: {id: string};
 };
 
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
@@ -162,9 +163,9 @@ const DetailTopic: React.FC = () => {
               </View>
               {detail?.newsArray?.map((newsReporterItem: NewsArray, newsReporterIndex: number) => (
                 <View key={newsReporterIndex} style={styles.bottom_item}>
-                  <Text>{'- '}</Text>
+                  <Text>・</Text>
                   <View>
-                    <Text numberOfLines={1}>{newsReporterItem.title}</Text>
+                    <Text>{newsReporterItem.title}</Text>
                     <Text style={styles.bottom_subTitle}>{newsReporterItem.siteName}</Text>
                   </View>
                 </View>
@@ -176,13 +177,20 @@ const DetailTopic: React.FC = () => {
                 <Text style={styles.bottom_title_right}>事件追踪</Text>
               </View>
               {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
-                <View key={topicIndex} style={styles.bottom_item}>
-                  <Text>{'- '}</Text>
+                <TouchableOpacity
+                  key={topicIndex}
+                  style={styles.bottom_item}
+                  onPress={() => {
+                    if (detail.id !== topicsItem.id) {
+                      navigation.push('DetailTopic', {id: topicsItem.id});
+                    }
+                  }}>
+                  <Text>・</Text>
                   <View>
                     <Text>{topicsItem.title}</Text>
                     <Text style={styles.bottom_subTitle}>{dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}</Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </ScrollView>
