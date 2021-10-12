@@ -37,13 +37,7 @@ const App: React.FC = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="DetailTopic" component={DetailTopic} />
         <Stack.Screen name="DetailNews" component={DetailNews} />
-        <Stack.Screen
-          name="Instant"
-          component={Instant}
-          options={{
-            ...TransitionPresets.ModalPresentationIOS,
-          }}
-        />
+        <Stack.Screen name="Instant" component={Instant} options={{...TransitionPresets.ModalPresentationIOS}} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         <Stack.Screen name="About" component={About} />

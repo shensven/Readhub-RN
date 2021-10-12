@@ -30,9 +30,7 @@ const Settings: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '设置',
-      cardStyle: {
-        backgroundColor: '#FFFFFF',
-      },
+      cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 

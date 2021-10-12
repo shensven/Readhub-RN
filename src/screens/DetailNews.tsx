@@ -35,9 +35,7 @@ const DetailNews: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '话题详情',
-      cardStyle: {
-        backgroundColor: '#FFFFFF',
-      },
+      cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 

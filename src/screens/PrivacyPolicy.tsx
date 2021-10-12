@@ -17,9 +17,7 @@ const Help: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '隐私政策',
-      cardStyle: {
-        backgroundColor: '#FFFFFF',
-      },
+      cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 

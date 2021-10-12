@@ -38,9 +38,7 @@ const Instant: React.FC = () => {
 
   const getInstant = async () => {
     const resp: any = await appAxios.get('https://api.readhub.cn/topic/instantview', {
-      params: {
-        topicId: route.params.id,
-      },
+      params: {topicId: route.params.id},
     });
     // console.log('getInstant', resp.data);
     setInstant(resp.data);
@@ -53,9 +51,7 @@ const Instant: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '即时预览',
-      cardStyle: {
-        backgroundColor: '#FFFFFF',
-      },
+      cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 

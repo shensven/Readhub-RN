@@ -7,22 +7,16 @@ const appAxios = axios.create({
 });
 
 appAxios.interceptors.request.use(
-  config => {
-    return config;
-  },
+  config => config,
   error => {
-    // console.log(error);
-    return Promise.reject(error);
+    Promise.reject(error);
   },
 );
 
 appAxios.interceptors.response.use(
-  config => {
-    return config;
-  },
+  config => config,
   error => {
-    // console.log(error);
-    return Promise.reject(error);
+    Promise.reject(error);
   },
 );
 

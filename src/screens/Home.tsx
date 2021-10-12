@@ -130,10 +130,7 @@ const Home: React.FC = () => {
 
   const getNextTopic = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await appAxios.get('/topic', {
-      params: {
-        pageSize: 20,
-        lastCursor: topicLastCursor,
-      },
+      params: {pageSize: 20, lastCursor: topicLastCursor},
     });
     // console.log('getNextTopic', resp.data);
     setTopics([...topics, ...resp.data.data]);
@@ -142,10 +139,7 @@ const Home: React.FC = () => {
 
   const getNextNews = async () => {
     const resp: AxiosResponse<{data: NewsFeed[]}> = await appAxios.get('/news', {
-      params: {
-        pageSize: 20,
-        lastCursor: newsLastCursor,
-      },
+      params: {pageSize: 20, lastCursor: newsLastCursor},
     });
     // console.log('getNextNews', resp.data);
     setNews([...news, ...resp.data.data]);
@@ -155,10 +149,7 @@ const Home: React.FC = () => {
 
   const getNextTechnews = async () => {
     const resp: AxiosResponse<{data: TechnewsFeed[]}> = await appAxios.get('/technews', {
-      params: {
-        pageSize: 20,
-        lastCursor: technewsLastCursor,
-      },
+      params: {pageSize: 20, lastCursor: technewsLastCursor},
     });
     // console.log('getNextTechnews', resp.data);
     setTechnews([...technews, ...resp.data.data]);

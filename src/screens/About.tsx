@@ -14,9 +14,7 @@ const About: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '关于',
-      cardStyle: {
-        backgroundColor: '#FFFFFF',
-      },
+      cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 
