@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {RefreshControl, StyleSheet, Text, Vibration, View} from 'react-native';
+import {RefreshControl, StyleSheet, Text, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
@@ -69,6 +69,7 @@ interface NewsFeed {
 interface TechnewsFeed extends NewsFeed {}
 
 type StackParamList = {
+  Search: undefined;
   Settings: undefined;
   DetailTopic: {id: string};
   DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
@@ -226,16 +227,23 @@ const Home: React.FC = () => {
 
   const RNHeaderRight: React.FC = () => {
     return (
-      <IconButton
-        icon={() => <Ionicons name="cog-outline" size={24} />}
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <View style={styles.RNHeader_right}>
+        <TouchableOpacity style={styles.RNHeader_fakeinput} onPress={() => navigation.navigate('Search')}>
+          <Text style={styles.RNHeader_fakeinput_placeholder}>搜索</Text>
+          <Ionicons name="search-outline" size={16} color={'rgba(0,0,0,0.5)'} style={styles.RNHeader_fakeinput_icon} />
+        </TouchableOpacity>
+        <IconButton
+          icon={() => <Ionicons name="cog-outline" size={24} />}
+          onPress={() => navigation.navigate('Settings')}
+        />
+      </View>
     );
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'ReadHubn',
+      headerTitleAlign: 'left',
       headerRight: () => <RNHeaderRight />,
     });
   }, [navigation, route]);
@@ -365,8 +373,29 @@ const Home: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  // root: {},
-  // RNHeaderRight: {},
+  RNHeader_right: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  RNHeader_fakeinput: {
+    height: 28,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 8,
+    marginRight: 8,
+    borderRadius: 8,
+    backgroundColor: 'rgba(0,0,0,0.05)',
+  },
+  RNHeader_fakeinput_placeholder: {
+    paddingLeft: 8,
+    paddingRight: 0,
+    marginRight: 32,
+    opacity: 0.5,
+  },
+  RNHeader_fakeinput_icon: {
+    marginLeft: 8,
+    marginRight: 8,
+  },
 
   tab_label: {
     fontWeight: 'bold',
