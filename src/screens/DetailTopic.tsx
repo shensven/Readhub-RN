@@ -8,6 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import {IconButton, TouchableRipple} from 'react-native-paper';
 import appAxios from '../utils/appAxios';
+import {Detail, NewsArray, Topics} from '../utils/type';
 
 type StackParamList = {
   Params: {id: string};
@@ -17,86 +18,6 @@ type StackParamList = {
 
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
-
-interface NewsArray {
-  autherName: string;
-  duplicateId: number;
-  hasInstantView: boolean;
-  id: string;
-  language: string;
-  mobileUrl: string;
-  publishDate: string;
-  siteName: string;
-  statementType: number;
-  title: string;
-  url: string;
-}
-
-interface Topics {
-  createdAt: string;
-  id: string;
-  title: string;
-}
-
-interface Detail {
-  createdAt: string;
-  entityEventTopics: {
-    entityId: string;
-    entityName: string;
-    entityType: string;
-    eventType: number;
-    eventTypeLabel: string;
-  }[];
-  entityTopics: {
-    entityId: string;
-    entityName: string;
-    entityType: string;
-    finance: {
-      code: string;
-      name: string;
-    };
-    nerName: string;
-  }[];
-  hasInstantView: true;
-  id: string;
-  instantViewNewsId: string;
-  newsArray: NewsArray[];
-  order: number;
-  publishDate: string;
-  summary: string;
-  tags: {
-    name: string;
-    uid: string;
-  }[];
-  timeline: {
-    commonEntities: {
-      reatedAt: string;
-      deleted: boolean;
-      entityId: string;
-      entityName: string;
-      entityType: string;
-      extra: {
-        finance: {
-          bussiness: string;
-          code: string;
-          exchange: string;
-          name: string;
-          state: number;
-        };
-      };
-      id: number;
-      isMain: boolean;
-      nerName: string;
-      topicId: string;
-      updatedAt: string;
-      weight: number;
-    }[];
-    topics: Topics[];
-  };
-  timelineId: string;
-  title: string;
-  updatedAt: string;
-}
 
 const DetailTopic: React.FC = () => {
   dayjs.extend(relativeTime);

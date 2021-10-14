@@ -4,13 +4,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import appAxios from '../utils/appAxios';
-
-interface Instant {
-  content: string;
-  siteName: string;
-  title: string;
-  url: string;
-}
+import {InstantState} from '../utils/type';
 
 type StackParamList = {
   Params: {
@@ -29,7 +23,7 @@ const Instant: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
 
-  const [instant, setInstant] = useState<Instant>({
+  const [instant, setInstant] = useState<InstantState>({
     content: '',
     siteName: '',
     title: '',

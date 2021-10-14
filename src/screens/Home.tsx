@@ -1,7 +1,8 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {RefreshControl, StyleSheet, Text, TouchableOpacity, Vibration, View} from 'react-native';
+import {ListRenderItem, RefreshControl, StyleSheet, Text, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,61 +13,7 @@ import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-interface TopicsFeed {
-  createdAt: string;
-  eventData: {
-    createdAt: string;
-    entityId: string;
-    entityName: string;
-    entityType: string;
-    eventType: number;
-    id: number;
-    state: number;
-    topicId: string;
-    updatedAt: string;
-  }[];
-  extra: {
-    instantView: boolean;
-  };
-  hasInstantView: boolean;
-  id: string;
-  newsArray: {
-    autherName: string;
-    duplicateId: number;
-    hasInstantView: boolean;
-    id: number;
-    language: string;
-    mobileUrl: string;
-    publishDate: string;
-    siteName: string;
-    statementType: number;
-    title: string;
-    url: string;
-  }[];
-  order: number;
-  publishDate: string;
-  summary: string;
-  timeline: string;
-  title: string;
-  updatedAt: string;
-}
-
-interface NewsFeed {
-  authorName: string;
-  id: number;
-  language: string;
-  mobileUrl: string;
-  publishDate: string;
-  siteName: string;
-  summary: string;
-  summaryAuto: string;
-  title: string;
-  url: string;
-}
-
-interface TechnewsFeed extends NewsFeed {}
+import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 
 type StackParamList = {
   Search: undefined;
@@ -250,7 +197,7 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
-  const renderCard = ({item}: {item: any}) => {
+  const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = ({item}: {item: any}) => {
     const goDetail = () => {
       switch (tabRef.current?.getFocusedTab()) {
         case 'Topics':
@@ -326,7 +273,7 @@ const Home: React.FC = () => {
       <Tabs.Tab name="Topics" label="热门话题">
         <Tabs.FlatList
           data={topics}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index: number) => index.toString()}
           renderItem={renderCard}
           ListHeaderComponent={() => <TopicsHeader />}
           ListHeaderComponentStyle={styles.flatlist_header_root}
@@ -341,7 +288,7 @@ const Home: React.FC = () => {
       <Tabs.Tab name="News" label="科技动态">
         <Tabs.FlatList
           data={news}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index: number) => index.toString()}
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header_root}
@@ -356,7 +303,7 @@ const Home: React.FC = () => {
       <Tabs.Tab name="Tech" label="技术资讯">
         <Tabs.FlatList
           data={technews}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index: number) => index.toString()}
           renderItem={renderCard}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.flatlist_header_root}

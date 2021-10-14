@@ -4,6 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {FlatList, Linking, StyleSheet} from 'react-native';
 import {List, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {SettingsItem} from '../utils/type';
 
 type StackParamList = {
   PrivacyPolicy: undefined;
@@ -12,16 +13,6 @@ type StackParamList = {
 };
 
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
-
-interface Item {
-  title: string;
-  leftIcon: string;
-  leftIconSize?: number;
-  rightIcon: string;
-  rightIconSize?: number;
-  description?: string;
-  onPress: () => void;
-}
 
 const Settings: React.FC = () => {
   const route = useRoute();
@@ -34,7 +25,7 @@ const Settings: React.FC = () => {
     });
   }, [navigation, route]);
 
-  const itemData: Item[] = [
+  const itemData: SettingsItem[] = [
     {
       title: '反馈',
       leftIcon: 'mail-outline',
@@ -67,7 +58,7 @@ const Settings: React.FC = () => {
     },
   ];
 
-  const renderCard = ({item}: {item: Item}) => {
+  const renderCard = ({item}: {item: SettingsItem}) => {
     return (
       <TouchableRipple onPress={item.onPress}>
         <List.Item
