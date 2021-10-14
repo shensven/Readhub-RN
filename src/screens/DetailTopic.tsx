@@ -1,12 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Text, StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
-import {IconButton, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple} from 'react-native-paper';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
 

@@ -1,6 +1,7 @@
 import React, {useLayoutEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {Text} from 'react-native-paper';
 
 interface Item {
   title: string;

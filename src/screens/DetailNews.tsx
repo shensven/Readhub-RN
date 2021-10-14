@@ -1,12 +1,12 @@
 import React, {useLayoutEffect} from 'react';
-import {Text, StyleSheet, ScrollView, View} from 'react-native';
+import {StyleSheet, ScrollView, View} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {IconButton, Text, TouchableRipple} from 'react-native-paper';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
-import {IconButton, TouchableRipple} from 'react-native-paper';
 
 type StackParamList = {
   Params: {

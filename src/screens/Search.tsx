@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import {View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import React, {useContext, useLayoutEffect, useState} from 'react';
+import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {IconButton, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import axios from 'axios';

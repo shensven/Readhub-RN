@@ -1,5 +1,6 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
@@ -29,6 +30,7 @@ const About: React.FC = () => {
           Version {version} ({buildNumber})
         </Text>
       </View>
+      {/* <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text> */}
       <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text>
     </View>
   );

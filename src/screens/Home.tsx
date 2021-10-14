@@ -1,10 +1,10 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {ListRenderItem, RefreshControl, StyleSheet, Text, TouchableOpacity, Vibration, View} from 'react-native';
+import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
-import {IconButton, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';

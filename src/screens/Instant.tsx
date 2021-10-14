@@ -1,5 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Text, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
+import {View, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
+import {Text} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
