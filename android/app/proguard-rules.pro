@@ -12,3 +12,5 @@
 -keep class com.facebook.react.turbomodule.** { *; }
 -keep class com.facebook.hermes.unicode.** { *; }
 -keep class com.facebook.jni.** { *; }
+-keep class com.google.android.gms.common.** {*;}
+-keepclassmembers class com.android.installreferrer.api.** { *; }
