@@ -2,8 +2,10 @@ import React, {useLayoutEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import DeviceInfo from 'react-native-device-info';
 
-const packageJson = require('../../package.json');
+let version = DeviceInfo.getVersion();
+let buildNumber = DeviceInfo.getBuildNumber();
 
 const About: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -24,7 +26,7 @@ const About: React.FC = () => {
         <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
         <Text style={styles.app_name}>ReadHubn</Text>
         <Text style={styles.app_ver}>
-          Version {packageJson.version} ({packageJson.readhubnBuild})
+          Version {version} ({buildNumber})
         </Text>
       </View>
       <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text>
