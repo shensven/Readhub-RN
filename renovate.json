@@ -20,6 +20,7 @@
         "react-native-background-timer",
         "react-native-bootsplash",
         "react-native-collapsible-tab-view",
+        "react-native-device-info",
         "react-native-gesture-handler",
         "react-native-pager-view",
         "react-native-paper",
