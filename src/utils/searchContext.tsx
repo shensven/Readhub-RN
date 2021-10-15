@@ -10,6 +10,8 @@ interface SuggestItem {
 }
 
 interface SearchType {
+  input: string;
+  setInput: Function;
   suggest: SuggestItem[];
   setSuggest: Function;
   searchResult: SearchReault[];
@@ -19,6 +21,8 @@ interface SearchType {
 }
 
 export const SearchCtx = createContext<SearchType>({
+  input: '',
+  setInput: () => null,
   suggest: [] as SuggestItem[],
   setSuggest: () => null,
   searchResult: [] as SearchReault[],
@@ -28,11 +32,16 @@ export const SearchCtx = createContext<SearchType>({
 });
 
 export const SearchProvider: React.FC = props => {
+  const [inputVal, setInputVal] = useState<string>('');
   const [suggestVal, setSuggestVal] = useState<SuggestItem[]>([]);
   const [searchResultVal, setSearchResultVal] = useState<SearchReault[]>([]);
   const [hasLoadingVal, setHasLoadingVal] = useState<boolean>(false);
 
   const ctxValue = {
+    input: inputVal,
+    setInput: (str: string) => {
+      setInputVal(str);
+    },
     suggest: suggestVal,
     setSuggest: (arr: SuggestItem[]) => {
       setSuggestVal([...arr]);

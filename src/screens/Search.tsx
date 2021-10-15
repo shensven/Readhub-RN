@@ -18,7 +18,6 @@ type StackParamList = {
   Search: undefined;
   Settings: undefined;
   DetailTopic: {id: string};
-  // DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
@@ -35,7 +34,10 @@ const Search: React.FC = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
-  const {suggest, setSuggest, searchResult, setSearchResult, hasLoading, setHasLoading} = useContext(SearchCtx);
+  const {input, setInput, suggest, setSuggest, searchResult, setSearchResult, hasLoading, setHasLoading} =
+    useContext(SearchCtx);
+
+  const [resultPage, setResultPage] = useState<number>(2);
 
   useLayoutEffect(() => {
     if (suggest.length > 0) {
@@ -45,29 +47,52 @@ const Search: React.FC = () => {
 
   useLayoutEffect(() => {
     if (isFocus) {
+      setInput('');
       setSuggest([]);
       setSearchResult([]);
       setHasLoading(false);
     }
   }, [isFocus]);
 
+  const goSearch = async (_prop: string) => {
+    const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
+      params: {page: 1, seze: 20, query: _prop, type: 'hot'},
+    });
+    // console.log('goSearch', resp);
+    setSearchResult(resp.data.data.items);
+  };
+
+  const goNextSearch = async () => {
+    const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
+      params: {page: resultPage, seze: 20, query: input, type: 'hot'},
+    });
+    // console.log('goNextSearch', resp);
+    setSearchResult([...searchResult, ...resp.data.data.items]);
+    setResultPage(resultPage + 1);
+  };
+
   //------------------------------------------------------------------------------
 
   const RNHeaderLeft: React.FC = () => {
-    const [input, setInput] = useState<string>('');
-
     const {
+      input: _input,
+      setInput: _setInput,
       setSuggest: _setSuggest,
       setSearchResult: _setSearchResult,
       setHasLoading: _setHasLoading,
     } = useContext(SearchCtx);
 
     const getSuggest = async () => {
-      if (input.length !== 0) {
+      if (_input.length !== 0) {
         const resp: {data: {result: {data: {items: SuggestItem[]}}}} = await axios.get(
           'https://search.readhub.cn/api/entity/suggest',
-          {params: {q: input}},
+          {params: {q: _input}},
         );
+        if (resp.data.result.data.items.length === 0) {
+          _setHasLoading(true);
+          goSearch(_input);
+          return;
+        }
         _setSuggest(resp.data.result.data.items);
       }
     };
@@ -75,12 +100,12 @@ const Search: React.FC = () => {
     return (
       <View style={styles.RNHeader_left}>
         <TextInput
-          value={input}
+          value={_input}
           placeholder="搜索"
           placeholderTextColor="rgba(0, 0, 0.7)"
           style={styles.RNHeader_input}
           autoFocus={true}
-          onChangeText={text => setInput(text)}
+          onChangeText={text => _setInput(text)}
           onSubmitEditing={() => getSuggest()}
           onFocus={() => {
             _setHasLoading(false);
@@ -116,16 +141,6 @@ const Search: React.FC = () => {
 
   //------------------------------------------------------------------------------
 
-  const goSearch = async (_prop: string) => {
-    const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
-      params: {page: 1, seze: 20, query: _prop, type: 'hot'},
-    });
-    console.log(resp);
-    setSearchResult(resp.data.data.items);
-  };
-
-  //------------------------------------------------------------------------------
-
   const renderSuggestList = ({item}: {item: SuggestItem}) => {
     return (
       <TouchableOpacity
@@ -158,7 +173,7 @@ const Search: React.FC = () => {
           <View style={styles.card_bottom}>
             <View style={styles.card_bottom_left}>
               <Text numberOfLines={1} style={styles.card_siteName}>
-                {'newsArray' in item && (
+                {'newsList' in item && (
                   <>
                     <Text style={styles.card_siteName_unit}>{item.newsList[0]?.siteName + ' '}</Text>
                     {item.newsList.length > 1 && (
@@ -207,6 +222,7 @@ const Search: React.FC = () => {
       ListFooterComponent={() => <Loading />}
       ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
       ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+      onEndReached={() => goNextSearch()}
     />
   );
 };
