@@ -6207,7 +6207,7 @@ react-native-collapsible-tab-view@4.3.0:
   dependencies:
     use-deep-compare "^1.1.0"
 
-react-native-device-info@^8.4.1:
+react-native-device-info@8.4.1:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.1.tgz#21d1cf0c7bc8476a20c82f0dde968f1660261674"
   integrity sha512-O+G0wUXAc3196CUAs/C/ugIvIUvTMPvw7gixStZyXOpOGwGQKWx6if1YV1qLD5oPldxSvg17CdgB91yOLniKEA==
