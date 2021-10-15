@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useLayoutEffect, useState} from 'react';
 import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -18,7 +18,7 @@ type StackParamList = {
   Search: undefined;
   Settings: undefined;
   DetailTopic: {id: string};
-  DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
+  // DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
@@ -143,7 +143,10 @@ const Search: React.FC = () => {
 
   const renderCard = ({item}: {item: SearchReault}) => {
     return (
-      <TouchableRipple borderless={true} style={styles.card} onPress={() => {}}>
+      <TouchableRipple
+        borderless={true}
+        style={styles.card}
+        onPress={() => navigation.navigate('DetailTopic', {id: item.topicId})}>
         <View>
           <Text style={styles.card_title}>{item.topicTitle}</Text>
           <Text style={styles.caed_publishDate}>{dayjs(item.topicCreateAt).format('YYYY-MM-DD')}</Text>
