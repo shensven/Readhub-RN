@@ -5,10 +5,10 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
 
-let version = DeviceInfo.getVersion();
-let buildNumber = DeviceInfo.getBuildNumber();
-
 const About: React.FC = () => {
+  const version = DeviceInfo.getVersion();
+  const buildNumber = DeviceInfo.getBuildNumber();
+
   const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
@@ -25,7 +25,7 @@ const About: React.FC = () => {
     <View style={styles.root}>
       <View style={styles.top}>
         <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
-        <Text style={styles.app_name}>ReadHubn</Text>
+        <Text style={styles.app_name}>ReadHub Native</Text>
         <Text style={styles.app_ver}>
           Version {version} ({buildNumber})
         </Text>
