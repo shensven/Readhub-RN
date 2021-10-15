@@ -1,13 +1,15 @@
-import React, {useContext, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {IconButton, Text, TouchableRipple} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import {SearchCtx} from '../utils/searchContext';
 import {SearchReault} from '../utils/type';
+import Loading from './components/Loading/Loading';
 
 const screenWidth = Dimensions.get('screen').width;
 // const screenHeight = Dimensions.get('screen').height;
@@ -29,16 +31,36 @@ interface SuggestItem {
 }
 
 const Search: React.FC = () => {
+  const isFocus = useIsFocused();
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
-  const {suggest, searchResult, setSearchResult} = useContext(SearchCtx);
+  const {suggest, setSuggest, searchResult, setSearchResult, hasLoading, setHasLoading} = useContext(SearchCtx);
+
+  useLayoutEffect(() => {
+    if (suggest.length > 0) {
+      setHasLoading(false);
+    }
+  }, [searchResult]);
+
+  useLayoutEffect(() => {
+    if (isFocus) {
+      setSuggest([]);
+      setSearchResult([]);
+      setHasLoading(false);
+    }
+  }, [isFocus]);
 
   //------------------------------------------------------------------------------
 
   const RNHeaderLeft: React.FC = () => {
     const [input, setInput] = useState<string>('');
 
-    const {setSuggest: _setSuggest, setSearchResult: _setSearchResult} = useContext(SearchCtx);
+    const {
+      setSuggest: _setSuggest,
+      setSearchResult: _setSearchResult,
+      setHasLoading: _setHasLoading,
+    } = useContext(SearchCtx);
 
     const getSuggest = async () => {
       if (input.length !== 0) {
@@ -46,7 +68,6 @@ const Search: React.FC = () => {
           'https://search.readhub.cn/api/entity/suggest',
           {params: {q: input}},
         );
-        // console.log('_getSuggest', resp);
         _setSuggest(resp.data.result.data.items);
       }
     };
@@ -61,7 +82,10 @@ const Search: React.FC = () => {
           autoFocus={true}
           onChangeText={text => setInput(text)}
           onSubmitEditing={() => getSuggest()}
-          onFocus={() => _setSearchResult([])}
+          onFocus={() => {
+            _setHasLoading(false);
+            _setSearchResult([]);
+          }}
         />
       </View>
     );
@@ -101,13 +125,15 @@ const Search: React.FC = () => {
   };
 
   //------------------------------------------------------------------------------
+
   const renderSuggestList = ({item}: {item: SuggestItem}) => {
     return (
       <TouchableOpacity
         style={styles.suggest_list_touchable}
         onPress={() => {
+          setSuggest([]);
+          setHasLoading(true);
           goSearch(item.entityName);
-          // setSuggest([]);
         }}>
         <Ionicons name="search-circle" size={16} color={'rgba(0,0,0,0.2)'} />
         <Text style={styles.suggest_list_keyword}>{item.entityName}</Text>
@@ -153,6 +179,15 @@ const Search: React.FC = () => {
         data={suggest}
         keyExtractor={(item, index: number) => index.toString()}
         renderItem={renderSuggestList}
+        ListHeaderComponent={() => <View />}
+        ListHeaderComponentStyle={styles.suggest_list_header}
+        ListEmptyComponent={() =>
+          hasLoading ? (
+            <View style={styles.suggest_list_empty}>
+              <Loading />
+            </View>
+          ) : null
+        }
         ItemSeparatorComponent={() => <View style={styles.suggest_list_separator} />}
         showsVerticalScrollIndicator={false}
       />
@@ -164,8 +199,10 @@ const Search: React.FC = () => {
       data={searchResult}
       keyExtractor={(item, index: number) => index.toString()}
       renderItem={renderCard}
-      ListHeaderComponent={() => <View style={styles.flatlist_header} />}
-      ListFooterComponent={() => <View style={styles.flatlist_footer} />}
+      ListHeaderComponent={() => <View />}
+      ListHeaderComponentStyle={styles.flatlist_header}
+      ListFooterComponent={() => <Loading />}
+      ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
       ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
     />
   );
@@ -199,17 +236,21 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     paddingTop: 16,
     paddingBottom: 16,
+    backgroundColor: '#FFFFFF',
   },
   suggest_list_icon: {},
   suggest_list_keyword: {
     marginLeft: 8,
     includeFontPadding: false,
   },
-  suggest_list_separator: {
-    width: screenWidth - 16,
+  suggest_list_header: {
     height: 1,
-    alignSelf: 'center',
-    backgroundColor: 'rgba(0,0,0,0.05)',
+  },
+  suggest_list_separator: {
+    height: 1,
+  },
+  suggest_list_empty: {
+    marginTop: 32,
   },
 
   flatlist_header: {
