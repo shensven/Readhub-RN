@@ -24,14 +24,17 @@ const About: React.FC = () => {
   return (
     <View style={styles.root}>
       <View style={styles.top}>
-        <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
+        <Image source={require('../assets/AppIcon/AppIcon384.png')} style={styles.app_logo} />
         <Text style={styles.app_name}>ReadHub Native</Text>
         <Text style={styles.app_ver}>
           Version {version} ({buildNumber})
         </Text>
       </View>
-      {/* <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text> */}
-      <Text style={[styles.description, {marginBottom: insets.bottom + 24}]}>Made with ❤️ in Kunming by GenSven</Text>
+      <View style={[styles.bottom, {marginBottom: insets.bottom + 24}]}>
+        <Text style={styles.description}>Made with ❤️ in Kunming by GenSven</Text>
+        <Text style={styles.description}>Thanks to readhub.cn</Text>
+        <Text style={styles.description}>Proudly powered by React Native</Text>
+      </View>
     </View>
   );
 };
@@ -59,9 +62,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 4,
   },
+  bottom: {
+    alignItems: 'center',
+  },
   description: {
     fontSize: 10,
     fontWeight: 'bold',
+    marginBottom: 8,
   },
 });
 
