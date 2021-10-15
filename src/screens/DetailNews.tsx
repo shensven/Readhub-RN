@@ -35,12 +35,13 @@ const DetailNews: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '话题详情',
+      headerBackTitle: '返回',
       cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
 
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={styles.root}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.publishDate}>{dayjs(publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>

@@ -231,13 +231,13 @@ const styles = StyleSheet.create({
   RNHeader_left: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     backgroundColor: 'rgba(0,0,0,0.05)',
     marginLeft: 8,
   },
   RNHeader_input: {
     width: screenWidth * 0.85 - 8,
-    height: 32,
+    height: 28,
     paddingTop: 0,
     paddingBottom: 0,
     paddingLeft: 8,

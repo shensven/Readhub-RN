@@ -44,6 +44,7 @@ const DetailTopic: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '话题详情',
+      headerBackTitle: '返回',
       cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
@@ -52,7 +53,7 @@ const DetailTopic: React.FC = () => {
     case true:
       return (
         hasFinalView && (
-          <ScrollView contentContainerStyle={styles.root}>
+          <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={styles.root}>
             <Text style={styles.title}>{detail.title}</Text>
             <Text style={styles.publishDate}>{dayjs(detail.publishDate).fromNow()}</Text>
             <Text selectable={true} style={styles.summary}>

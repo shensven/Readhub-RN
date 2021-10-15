@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
+import {SearchProvider} from './src/utils/searchContext';
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
 import DetailTopic from './src/screens/DetailTopic';
@@ -11,7 +12,6 @@ import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import About from './src/screens/About';
-import {SearchProvider} from './src/utils/searchContext';
 
 const Stack = createStackNavigator();
 

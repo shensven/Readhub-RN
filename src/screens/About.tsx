@@ -24,7 +24,7 @@ const About: React.FC = () => {
   return (
     <View style={styles.root}>
       <View style={styles.top}>
-        <Image source={require('../assets/AppIcon/AppIcon384.png')} style={styles.app_logo} />
+        <Image source={require('../assets/AppIcon/AppIcon192.png')} style={styles.app_logo} />
         <Text style={styles.app_name}>ReadHub Native</Text>
         <Text style={styles.app_ver}>
           Version {version} ({buildNumber})

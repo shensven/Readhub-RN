@@ -21,6 +21,7 @@ const Settings: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '设置',
+      headerBackTitle: '返回',
       cardStyle: {backgroundColor: '#FFFFFF'},
     });
   }, [navigation, route]);
@@ -47,7 +48,8 @@ const Settings: React.FC = () => {
       leftIcon: 'code-slash-outline',
       leftIconSize: 22,
       rightIcon: 'chevron-forward-outline',
-      onPress: () => navigation.navigate('OpenSourceLibrary'),
+      // onPress: () => navigation.navigate('OpenSourceLibrary'),
+      onPress: () => null,
     },
     {
       title: '关于',
