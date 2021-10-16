@@ -2,7 +2,7 @@ import React, {useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {FlatList, Linking, StyleSheet} from 'react-native';
-import {List, TouchableRipple} from 'react-native-paper';
+import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SettingsItem} from '../utils/type';
 
@@ -16,6 +16,8 @@ type StackParamList = {
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 const Settings: React.FC = () => {
+  const {colors: paperColor} = usePaperTheme();
+
   const route = useRoute();
   const navigation = useNavigation<ScreenNavigationProp>();
 
@@ -70,12 +72,12 @@ const Settings: React.FC = () => {
 
   const renderCard = ({item}: {item: SettingsItem}) => {
     return (
-      <TouchableRipple onPress={item.onPress}>
+      <TouchableRipple rippleColor={paperColor.ripple} onPress={item.onPress}>
         <List.Item
           title={item.title}
           titleStyle={styles.title}
           description={item.description}
-          descriptionStyle={styles.description}
+          descriptionStyle={[styles.description, {color: paperColor.textAccent}]}
           left={() => <List.Icon icon={() => <Ionicons name={item.leftIcon} size={item.leftIconSize ?? 24} />} />}
           right={() => <List.Icon icon={() => <Ionicons name={item.rightIcon} size={item.rightIconSize ?? 20} />} />}
         />

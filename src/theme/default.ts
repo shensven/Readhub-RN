@@ -7,13 +7,19 @@ import {
 
 declare global {
   namespace ReactNativePaper {
-    interface ThemeColors {}
+    interface ThemeColors {
+      textAccent: string;
+      ripple: string;
+      rippleAccent: string;
+      instantText: string;
+      instantRipple: string;
+    }
   }
 }
 
 // ----------------------------------------------------------------------
 //
-export const pinkPaperLight = {
+export const paperLight = {
   ...PaperDefaultTheme,
   roundness: 2,
   colors: {
@@ -22,7 +28,12 @@ export const pinkPaperLight = {
     // accent: '',
     // background: '',
     // surface: '',
-    // text: '',
+    text: 'rgb(0,0,0)',
+    textAccent: 'rgba(0,0,0,0.5)',
+    ripple: 'rgba(128,128,128,0.2)',
+    rippleAccent: 'rgba(128,128,128,0.1)',
+    instantText: 'rgb(46,117,213)',
+    instantRipple: 'rgba(46,117,213,0.1)',
     // disabled: '',
     // placeholder: '',
     // backdrop: '',
@@ -43,7 +54,7 @@ export const pinkPaperLight = {
 
 // ----------------------------------------------------------------------
 //
-export const pinkPaperDark = {
+export const paperDark = {
   ...PaperDarkTheme,
   roundness: 2,
   colors: {
@@ -73,7 +84,7 @@ export const pinkPaperDark = {
 
 // ----------------------------------------------------------------------
 //
-export const pinkNavigationLight = {
+export const navigationLight = {
   ...NavigationDefaultTheme,
   colors: {
     ...NavigationDefaultTheme.colors,
@@ -87,7 +98,7 @@ export const pinkNavigationLight = {
   },
 };
 
-export const pinkNavigationDark = {
+export const navigationDark = {
   ...NavigationDarkTheme,
   dark: true,
   colors: {

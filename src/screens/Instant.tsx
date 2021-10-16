@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {View, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,6 +20,7 @@ type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 
 const Instant: React.FC = () => {
   const {width} = useWindowDimensions();
+  const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
@@ -53,14 +54,14 @@ const Instant: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={styles.root}>
       <StatusBar barStyle="light-content" />
-      <Text>来源{' ' + instant.siteName}</Text>
-      <View style={styles.header_divider} />
+      <Text style={{color: paperColor.textAccent}}>来源{' ' + instant.siteName}</Text>
+      <View style={[styles.header_divider, {backgroundColor: paperColor.ripple}]} />
       <Text style={styles.title}>{instant.title}</Text>
       <RenderHtml contentWidth={width - 32} source={{html: instant.content}} />
       <View style={styles.bottom}>
-        <View style={styles.divider} />
-        <Ionicons name="glasses-outline" size={24} color="rgba(0,0,0,0.1)" />
-        <View style={styles.divider} />
+        <View style={[styles.divider, {backgroundColor: paperColor.ripple}]} />
+        <Ionicons name="glasses-outline" size={24} color={paperColor.ripple} />
+        <View style={[styles.divider, {backgroundColor: paperColor.ripple}]} />
       </View>
     </ScrollView>
   );
@@ -72,7 +73,6 @@ const styles = StyleSheet.create({
   },
   header_divider: {
     height: 1,
-    backgroundColor: 'rgba(0,0,0,0.1)',
     marginTop: 16,
     marginBottom: 16,
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'justify',
   },
-  content: {},
+  // content: {},
   bottom: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: 'rgba(0,0,0,0.1)',
     width: '42%',
   },
 });

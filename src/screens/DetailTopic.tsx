@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
-import {IconButton, Text, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
 
@@ -22,6 +22,8 @@ type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 const DetailTopic: React.FC = () => {
   dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
+
+  const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute<ScreenRouteProp>();
@@ -55,7 +57,9 @@ const DetailTopic: React.FC = () => {
         hasFinalView && (
           <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={styles.root}>
             <Text style={styles.title}>{detail.title}</Text>
-            <Text style={styles.publishDate}>{dayjs(detail.publishDate).fromNow()}</Text>
+            <Text style={[styles.publishDate, {color: paperColor.textAccent}]}>
+              {dayjs(detail.publishDate).fromNow()}
+            </Text>
             <Text selectable={true} style={styles.summary}>
               {detail.summary}
             </Text>
@@ -63,18 +67,25 @@ const DetailTopic: React.FC = () => {
               {detail.hasInstantView ? (
                 <TouchableRipple
                   borderless={true}
-                  rippleColor="rgba(46,117,213,0.8)"
-                  style={styles.instant}
+                  rippleColor={paperColor.instantRipple}
+                  style={[styles.instant, {backgroundColor: paperColor.instantRipple}]}
                   onPress={() => navigation.navigate('Instant', {id})}>
                   <>
-                    <Ionicons name="glasses-outline" size={24} color="rgb(46,117,213)" />
-                    <Text style={styles.instant_label}>即时预览</Text>
+                    <Ionicons name="glasses-outline" size={24} color={paperColor.instantText} />
+                    <Text style={[styles.instant_label, {color: paperColor.instantText}]}>即时预览</Text>
                   </>
                 </TouchableRipple>
               ) : (
                 <View />
               )}
-              <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.iconbtn} onPress={() => {}} />
+              <IconButton
+                icon="share-variant"
+                size={14}
+                color="#FFFFFF"
+                rippleColor={paperColor.ripple}
+                style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
+                onPress={() => {}}
+              />
             </View>
             <View style={styles.bottom}>
               <View style={styles.bottom_title}>
@@ -152,7 +163,6 @@ const styles = StyleSheet.create({
   instant: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(46,117,213,0.1)',
     borderRadius: 4,
     paddingLeft: 8,
     paddingRight: 8,
@@ -160,10 +170,8 @@ const styles = StyleSheet.create({
   instant_label: {
     includeFontPadding: false,
     marginLeft: 4,
-    color: 'rgb(46,117,213)',
   },
   iconbtn: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
     paddingRight: 2,
   },
   bottom: {

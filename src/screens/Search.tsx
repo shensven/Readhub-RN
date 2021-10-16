@@ -3,7 +3,7 @@ import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} fro
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {IconButton, Text, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import axios from 'axios';
@@ -33,6 +33,8 @@ const Search: React.FC = () => {
   const isFocus = useIsFocused();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
+
+  const {colors: paperColor} = usePaperTheme();
 
   const {input, setInput, suggest, setSuggest, searchResult, setSearchResult, hasLoading, setHasLoading} =
     useContext(SearchCtx);
@@ -102,7 +104,7 @@ const Search: React.FC = () => {
         <TextInput
           value={_input}
           placeholder="搜索"
-          placeholderTextColor="rgba(0, 0, 0.7)"
+          placeholderTextColor={paperColor.textAccent}
           style={styles.RNHeader_input}
           autoFocus={true}
           onChangeText={text => _setInput(text)}
@@ -145,12 +147,13 @@ const Search: React.FC = () => {
     return (
       <TouchableOpacity
         style={styles.suggest_list_touchable}
+        activeOpacity={0.6}
         onPress={() => {
           setSuggest([]);
           setHasLoading(true);
           goSearch(item.entityName);
         }}>
-        <Ionicons name="search-circle" size={16} color={'rgba(0,0,0,0.2)'} />
+        <Ionicons name="search-circle" size={16} color={paperColor.ripple} />
         <Text style={styles.suggest_list_keyword}>{item.entityName}</Text>
       </TouchableOpacity>
     );
@@ -160,11 +163,14 @@ const Search: React.FC = () => {
     return (
       <TouchableRipple
         borderless={true}
+        rippleColor={paperColor.ripple}
         style={styles.card}
         onPress={() => navigation.navigate('DetailTopic', {id: item.topicId})}>
         <View>
           <Text style={styles.card_title}>{item.topicTitle}</Text>
-          <Text style={styles.caed_publishDate}>{dayjs(item.topicCreateAt).format('YYYY-MM-DD')}</Text>
+          <Text style={[styles.caed_publishDate, {color: paperColor.textAccent}]}>
+            {dayjs(item.topicCreateAt).format('YYYY-MM-DD')}
+          </Text>
           {item.topicSummary.length > 0 && (
             <Text numberOfLines={3} style={styles.card_summary}>
               {item.topicSummary}
@@ -184,7 +190,14 @@ const Search: React.FC = () => {
                 )}
               </Text>
             </View>
-            <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.card_iconbtn} onPress={() => {}} />
+            <IconButton
+              icon="share-variant"
+              size={14}
+              color="#FFFFFF"
+              rippleColor={paperColor.ripple}
+              style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
+              onPress={() => {}}
+            />
           </View>
         </View>
       </TouchableRipple>
@@ -232,7 +245,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: 'rgba(128,128,128,0.1)',
     marginLeft: 8,
   },
   RNHeader_input: {
@@ -323,7 +336,6 @@ const styles = StyleSheet.create({
   card_iconbtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
     paddingRight: 2,
   },
 });

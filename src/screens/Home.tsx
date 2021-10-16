@@ -4,7 +4,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
-import {IconButton, Text, TouchableRipple} from 'react-native-paper';
+import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
@@ -30,6 +30,7 @@ const Home: React.FC = () => {
   dayjs.extend(relativeTime);
 
   const insets = useSafeAreaInsets();
+  const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
@@ -173,14 +174,24 @@ const Home: React.FC = () => {
   //----------------------------------------------------------------------------
 
   const RNHeaderRight: React.FC = () => {
+    const {colors: _paperColor} = usePaperTheme();
     return (
       <View style={styles.RNHeader_right}>
-        <TouchableOpacity style={styles.RNHeader_fakeinput} onPress={() => navigation.navigate('Search')}>
-          <Text style={styles.RNHeader_fakeinput_placeholder}>搜索</Text>
-          <Ionicons name="search-outline" size={16} color={'rgba(0,0,0,0.5)'} style={styles.RNHeader_fakeinput_icon} />
+        <TouchableOpacity
+          activeOpacity={0.6}
+          style={[styles.RNHeader_fakeinput, {backgroundColor: _paperColor.rippleAccent}]}
+          onPress={() => navigation.navigate('Search')}>
+          <Text style={[styles.RNHeader_fakeinput_placeholder, {color: _paperColor.textAccent}]}>搜索</Text>
+          <Ionicons
+            name="search-outline"
+            size={16}
+            color={_paperColor.textAccent}
+            style={styles.RNHeader_fakeinput_icon}
+          />
         </TouchableOpacity>
         <IconButton
           icon={() => <Ionicons name="cog-outline" size={24} />}
+          rippleColor={_paperColor.ripple}
           onPress={() => navigation.navigate('Settings')}
         />
       </View>
@@ -219,10 +230,12 @@ const Home: React.FC = () => {
     };
 
     return (
-      <TouchableRipple borderless={true} style={styles.card} onPress={() => goDetail()}>
+      <TouchableRipple borderless={true} rippleColor={paperColor.ripple} style={styles.card} onPress={() => goDetail()}>
         <View>
           <Text style={styles.card_title}>{item.title}</Text>
-          <Text style={styles.caed_publishDate}>{dayjs(item.publishDate).fromNow()}</Text>
+          <Text style={[styles.caed_publishDate, {color: paperColor.textAccent}]}>
+            {dayjs(item.publishDate).fromNow()}
+          </Text>
           {item.summary.length > 0 && (
             <Text numberOfLines={3} style={styles.card_summary}>
               {item.summary}
@@ -246,7 +259,14 @@ const Home: React.FC = () => {
                 )}
               </Text>
             </View>
-            <IconButton icon="share-variant" size={14} color="#FFFFFF" style={styles.card_iconbtn} onPress={() => {}} />
+            <IconButton
+              icon="share-variant"
+              size={14}
+              color="#FFFFFF"
+              rippleColor={paperColor.ripple}
+              style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
+              onPress={() => {}}
+            />
           </View>
         </View>
       </TouchableRipple>
@@ -331,13 +351,11 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8,
     borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.05)',
   },
   RNHeader_fakeinput_placeholder: {
     paddingLeft: 8,
     paddingRight: 0,
     marginRight: 32,
-    opacity: 0.5,
   },
   RNHeader_fakeinput_icon: {
     marginLeft: 8,
@@ -416,7 +434,6 @@ const styles = StyleSheet.create({
   card_iconbtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
     paddingRight: 2,
   },
 });
