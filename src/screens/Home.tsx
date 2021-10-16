@@ -202,6 +202,8 @@ const Home: React.FC = () => {
     navigation.setOptions({
       title: 'ReadHub Native',
       headerTitleAlign: 'left',
+      headerTintColor: paperColor.instantText,
+      headerTitleStyle: {fontWeight: 'bold'},
       headerRight: () => <RNHeaderRight />,
     });
   }, [navigation, route]);
@@ -300,7 +302,14 @@ const Home: React.FC = () => {
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTopicRefresh()} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.instantText]}
+              tintColor={paperColor.instantText}
+              refreshing={refreshing}
+              onRefresh={() => handleTopicRefresh()}
+            />
+          }
           showsVerticalScrollIndicator={false}
           onEndReached={() => getNextTopic()}
         />
@@ -315,7 +324,14 @@ const Home: React.FC = () => {
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleNewsRefresh()} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.instantText]}
+              tintColor={paperColor.instantText}
+              refreshing={refreshing}
+              onRefresh={() => handleNewsRefresh()}
+            />
+          }
           showsVerticalScrollIndicator={false}
           onEndReached={() => getNextNews()}
         />
@@ -330,7 +346,14 @@ const Home: React.FC = () => {
           ListFooterComponent={() => <Loading />}
           ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => handleTechnewsRefresh()} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.instantText]}
+              tintColor={paperColor.instantText}
+              refreshing={refreshing}
+              onRefresh={() => handleTechnewsRefresh()}
+            />
+          }
           showsVerticalScrollIndicator={false}
           onEndReached={() => getNextTechnews()}
         />

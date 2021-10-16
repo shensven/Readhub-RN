@@ -2,6 +2,7 @@ import React, {useLayoutEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import dayjs from 'dayjs';
@@ -28,6 +29,7 @@ const DetailNews: React.FC = () => {
   dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
 
+  const insets = useSafeAreaInsets();
   const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -43,7 +45,9 @@ const DetailNews: React.FC = () => {
   }, [navigation, route]);
 
   return (
-    <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={styles.root}>
+    <ScrollView
+      scrollIndicatorInsets={{right: 1}}
+      contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
       <Text style={styles.title}>{title}</Text>
       <Text style={[styles.publishDate, {color: paperColor.textAccent}]}>{dayjs(publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>

@@ -2,6 +2,7 @@ import React, {useLayoutEffect, useState} from 'react';
 import {StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -23,6 +24,7 @@ const DetailTopic: React.FC = () => {
   dayjs.extend(relativeTime);
   dayjs.locale('zh-cn');
 
+  const insets = useSafeAreaInsets();
   const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -55,7 +57,9 @@ const DetailTopic: React.FC = () => {
     case true:
       return (
         hasFinalView && (
-          <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={styles.root}>
+          <ScrollView
+            scrollIndicatorInsets={{right: 1}}
+            contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
             <Text style={styles.title}>{detail.title}</Text>
             <Text style={[styles.publishDate, {color: paperColor.textAccent}]}>
               {dayjs(detail.publishDate).fromNow()}

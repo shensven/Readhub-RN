@@ -2,6 +2,7 @@ import React, {useLayoutEffect, useState} from 'react';
 import {View, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import appAxios from '../utils/appAxios';
@@ -19,6 +20,8 @@ type StackParamList = {
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 
 const Instant: React.FC = () => {
+  const insets = useSafeAreaInsets();
+
   const {width} = useWindowDimensions();
   const {colors: paperColor} = usePaperTheme();
 
@@ -52,13 +55,13 @@ const Instant: React.FC = () => {
   }, [navigation, route]);
 
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <ScrollView contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 16}]}>
       <StatusBar barStyle="light-content" />
       <Text style={{color: paperColor.textAccent}}>来源{' ' + instant.siteName}</Text>
       <View style={[styles.header_divider, {backgroundColor: paperColor.ripple}]} />
       <Text style={styles.title}>{instant.title}</Text>
       <RenderHtml contentWidth={width - 32} source={{html: instant.content}} />
-      <View style={styles.bottom}>
+      <View style={[styles.bottom]}>
         <View style={[styles.divider, {backgroundColor: paperColor.ripple}]} />
         <Ionicons name="glasses-outline" size={24} color={paperColor.ripple} />
         <View style={[styles.divider, {backgroundColor: paperColor.ripple}]} />

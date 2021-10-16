@@ -1,6 +1,6 @@
 import React, {useLayoutEffect} from 'react';
 import {View, Image, StyleSheet, PixelRatio} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, useTheme as usePaperTheme} from 'react-native-paper';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
@@ -10,6 +10,7 @@ const About: React.FC = () => {
   const buildNumber = DeviceInfo.getBuildNumber();
 
   const insets = useSafeAreaInsets();
+  const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -37,15 +38,15 @@ const About: React.FC = () => {
           <Image source={require('../assets/AppIcon/AppIcon180.png')} style={styles.app_logo} />
         )}
         <Text style={styles.app_name}>ReadHub Native</Text>
-        <Text style={styles.app_ver}>
+        <Text style={[styles.app_ver, {color: paperColor.textAccent}]}>
           Version {version} ({buildNumber})
         </Text>
       </View>
       <View style={[styles.bottom, {marginBottom: insets.bottom + 24}]}>
         {/* <Text style={styles.description}>{PixelRatio.get()}</Text> */}
-        <Text style={styles.description}>Made with ❤️ in Kunming by GenSven</Text>
-        <Text style={styles.description}>Thanks to readhub.cn</Text>
-        <Text style={styles.description}>Proudly powered by React Native</Text>
+        <Text style={[styles.description, {color: paperColor.textAccent}]}>Made with ❤️ in Kunming by GenSven</Text>
+        <Text style={[styles.description, {color: paperColor.textAccent}]}>Thanks to readhub.cn</Text>
+        <Text style={[styles.description, {color: paperColor.textAccent}]}>Proudly powered by React Native</Text>
       </View>
     </View>
   );
