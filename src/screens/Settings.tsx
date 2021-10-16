@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SettingsItem} from '../utils/type';
 
 type StackParamList = {
+  Welcome: undefined;
   PrivacyPolicy: undefined;
   OpenSourceLibrary: undefined;
   About: undefined;
@@ -32,7 +33,7 @@ const Settings: React.FC = () => {
       leftIcon: 'pizza-outline',
       leftIconSize: 23,
       rightIcon: 'chevron-forward-outline',
-      onPress: () => null,
+      onPress: () => navigation.navigate('Welcome'),
     },
     {
       title: '隐私政策',

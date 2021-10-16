@@ -10,6 +10,7 @@ import DetailTopic from './src/screens/DetailTopic';
 import DetailNews from './src/screens/DetailNews';
 import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
+import Welcome from './src/screens/Welcome';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import About from './src/screens/About';
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Stack.Screen name="DetailNews" component={DetailNews} />
           <Stack.Screen name="Instant" component={Instant} options={{...TransitionPresets.ModalPresentationIOS}} />
           <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Welcome" component={Welcome} options={{...TransitionPresets.ModalSlideFromBottomIOS}} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
           <Stack.Screen name="About" component={About} />
         </Stack.Navigator>
