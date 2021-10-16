@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, PixelRatio} from 'react-native';
 import {Text} from 'react-native-paper';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -24,7 +24,15 @@ const About: React.FC = () => {
   return (
     <View style={styles.root}>
       <View style={styles.top}>
-        <Image source={require('../assets/AppIcon/AppIcon192.png')} style={styles.app_logo} />
+        {PixelRatio.get() === 1 && (
+          <Image source={require('../assets/AppIcon/AppIcon60.png')} style={styles.app_logo} />
+        )}
+        {PixelRatio.get() === 2 && (
+          <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
+        )}
+        {PixelRatio.get() === 3 && (
+          <Image source={require('../assets/AppIcon/AppIcon180.png')} style={styles.app_logo} />
+        )}
         <Text style={styles.app_name}>ReadHub Native</Text>
         <Text style={styles.app_ver}>
           Version {version} ({buildNumber})

@@ -28,13 +28,11 @@ const Settings: React.FC = () => {
 
   const itemData: SettingsItem[] = [
     {
-      title: '反馈',
-      leftIcon: 'mail-outline',
-      leftIconSize: 22,
-      rightIcon: 'open-outline',
-      rightIconSize: 16,
-      description: 'https://github.com/shensven/ReadHubn/issues',
-      onPress: () => Linking.openURL('https://github.com/shensven/ReadHubn/issues'),
+      title: '欢迎',
+      leftIcon: 'pizza-outline',
+      leftIconSize: 23,
+      rightIcon: 'chevron-forward-outline',
+      onPress: () => null,
     },
     {
       title: '隐私政策',
@@ -50,6 +48,15 @@ const Settings: React.FC = () => {
       rightIcon: 'chevron-forward-outline',
       // onPress: () => navigation.navigate('OpenSourceLibrary'),
       onPress: () => null,
+    },
+    {
+      title: '反馈',
+      leftIcon: 'bug-outline',
+      leftIconSize: 23,
+      rightIcon: 'open-outline',
+      rightIconSize: 16,
+      description: 'https://github.com/shensven/ReadHubn/issues',
+      onPress: () => Linking.openURL('https://github.com/shensven/ReadHubn/issues'),
     },
     {
       title: '关于',
