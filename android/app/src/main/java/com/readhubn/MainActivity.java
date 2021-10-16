@@ -52,5 +52,4 @@ public class MainActivity extends ReactActivity {
     }
     win.setAttributes(winParams);
   }
-
 }
