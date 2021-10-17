@@ -11,8 +11,8 @@ declare global {
       textAccent: string;
       ripple: string;
       rippleAccent: string;
-      instantText: string;
-      instantRipple: string;
+      blueText: string;
+      blueRipple: string;
     }
   }
 }
@@ -24,7 +24,7 @@ export const paperLight = {
   roundness: 2,
   colors: {
     ...PaperDefaultTheme.colors,
-    // primary: '',
+    primary: '#4A6C91',
     // accent: '',
     // background: '',
     // surface: '',
@@ -32,8 +32,8 @@ export const paperLight = {
     textAccent: 'rgba(0,0,0,0.5)',
     ripple: 'rgba(128,128,128,0.2)',
     rippleAccent: 'rgba(128,128,128,0.1)',
-    instantText: 'rgb(46,117,213)',
-    instantRipple: 'rgba(46,117,213,0.1)',
+    blueText: 'rgb(46,117,213)',
+    blueRipple: 'rgba(46,117,213,0.1)',
     // disabled: '',
     // placeholder: '',
     // backdrop: '',

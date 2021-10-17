@@ -57,12 +57,12 @@ const DetailNews: React.FC = () => {
         {hasInstantView ? (
           <TouchableRipple
             borderless={true}
-            rippleColor={paperColor.instantRipple}
-            style={[styles.instant, {backgroundColor: paperColor.instantRipple}]}
+            rippleColor={paperColor.blueRipple}
+            style={[styles.instant, {backgroundColor: paperColor.blueRipple}]}
             onPress={() => navigation.navigate('Instant', {id})}>
             <>
-              <Ionicons name="glasses-outline" size={24} color={paperColor.instantText} />
-              <Text style={[styles.instant_label, {color: paperColor.instantText}]}>即时预览</Text>
+              <Ionicons name="glasses-outline" size={24} color={paperColor.blueText} />
+              <Text style={[styles.instant_label, {color: paperColor.blueText}]}>即时预览</Text>
             </>
           </TouchableRipple>
         ) : (
@@ -72,7 +72,7 @@ const DetailNews: React.FC = () => {
           icon="share-variant"
           size={14}
           color="#FFFFFF"
-          rippleColor={paperColor.ripple}
+          rippleColor={paperColor.blueRipple}
           style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
           onPress={() => {}}
         />

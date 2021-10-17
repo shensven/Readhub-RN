@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Image, StyleSheet, PixelRatio} from 'react-native';
+import {View, Image, StyleSheet, PixelRatio, useWindowDimensions} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ const About: React.FC = () => {
   const buildNumber = DeviceInfo.getBuildNumber();
 
   const insets = useSafeAreaInsets();
+  const windowHeight = useWindowDimensions().height;
   const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation();
@@ -42,11 +43,11 @@ const About: React.FC = () => {
           Version {version} ({buildNumber})
         </Text>
       </View>
-      <View style={[styles.bottom, {marginBottom: insets.bottom + 24}]}>
+      <View style={[styles.bottom, {marginTop: windowHeight / 2, marginBottom: insets.bottom + 24}]}>
         {/* <Text style={styles.description}>{PixelRatio.get()}</Text> */}
         <Text style={[styles.description, {color: paperColor.textAccent}]}>Made with ❤️ in Kunming by GenSven</Text>
         <Text style={[styles.description, {color: paperColor.textAccent}]}>Thanks to readhub.cn</Text>
-        <Text style={[styles.description, {color: paperColor.textAccent}]}>Proudly powered by React Native</Text>
+        <Text style={[styles.description, {color: paperColor.textAccent}]}>Powered by React Native</Text>
       </View>
     </View>
   );

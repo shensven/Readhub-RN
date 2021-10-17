@@ -1,6 +1,8 @@
 import React, {useLayoutEffect} from 'react';
-import {View, StyleSheet, Image, StatusBar} from 'react-native';
+import {View, StyleSheet, Image, StatusBar, Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+const screenHeight = Dimensions.get('screen').height;
 
 const Welcome: React.FC = () => {
   const navigation = useNavigation();
@@ -26,10 +28,11 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: '#000000',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
+    marginTop: screenHeight / 2 - 128,
     width: 256,
     height: 256,
   },

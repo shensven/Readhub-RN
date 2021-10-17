@@ -202,8 +202,7 @@ const Home: React.FC = () => {
     navigation.setOptions({
       title: 'ReadHub Native',
       headerTitleAlign: 'left',
-      headerTintColor: paperColor.instantText,
-      headerTitleStyle: {fontWeight: 'bold'},
+      headerTintColor: paperColor.blueText,
       headerRight: () => <RNHeaderRight />,
     });
   }, [navigation, route]);
@@ -265,7 +264,7 @@ const Home: React.FC = () => {
               icon="share-variant"
               size={14}
               color="#FFFFFF"
-              rippleColor={paperColor.ripple}
+              rippleColor={paperColor.blueRipple}
               style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
               onPress={() => {}}
             />
@@ -289,8 +288,16 @@ const Home: React.FC = () => {
   return (
     <Tabs.Container
       ref={tabRef}
+      lazy={true}
       renderTabBar={props => (
-        <MaterialTabBar {...props} scrollEnabled labelStyle={styles.tab_label} indicatorStyle={styles.tab_indicator} />
+        <MaterialTabBar
+          {...props}
+          scrollEnabled
+          labelStyle={styles.tab_label}
+          indicatorStyle={styles.tab_indicator}
+          activeColor={paperColor.text}
+          inactiveColor={paperColor.textAccent}
+        />
       )}>
       <Tabs.Tab name="Topics" label="热门话题">
         <Tabs.FlatList
@@ -304,8 +311,8 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={
             <RefreshControl
-              colors={[paperColor.instantText]}
-              tintColor={paperColor.instantText}
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
               refreshing={refreshing}
               onRefresh={() => handleTopicRefresh()}
             />
@@ -326,8 +333,8 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={
             <RefreshControl
-              colors={[paperColor.instantText]}
-              tintColor={paperColor.instantText}
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
               refreshing={refreshing}
               onRefresh={() => handleNewsRefresh()}
             />
@@ -348,8 +355,8 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
           refreshControl={
             <RefreshControl
-              colors={[paperColor.instantText]}
-              tintColor={paperColor.instantText}
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
               refreshing={refreshing}
               onRefresh={() => handleTechnewsRefresh()}
             />
@@ -389,7 +396,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   tab_indicator: {
-    backgroundColor: '#4A6C91',
+    // backgroundColor: '#4A6C91',
+    height: 0,
   },
 
   flatlist_header_root: {

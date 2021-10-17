@@ -102,11 +102,12 @@ const Search: React.FC = () => {
     return (
       <View style={styles.RNHeader_left}>
         <TextInput
-          value={_input}
-          placeholder="搜索"
-          placeholderTextColor={paperColor.textAccent}
-          style={styles.RNHeader_input}
           autoFocus={true}
+          placeholder="搜索"
+          value={_input}
+          placeholderTextColor={paperColor.textAccent}
+          selectionColor={paperColor.primary}
+          style={styles.RNHeader_input}
           onChangeText={text => _setInput(text)}
           onSubmitEditing={() => getSuggest()}
           onFocus={() => {
@@ -194,7 +195,7 @@ const Search: React.FC = () => {
               icon="share-variant"
               size={14}
               color="#FFFFFF"
-              rippleColor={paperColor.ripple}
+              rippleColor={paperColor.blueRipple}
               style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
               onPress={() => {}}
             />

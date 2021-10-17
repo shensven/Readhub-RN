@@ -71,12 +71,12 @@ const DetailTopic: React.FC = () => {
               {detail.hasInstantView ? (
                 <TouchableRipple
                   borderless={true}
-                  rippleColor={paperColor.instantRipple}
-                  style={[styles.instant, {backgroundColor: paperColor.instantRipple}]}
+                  rippleColor={paperColor.blueRipple}
+                  style={[styles.instant, {backgroundColor: paperColor.blueRipple}]}
                   onPress={() => navigation.navigate('Instant', {id})}>
                   <>
-                    <Ionicons name="glasses-outline" size={24} color={paperColor.instantText} />
-                    <Text style={[styles.instant_label, {color: paperColor.instantText}]}>即时预览</Text>
+                    <Ionicons name="glasses-outline" size={24} color={paperColor.blueText} />
+                    <Text style={[styles.instant_label, {color: paperColor.blueText}]}>即时预览</Text>
                   </>
                 </TouchableRipple>
               ) : (
@@ -86,7 +86,7 @@ const DetailTopic: React.FC = () => {
                 icon="share-variant"
                 size={14}
                 color="#FFFFFF"
-                rippleColor={paperColor.ripple}
+                rippleColor={paperColor.blueRipple}
                 style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
                 onPress={() => {}}
               />
@@ -103,14 +103,16 @@ const DetailTopic: React.FC = () => {
                     <TouchableOpacity onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
                       <Text>{newsReporterItem.title}</Text>
                     </TouchableOpacity>
-                    <Text style={styles.bottom_subTitle}>{newsReporterItem.siteName}</Text>
+                    <Text style={[styles.bottom_subTitle, {color: paperColor.textAccent}]}>
+                      {newsReporterItem.siteName}
+                    </Text>
                   </View>
                 </View>
               ))}
             </View>
             <View style={styles.bottom}>
               <View style={styles.bottom_title}>
-                <Ionicons name="time-outline" size={17} />
+                <Ionicons name="time-outline" size={16} />
                 <Text style={styles.bottom_title_right}>事件追踪</Text>
               </View>
               {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
@@ -125,7 +127,9 @@ const DetailTopic: React.FC = () => {
                       }}>
                       <Text>{topicsItem.title}</Text>
                     </TouchableOpacity>
-                    <Text style={styles.bottom_subTitle}>{dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}</Text>
+                    <Text style={[styles.bottom_subTitle, {color: paperColor.textAccent}]}>
+                      {dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}
+                    </Text>
                   </View>
                 </View>
               ))}
@@ -198,7 +202,6 @@ const styles = StyleSheet.create({
   bottom_subTitle: {
     fontSize: 10,
     marginTop: 2,
-    opacity: 0.5,
   },
 });
 
