@@ -75,8 +75,8 @@ const Settings: React.FC = () => {
       leftIconSize: 23,
       rightIcon: 'open-outline',
       rightIconSize: 16,
-      description: 'https://github.com/shensven/ReadHubn/issues',
-      onPress: () => Linking.openURL('https://github.com/shensven/ReadHubn/issues'),
+      description: 'https://github.com/shensven/Readhubn/issues',
+      onPress: () => Linking.openURL('https://github.com/shensven/Readhubn/issues'),
     },
     {
       title: '关于',

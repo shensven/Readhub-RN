@@ -38,7 +38,7 @@ const About: React.FC = () => {
         {PixelRatio.get() === 3 && (
           <Image source={require('../assets/AppIcon/AppIcon180.png')} style={styles.app_logo} />
         )}
-        <Text style={styles.app_name}>ReadHub Native</Text>
+        <Text style={styles.app_name}>Readhub Native</Text>
         <Text style={[styles.app_ver, {color: paperColor.textAccent}]}>
           Version {version} ({buildNumber})
         </Text>

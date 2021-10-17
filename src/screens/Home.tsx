@@ -203,7 +203,7 @@ const Home: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'ReadHub Native',
+      title: 'Readhub Native',
       headerTitleAlign: 'left',
       headerTintColor: paperColor.blueText,
       headerRight: () => <RNHeaderRight />,
