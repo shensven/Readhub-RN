@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {createContext, useLayoutEffect, useState} from 'react';
+import React, {createContext, useEffect, useLayoutEffect, useState} from 'react';
 import {SearchReault} from './type';
 
 interface SuggestItem {
@@ -59,7 +59,7 @@ export const ReadhubProvider: React.FC = props => {
     initListHasRead();
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     persistListHasRead();
   }, [listHasReadVal]);
 

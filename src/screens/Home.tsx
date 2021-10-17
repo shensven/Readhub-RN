@@ -260,12 +260,7 @@ const Home: React.FC = () => {
             {dayjs(item.publishDate).fromNow()}
           </Text>
           {item.summary.length > 0 && (
-            <Text
-              numberOfLines={3}
-              style={[
-                styles.card_summary,
-                {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-              ]}>
+            <Text numberOfLines={3} style={[styles.card_summary, {color: paperColor.text}]}>
               {item.summary}
             </Text>
           )}
@@ -274,48 +269,22 @@ const Home: React.FC = () => {
               <Text numberOfLines={1} style={styles.card_siteName}>
                 {'newsArray' in item && (
                   <>
-                    <Text
-                      style={[
-                        styles.card_siteName_unit,
-                        {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-                      ]}>
+                    <Text style={[styles.card_siteName_unit, {color: paperColor.text}]}>
                       {item.newsArray[0]?.siteName + ' '}
                     </Text>
                     {item.newsArray.length > 1 && (
-                      <Text
-                        style={[
-                          styles.card_siteName_unit,
-                          {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-                        ]}>
+                      <Text style={[styles.card_siteName_unit, {color: paperColor.text}]}>
                         等{' ' + item.newsArray.length + ' '}家媒体
                       </Text>
                     )}
-                    <Text
-                      style={[
-                        styles.card_siteName_unit,
-                        {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-                      ]}>
-                      报道
-                    </Text>
+                    <Text style={[styles.card_siteName_unit, {color: paperColor.text}]}>报道</Text>
                   </>
                 )}
                 {item.siteName?.length > 1 && (
-                  <Text
-                    style={[
-                      styles.card_siteName_unit,
-                      {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-                    ]}>
-                    {item.siteName}
-                  </Text>
+                  <Text style={[styles.card_siteName_unit, {color: paperColor.text}]}>{item.siteName}</Text>
                 )}
                 {item.authorName?.length > 1 && (
-                  <Text
-                    style={[
-                      styles.card_siteName_unit,
-                      {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
-                    ]}>
-                    {' / ' + item.authorName}
-                  </Text>
+                  <Text style={[styles.card_siteName_unit, {color: paperColor.text}]}>{' / ' + item.authorName}</Text>
                 )}
               </Text>
             </View>
@@ -353,7 +322,7 @@ const Home: React.FC = () => {
           {...props}
           scrollEnabled
           labelStyle={styles.tab_label}
-          indicatorStyle={styles.tab_indicator}
+          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
           // activeColor={paperColor.text}
           // inactiveColor={paperColor.textAccent}
         />
@@ -455,8 +424,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   tab_indicator: {
-    // backgroundColor: '#4A6C91',
-    height: 0,
+    // height: 0,
   },
 
   flatlist_header_root: {

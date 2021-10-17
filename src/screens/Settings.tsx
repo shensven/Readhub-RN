@@ -1,7 +1,7 @@
 import React, {useContext, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {Alert, FlatList, Linking, StyleSheet} from 'react-native';
+import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SettingsItem} from '../utils/type';
@@ -27,7 +27,13 @@ const Settings: React.FC = () => {
   const resetListHasRead = async () => {
     Alert.alert('重置进度', '所有的阅读进度将会被清除', [
       {text: '取消'},
-      {text: '确定', onPress: () => setListHasRead([])},
+      {
+        text: '确定',
+        onPress: () => {
+          setListHasRead([]);
+          Platform.OS === 'android' && ToastAndroid.show('已清除', ToastAndroid.SHORT);
+        },
+      },
     ]);
   };
 
