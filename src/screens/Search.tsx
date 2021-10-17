@@ -7,7 +7,7 @@ import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'reac
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import {SearchCtx} from '../utils/searchContext';
+import {ReadhubCtx} from '../utils/readhubnContext';
 import {SearchReault} from '../utils/type';
 import Loading from './components/Loading/Loading';
 
@@ -36,8 +36,18 @@ const Search: React.FC = () => {
 
   const {colors: paperColor} = usePaperTheme();
 
-  const {input, setInput, suggest, setSuggest, searchResult, setSearchResult, hasLoading, setHasLoading} =
-    useContext(SearchCtx);
+  const {
+    input,
+    setInput,
+    suggest,
+    setSuggest,
+    searchResult,
+    setSearchResult,
+    hasLoading,
+    setHasLoading,
+    listHasRead,
+    setListHasRead,
+  } = useContext(ReadhubCtx);
 
   const [resultPage, setResultPage] = useState<number>(2);
 
@@ -82,7 +92,7 @@ const Search: React.FC = () => {
       setSuggest: _setSuggest,
       setSearchResult: _setSearchResult,
       setHasLoading: _setHasLoading,
-    } = useContext(SearchCtx);
+    } = useContext(ReadhubCtx);
 
     const getSuggest = async () => {
       if (_input.length !== 0) {
@@ -120,7 +130,7 @@ const Search: React.FC = () => {
   };
 
   const RNHeaderRight: React.FC = () => {
-    const {setSuggest: _setSuggest} = useContext(SearchCtx);
+    const {setSuggest: _setSuggest} = useContext(ReadhubCtx);
     return (
       <TouchableOpacity
         hitSlop={{top: 16, bottom: 16, left: 16, right: 16}}
@@ -166,7 +176,12 @@ const Search: React.FC = () => {
         borderless={true}
         rippleColor={paperColor.ripple}
         style={styles.card}
-        onPress={() => navigation.navigate('DetailTopic', {id: item.topicId})}>
+        onPress={() => {
+          if (listHasRead.indexOf(item.topicId) === -1) {
+            setListHasRead([...listHasRead, item.topicId]);
+          }
+          navigation.navigate('DetailTopic', {id: item.topicId});
+        }}>
         <View>
           <Text style={styles.card_title}>{item.topicTitle}</Text>
           <Text style={[styles.caed_publishDate, {color: paperColor.textAccent}]}>

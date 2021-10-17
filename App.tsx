@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {Provider as PaperProvider} from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
-import {SearchProvider} from './src/utils/searchContext';
+import {ReadhubProvider} from './src/utils/readhubnContext';
 import {paperLight} from './src/theme/default';
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <SearchProvider>
+    <ReadhubProvider>
       <PaperProvider theme={paperLight}>
         <NavigationContainer
           onReady={() =>
@@ -53,7 +53,7 @@ const App: React.FC = () => {
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
-    </SearchProvider>
+    </ReadhubProvider>
   );
 };
 

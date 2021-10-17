@@ -1,10 +1,11 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useContext, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {FlatList, Linking, StyleSheet} from 'react-native';
+import {Alert, FlatList, Linking, StyleSheet} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SettingsItem} from '../utils/type';
+import {ReadhubCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
   Welcome: undefined;
@@ -21,6 +22,15 @@ const Settings: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation<ScreenNavigationProp>();
 
+  const {setListHasRead} = useContext(ReadhubCtx);
+
+  const resetListHasRead = async () => {
+    Alert.alert('重置进度', '所有的阅读进度将会被清除', [
+      {text: '取消'},
+      {text: '确定', onPress: () => setListHasRead([])},
+    ]);
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '设置',
@@ -36,6 +46,13 @@ const Settings: React.FC = () => {
       leftIconSize: 23,
       rightIcon: 'chevron-forward-outline',
       onPress: () => navigation.navigate('Welcome'),
+    },
+    {
+      title: '重置阅读进度',
+      leftIcon: 'trash-outline',
+      leftIconSize: 23,
+      rightIcon: 'chevron-forward-outline',
+      onPress: () => resetListHasRead(),
     },
     {
       title: '隐私政策',

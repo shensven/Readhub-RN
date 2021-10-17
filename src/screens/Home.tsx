@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -14,6 +14,7 @@ import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
+import {ReadhubCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
   Search: undefined;
@@ -48,6 +49,8 @@ const Home: React.FC = () => {
   const [technewsLastCursor, setTechnewsLastCursor] = useState<number>();
 
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
+
+  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
 
   //----------------------------------------------------------------------------
 
@@ -211,6 +214,9 @@ const Home: React.FC = () => {
 
   const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = ({item}: {item: any}) => {
     const goDetail = () => {
+      if (listHasRead.indexOf(item.id) === -1) {
+        setListHasRead([...listHasRead, item.id]);
+      }
       switch (tabRef.current?.getFocusedTab()) {
         case 'Topics':
           navigation.navigate('DetailTopic', {id: item.id});
@@ -231,14 +237,35 @@ const Home: React.FC = () => {
     };
 
     return (
-      <TouchableRipple borderless={true} rippleColor={paperColor.ripple} style={styles.card} onPress={() => goDetail()}>
+      <TouchableRipple
+        borderless={true}
+        rippleColor={paperColor.ripple}
+        style={[
+          styles.card,
+          {
+            backgroundColor:
+              listHasRead.indexOf(item.id) === -1 ? paperColor.cardBackground : paperColor.cardBackgroundAlreadyRead,
+          },
+        ]}
+        onPress={() => goDetail()}>
         <View>
-          <Text style={styles.card_title}>{item.title}</Text>
+          <Text
+            style={[
+              styles.card_title,
+              {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+            ]}>
+            {item.title}
+          </Text>
           <Text style={[styles.caed_publishDate, {color: paperColor.textAccent}]}>
             {dayjs(item.publishDate).fromNow()}
           </Text>
           {item.summary.length > 0 && (
-            <Text numberOfLines={3} style={styles.card_summary}>
+            <Text
+              numberOfLines={3}
+              style={[
+                styles.card_summary,
+                {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+              ]}>
               {item.summary}
             </Text>
           )}
@@ -247,16 +274,48 @@ const Home: React.FC = () => {
               <Text numberOfLines={1} style={styles.card_siteName}>
                 {'newsArray' in item && (
                   <>
-                    <Text style={styles.card_siteName_unit}>{item.newsArray[0]?.siteName + ' '}</Text>
+                    <Text
+                      style={[
+                        styles.card_siteName_unit,
+                        {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+                      ]}>
+                      {item.newsArray[0]?.siteName + ' '}
+                    </Text>
                     {item.newsArray.length > 1 && (
-                      <Text style={styles.card_siteName_unit}>等{' ' + item.newsArray.length + ' '}家媒体</Text>
+                      <Text
+                        style={[
+                          styles.card_siteName_unit,
+                          {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+                        ]}>
+                        等{' ' + item.newsArray.length + ' '}家媒体
+                      </Text>
                     )}
-                    <Text style={styles.card_siteName_unit}>报道</Text>
+                    <Text
+                      style={[
+                        styles.card_siteName_unit,
+                        {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+                      ]}>
+                      报道
+                    </Text>
                   </>
                 )}
-                {item.siteName?.length > 1 && <Text style={styles.card_siteName_unit}>{item.siteName}</Text>}
+                {item.siteName?.length > 1 && (
+                  <Text
+                    style={[
+                      styles.card_siteName_unit,
+                      {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+                    ]}>
+                    {item.siteName}
+                  </Text>
+                )}
                 {item.authorName?.length > 1 && (
-                  <Text style={styles.card_siteName_unit}>{' / ' + item.authorName}</Text>
+                  <Text
+                    style={[
+                      styles.card_siteName_unit,
+                      {color: listHasRead.indexOf(item.id) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+                    ]}>
+                    {' / ' + item.authorName}
+                  </Text>
                 )}
               </Text>
             </View>
@@ -295,8 +354,8 @@ const Home: React.FC = () => {
           scrollEnabled
           labelStyle={styles.tab_label}
           indicatorStyle={styles.tab_indicator}
-          activeColor={paperColor.text}
-          inactiveColor={paperColor.textAccent}
+          // activeColor={paperColor.text}
+          // inactiveColor={paperColor.textAccent}
         />
       )}>
       <Tabs.Tab name="Topics" label="热门话题">
@@ -425,7 +484,6 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: '#FFFFFF',
     marginLeft: 20,
     marginRight: 20,
     padding: 16,

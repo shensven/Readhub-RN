@@ -8,7 +8,10 @@ import {
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
+      cardBackground: string;
+      cardBackgroundAlreadyRead: string;
       textAccent: string;
+      textAlreadyRead: string;
       ripple: string;
       rippleAccent: string;
       blueText: string;
@@ -28,8 +31,11 @@ export const paperLight = {
     // accent: '',
     // background: '',
     // surface: '',
+    cardBackground: 'rgb(255,255,255)',
+    cardBackgroundAlreadyRead: 'rgba(255,255,255,0.55)',
     text: 'rgb(0,0,0)',
     textAccent: 'rgba(0,0,0,0.5)',
+    textAlreadyRead: 'rgba(0,0,0,0.8)',
     ripple: 'rgba(128,128,128,0.2)',
     rippleAccent: 'rgba(128,128,128,0.1)',
     blueText: 'rgb(46,117,213)',
