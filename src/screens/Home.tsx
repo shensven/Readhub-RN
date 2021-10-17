@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
 
-  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+  const {listHasRead} = useContext(ReadhubCtx);
 
   //----------------------------------------------------------------------------
 
@@ -214,9 +214,6 @@ const Home: React.FC = () => {
 
   const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = ({item}: {item: any}) => {
     const goDetail = () => {
-      if (listHasRead.indexOf(item.id) === -1) {
-        setListHasRead([...listHasRead, item.id]);
-      }
       switch (tabRef.current?.getFocusedTab()) {
         case 'Topics':
           navigation.navigate('DetailTopic', {id: item.id});

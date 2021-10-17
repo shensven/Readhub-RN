@@ -1,5 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {createContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {SearchReault} from './type';
 
 interface SuggestItem {
@@ -42,26 +41,6 @@ export const ReadhubProvider: React.FC = props => {
   const [searchResultVal, setSearchResultVal] = useState<SearchReault[]>([]);
   const [hasLoadingVal, setHasLoadingVal] = useState<boolean>(false);
   const [listHasReadVal, setListHasReadVal] = useState<string[]>([]);
-
-  const initListHasRead = async () => {
-    if (listHasReadVal.length === 0) {
-      const resp = await AsyncStorage.getItem('@listHasRead');
-      setListHasReadVal(resp ? JSON.parse(resp) : []);
-    }
-  };
-
-  const persistListHasRead = async () => {
-    const jsonVal: string = JSON.stringify([...listHasReadVal]);
-    await AsyncStorage.setItem('@listHasRead', jsonVal);
-  };
-
-  useLayoutEffect(() => {
-    initListHasRead();
-  }, []);
-
-  useEffect(() => {
-    persistListHasRead();
-  }, [listHasReadVal]);
 
   const ctxValue = {
     input: inputVal,

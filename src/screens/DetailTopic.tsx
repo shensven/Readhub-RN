@@ -1,5 +1,6 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
+import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -7,7 +8,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
-import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ReadhubCtx} from '../utils/readhubnContext';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
 
@@ -31,18 +33,34 @@ const DetailTopic: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
   const {id} = route.params;
 
+  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+
   const [hasFinalView, setHasFinalView] = useState<boolean>(false);
   const [detail, setDetail] = useState<Detail>({} as Detail);
 
   const getTopicSummary = async () => {
-    const resp: {data: Detail} = await appAxios.get(`/topic/${route.params.id}`);
+    const resp: {data: Detail} = await appAxios.get(`/topic/${id}`);
     // console.log('getTopicSummary', resp.data);
     setDetail(resp.data);
     setHasFinalView(true);
   };
 
+  const persistListHasRead = () => {
+    const jsonVal: string = JSON.stringify([...listHasRead, id]);
+    AsyncStorage.setItem('@listHasRead', jsonVal);
+  };
+
   useLayoutEffect(() => {
     getTopicSummary();
+  }, []);
+
+  useEffect(() => {
+    if (listHasRead.indexOf(id) === -1) {
+      setTimeout(() => {
+        setListHasRead([...listHasRead, id]);
+        persistListHasRead();
+      }, 250);
+    }
   }, []);
 
   useLayoutEffect(() => {

@@ -1,13 +1,15 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useContext, useEffect, useLayoutEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
+import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ReadhubCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
   Params: {
@@ -35,6 +37,22 @@ const DetailNews: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute<ScreenRouteProp>();
   const {id, title, publishDate, summary, hasInstantView} = route.params;
+
+  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+
+  const persistListHasRead = () => {
+    const jsonVal: string = JSON.stringify([...listHasRead, id]);
+    AsyncStorage.setItem('@listHasRead', jsonVal);
+  };
+
+  useEffect(() => {
+    if (listHasRead.indexOf(id) === -1) {
+      setTimeout(() => {
+        setListHasRead([...listHasRead, id]);
+        persistListHasRead();
+      }, 250);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({

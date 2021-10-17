@@ -4,8 +4,9 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {SettingsItem} from '../utils/type';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ReadhubCtx} from '../utils/readhubnContext';
+import {SettingsItem} from '../utils/type';
 
 type StackParamList = {
   Welcome: undefined;
@@ -31,6 +32,7 @@ const Settings: React.FC = () => {
         text: '确定',
         onPress: () => {
           setListHasRead([]);
+          AsyncStorage.clear();
           Platform.OS === 'android' && ToastAndroid.show('已清除', ToastAndroid.SHORT);
         },
       },
