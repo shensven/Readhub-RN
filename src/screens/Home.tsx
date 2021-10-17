@@ -288,7 +288,7 @@ const Home: React.FC = () => {
   return (
     <Tabs.Container
       ref={tabRef}
-      lazy={true}
+      // lazy={true}
       renderTabBar={props => (
         <MaterialTabBar
           {...props}
