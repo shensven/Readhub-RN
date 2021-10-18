@@ -12,13 +12,15 @@ import com.facebook.react.ReactActivity;
 import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
-  /**
-   * Returns the name of the main component registered from JavaScript. This is used to schedule
-   * rendering of the component.
-   */
-  @Override
-  protected String getMainComponentName() {
-    return "Readhubn";
+  public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+    Window win = activity.getWindow();
+    WindowManager.LayoutParams winParams = win.getAttributes();
+    if (on) {
+        winParams.flags |= bits;
+    } else {
+        winParams.flags &= ~bits;
+    }
+    win.setAttributes(winParams);
   }
 
   @Override
@@ -42,14 +44,12 @@ public class MainActivity extends ReactActivity {
     WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
   }
 
-  public static void setWindowFlag(Activity activity, final int bits, boolean on) {
-    Window win = activity.getWindow();
-    WindowManager.LayoutParams winParams = win.getAttributes();
-    if (on) {
-        winParams.flags |= bits;
-    } else {
-        winParams.flags &= ~bits;
-    }
-    win.setAttributes(winParams);
+  /**
+   * Returns the name of the main component registered from JavaScript. This is used to schedule
+   * rendering of the component.
+   */
+  @Override
+  protected String getMainComponentName() {
+    return "Readhubn";
   }
 }

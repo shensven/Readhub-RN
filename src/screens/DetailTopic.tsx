@@ -131,7 +131,7 @@ const DetailTopic: React.FC = () => {
             <View style={styles.bottom}>
               <View style={styles.bottom_title}>
                 <Ionicons name="time-outline" size={16} />
-                <Text style={styles.bottom_title_right}>事件追踪</Text>
+                <Text style={styles.bottom_title_right}>相关事件</Text>
               </View>
               {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
                 <View key={topicIndex} style={styles.bottom_item}>
