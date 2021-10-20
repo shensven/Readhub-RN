@@ -5,7 +5,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {Provider as PaperProvider} from 'react-native-paper';
 import RNBootSplash from 'react-native-bootsplash';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ReadhubCtx, ReadhubProvider} from './src/utils/readhubnContext';
+import {ReadhubnCtx, ReadhubProvider} from './src/utils/readhubnContext';
 import {paperLight} from './src/theme/default';
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
@@ -20,7 +20,7 @@ import About from './src/screens/About';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
-  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+  const {listHasRead, setListHasRead} = useContext(ReadhubnCtx);
 
   const initListHasRead = async () => {
     if (listHasRead.length === 0) {

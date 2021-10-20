@@ -9,7 +9,7 @@ interface SuggestItem {
   type: string;
 }
 
-interface SearchType {
+interface CtxType {
   input: string;
   setInput: Function;
   suggest: SuggestItem[];
@@ -22,7 +22,7 @@ interface SearchType {
   setListHasRead: Function;
 }
 
-export const ReadhubCtx = createContext<SearchType>({
+export const ReadhubnCtx = createContext<CtxType>({
   input: '',
   setInput: () => null,
   suggest: [] as SuggestItem[],
@@ -55,5 +55,5 @@ export const ReadhubProvider: React.FC = props => {
     setListHasRead: (arr: string[]) => setListHasReadVal([...arr]),
   };
 
-  return <ReadhubCtx.Provider value={ctxValue}>{props.children}</ReadhubCtx.Provider>;
+  return <ReadhubnCtx.Provider value={ctxValue}>{props.children}</ReadhubnCtx.Provider>;
 };

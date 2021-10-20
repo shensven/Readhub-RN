@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ReadhubCtx} from '../utils/readhubnContext';
+import {ReadhubnCtx} from '../utils/readhubnContext';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
 
@@ -33,7 +33,7 @@ const DetailTopic: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
   const {id} = route.params;
 
-  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+  const {listHasRead, setListHasRead} = useContext(ReadhubnCtx);
 
   const [hasFinalView, setHasFinalView] = useState<boolean>(false);
   const [detail, setDetail] = useState<Detail>({} as Detail);

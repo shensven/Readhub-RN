@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ReadhubCtx} from '../utils/readhubnContext';
+import {ReadhubnCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
   Params: {
@@ -38,7 +38,7 @@ const DetailNews: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
   const {id, title, publishDate, summary, hasInstantView} = route.params;
 
-  const {listHasRead, setListHasRead} = useContext(ReadhubCtx);
+  const {listHasRead, setListHasRead} = useContext(ReadhubnCtx);
 
   const persistListHasRead = () => {
     const jsonVal: string = JSON.stringify([...listHasRead, id]);

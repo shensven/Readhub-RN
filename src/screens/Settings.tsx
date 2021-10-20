@@ -5,7 +5,7 @@ import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid} from 'reac
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ReadhubCtx} from '../utils/readhubnContext';
+import {ReadhubnCtx} from '../utils/readhubnContext';
 import {SettingsItem} from '../utils/type';
 
 type StackParamList = {
@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation<ScreenNavigationProp>();
 
-  const {setListHasRead} = useContext(ReadhubCtx);
+  const {setListHasRead} = useContext(ReadhubnCtx);
 
   const resetListHasRead = async () => {
     Alert.alert('重置进度', '所有的阅读进度将会被清除', [

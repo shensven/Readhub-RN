@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -14,7 +14,7 @@ import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
-import {ReadhubCtx} from '../utils/readhubnContext';
+import {ReadhubnCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
   Search: undefined;
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
 
-  const tabRef = React.useRef<CollapsibleRef>();
+  const tabRef = useRef<CollapsibleRef>();
 
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
   const [news, setNews] = useState<NewsFeed[]>([]);
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
 
-  const {listHasRead} = useContext(ReadhubCtx);
+  const {listHasRead} = useContext(ReadhubnCtx);
 
   //----------------------------------------------------------------------------
 

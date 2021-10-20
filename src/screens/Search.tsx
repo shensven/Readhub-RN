@@ -7,7 +7,7 @@ import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'reac
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import {ReadhubCtx} from '../utils/readhubnContext';
+import {ReadhubnCtx} from '../utils/readhubnContext';
 import {SearchReault} from '../utils/type';
 import Loading from './components/Loading/Loading';
 
@@ -47,7 +47,7 @@ const Search: React.FC = () => {
     setHasLoading,
     listHasRead,
     setListHasRead,
-  } = useContext(ReadhubCtx);
+  } = useContext(ReadhubnCtx);
 
   const [resultPage, setResultPage] = useState<number>(2);
 
@@ -92,7 +92,7 @@ const Search: React.FC = () => {
       setSuggest: _setSuggest,
       setSearchResult: _setSearchResult,
       setHasLoading: _setHasLoading,
-    } = useContext(ReadhubCtx);
+    } = useContext(ReadhubnCtx);
 
     const getSuggest = async () => {
       if (_input.length !== 0) {
@@ -130,7 +130,7 @@ const Search: React.FC = () => {
   };
 
   const RNHeaderRight: React.FC = () => {
-    const {setSuggest: _setSuggest} = useContext(ReadhubCtx);
+    const {setSuggest: _setSuggest} = useContext(ReadhubnCtx);
     return (
       <TouchableOpacity
         hitSlop={{top: 16, bottom: 16, left: 16, right: 16}}
