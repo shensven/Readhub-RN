@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -15,7 +16,6 @@ import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 import {ReadhubnCtx} from '../utils/readhubnContext';
-import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 type StackParamList = {
   Search: undefined;
@@ -307,7 +307,9 @@ const Home: React.FC = () => {
                 style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
                 onPress={() => {
                   bottomSheetModalRef.current?.present();
-                  setShareURL('https://readhub.cn/topic/' + item.id);
+                  setTimeout(() => {
+                    setShareURL('https://readhub.cn/topic/' + item.id);
+                  }, 250);
                 }}
               />
             )}
