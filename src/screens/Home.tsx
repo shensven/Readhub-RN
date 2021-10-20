@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -15,6 +15,7 @@ import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 import {ReadhubnCtx} from '../utils/readhubnContext';
+import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 type StackParamList = {
   Search: undefined;
@@ -37,6 +38,8 @@ const Home: React.FC = () => {
   const route = useRoute();
 
   const tabRef = useRef<CollapsibleRef>();
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => [128], []);
 
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
   const [news, setNews] = useState<NewsFeed[]>([]);
@@ -51,6 +54,8 @@ const Home: React.FC = () => {
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
 
   const {listHasRead} = useContext(ReadhubnCtx);
+
+  const [shareURL, setShareURL] = useState<string>('');
 
   //----------------------------------------------------------------------------
 
@@ -176,6 +181,14 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
+  const handleBottomSheetOnChange = (snapPoint: number) => {
+    if (snapPoint === -1) {
+      setShareURL('');
+    }
+  };
+
+  //----------------------------------------------------------------------------
+
   const RNHeaderRight: React.FC = () => {
     const {colors: _paperColor} = usePaperTheme();
     return (
@@ -285,14 +298,19 @@ const Home: React.FC = () => {
                 )}
               </Text>
             </View>
-            <IconButton
-              icon="share-variant"
-              size={14}
-              color="#FFFFFF"
-              rippleColor={paperColor.blueRipple}
-              style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
-              onPress={() => {}}
-            />
+            {'eventData' in item && (
+              <IconButton
+                icon="share-variant"
+                size={14}
+                color="#FFFFFF"
+                rippleColor={paperColor.blueRipple}
+                style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
+                onPress={() => {
+                  bottomSheetModalRef.current?.present();
+                  setShareURL('https://readhub.cn/topic/' + item.id);
+                }}
+              />
+            )}
           </View>
         </View>
       </TouchableRipple>
@@ -311,86 +329,107 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Tabs.Container
-      ref={tabRef}
-      // lazy={true}
-      renderTabBar={props => (
-        <MaterialTabBar
-          {...props}
-          scrollEnabled
-          labelStyle={styles.tab_label}
-          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
-          // activeColor={paperColor.text}
-          // inactiveColor={paperColor.textAccent}
-        />
-      )}>
-      <Tabs.Tab name="Topics" label="热门话题">
-        <Tabs.FlatList
-          data={topics}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <TopicsHeader />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleTopicRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextTopic()}
-        />
-      </Tabs.Tab>
-      <Tabs.Tab name="News" label="科技动态">
-        <Tabs.FlatList
-          data={news}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleNewsRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextNews()}
-        />
-      </Tabs.Tab>
-      <Tabs.Tab name="Tech" label="技术资讯">
-        <Tabs.FlatList
-          data={technews}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleTechnewsRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextTechnews()}
-        />
-      </Tabs.Tab>
-    </Tabs.Container>
+    <BottomSheetModalProvider>
+      <Tabs.Container
+        ref={tabRef}
+        // lazy={true}
+        renderTabBar={props => (
+          <MaterialTabBar
+            {...props}
+            scrollEnabled
+            labelStyle={styles.tab_label}
+            indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
+            // activeColor={paperColor.text}
+            // inactiveColor={paperColor.textAccent}
+          />
+        )}>
+        <Tabs.Tab name="Topics" label="热门话题">
+          <Tabs.FlatList
+            data={topics}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <TopicsHeader />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleTopicRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextTopic()}
+          />
+        </Tabs.Tab>
+        <Tabs.Tab name="News" label="科技动态">
+          <Tabs.FlatList
+            data={news}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <View />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleNewsRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextNews()}
+          />
+        </Tabs.Tab>
+        <Tabs.Tab name="Tech" label="技术资讯">
+          <Tabs.FlatList
+            data={technews}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <View />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleTechnewsRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextTechnews()}
+          />
+        </Tabs.Tab>
+      </Tabs.Container>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        snapPoints={snapPoints}
+        backdropComponent={backdropProps => (
+          <BottomSheetBackdrop {...backdropProps} opacity={0.3} disappearsOnIndex={-1} />
+        )}
+        onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
+        <View style={styles.bottom_sheet}>
+          <View style={styles.bottom_sheet_btn}>
+            <TouchableOpacity
+              style={[styles.bottom_sheet_icon, {backgroundColor: paperColor.rippleAccent}]}
+              onPress={() => console.log(shareURL)}>
+              <Ionicons name="link-outline" size={24} />
+            </TouchableOpacity>
+            <Text style={[styles.bottom_sheet_label, {color: paperColor.textAccent}]}>复制链接</Text>
+          </View>
+        </View>
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 
@@ -489,6 +528,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingRight: 2,
+  },
+
+  bottom_sheet: {
+    flexDirection: 'row',
+  },
+  bottom_sheet_btn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 24,
+  },
+  bottom_sheet_icon: {
+    width: 48,
+    height: 48,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottom_sheet_label: {
+    fontSize: 12,
+    marginTop: 4,
   },
 });
 
