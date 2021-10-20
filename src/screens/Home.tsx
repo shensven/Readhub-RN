@@ -1,12 +1,22 @@
 import React, {useContext, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
+import {
+  ListRenderItem,
+  Platform,
+  RefreshControl,
+  StyleSheet,
+  ToastAndroid,
+  TouchableOpacity,
+  Vibration,
+  View,
+} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView} from '@gorhom/bottom-sheet';
+import Clipboard from '@react-native-clipboard/clipboard';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -420,16 +430,20 @@ const Home: React.FC = () => {
           <BottomSheetBackdrop {...backdropProps} opacity={0.3} disappearsOnIndex={-1} />
         )}
         onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
-        <View style={styles.bottom_sheet}>
-          <View style={styles.bottom_sheet_btn}>
+        <BottomSheetView style={styles.bottom_sheet}>
+          <BottomSheetView style={styles.bottom_sheet_btn}>
             <TouchableOpacity
               style={[styles.bottom_sheet_icon, {backgroundColor: paperColor.rippleAccent}]}
-              onPress={() => console.log(shareURL)}>
+              onPress={() => {
+                Clipboard.setString(shareURL);
+                bottomSheetModalRef.current?.close();
+                Platform.OS === 'android' && ToastAndroid.show('已复制', ToastAndroid.SHORT);
+              }}>
               <Ionicons name="link-outline" size={24} />
             </TouchableOpacity>
             <Text style={[styles.bottom_sheet_label, {color: paperColor.textAccent}]}>复制链接</Text>
-          </View>
-        </View>
+          </BottomSheetView>
+        </BottomSheetView>
       </BottomSheetModal>
     </BottomSheetModalProvider>
   );
