@@ -5144,7 +5144,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-license-report@^4.5.0:
+license-report@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/license-report/-/license-report-4.5.0.tgz#b49f1f1bccbe3b1d1714da01d750c410f9e87903"
   integrity sha512-jj9Cz3QLw+fsvbCKEsVVUlp/Sx9FSD+0amkXvDbii7T8HZ0tOGHzP3HhtFZXZDeXEf7ztAtiELBE7xD/wXiTgg==
