@@ -47,6 +47,7 @@
         "@types/react-native-vector-icons",
         "@types/react-test-renderer",
         "json",
+        "license-report",
         "react-native-flipper"
       ]
     }
