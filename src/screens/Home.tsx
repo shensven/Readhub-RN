@@ -1,5 +1,13 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
+import {
+  ActivityIndicator,
+  ListRenderItem,
+  RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
+  Vibration,
+  View,
+} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -49,6 +57,7 @@ const Home: React.FC = () => {
   const [technewsLastCursor, setTechnewsLastCursor] = useState<number>();
 
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
+  const [hasTopicsHeaderActivityIndicator, setHasTopicsHeaderActivityIndicator] = useState<boolean>(false);
 
   const {listHasRead, bottomSheetModalRef, setShareURL} = useContext(ReadhubnCtx);
 
@@ -60,6 +69,7 @@ const Home: React.FC = () => {
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
     setTopicsNewCount(0);
+    setHasTopicsHeaderActivityIndicator(false);
   };
 
   const getNews = async () => {
@@ -311,8 +321,18 @@ const Home: React.FC = () => {
       return <View />;
     }
     return (
-      <TouchableRipple style={styles.flatlist_header_btn} borderless={true} onPress={() => getTopics()}>
-        <Text style={styles.flatlist_header_label}>有 {topicsNewCount} 个新话题，点击刷新</Text>
+      <TouchableRipple
+        style={styles.flatlist_header_btn}
+        borderless={true}
+        onPress={() => {
+          setHasTopicsHeaderActivityIndicator(true);
+          getTopics();
+        }}>
+        {hasTopicsHeaderActivityIndicator ? (
+          <ActivityIndicator color={paperColor.blueText} />
+        ) : (
+          <Text style={styles.flatlist_header_label}>有 {topicsNewCount} 个新话题，点击刷新</Text>
+        )}
       </TouchableRipple>
     );
   };
@@ -439,9 +459,11 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 16,
     marginBottom: 16,
-    padding: 8,
+    height: 32,
+    // padding: 8,
     borderRadius: 12,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   flatlist_header_label: {
     fontSize: 12,
