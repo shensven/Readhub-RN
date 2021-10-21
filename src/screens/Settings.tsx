@@ -11,7 +11,7 @@ import {SettingsItem} from '../utils/type';
 type StackParamList = {
   Welcome: undefined;
   PrivacyPolicy: undefined;
-  OpenSourceLibrary: undefined;
+  OpenSourceLibraries: undefined;
   About: undefined;
 };
 
@@ -74,8 +74,7 @@ const Settings: React.FC = () => {
       leftIcon: 'code-slash-outline',
       leftIconSize: 22,
       rightIcon: 'chevron-forward-outline',
-      // onPress: () => navigation.navigate('OpenSourceLibrary'),
-      onPress: () => null,
+      onPress: () => navigation.navigate('OpenSourceLibraries'),
     },
     {
       title: '反馈',

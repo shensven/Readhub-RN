@@ -2,7 +2,7 @@ import React, {useContext, useMemo} from 'react';
 import {Platform, StatusBar, StyleSheet, ToastAndroid, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {Provider as PaperProvider, Text, useTheme as usePaperTheme} from 'react-native-paper';
+import {Provider as PaperProvider, Text /* useTheme as usePaperTheme */} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNBootSplash from 'react-native-bootsplash';
 import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView} from '@gorhom/bottom-sheet';
@@ -18,6 +18,7 @@ import Instant from './src/screens/Instant';
 import Settings from './src/screens/Settings';
 import Welcome from './src/screens/Welcome';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
+import OpenSourceLibraries from './src/screens/OpenSourceLibraries';
 import About from './src/screens/About';
 
 const Stack = createStackNavigator();
@@ -71,6 +72,7 @@ const App: React.FC = () => {
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="Welcome" component={Welcome} options={{...TransitionPresets.ModalSlideFromBottomIOS}} />
             <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+            <Stack.Screen name="OpenSourceLibraries" component={OpenSourceLibraries} />
             <Stack.Screen name="About" component={About} />
           </Stack.Navigator>
           <BottomSheetModal
