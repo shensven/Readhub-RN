@@ -1,4 +1,6 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, RefObject, useRef, useState} from 'react';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {BottomSheetModalMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
 import {SearchReault} from './type';
 
 interface SuggestItem {
@@ -20,6 +22,9 @@ interface CtxType {
   setHasLoading: Function;
   listHasRead: string[];
   setListHasRead: Function;
+  bottomSheetModalRef: RefObject<BottomSheetModalMethods>;
+  shareURL: string;
+  setShareURL: Function;
 }
 
 export const ReadhubnCtx = createContext<CtxType>({
@@ -33,6 +38,9 @@ export const ReadhubnCtx = createContext<CtxType>({
   setHasLoading: () => null,
   listHasRead: [] as string[],
   setListHasRead: () => null,
+  bottomSheetModalRef: null as any,
+  shareURL: '',
+  setShareURL: () => null,
 });
 
 export const ReadhubProvider: React.FC = props => {
@@ -41,6 +49,9 @@ export const ReadhubProvider: React.FC = props => {
   const [searchResultVal, setSearchResultVal] = useState<SearchReault[]>([]);
   const [hasLoadingVal, setHasLoadingVal] = useState<boolean>(false);
   const [listHasReadVal, setListHasReadVal] = useState<string[]>([]);
+  const [shareURLVal, setShareURLVal] = useState<string>('');
+
+  const bottomSheetModalRefVal = useRef<BottomSheetModal>(null);
 
   const ctxValue = {
     input: inputVal,
@@ -53,6 +64,9 @@ export const ReadhubProvider: React.FC = props => {
     setHasLoading: (prop: boolean) => setHasLoadingVal(prop),
     listHasRead: listHasReadVal,
     setListHasRead: (arr: string[]) => setListHasReadVal([...arr]),
+    bottomSheetModalRef: bottomSheetModalRefVal,
+    shareURL: shareURLVal,
+    setShareURL: (str: string) => setShareURLVal(str),
   };
 
   return <ReadhubnCtx.Provider value={ctxValue}>{props.children}</ReadhubnCtx.Provider>;

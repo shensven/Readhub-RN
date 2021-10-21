@@ -1,22 +1,11 @@
-import React, {useContext, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {
-  ListRenderItem,
-  Platform,
-  RefreshControl,
-  StyleSheet,
-  ToastAndroid,
-  TouchableOpacity,
-  Vibration,
-  View,
-} from 'react-native';
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {ListRenderItem, RefreshControl, StyleSheet, TouchableOpacity, Vibration, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView} from '@gorhom/bottom-sheet';
-import Clipboard from '@react-native-clipboard/clipboard';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -48,8 +37,6 @@ const Home: React.FC = () => {
   const route = useRoute();
 
   const tabRef = useRef<CollapsibleRef>();
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => [128], []);
 
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
   const [news, setNews] = useState<NewsFeed[]>([]);
@@ -63,9 +50,7 @@ const Home: React.FC = () => {
 
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
 
-  const {listHasRead} = useContext(ReadhubnCtx);
-
-  const [shareURL, setShareURL] = useState<string>('');
+  const {listHasRead, bottomSheetModalRef, setShareURL} = useContext(ReadhubnCtx);
 
   //----------------------------------------------------------------------------
 
@@ -191,14 +176,6 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
-  const handleBottomSheetOnChange = (snapPoint: number) => {
-    if (snapPoint === -1) {
-      setShareURL('');
-    }
-  };
-
-  //----------------------------------------------------------------------------
-
   const RNHeaderRight: React.FC = () => {
     const {colors: _paperColor} = usePaperTheme();
     return (
@@ -313,7 +290,7 @@ const Home: React.FC = () => {
                 icon="share-variant"
                 size={14}
                 color="#FFFFFF"
-                rippleColor={paperColor.blueRipple}
+                rippleColor={paperColor.ripple}
                 style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
                 onPress={() => {
                   bottomSheetModalRef.current?.present();
@@ -341,111 +318,85 @@ const Home: React.FC = () => {
   };
 
   return (
-    <BottomSheetModalProvider>
-      <Tabs.Container
-        ref={tabRef}
-        // lazy={true}
-        renderTabBar={props => (
-          <MaterialTabBar
-            {...props}
-            scrollEnabled
-            labelStyle={styles.tab_label}
-            indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
-            // activeColor={paperColor.text}
-            // inactiveColor={paperColor.textAccent}
-          />
-        )}>
-        <Tabs.Tab name="Topics" label="热门话题">
-          <Tabs.FlatList
-            data={topics}
-            keyExtractor={(item, index: number) => index.toString()}
-            renderItem={renderCard}
-            ListHeaderComponent={() => <TopicsHeader />}
-            ListHeaderComponentStyle={styles.flatlist_header_root}
-            ListFooterComponent={() => <Loading />}
-            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-            refreshControl={
-              <RefreshControl
-                colors={[paperColor.blueText]}
-                tintColor={paperColor.blueText}
-                refreshing={refreshing}
-                onRefresh={() => handleTopicRefresh()}
-              />
-            }
-            showsVerticalScrollIndicator={false}
-            onEndReached={() => getNextTopic()}
-          />
-        </Tabs.Tab>
-        <Tabs.Tab name="News" label="科技动态">
-          <Tabs.FlatList
-            data={news}
-            keyExtractor={(item, index: number) => index.toString()}
-            renderItem={renderCard}
-            ListHeaderComponent={() => <View />}
-            ListHeaderComponentStyle={styles.flatlist_header_root}
-            ListFooterComponent={() => <Loading />}
-            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-            refreshControl={
-              <RefreshControl
-                colors={[paperColor.blueText]}
-                tintColor={paperColor.blueText}
-                refreshing={refreshing}
-                onRefresh={() => handleNewsRefresh()}
-              />
-            }
-            showsVerticalScrollIndicator={false}
-            onEndReached={() => getNextNews()}
-          />
-        </Tabs.Tab>
-        <Tabs.Tab name="Tech" label="技术资讯">
-          <Tabs.FlatList
-            data={technews}
-            keyExtractor={(item, index: number) => index.toString()}
-            renderItem={renderCard}
-            ListHeaderComponent={() => <View />}
-            ListHeaderComponentStyle={styles.flatlist_header_root}
-            ListFooterComponent={() => <Loading />}
-            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-            refreshControl={
-              <RefreshControl
-                colors={[paperColor.blueText]}
-                tintColor={paperColor.blueText}
-                refreshing={refreshing}
-                onRefresh={() => handleTechnewsRefresh()}
-              />
-            }
-            showsVerticalScrollIndicator={false}
-            onEndReached={() => getNextTechnews()}
-          />
-        </Tabs.Tab>
-      </Tabs.Container>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        index={0}
-        snapPoints={snapPoints}
-        backdropComponent={backdropProps => (
-          <BottomSheetBackdrop {...backdropProps} opacity={0.3} disappearsOnIndex={-1} />
-        )}
-        onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
-        <BottomSheetView style={styles.bottom_sheet}>
-          <BottomSheetView style={styles.bottom_sheet_btn}>
-            <TouchableOpacity
-              style={[styles.bottom_sheet_icon, {backgroundColor: paperColor.rippleAccent}]}
-              onPress={() => {
-                Clipboard.setString(shareURL);
-                bottomSheetModalRef.current?.close();
-                Platform.OS === 'android' && ToastAndroid.show('已复制', ToastAndroid.SHORT);
-              }}>
-              <Ionicons name="link-outline" size={24} />
-            </TouchableOpacity>
-            <Text style={[styles.bottom_sheet_label, {color: paperColor.textAccent}]}>复制链接</Text>
-          </BottomSheetView>
-        </BottomSheetView>
-      </BottomSheetModal>
-    </BottomSheetModalProvider>
+    <Tabs.Container
+      ref={tabRef}
+      renderTabBar={props => (
+        <MaterialTabBar
+          {...props}
+          scrollEnabled
+          labelStyle={styles.tab_label}
+          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
+          // activeColor={paperColor.text}
+          // inactiveColor={paperColor.textAccent}
+        />
+      )}>
+      <Tabs.Tab name="Topics" label="热门话题">
+        <Tabs.FlatList
+          data={topics}
+          keyExtractor={(item, index: number) => index.toString()}
+          renderItem={renderCard}
+          ListHeaderComponent={() => <TopicsHeader />}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
+              refreshing={refreshing}
+              onRefresh={() => handleTopicRefresh()}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextTopic()}
+        />
+      </Tabs.Tab>
+      <Tabs.Tab name="News" label="科技动态">
+        <Tabs.FlatList
+          data={news}
+          keyExtractor={(item, index: number) => index.toString()}
+          renderItem={renderCard}
+          ListHeaderComponent={() => <View />}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
+              refreshing={refreshing}
+              onRefresh={() => handleNewsRefresh()}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextNews()}
+        />
+      </Tabs.Tab>
+      <Tabs.Tab name="Tech" label="技术资讯">
+        <Tabs.FlatList
+          data={technews}
+          keyExtractor={(item, index: number) => index.toString()}
+          renderItem={renderCard}
+          ListHeaderComponent={() => <View />}
+          ListHeaderComponentStyle={styles.flatlist_header_root}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+          refreshControl={
+            <RefreshControl
+              colors={[paperColor.blueText]}
+              tintColor={paperColor.blueText}
+              refreshing={refreshing}
+              onRefresh={() => handleTechnewsRefresh()}
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextTechnews()}
+        />
+      </Tabs.Tab>
+    </Tabs.Container>
   );
 };
 
@@ -544,26 +495,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingRight: 2,
-  },
-
-  bottom_sheet: {
-    flexDirection: 'row',
-  },
-  bottom_sheet_btn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 24,
-  },
-  bottom_sheet_icon: {
-    width: 48,
-    height: 48,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottom_sheet_label: {
-    fontSize: 12,
-    marginTop: 4,
   },
 });
 
