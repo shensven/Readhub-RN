@@ -80,6 +80,7 @@ const App: React.FC = () => {
             index={0}
             snapPoints={snapPoints}
             backdropComponent={backdropProps => <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} />}
+            style={styles.bottom_sheet_container}
             onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
             <BottomSheetView style={styles.bottom_sheet}>
               <BottomSheetView style={styles.bottom_sheet_btn}>
@@ -103,6 +104,15 @@ const App: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  bottom_sheet_container: {
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.75,
+    shadowRadius: 16.0,
+    elevation: 24,
+  },
   bottom_sheet: {
     flexDirection: 'row',
   },
