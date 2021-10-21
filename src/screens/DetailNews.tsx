@@ -86,14 +86,14 @@ const DetailNews: React.FC = () => {
         ) : (
           <View />
         )}
-        <IconButton
+        {/* <IconButton
           icon="share-variant"
           size={14}
           color="#FFFFFF"
-          rippleColor={paperColor.blueRipple}
+          rippleColor={paperColor.ripple}
           style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
           onPress={() => {}}
-        />
+        /> */}
       </View>
     </ScrollView>
   );
@@ -136,9 +136,9 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
     marginLeft: 4,
   },
-  iconbtn: {
-    paddingRight: 2,
-  },
+  // iconbtn: {
+  //   paddingRight: 2,
+  // },
 });
 
 export default DetailNews;
