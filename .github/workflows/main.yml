@@ -17,7 +17,7 @@ jobs:
               run: yarn install
 
             - name: License report
-              run: yarn --silent license-report --package=./package.json --output=json > ./src/utils/openSourceLibraries.json
+              run: yarn --silent license-report
 
             - name: Init readhubnBuild
               run: yarn json -I -f package.json -e "this.readhubnBuild=${GITHUB_RUN_NUMBER}"
