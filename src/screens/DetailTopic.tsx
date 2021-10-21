@@ -33,7 +33,7 @@ const DetailTopic: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
   const {id} = route.params;
 
-  const {listHasRead, setListHasRead} = useContext(ReadhubnCtx);
+  const {listHasRead, setListHasRead, bottomSheetModalRef, setShareURL} = useContext(ReadhubnCtx);
 
   const [hasFinalView, setHasFinalView] = useState<boolean>(false);
   const [detail, setDetail] = useState<Detail>({} as Detail);
@@ -104,9 +104,14 @@ const DetailTopic: React.FC = () => {
                 icon="share-variant"
                 size={14}
                 color="#FFFFFF"
-                rippleColor={paperColor.blueRipple}
+                rippleColor={paperColor.ripple}
                 style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
-                onPress={() => {}}
+                onPress={() => {
+                  bottomSheetModalRef.current?.present();
+                  setTimeout(() => {
+                    setShareURL('https://readhub.cn/topic/' + id);
+                  }, 250);
+                }}
               />
             </View>
             <View style={styles.bottom}>
