@@ -60,7 +60,7 @@ const DetailNews: React.FC = () => {
       headerBackTitle: '返回',
       cardStyle: {backgroundColor: '#FFFFFF'},
     });
-  }, [navigation, route]);
+  }, []);
 
   return (
     <ScrollView

@@ -16,10 +16,12 @@ interface CtxType {
   setInput: Function;
   suggest: SuggestItem[];
   setSuggest: Function;
-  searchResult: SearchReault[];
-  setSearchResult: Function;
   hasLoading: boolean;
   setHasLoading: Function;
+  searchResult: SearchReault[];
+  setSearchResult: Function;
+  searchResultPage: number;
+  setSearchResultPage: Function;
   listHasRead: string[];
   setListHasRead: Function;
   bottomSheetModalRef: RefObject<BottomSheetModalMethods>;
@@ -34,6 +36,8 @@ export const ReadhubnCtx = createContext<CtxType>({
   setSuggest: () => null,
   searchResult: [] as SearchReault[],
   setSearchResult: () => null,
+  searchResultPage: 2,
+  setSearchResultPage: () => null,
   hasLoading: false,
   setHasLoading: () => null,
   listHasRead: [] as string[],
@@ -47,6 +51,7 @@ export const ReadhubProvider: React.FC = props => {
   const [inputVal, setInputVal] = useState<string>('');
   const [suggestVal, setSuggestVal] = useState<SuggestItem[]>([]);
   const [searchResultVal, setSearchResultVal] = useState<SearchReault[]>([]);
+  const [searchResultPageVal, setSearchResultPageVal] = useState<number>(2);
   const [hasLoadingVal, setHasLoadingVal] = useState<boolean>(false);
   const [listHasReadVal, setListHasReadVal] = useState<string[]>([]);
   const [shareURLVal, setShareURLVal] = useState<string>('');
@@ -60,6 +65,8 @@ export const ReadhubProvider: React.FC = props => {
     setSuggest: (arr: SuggestItem[]) => setSuggestVal([...arr]),
     searchResult: searchResultVal,
     setSearchResult: (arr: SearchReault[]) => setSearchResultVal([...arr]),
+    searchResultPage: searchResultPageVal,
+    setSearchResultPage: (num: number) => setSearchResultPageVal(num),
     hasLoading: hasLoadingVal,
     setHasLoading: (prop: boolean) => setHasLoadingVal(prop),
     listHasRead: listHasReadVal,

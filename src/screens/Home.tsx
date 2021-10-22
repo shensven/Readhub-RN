@@ -8,7 +8,7 @@ import {
   Vibration,
   View,
 } from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
@@ -43,6 +43,7 @@ const Home: React.FC = () => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
+  const isFocused = useIsFocused();
 
   const tabRef = useRef<CollapsibleRef>();
 
@@ -59,7 +60,23 @@ const Home: React.FC = () => {
   const [topicsNewCount, setTopicsNewCount] = useState<number>(0);
   const [hasTopicsHeaderActivityIndicator, setHasTopicsHeaderActivityIndicator] = useState<boolean>(false);
 
-  const {listHasRead, bottomSheetModalRef, setShareURL} = useContext(ReadhubnCtx);
+  const {
+    // input,
+    setInput,
+    // suggest,
+    setSuggest,
+    // hasLoading,
+    setHasLoading,
+    // searchResult,
+    setSearchResult,
+    // searchResultPage,
+    setSearchResultPage,
+    listHasRead,
+    // setListHasRead,
+    bottomSheetModalRef,
+    // shareURL,
+    setShareURL,
+  } = useContext(ReadhubnCtx);
 
   //----------------------------------------------------------------------------
 
@@ -69,7 +86,6 @@ const Home: React.FC = () => {
     setTopics(resp.data.data);
     setTopicLastCursor(resp.data.data[19].order);
     setTopicsNewCount(0);
-    setHasTopicsHeaderActivityIndicator(false);
   };
 
   const getNews = async () => {
@@ -183,6 +199,14 @@ const Home: React.FC = () => {
       getTopicsNewCount();
     }, 30000);
   }, [topics]);
+
+  useEffect(() => {
+    setInput('');
+    setSuggest([]);
+    setSearchResult([]);
+    setSearchResultPage(2);
+    setHasLoading(false);
+  }, [isFocused]);
 
   //----------------------------------------------------------------------------
 
@@ -327,6 +351,7 @@ const Home: React.FC = () => {
         onPress={() => {
           setHasTopicsHeaderActivityIndicator(true);
           getTopics();
+          setHasTopicsHeaderActivityIndicator(false);
         }}>
         {hasTopicsHeaderActivityIndicator ? (
           <ActivityIndicator color={paperColor.blueText} />

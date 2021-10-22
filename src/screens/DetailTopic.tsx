@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {RouteProp, useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -29,11 +29,28 @@ const DetailTopic: React.FC = () => {
   const insets = useSafeAreaInsets();
   const {colors: paperColor} = usePaperTheme();
 
+  const isFocused = useIsFocused();
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute<ScreenRouteProp>();
   const {id} = route.params;
 
-  const {listHasRead, setListHasRead, bottomSheetModalRef, setShareURL} = useContext(ReadhubnCtx);
+  const {
+    // input,
+    // setInput,
+    // suggest,
+    setSuggest,
+    // hasLoading,
+    setHasLoading,
+    // searchResult,
+    // setSearchResult,
+    // searchResultPage,
+    // setSearchResultPage,
+    listHasRead,
+    setListHasRead,
+    bottomSheetModalRef,
+    // shareURL,
+    setShareURL,
+  } = useContext(ReadhubnCtx);
 
   const [hasFinalView, setHasFinalView] = useState<boolean>(false);
   const [detail, setDetail] = useState<Detail>({} as Detail);
@@ -61,7 +78,9 @@ const DetailTopic: React.FC = () => {
         persistListHasRead();
       }, 250);
     }
-  }, []);
+    setSuggest([]);
+    setHasLoading(false);
+  }, [isFocused]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -69,7 +88,7 @@ const DetailTopic: React.FC = () => {
       headerBackTitle: '返回',
       cardStyle: {backgroundColor: '#FFFFFF'},
     });
-  }, [navigation, route]);
+  }, []);
 
   switch (hasFinalView) {
     case true:

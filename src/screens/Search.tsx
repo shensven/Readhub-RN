@@ -1,6 +1,6 @@
 import React, {useContext, useLayoutEffect, useState} from 'react';
 import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
@@ -30,7 +30,6 @@ interface SuggestItem {
 }
 
 const Search: React.FC = () => {
-  const isFocus = useIsFocused();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
@@ -38,33 +37,27 @@ const Search: React.FC = () => {
 
   const {
     input,
-    setInput,
+    // setInput,
     suggest,
     setSuggest,
-    searchResult,
-    setSearchResult,
     hasLoading,
     setHasLoading,
+    searchResult,
+    setSearchResult,
+    searchResultPage,
+    setSearchResultPage,
     listHasRead,
-    setListHasRead,
+    // setListHasRead,
+    bottomSheetModalRef,
+    // shareURL,
+    setShareURL,
   } = useContext(ReadhubnCtx);
-
-  const [resultPage, setResultPage] = useState<number>(2);
 
   useLayoutEffect(() => {
     if (suggest.length > 0) {
       setHasLoading(false);
     }
   }, [searchResult]);
-
-  useLayoutEffect(() => {
-    if (isFocus) {
-      setInput('');
-      setSuggest([]);
-      setSearchResult([]);
-      setHasLoading(false);
-    }
-  }, [isFocus]);
 
   const goSearch = async (_prop: string) => {
     const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
@@ -76,11 +69,11 @@ const Search: React.FC = () => {
 
   const goNextSearch = async () => {
     const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
-      params: {page: resultPage, seze: 20, query: input, type: 'hot'},
+      params: {page: searchResultPage, seze: 20, query: input, type: 'hot'},
     });
     // console.log('goNextSearch', resp);
     setSearchResult([...searchResult, ...resp.data.data.items]);
-    setResultPage(resultPage + 1);
+    setSearchResultPage(searchResultPage + 1);
   };
 
   //------------------------------------------------------------------------------
@@ -90,12 +83,13 @@ const Search: React.FC = () => {
       input: _input,
       setInput: _setInput,
       setSuggest: _setSuggest,
-      setSearchResult: _setSearchResult,
       setHasLoading: _setHasLoading,
+      setSearchResult: _setSearchResult,
+      setSearchResultPage: _setSearchResultPage,
     } = useContext(ReadhubnCtx);
 
     const getSuggest = async () => {
-      if (_input.length !== 0) {
+      if (_input.length > 0) {
         const resp: {data: {result: {data: {items: SuggestItem[]}}}} = await axios.get(
           'https://search.readhub.cn/api/entity/suggest',
           {params: {q: _input}},
@@ -123,6 +117,7 @@ const Search: React.FC = () => {
           onFocus={() => {
             _setHasLoading(false);
             _setSearchResult([]);
+            _setSearchResultPage(2);
           }}
         />
       </View>
@@ -130,15 +125,11 @@ const Search: React.FC = () => {
   };
 
   const RNHeaderRight: React.FC = () => {
-    const {setSuggest: _setSuggest} = useContext(ReadhubnCtx);
     return (
       <TouchableOpacity
         hitSlop={{top: 16, bottom: 16, left: 16, right: 16}}
         style={styles.RNHeader_right}
-        onPress={() => {
-          _setSuggest([]);
-          navigation.goBack();
-        }}>
+        onPress={() => navigation.goBack()}>
         <Text>取消</Text>
       </TouchableOpacity>
     );
@@ -175,15 +166,24 @@ const Search: React.FC = () => {
       <TouchableRipple
         borderless={true}
         rippleColor={paperColor.ripple}
-        style={styles.card}
-        onPress={() => {
-          if (listHasRead.indexOf(item.topicId) === -1) {
-            setListHasRead([...listHasRead, item.topicId]);
-          }
-          navigation.navigate('DetailTopic', {id: item.topicId});
-        }}>
+        style={[
+          styles.card,
+          {
+            backgroundColor:
+              listHasRead.indexOf(item.topicId) === -1
+                ? paperColor.cardBackground
+                : paperColor.cardBackgroundAlreadyRead,
+          },
+        ]}
+        onPress={() => navigation.navigate('DetailTopic', {id: item.topicId})}>
         <View>
-          <Text style={styles.card_title}>{item.topicTitle}</Text>
+          <Text
+            style={[
+              styles.card_title,
+              {color: listHasRead.indexOf(item.topicId) === -1 ? paperColor.text : paperColor.textAlreadyRead},
+            ]}>
+            {item.topicTitle}
+          </Text>
           <Text style={[styles.caed_publishDate, {color: paperColor.textAccent}]}>
             {dayjs(item.topicCreateAt).format('YYYY-MM-DD')}
           </Text>
@@ -210,9 +210,14 @@ const Search: React.FC = () => {
               icon="share-variant"
               size={14}
               color="#FFFFFF"
-              rippleColor={paperColor.blueRipple}
+              rippleColor={paperColor.ripple}
               style={[styles.card_iconbtn, {backgroundColor: paperColor.ripple}]}
-              onPress={() => {}}
+              onPress={() => {
+                bottomSheetModalRef.current?.present();
+                setTimeout(() => {
+                  setShareURL('https://readhub.cn/topic/' + item.topicId);
+                }, 250);
+              }}
             />
           </View>
         </View>
@@ -286,7 +291,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     backgroundColor: '#FFFFFF',
   },
-  suggest_list_icon: {},
+  // suggest_list_icon: {},
   suggest_list_keyword: {
     marginLeft: 8,
     includeFontPadding: false,
