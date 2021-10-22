@@ -17,7 +17,6 @@ type StackParamList = {
     title: string;
     publishDate: string;
     summary: string;
-    hasInstantView?: boolean;
   };
   Instant: {
     id: string;
@@ -36,7 +35,7 @@ const DetailNews: React.FC = () => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute<ScreenRouteProp>();
-  const {id, title, publishDate, summary, hasInstantView} = route.params;
+  const {id, title, publishDate, summary} = route.params;
 
   const {listHasRead, setListHasRead} = useContext(ReadhubnCtx);
 
@@ -66,34 +65,34 @@ const DetailNews: React.FC = () => {
     <ScrollView
       scrollIndicatorInsets={{right: 1}}
       contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
-      <Text style={styles.title}>{title}</Text>
+      <Text selectable={true} style={styles.title}>
+        {title}
+      </Text>
       <Text style={[styles.publishDate, {color: paperColor.textAccent}]}>{dayjs(publishDate).fromNow()}</Text>
       <Text selectable={true} style={styles.summary}>
         {summary}
       </Text>
       <View style={styles.mid}>
-        {hasInstantView ? (
-          <TouchableRipple
-            borderless={true}
-            rippleColor={paperColor.blueRipple}
-            style={[styles.instant, {backgroundColor: paperColor.blueRipple}]}
-            onPress={() => navigation.navigate('Instant', {id})}>
-            <>
-              <Ionicons name="glasses-outline" size={24} color={paperColor.blueText} />
-              <Text style={[styles.instant_label, {color: paperColor.blueText}]}>即时预览</Text>
-            </>
-          </TouchableRipple>
-        ) : (
-          <View />
-        )}
-        {/* <IconButton
+        <TouchableRipple
+          disabled={true}
+          borderless={true}
+          rippleColor={paperColor.ripple}
+          style={[styles.instant, {backgroundColor: paperColor.ripple}]}
+          onPress={() => navigation.navigate('Instant', {id})}>
+          <>
+            <Ionicons name="glasses-outline" size={24} color={paperColor.textAccent} />
+            <Text style={[styles.instant_label, {color: paperColor.textAccent}]}>即时预览</Text>
+          </>
+        </TouchableRipple>
+        <IconButton
+          disabled={true}
           icon="share-variant"
           size={14}
           color="#FFFFFF"
           rippleColor={paperColor.ripple}
           style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
           onPress={() => {}}
-        /> */}
+        />
       </View>
     </ScrollView>
   );
@@ -136,9 +135,9 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
     marginLeft: 4,
   },
-  // iconbtn: {
-  //   paddingRight: 2,
-  // },
+  iconbtn: {
+    paddingRight: 2,
+  },
 });
 
 export default DetailNews;

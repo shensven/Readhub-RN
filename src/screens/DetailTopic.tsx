@@ -97,7 +97,9 @@ const DetailTopic: React.FC = () => {
           <ScrollView
             scrollIndicatorInsets={{right: 1}}
             contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
-            <Text style={styles.title}>{detail.title}</Text>
+            <Text selectable={true} style={styles.title}>
+              {detail.title}
+            </Text>
             <Text style={[styles.publishDate, {color: paperColor.textAccent}]}>
               {dayjs(detail.publishDate).fromNow()}
             </Text>
@@ -105,20 +107,31 @@ const DetailTopic: React.FC = () => {
               {detail.summary}
             </Text>
             <View style={styles.mid}>
-              {detail.hasInstantView ? (
-                <TouchableRipple
-                  borderless={true}
-                  rippleColor={paperColor.blueRipple}
-                  style={[styles.instant, {backgroundColor: paperColor.blueRipple}]}
-                  onPress={() => navigation.navigate('Instant', {id})}>
-                  <>
-                    <Ionicons name="glasses-outline" size={24} color={paperColor.blueText} />
-                    <Text style={[styles.instant_label, {color: paperColor.blueText}]}>即时预览</Text>
-                  </>
-                </TouchableRipple>
-              ) : (
-                <View />
-              )}
+              <TouchableRipple
+                disabled={!detail.hasInstantView}
+                borderless={true}
+                rippleColor={paperColor.blueRipple}
+                style={[
+                  styles.instant,
+                  {backgroundColor: detail.hasInstantView ? paperColor.blueRipple : paperColor.ripple},
+                ]}
+                onPress={() => navigation.navigate('Instant', {id})}>
+                <>
+                  <Ionicons
+                    name="glasses-outline"
+                    size={24}
+                    color={detail.hasInstantView ? paperColor.blueText : paperColor.textAccent}
+                  />
+                  <Text
+                    style={[
+                      styles.instant_label,
+                      {color: detail.hasInstantView ? paperColor.blueText : paperColor.textAccent},
+                    ]}>
+                    即时预览
+                  </Text>
+                </>
+              </TouchableRipple>
+
               <IconButton
                 icon="share-variant"
                 size={14}
