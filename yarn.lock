@@ -1336,25 +1336,26 @@
   resolved "https://registry.yarnpkg.com/@kessler/tableify/-/tableify-1.0.2.tgz#44fb4df25a3d3e4bb8b286e80c31f02b961152ac"
   integrity sha512-e4psVV9Fe2eBfS9xK2rzQ9lE5xS4tARm7EJzDb6sVZy3F+EMyHJ67i0NdBVR9BRyQx7YhogMCbB6R1QwXuBxMg==
 
-"@native-html/css-processor@1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@native-html/css-processor/-/css-processor-1.10.2.tgz#b3a214742dc6fa6ada9aab03f841d09b9acd7b05"
-  integrity sha512-cpcWZ8OcK70UE4TwrIxbaJeSX6hboO7LhAqbalWXp8pkUfEocR72AY+gi1BqQUzAH3sIU0ZUjPmec6brAg2WRQ==
+"@native-html/css-processor@1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@native-html/css-processor/-/css-processor-1.11.0.tgz#27d02e5123b0849f4986d44060ba3f235a15f552"
+  integrity sha512-NnhBEbJX5M2gBGltPKOetiLlKhNf3OHdRafc8//e2ZQxXN8JaSW/Hy8cm94pnIckQxwaMKxrtaNT3x4ZcffoNQ==
   dependencies:
     css-to-react-native "^3.0.0"
     csstype "^3.0.8"
 
-"@native-html/transient-render-engine@^9.2.4":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@native-html/transient-render-engine/-/transient-render-engine-9.3.0.tgz#ac02b70d8f1cdbd756d1269ac83afe92cdc4e3e1"
-  integrity sha512-0ujg9pXEtIhmKBhd17Az6EfuhlJgO6WlfovQhh5RyiM/lS5BFyl8Au99CzpmnOCo2s+I76d370FGWAAwcRKqHA==
+"@native-html/transient-render-engine@11.2.1":
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/@native-html/transient-render-engine/-/transient-render-engine-11.2.1.tgz#2fc9d5886289bc98c2c6bd2601bba0d5ffcde36a"
+  integrity sha512-j4jg4izTSmvqpKoYzqkTT2BTEd+J+Jmtvc2IUnv8YG68cnfGGjz45BmH+lTgYuMJi5T4l0IP/0+4/JVsfqQjEQ==
   dependencies:
-    "@native-html/css-processor" "1.10.2"
+    "@native-html/css-processor" "1.11.0"
     "@types/ramda" "^0.27.44"
-    csstype "^3.0.8"
+    csstype "^3.0.9"
     domelementtype "^2.2.0"
-    domhandler "^4.2.0"
-    htmlparser2 "^7.1.1"
+    domhandler "^4.2.2"
+    domutils "^2.8.0"
+    htmlparser2 "^7.1.2"
     ramda "^0.27.1"
 
 "@react-native-async-storage/async-storage@1.15.9":
@@ -2861,7 +2862,7 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^3.0.2, csstype@^3.0.8:
+csstype@^3.0.2, csstype@^3.0.8, csstype@^3.0.9:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.9.tgz#6410af31b26bd0520933d02cbc64fce9ce3fbf0b"
   integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
@@ -4007,7 +4008,7 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-htmlparser2@^7.1.1:
+htmlparser2@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-7.1.2.tgz#587923d38f03bc89e03076e00cba2c7473f37f7c"
   integrity sha512-d6cqsbJba2nRdg8WW2okyD4ceonFHn9jLFxhwlNcLhQWcFPdxXeJulgOLjLKtAK9T6ahd+GQNZwG9fjmGW7lyg==
@@ -6532,14 +6533,14 @@ react-native-redash@^16.1.1:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
-react-native-render-html@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.1.0.tgz#b1c9c4b8156eef124feadf357ce12b9603b92f74"
-  integrity sha512-jJUqTWH9jAh5QipEJE+TXs2WwbKccd3SIT0g8d42XhoiGx1M9AtI1NQ/PP4Rzj5M/9EC4BovhHOhkFjk+tjN+g==
+react-native-render-html@6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.2.0.tgz#f578f631c975ead0d5dba2c57b7e35e8e7257d58"
+  integrity sha512-czqetQvnlPszsc2bUWnBzIkssYmuMHc0PpQEw+XzxT3t12tF7trrpN+/cX8vtk6J6HmONJP/HtAs7v32o2Gkhg==
   dependencies:
     "@jsamr/counter-style" "^2.0.1"
     "@jsamr/react-native-li" "^2.3.0"
-    "@native-html/transient-render-engine" "^9.2.4"
+    "@native-html/transient-render-engine" "11.2.1"
     "@types/ramda" "^0.27.40"
     "@types/urijs" "^1.19.15"
     prop-types "^15.5.7"
