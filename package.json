@@ -1,6 +1,6 @@
 {
   "name": "readhubn",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "readhubnBuild": 1,
   "private": true,
   "scripts": {
