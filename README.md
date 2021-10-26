@@ -7,32 +7,39 @@
 [![Build](https://github.com/shensven/Readhubn/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/shensven/Readhubn/actions/workflows/main.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/Readhubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhubn&utm_campaign=Badge_Grade_Settings)
 [![Pull Request](https://img.shields.io/badge/pull%20request-welcome-brightgreen)](https://github.com/shensven/Readhubn/pulls)
-| iOS 首页 | iOS 话题详情 | Android 首页 | Android 话题详情 |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+
+English ｜ [简体中文](./README-zh-cn.md)
+
+|                         iOS Home                         |                     iOS Topic Detail                     |                       Android Home                       |                   Android Topic Detail                   |
+| :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 | ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) | ![Screenshot 4](src/assets/Screenshots/screenshot-4.png) | ![Screenshot 5](src/assets/Screenshots/screenshot-5.png) |
 
-## 简介
+## INTRO
 
-- 项目完全使用 [React Native](https://reactnative.dev) 编写
-- 项目的构建产物不收集您的任何隐私，且不夹杂任何私货
-- 项目使用 [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) 保持依赖在大版本下始终最新
-- 项目的 Android 版本完全使用 [Github Workflow](https://github.com/shensven/Readhubn/actions) 进行单元测试和持续集成
-- 项目启用了 [Hermes](https://hermesengine.dev)，因此推荐使用 [Flipper](https://fbflipper.com) 进行调试
-- 项目使用了 [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated)，一个 C++ 编写的高性能动画组件
+- The project is written entirely in [React Native](https://reactnative.dev)
+- The build product of the project does NOT collect any of your privacy, and does NOT contain any mix private goods
+- The projects use [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to keep dependencies up to date under the same major version
+- The Android version of the project uses [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for unit testing and continuous integration
+- The project has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
+- The project uses [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated), a high-performance animation component written in C++
 
-## 编译
+## INSTALL
 
-### 先决条件
+<a href='https://play.google.com/store/apps/details?id=com.shensven.readhubn'><img width="153" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-- [Node 12](https://nodejs.org) 或更高版本，推荐使用 [nvm](https://github.com/nvm-sh/nvm) 进行安装
-- [yarn](https://yarnpkg.com/getting-started/install) 包管理器
+## BUILD
+
+### PREREQUISITES
+
+- [Node 12](https://nodejs.org) or later, [nvm](https://github.com/nvm-sh/nvm) is recommended for installation
+- The [yarn](https://yarnpkg.com/getting-started/install) package manager
 - [Watchman](https://formulae.brew.sh/formula/watchman)
-- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) 或更高版本，推荐安装 [JDK 11](https://formulae.brew.sh/formula/openjdk@11)
-- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
-- [Xcode 10](https://developer.apple.com/xcode/resources) 或更高版本
+- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) or higher, [JDK 11](https://formulae.brew.sh/formula/openjdk@11) recommended
+- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms), recommended for installation via [android studio](https://developer.android.com/studio)
+- [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 
-### 项目初始化
+### GET STARTED
 
 ```sh
 yarn install
@@ -42,7 +49,7 @@ yarn install
 cd ios && pod install
 ```
 
-### 真机运行 & 模拟器运行
+### RUNNING ON DEVICE & SIMULATOR
 
 ```sh
 yarn react-native run-android
@@ -52,11 +59,11 @@ yarn react-native run-android
 yarn react-native run-ios
 ```
 
-### 使用 Flipper 进行调试
+### DEBUGGING
 
-[下载地址](https://fbflipper.com/)
+Using [Flipper](https://fbflipper.com/) for debugging
 
-### 测试
+### TEST
 
 ```sh
 yarn test
@@ -66,7 +73,7 @@ yarn test
 cd android && chmod +x gradlew && ./gradlew test
 ```
 
-### 构建 apk
+### ASSEMBLE THE APK
 
 ```sh
 cd android && ./gradlew assembleRelease
