@@ -6,6 +6,7 @@ import {Provider as PaperProvider, Text /* useTheme as usePaperTheme */} from 'r
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNBootSplash from 'react-native-bootsplash';
 import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView} from '@gorhom/bottom-sheet';
+import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {ReadhubnCtx, ReadhubProvider} from './src/utils/readhubnContext';
@@ -24,9 +25,10 @@ import About from './src/screens/About';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
+  const insets = useSafeAreaInsets();
   const {listHasRead, setListHasRead, bottomSheetModalRef, shareURL, setShareURL} = useContext(ReadhubnCtx);
 
-  const snapPoints = useMemo(() => [128], []);
+  const snapPoints = useMemo(() => [128 + insets.bottom], []);
 
   const handleBottomSheetOnChange = (snapPoint: number) => {
     if (snapPoint === -1) {
@@ -42,64 +44,60 @@ const App: React.FC = () => {
   };
 
   return (
-    <PaperProvider theme={paperLight}>
-      <BottomSheetModalProvider>
-        <NavigationContainer
-          onReady={() =>
-            setTimeout(() => {
-              initListHasRead();
-              RNBootSplash.hide({fade: true});
-            }, 200)
-          }>
-          <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-          <Stack.Navigator
-            detachInactiveScreens={!__DEV__}
-            initialRouteName="Home"
-            screenOptions={{
-              headerStyle: {
-                elevation: 0, // Android
-                shadowOpacity: 0, // iOS
-              },
-              cardOverlayEnabled: true,
-              gestureEnabled: true,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Search" component={Search} />
-            <Stack.Screen name="DetailTopic" component={DetailTopic} />
-            <Stack.Screen name="DetailNews" component={DetailNews} />
-            <Stack.Screen name="Instant" component={Instant} options={{...TransitionPresets.ModalPresentationIOS}} />
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen name="Welcome" component={Welcome} options={{...TransitionPresets.ModalSlideFromBottomIOS}} />
-            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-            <Stack.Screen name="OpenSourceLibraries" component={OpenSourceLibraries} />
-            <Stack.Screen name="About" component={About} />
-          </Stack.Navigator>
-          <BottomSheetModal
-            ref={bottomSheetModalRef}
-            index={0}
-            snapPoints={snapPoints}
-            backdropComponent={backdropProps => <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} />}
-            style={styles.bottom_sheet_container}
-            onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
-            <BottomSheetView style={styles.bottom_sheet}>
-              <BottomSheetView style={styles.bottom_sheet_btn}>
-                <TouchableOpacity
-                  style={styles.bottom_sheet_icon}
-                  onPress={() => {
-                    Clipboard.setString(shareURL);
-                    bottomSheetModalRef.current?.close();
-                    Platform.OS === 'android' && ToastAndroid.show('已复制', ToastAndroid.SHORT);
-                  }}>
-                  <Ionicons name="link-outline" size={24} />
-                </TouchableOpacity>
-                <Text style={styles.bottom_sheet_label}>复制链接</Text>
-              </BottomSheetView>
-            </BottomSheetView>
-          </BottomSheetModal>
-        </NavigationContainer>
-      </BottomSheetModalProvider>
-    </PaperProvider>
+    <NavigationContainer
+      onReady={() =>
+        setTimeout(() => {
+          initListHasRead();
+          RNBootSplash.hide({fade: true});
+        }, 200)
+      }>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <Stack.Navigator
+        detachInactiveScreens={!__DEV__}
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            elevation: 0, // Android
+            shadowOpacity: 0, // iOS
+          },
+          cardOverlayEnabled: true,
+          gestureEnabled: true,
+          ...TransitionPresets.SlideFromRightIOS,
+        }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="DetailTopic" component={DetailTopic} />
+        <Stack.Screen name="DetailNews" component={DetailNews} />
+        <Stack.Screen name="Instant" component={Instant} options={{...TransitionPresets.ModalPresentationIOS}} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Welcome" component={Welcome} options={{...TransitionPresets.ModalSlideFromBottomIOS}} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+        <Stack.Screen name="OpenSourceLibraries" component={OpenSourceLibraries} />
+        <Stack.Screen name="About" component={About} />
+      </Stack.Navigator>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        snapPoints={snapPoints}
+        backdropComponent={backdropProps => <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} />}
+        style={styles.bottom_sheet_container}
+        onChange={snapPoint => handleBottomSheetOnChange(snapPoint)}>
+        <BottomSheetView style={styles.bottom_sheet}>
+          <BottomSheetView style={styles.bottom_sheet_btn}>
+            <TouchableOpacity
+              style={styles.bottom_sheet_icon}
+              onPress={() => {
+                Clipboard.setString(shareURL);
+                bottomSheetModalRef.current?.close();
+                Platform.OS === 'android' && ToastAndroid.show('已复制', ToastAndroid.SHORT);
+              }}>
+              <Ionicons name="link-outline" size={24} />
+            </TouchableOpacity>
+            <Text style={styles.bottom_sheet_label}>复制链接</Text>
+          </BottomSheetView>
+        </BottomSheetView>
+      </BottomSheetModal>
+    </NavigationContainer>
   );
 };
 
@@ -138,6 +136,12 @@ const styles = StyleSheet.create({
 
 export default () => (
   <ReadhubProvider>
-    <App />
+    <SafeAreaProvider>
+      <PaperProvider theme={paperLight}>
+        <BottomSheetModalProvider>
+          <App />
+        </BottomSheetModalProvider>
+      </PaperProvider>
+    </SafeAreaProvider>
   </ReadhubProvider>
 );

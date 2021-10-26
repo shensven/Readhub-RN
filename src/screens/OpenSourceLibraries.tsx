@@ -64,9 +64,9 @@ const OpenSourceLibraries: React.FC = () => {
     <FlatList
       data={openSourceLibrariesArr}
       renderItem={renderTouchableRipple}
+      keyExtractor={(item, index) => index.toString()}
       ListFooterComponent={() => <View />}
       ListFooterComponentStyle={{height: insets.bottom}}
-      keyExtractor={(item, index) => index.toString()}
     />
   );
 };

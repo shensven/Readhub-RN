@@ -1,10 +1,11 @@
 import React, {useContext, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid} from 'react-native';
+import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid, View} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 import {SettingsItem} from '../utils/type';
 
@@ -19,6 +20,7 @@ type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 const Settings: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
+  const insets = useSafeAreaInsets();
 
   const route = useRoute();
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -109,7 +111,15 @@ const Settings: React.FC = () => {
     );
   };
 
-  return <FlatList data={itemData} renderItem={renderCard} keyExtractor={(item, index) => index.toString()} />;
+  return (
+    <FlatList
+      data={itemData}
+      renderItem={renderCard}
+      keyExtractor={(item, index) => index.toString()}
+      ListFooterComponent={() => <View />}
+      ListFooterComponentStyle={{height: insets.bottom}}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
