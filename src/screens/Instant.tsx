@@ -50,7 +50,7 @@ const Instant: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '即时预览',
-      cardStyle: {backgroundColor: '#FFFFFF'},
+      cardStyle: {backgroundColor: paperColor.cardBackground},
     });
   }, [navigation, route]);
 

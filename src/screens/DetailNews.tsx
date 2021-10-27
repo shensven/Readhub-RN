@@ -57,7 +57,7 @@ const DetailNews: React.FC = () => {
     navigation.setOptions({
       title: '话题详情',
       headerBackTitle: '返回',
-      cardStyle: {backgroundColor: '#FFFFFF'},
+      cardStyle: {backgroundColor: paperColor.cardBackground},
     });
   }, []);
 

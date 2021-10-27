@@ -104,7 +104,7 @@ const Search: React.FC = () => {
     };
 
     return (
-      <View style={styles.RNHeader_left}>
+      <View style={[styles.RNHeader_left, {backgroundColor: paperColor.rippleAccent}]}>
         <TextInput
           autoFocus={true}
           placeholder="搜索"
@@ -148,7 +148,7 @@ const Search: React.FC = () => {
   const renderSuggestList = ({item}: {item: SuggestItem}) => {
     return (
       <TouchableOpacity
-        style={styles.suggest_list_touchable}
+        style={[styles.suggest_list_touchable, {backgroundColor: paperColor.cardBackground}]}
         activeOpacity={0.6}
         onPress={() => {
           setSuggest([]);
@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 8,
-    backgroundColor: 'rgba(128,128,128,0.1)',
     marginLeft: 8,
   },
   RNHeader_input: {
@@ -289,7 +288,6 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     paddingTop: 16,
     paddingBottom: 16,
-    backgroundColor: '#FFFFFF',
   },
   // suggest_list_icon: {},
   suggest_list_keyword: {
@@ -317,9 +315,8 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: '#FFFFFF',
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 16,
+    marginRight: 16,
     padding: 16,
     paddingTop: 20,
     borderRadius: 12,

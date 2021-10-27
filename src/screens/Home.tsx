@@ -239,6 +239,7 @@ const Home: React.FC = () => {
     navigation.setOptions({
       title: 'Readhub Native',
       headerTitleAlign: 'left',
+      headerTitleStyle: {fontWeight: 'bold'},
       headerTintColor: paperColor.blueText,
       headerRight: () => <RNHeaderRight />,
     });
@@ -346,7 +347,7 @@ const Home: React.FC = () => {
     }
     return (
       <TouchableRipple
-        style={styles.flatlist_header_btn}
+        style={[styles.flatlist_header_btn, {backgroundColor: paperColor.cardBackground}]}
         borderless={true}
         onPress={() => {
           setHasTopicsHeaderActivityIndicator(true);
@@ -365,12 +366,13 @@ const Home: React.FC = () => {
   return (
     <Tabs.Container
       ref={tabRef}
+      headerContainerStyle={styles.tab_headerContainer}
       renderTabBar={props => (
         <MaterialTabBar
           {...props}
           scrollEnabled
           labelStyle={styles.tab_label}
-          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.primary}]}
+          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.blueRipple}]}
           // activeColor={paperColor.text}
           // inactiveColor={paperColor.textAccent}
         />
@@ -468,18 +470,23 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
+  tab_headerContainer: {
+    elevation: 1,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
   tab_label: {
     fontWeight: 'bold',
   },
   tab_indicator: {
-    // height: 0,
+    // height: 8,
+    height: 0,
   },
 
   flatlist_header_root: {
     minHeight: 16,
   },
   flatlist_header_btn: {
-    backgroundColor: '#FFFFFF',
     marginLeft: 20,
     marginRight: 20,
     marginTop: 16,
@@ -502,8 +509,8 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 16,
+    marginRight: 16,
     padding: 16,
     paddingTop: 20,
     borderRadius: 12,

@@ -1,7 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Text} from 'react-native-paper';
+import {Text, useTheme as usePaperTheme} from 'react-native-paper';
 
 interface Item {
   title: string;
@@ -15,10 +15,12 @@ const Help: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const {colors: paperColor} = usePaperTheme();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '隐私政策',
-      cardStyle: {backgroundColor: '#FFFFFF'},
+      cardStyle: {backgroundColor: paperColor.cardBackground},
     });
   }, [navigation, route]);
 
