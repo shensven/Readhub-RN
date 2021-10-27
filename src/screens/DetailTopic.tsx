@@ -149,16 +149,26 @@ const DetailTopic: React.FC = () => {
             <View style={styles.bottom}>
               <View style={styles.bottom_title}>
                 <Ionicons name="newspaper-outline" size={16} />
-                <Text style={styles.bottom_title_right}>媒体报道</Text>
+                <Text style={styles.bottom_title_text}>媒体报道</Text>
               </View>
               {detail?.newsArray?.map((newsReporterItem: NewsArray, newsReporterIndex: number) => (
                 <View key={newsReporterIndex} style={styles.bottom_item}>
                   <Text>・</Text>
-                  <View>
-                    <TouchableOpacity onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
-                      <Text>{newsReporterItem.title}</Text>
+                  <View style={styles.bottom_item_right}>
+                    <TouchableOpacity
+                      style={styles.bottom_item_btn}
+                      onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
+                      <Text>
+                        {newsReporterItem.title + ' '}
+                        <Ionicons
+                          name="open-outline"
+                          size={10}
+                          color={paperColor.textAccent}
+                          style={styles.bottom_item_icon}
+                        />
+                      </Text>
                     </TouchableOpacity>
-                    <Text style={[styles.bottom_subTitle, {color: paperColor.textAccent}]}>
+                    <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
                       {newsReporterItem.siteName}
                     </Text>
                   </View>
@@ -168,12 +178,12 @@ const DetailTopic: React.FC = () => {
             <View style={styles.bottom}>
               <View style={styles.bottom_title}>
                 <Ionicons name="time-outline" size={16} />
-                <Text style={styles.bottom_title_right}>相关事件</Text>
+                <Text style={styles.bottom_title_text}>相关事件</Text>
               </View>
               {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
                 <View key={topicIndex} style={styles.bottom_item}>
                   <Text>・</Text>
-                  <View>
+                  <View style={styles.bottom_item_right}>
                     <TouchableOpacity
                       onPress={() => {
                         if (detail.id !== topicsItem.id) {
@@ -182,7 +192,7 @@ const DetailTopic: React.FC = () => {
                       }}>
                       <Text>{topicsItem.title}</Text>
                     </TouchableOpacity>
-                    <Text style={[styles.bottom_subTitle, {color: paperColor.textAccent}]}>
+                    <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
                       {dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}
                     </Text>
                   </View>
@@ -237,24 +247,37 @@ const styles = StyleSheet.create({
   iconbtn: {
     paddingRight: 2,
   },
+
   bottom: {
     marginTop: 24,
   },
-  bottom_item: {
-    marginTop: 16,
-    flexDirection: 'row',
-  },
+
   bottom_title: {
     flexDirection: 'row',
     alignItems: 'center',
     includeFontPadding: false,
   },
-  bottom_title_right: {
+  bottom_title_text: {
     fontSize: 17,
     fontWeight: 'bold',
     marginLeft: 6,
   },
-  bottom_subTitle: {
+
+  bottom_item: {
+    marginTop: 16,
+    flexDirection: 'row',
+  },
+  bottom_item_right: {
+    flex: 1,
+  },
+  bottom_item_btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottom_item_icon: {
+    marginLeft: 4,
+  },
+  bottom_item_subTitle: {
     fontSize: 10,
     marginTop: 2,
   },
