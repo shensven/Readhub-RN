@@ -88,7 +88,7 @@ const DetailNews: React.FC = () => {
           disabled={true}
           icon="share-variant"
           size={14}
-          color="#FFFFFF"
+          color={paperColor.textAccent}
           rippleColor={paperColor.ripple}
           style={[styles.iconbtn, {backgroundColor: paperColor.ripple}]}
           onPress={() => {}}

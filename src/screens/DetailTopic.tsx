@@ -146,59 +146,63 @@ const DetailTopic: React.FC = () => {
                 }}
               />
             </View>
-            <View style={styles.bottom}>
-              <View style={styles.bottom_title}>
-                <Ionicons name="newspaper-outline" size={16} />
-                <Text style={styles.bottom_title_text}>媒体报道</Text>
-              </View>
-              {detail?.newsArray?.map((newsReporterItem: NewsArray, newsReporterIndex: number) => (
-                <View key={newsReporterIndex} style={styles.bottom_item}>
-                  <Text>・</Text>
-                  <View style={styles.bottom_item_right}>
-                    <TouchableOpacity
-                      style={styles.bottom_item_btn}
-                      onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
-                      <Text>
-                        {newsReporterItem.title + ' '}
-                        <Ionicons
-                          name="open-outline"
-                          size={10}
-                          color={paperColor.textAccent}
-                          style={styles.bottom_item_icon}
-                        />
+            {detail?.newsArray?.length > 0 && (
+              <View style={styles.bottom}>
+                <View style={styles.bottom_title}>
+                  <Ionicons name="newspaper-outline" size={16} />
+                  <Text style={styles.bottom_title_text}>媒体报道</Text>
+                </View>
+                {detail?.newsArray?.map((newsReporterItem: NewsArray, newsReporterIndex: number) => (
+                  <View key={newsReporterIndex} style={styles.bottom_item}>
+                    <Text>・</Text>
+                    <View style={styles.bottom_item_right}>
+                      <TouchableOpacity
+                        style={styles.bottom_item_btn}
+                        onPress={() => Linking.openURL(newsReporterItem.mobileUrl)}>
+                        <Text>
+                          {newsReporterItem.title + ' '}
+                          <Ionicons
+                            name="open-outline"
+                            size={10}
+                            color={paperColor.textAccent}
+                            style={styles.bottom_item_icon}
+                          />
+                        </Text>
+                      </TouchableOpacity>
+                      <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
+                        {newsReporterItem.siteName}
                       </Text>
-                    </TouchableOpacity>
-                    <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
-                      {newsReporterItem.siteName}
-                    </Text>
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
-            <View style={styles.bottom}>
-              <View style={styles.bottom_title}>
-                <Ionicons name="time-outline" size={16} />
-                <Text style={styles.bottom_title_text}>相关事件</Text>
+                ))}
               </View>
-              {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
-                <View key={topicIndex} style={styles.bottom_item}>
-                  <Text>・</Text>
-                  <View style={styles.bottom_item_right}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        if (detail.id !== topicsItem.id) {
-                          navigation.push('DetailTopic', {id: topicsItem.id});
-                        }
-                      }}>
-                      <Text>{topicsItem.title}</Text>
-                    </TouchableOpacity>
-                    <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
-                      {dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}
-                    </Text>
-                  </View>
+            )}
+            {detail?.timeline?.topics?.length > 0 && (
+              <View style={styles.bottom}>
+                <View style={styles.bottom_title}>
+                  <Ionicons name="time-outline" size={16} />
+                  <Text style={styles.bottom_title_text}>相关事件</Text>
                 </View>
-              ))}
-            </View>
+                {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
+                  <View key={topicIndex} style={styles.bottom_item}>
+                    <Text>・</Text>
+                    <View style={styles.bottom_item_right}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          if (detail.id !== topicsItem.id) {
+                            navigation.push('DetailTopic', {id: topicsItem.id});
+                          }
+                        }}>
+                        <Text>{topicsItem.title}</Text>
+                      </TouchableOpacity>
+                      <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
+                        {dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
           </ScrollView>
         )
       );
