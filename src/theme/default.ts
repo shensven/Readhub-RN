@@ -12,6 +12,7 @@ declare global {
       cardBackgroundAlreadyRead: string;
       textAccent: string;
       textAlreadyRead: string;
+      textForceLight: string;
       ripple: string;
       rippleAccent: string;
       blueText: string;
@@ -36,6 +37,7 @@ export const paperLight = {
     text: 'rgb(0,0,0)',
     textAccent: 'rgba(0,0,0,0.5)',
     textAlreadyRead: 'rgba(0,0,0,0.5)',
+    textForceLight: '#FFFFFF',
     ripple: 'rgba(128,128,128,0.2)',
     rippleAccent: 'rgba(128,128,128,0.1)',
     blueText: '#007498',

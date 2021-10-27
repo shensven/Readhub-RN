@@ -140,6 +140,11 @@ const Search: React.FC = () => {
       headerTitle: () => null,
       headerLeft: () => <RNHeaderLeft />,
       headerRight: () => <RNHeaderRight />,
+      headerStyle: {
+        elevation: 1,
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
     });
   }, []);
 
