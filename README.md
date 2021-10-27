@@ -18,8 +18,8 @@ English | [简体中文](./README-zh-cn.md)
 
 - The project is written entirely in [React Native](https://reactnative.dev)
 - The build product of the project does NOT collect any of your privacy, and does NOT contain any mix private goods
-- The projects use [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to keep dependencies up to date under the same major version
-- The Android version of the project uses [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for unit testing and continuous integration
+- The project use [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to keep dependencies up to date under the same major version
+- The Android part of the project uses [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for unit testing and continuous integration
 - The project has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
 - The project uses [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated), a high-performance animation component written in C++
 
@@ -31,7 +31,7 @@ English | [简体中文](./README-zh-cn.md)
 
 ### PREREQUISITES
 
-- [Node 12](https://nodejs.org) or later, [nvm](https://github.com/nvm-sh/nvm) is recommended for installation
+- [Node 12](https://nodejs.org) or higher, [nvm](https://github.com/nvm-sh/nvm) is recommended for installation
 - The [yarn](https://yarnpkg.com/getting-started/install) package manager
 - [Watchman](https://formulae.brew.sh/formula/watchman)
 - [JDK 8](https://formulae.brew.sh/formula/openjdk@8) or higher, [JDK 11](https://formulae.brew.sh/formula/openjdk@11) recommended
