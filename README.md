@@ -8,7 +8,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/Readhubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhubn&utm_campaign=Badge_Grade_Settings)
 [![Pull Request](https://img.shields.io/badge/pull%20request-welcome-brightgreen)](https://github.com/shensven/Readhubn/pulls)
 
-English ｜ [简体中文](./README-zh-cn.md)
+English | [简体中文](./README-zh-cn.md)
 
 |                         iOS Home                         |                     iOS Topic Detail                     |                       Android Home                       |                   Android Topic Detail                   |
 | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
