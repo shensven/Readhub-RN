@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import {StyleSheet, ScrollView, View, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, ScrollView, View, TouchableOpacity, Linking, Dimensions} from 'react-native';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -12,6 +12,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
+import Loading from './components/Loading/Loading';
+
+// const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
 
 type StackParamList = {
   Params: {id: string};
@@ -204,11 +208,19 @@ const DetailTopic: React.FC = () => {
         )
       );
     default:
-      return null;
+      return (
+        <View style={styles.loading}>
+          <Loading />
+        </View>
+      );
   }
 };
 
 const styles = StyleSheet.create({
+  loading: {
+    marginTop: screenHeight / 6,
+  },
+
   root: {
     padding: 24,
   },
