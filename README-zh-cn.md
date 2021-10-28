@@ -10,6 +10,8 @@
 
 [English](./README.md) | 简体中文
 
+[readhub.cn](https://readhub.cn) 的 React Native 实现
+
 |                         iOS 首页                         |                       iOS 话题详情                       |                       Android 首页                       |                     Android 话题详情                     |
 | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 | ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) | ![Screenshot 4](src/assets/Screenshots/screenshot-4.png) | ![Screenshot 5](src/assets/Screenshots/screenshot-5.png) |
