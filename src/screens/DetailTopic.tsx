@@ -82,14 +82,6 @@ const DetailTopic: React.FC = () => {
     setHasLoading(false);
   }, [isFocused]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '话题详情',
-      headerBackTitle: '返回',
-      cardStyle: {backgroundColor: '#FFFFFF'},
-    });
-  }, []);
-
   switch (hasFinalView) {
     case true:
       return (

@@ -1,5 +1,5 @@
-import React, {useContext, useLayoutEffect} from 'react';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useContext} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid, View} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
@@ -22,7 +22,6 @@ const Settings: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
   const insets = useSafeAreaInsets();
 
-  const route = useRoute();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const {setListHasRead} = useContext(ReadhubnCtx);
@@ -40,14 +39,6 @@ const Settings: React.FC = () => {
       },
     ]);
   };
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '设置',
-      headerBackTitle: '返回',
-      cardStyle: {backgroundColor: '#FFFFFF'},
-    });
-  }, [navigation, route]);
 
   const itemData: SettingsItem[] = [
     {

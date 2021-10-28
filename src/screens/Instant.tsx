@@ -1,7 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {View, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import RenderHtml from 'react-native-render-html';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -25,7 +25,6 @@ const Instant: React.FC = () => {
   const {width} = useWindowDimensions();
   const {colors: paperColor} = usePaperTheme();
 
-  const navigation = useNavigation();
   const route = useRoute<ScreenRouteProp>();
 
   const [instant, setInstant] = useState<InstantState>({
@@ -45,14 +44,7 @@ const Instant: React.FC = () => {
 
   useLayoutEffect(() => {
     getInstant();
-  }, [navigation, route]);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '即时预览',
-      cardStyle: {backgroundColor: paperColor.cardBackground},
-    });
-  }, [navigation, route]);
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 16}]}>

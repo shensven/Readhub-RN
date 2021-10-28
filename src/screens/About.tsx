@@ -1,7 +1,6 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {View, Image, StyleSheet, PixelRatio, useWindowDimensions} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
-import {useNavigation, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
 
@@ -12,16 +11,6 @@ const About: React.FC = () => {
   const insets = useSafeAreaInsets();
   const windowHeight = useWindowDimensions().height;
   const {colors: paperColor} = usePaperTheme();
-
-  const navigation = useNavigation();
-  const route = useRoute();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '关于',
-      cardStyle: {backgroundColor: '#FFFFFF'},
-    });
-  }, [navigation, route]);
 
   return (
     <View style={styles.root}>

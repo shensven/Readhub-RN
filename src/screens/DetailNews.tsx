@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
@@ -51,14 +51,6 @@ const DetailNews: React.FC = () => {
         persistListHasRead();
       }, 250);
     }
-  }, []);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '话题详情',
-      headerBackTitle: '返回',
-      cardStyle: {backgroundColor: paperColor.cardBackground},
-    });
   }, []);
 
   return (

@@ -1,29 +1,8 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {Text, useTheme as usePaperTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 
-interface Item {
-  title: string;
-  leftIcon: string;
-  leftIconSize?: number;
-  rightIcon: string;
-  onPress: () => void;
-}
-
-const Help: React.FC = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-
-  const {colors: paperColor} = usePaperTheme();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '隐私政策',
-      cardStyle: {backgroundColor: paperColor.cardBackground},
-    });
-  }, [navigation, route]);
-
+const PrivacyPolicy: React.FC = () => {
   return (
     <View style={styles.root}>
       <Text style={styles.description}>
@@ -46,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Help;
+export default PrivacyPolicy;

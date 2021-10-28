@@ -1,8 +1,7 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {View, FlatList, StyleSheet, Linking} from 'react-native';
 import {List, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface PackageDetail {
@@ -29,14 +28,6 @@ const openSourceLibrariesArr: PackageDetail[] = require('./../utils/openSourceLi
 const OpenSourceLibraries: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '开源库',
-      cardStyle: {backgroundColor: '#FFFFFF'},
-    });
-  }, []);
 
   const renderTouchableRipple = ({item}: {item: TouchableRippleProps}) => {
     return (

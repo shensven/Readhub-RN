@@ -12,7 +12,10 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {ReadhubnCtx, ReadhubProvider} from './src/utils/readhubnContext';
 import {paperLight} from './src/theme/default';
 import Home from './src/screens/Home';
+import HomeHeaderRight from './src/screens/components/HomeHeader/HomeHeaderRight';
 import Search from './src/screens/Search';
+import SearchHeaderLeft from './src/screens/components/SearchHeader/SearchHeaderLeft';
+import SearchHeaderRight from './src/screens/components/SearchHeader/SearchHeaderRight';
 import DetailTopic from './src/screens/DetailTopic';
 import DetailNews from './src/screens/DetailNews';
 import Instant from './src/screens/Instant';
@@ -66,16 +69,102 @@ const App: React.FC = () => {
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
         }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="DetailTopic" component={DetailTopic} />
-        <Stack.Screen name="DetailNews" component={DetailNews} />
-        <Stack.Screen name="Instant" component={Instant} options={{...TransitionPresets.ModalPresentationIOS}} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="Welcome" component={Welcome} options={{...TransitionPresets.ModalSlideFromBottomIOS}} />
-        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-        <Stack.Screen name="OpenSourceLibraries" component={OpenSourceLibraries} />
-        <Stack.Screen name="About" component={About} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: 'Readhub Native',
+            headerTitleAlign: 'left',
+            headerTitleStyle: {fontWeight: 'bold'},
+            headerTintColor: paperColor.blueText,
+            headerRight: () => <HomeHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{
+            headerTitle: () => null,
+            headerLeft: () => <SearchHeaderLeft />,
+            headerRight: () => <SearchHeaderRight />,
+            headerStyle: {
+              elevation: 1,
+              shadowOpacity: 0.5,
+              shadowRadius: 4,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="DetailTopic"
+          component={DetailTopic}
+          options={{
+            title: '话题详情',
+            headerBackTitle: '返回',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
+        <Stack.Screen
+          name="DetailNews"
+          component={DetailNews}
+          options={{
+            title: '话题详情',
+            headerBackTitle: '返回',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
+        <Stack.Screen
+          name="Instant"
+          component={Instant}
+          options={{
+            title: '即时预览',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+            ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            title: '设置',
+            headerBackTitle: '返回',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{
+            title: '欢迎',
+            headerTransparent: true,
+            headerTintColor: paperColor.textForceLight,
+            headerMode: 'screen',
+            ...TransitionPresets.ModalSlideFromBottomIOS,
+          }}
+        />
+        <Stack.Screen
+          name="PrivacyPolicy"
+          component={PrivacyPolicy}
+          options={{
+            title: '隐私政策',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
+        <Stack.Screen
+          name="OpenSourceLibraries"
+          component={OpenSourceLibraries}
+          options={{
+            title: '开源库',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
+        <Stack.Screen
+          name="About"
+          component={About}
+          options={{
+            title: '关于',
+            cardStyle: {backgroundColor: paperColor.cardBackground},
+          }}
+        />
       </Stack.Navigator>
       <BottomSheetModal
         ref={bottomSheetModalRef}

@@ -169,3 +169,11 @@ export interface SearchReault {
   topicSummary: string;
   topicTitle: string;
 }
+
+export interface SuggestItem {
+  entityId: string;
+  entityName: string;
+  entityType: string;
+  text: string;
+  type: string;
+}

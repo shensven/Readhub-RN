@@ -1,21 +1,9 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, Image, StatusBar, Dimensions} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
 const screenHeight = Dimensions.get('screen').height;
 
 const Welcome: React.FC = () => {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: '欢迎',
-      headerTransparent: true,
-      headerTintColor: '#FFFFFF',
-      headerMode: 'screen',
-    });
-  }, []);
-
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />

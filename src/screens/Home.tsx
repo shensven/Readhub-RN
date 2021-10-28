@@ -1,19 +1,10 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {
-  ActivityIndicator,
-  ListRenderItem,
-  RefreshControl,
-  StyleSheet,
-  TouchableOpacity,
-  Vibration,
-  View,
-} from 'react-native';
+import {ActivityIndicator, ListRenderItem, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
 import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -25,8 +16,6 @@ import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 
 type StackParamList = {
-  Search: undefined;
-  Settings: undefined;
   DetailTopic: {id: string};
   DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
@@ -42,7 +31,6 @@ const Home: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
 
   const navigation = useNavigation<ScreenNavigationProp>();
-  const route = useRoute();
   const isFocused = useIsFocused();
 
   const tabRef = useRef<CollapsibleRef>();
@@ -207,43 +195,6 @@ const Home: React.FC = () => {
     setSearchResultPage(2);
     setHasLoading(false);
   }, [isFocused]);
-
-  //----------------------------------------------------------------------------
-
-  const RNHeaderRight: React.FC = () => {
-    const {colors: _paperColor} = usePaperTheme();
-    return (
-      <View style={styles.RNHeader_right}>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={[styles.RNHeader_fakeinput, {backgroundColor: _paperColor.rippleAccent}]}
-          onPress={() => navigation.navigate('Search')}>
-          <Text style={[styles.RNHeader_fakeinput_placeholder, {color: _paperColor.textAccent}]}>搜索</Text>
-          <Ionicons
-            name="search-outline"
-            size={16}
-            color={_paperColor.textAccent}
-            style={styles.RNHeader_fakeinput_icon}
-          />
-        </TouchableOpacity>
-        <IconButton
-          icon={() => <Ionicons name="cog-outline" size={24} />}
-          rippleColor={_paperColor.ripple}
-          onPress={() => navigation.navigate('Settings')}
-        />
-      </View>
-    );
-  };
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'Readhub Native',
-      headerTitleAlign: 'left',
-      headerTitleStyle: {fontWeight: 'bold'},
-      headerTintColor: paperColor.blueText,
-      headerRight: () => <RNHeaderRight />,
-    });
-  }, [navigation, route]);
 
   //----------------------------------------------------------------------------
 
@@ -450,28 +401,6 @@ const Home: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  RNHeader_right: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  RNHeader_fakeinput: {
-    height: 28,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 8,
-    marginRight: 8,
-    borderRadius: 8,
-  },
-  RNHeader_fakeinput_placeholder: {
-    paddingLeft: 8,
-    paddingRight: 0,
-    marginRight: 32,
-  },
-  RNHeader_fakeinput_icon: {
-    marginLeft: 8,
-    marginRight: 8,
-  },
-
   tab_headerContainer: {
     elevation: 1,
     shadowOpacity: 0.1,

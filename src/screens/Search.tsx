@@ -1,5 +1,5 @@
-import React, {useContext, useLayoutEffect, useState} from 'react';
-import {View, StyleSheet, Dimensions, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import React, {useContext, useLayoutEffect} from 'react';
+import {View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -10,9 +10,6 @@ import axios from 'axios';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 import {SearchReault} from '../utils/type';
 import Loading from './components/Loading/Loading';
-
-const screenWidth = Dimensions.get('screen').width;
-// const screenHeight = Dimensions.get('screen').height;
 
 type StackParamList = {
   Search: undefined;
@@ -59,6 +56,8 @@ const Search: React.FC = () => {
     }
   }, [searchResult]);
 
+  //------------------------------------------------------------------------------
+
   const goSearch = async (_prop: string) => {
     const resp: {data: {data: {items: SearchReault[]}}} = await axios.get('https://search.readhub.cn/api/entity/news', {
       params: {page: 1, seze: 20, query: _prop, type: 'hot'},
@@ -75,78 +74,6 @@ const Search: React.FC = () => {
     setSearchResult([...searchResult, ...resp.data.data.items]);
     setSearchResultPage(searchResultPage + 1);
   };
-
-  //------------------------------------------------------------------------------
-
-  const RNHeaderLeft: React.FC = () => {
-    const {
-      input: _input,
-      setInput: _setInput,
-      setSuggest: _setSuggest,
-      setHasLoading: _setHasLoading,
-      setSearchResult: _setSearchResult,
-      setSearchResultPage: _setSearchResultPage,
-    } = useContext(ReadhubnCtx);
-
-    const getSuggest = async () => {
-      if (_input.length > 0) {
-        const resp: {data: {result: {data: {items: SuggestItem[]}}}} = await axios.get(
-          'https://search.readhub.cn/api/entity/suggest',
-          {params: {q: _input}},
-        );
-        if (resp.data.result.data.items.length === 0) {
-          _setHasLoading(true);
-          goSearch(_input);
-          return;
-        }
-        _setSuggest(resp.data.result.data.items);
-      }
-    };
-
-    return (
-      <View style={[styles.RNHeader_left, {backgroundColor: paperColor.rippleAccent}]}>
-        <TextInput
-          autoFocus={true}
-          placeholder="搜索"
-          value={_input}
-          placeholderTextColor={paperColor.textAccent}
-          selectionColor={paperColor.primary}
-          style={styles.RNHeader_input}
-          onChangeText={text => _setInput(text)}
-          onSubmitEditing={() => getSuggest()}
-          onFocus={() => {
-            _setHasLoading(false);
-            _setSearchResult([]);
-            _setSearchResultPage(2);
-          }}
-        />
-      </View>
-    );
-  };
-
-  const RNHeaderRight: React.FC = () => {
-    return (
-      <TouchableOpacity
-        hitSlop={{top: 16, bottom: 16, left: 16, right: 16}}
-        style={styles.RNHeader_right}
-        onPress={() => navigation.goBack()}>
-        <Text>取消</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => null,
-      headerLeft: () => <RNHeaderLeft />,
-      headerRight: () => <RNHeaderRight />,
-      headerStyle: {
-        elevation: 1,
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-      },
-    });
-  }, []);
 
   //------------------------------------------------------------------------------
 
@@ -267,25 +194,6 @@ const Search: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  RNHeader_left: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 8,
-    marginLeft: 8,
-  },
-  RNHeader_input: {
-    width: screenWidth * 0.85 - 8,
-    height: 28,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 8,
-    paddingRight: 8,
-  },
-  RNHeader_right: {
-    width: screenWidth * 0.15,
-    alignItems: 'center',
-  },
-
   suggest_list_touchable: {
     flexDirection: 'row',
     alignItems: 'center',
