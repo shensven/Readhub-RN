@@ -185,7 +185,12 @@ const DetailTopic: React.FC = () => {
                             navigation.push('DetailTopic', {id: topicsItem.id});
                           }
                         }}>
-                        <Text>{topicsItem.title}</Text>
+                        <Text>
+                          {topicsItem.title}
+                          {detail.id === topicsItem.id && (
+                            <Text style={{color: paperColor.blueText}}>（正在阅读）</Text>
+                          )}
+                        </Text>
                       </TouchableOpacity>
                       <Text style={[styles.bottom_item_subTitle, {color: paperColor.textAccent}]}>
                         {dayjs(topicsItem.createdAt).format('YYYY-MM-DD')}
