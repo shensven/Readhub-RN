@@ -298,7 +298,7 @@ const Home: React.FC = () => {
     }
     return (
       <TouchableRipple
-        style={[styles.flatlist_header_btn, {backgroundColor: paperColor.primary}]}
+        style={[styles.flatlist_header_btn, {backgroundColor: paperColor.cardBackground}]}
         borderless={true}
         onPress={() => {
           setHasTopicsHeaderActivityIndicator(true);
@@ -308,7 +308,7 @@ const Home: React.FC = () => {
         {hasTopicsHeaderActivityIndicator ? (
           <ActivityIndicator color={paperColor.blueText} />
         ) : (
-          <Text style={[styles.flatlist_header_label, {color: paperColor.textForceLight}]}>
+          <Text style={[styles.flatlist_header_label, {color: paperColor.text}]}>
             有 {topicsNewCount} 个新话题，点击刷新
           </Text>
         )}
