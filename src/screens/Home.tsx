@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {ActivityIndicator, ListRenderItem, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
-import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
