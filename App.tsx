@@ -12,7 +12,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {ReadhubnCtx, ReadhubProvider} from './src/utils/readhubnContext';
 import {paperLight} from './src/theme/default';
 import Home from './src/screens/Home';
-import HomeHeaderRight from './src/screens/components/HomeHeader/HomeHeaderRight';
+// import HomeHeaderRight from './src/screens/components/HomeHeader/HomeHeaderRight';
 import Search from './src/screens/Search';
 import SearchHeaderLeft from './src/screens/components/SearchHeader/SearchHeaderLeft';
 import SearchHeaderRight from './src/screens/components/SearchHeader/SearchHeaderRight';
@@ -76,7 +76,8 @@ const App: React.FC = () => {
             title: 'Readhub Native',
             headerTitleAlign: 'left',
             headerTintColor: paperColor.textForceLight,
-            headerRight: () => <HomeHeaderRight />,
+            // headerRight: () => <HomeHeaderRight />,
+            headerShown: false,
             headerStyle: {backgroundColor: paperColor.primary, elevation: 0, shadowOpacity: 0},
           }}
         />

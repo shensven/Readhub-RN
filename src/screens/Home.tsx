@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {ActivityIndicator, ListRenderItem, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
+import {ActivityIndicator, ListRenderItem, Platform, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
-import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
+import {Appbar, IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import BackgroundTimer from 'react-native-background-timer';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -18,6 +18,8 @@ import {ReadhubnCtx} from '../utils/readhubnContext';
 import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 
 type StackParamList = {
+  Search: undefined;
+  Settings: undefined;
   DetailTopic: {id: string};
   DetailNews: {id: string; title: string; publishDate: string; summary: string; hasInstantView?: boolean};
 };
@@ -324,6 +326,18 @@ const Home: React.FC = () => {
       <FocusAwareStatusBar barStyle="light-content" />
       <Tabs.Container
         ref={tabRef}
+        minHeaderHeight={insets.top}
+        revealHeaderOnScroll={true}
+        HeaderComponent={() => (
+          <Appbar.Header style={[styles.appbar, {marginTop: Platform.OS === 'android' ? insets.top : 0}]}>
+            <Appbar.Content title="Readhub Native" titleStyle={styles.appbar_title} />
+            <Appbar.Action icon="magnify" onPress={() => navigation.navigate('Search')} />
+            <Appbar.Action
+              icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
+              onPress={() => navigation.navigate('Settings')}
+            />
+          </Appbar.Header>
+        )}
         headerContainerStyle={styles.tab_headerContainer}
         renderTabBar={props => (
           <MaterialTabBar
@@ -403,11 +417,20 @@ const Home: React.FC = () => {
           />
         </Tabs.Tab>
       </Tabs.Container>
+      <View style={[styles.fake_statusbar, {height: insets.top, backgroundColor: paperColor.primary}]} />
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  appbar: {
+    elevation: 0,
+    shadowOpacity: 0,
+  },
+  appbar_title: {
+    fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
+  },
+
   tab_headerContainer: {
     elevation: 1,
     shadowOpacity: 0.1,
@@ -487,6 +510,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingRight: 2,
+  },
+  fake_statusbar: {
+    width: '100%',
+    position: 'absolute',
+    top: 0,
   },
 });
 
