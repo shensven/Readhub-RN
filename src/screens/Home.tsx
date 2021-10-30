@@ -388,6 +388,7 @@ const Home: React.FC = () => {
               />
             }
             showsVerticalScrollIndicator={false}
+            overScrollMode="never"
             onEndReached={() => getNextTopic()}
           />
         </Tabs.Tab>
@@ -410,6 +411,7 @@ const Home: React.FC = () => {
               />
             }
             showsVerticalScrollIndicator={false}
+            overScrollMode="never"
             onEndReached={() => getNextNews()}
           />
         </Tabs.Tab>
@@ -432,6 +434,7 @@ const Home: React.FC = () => {
               />
             }
             showsVerticalScrollIndicator={false}
+            overScrollMode="never"
             onEndReached={() => getNextTechnews()}
           />
         </Tabs.Tab>
