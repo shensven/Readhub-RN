@@ -75,9 +75,9 @@ const App: React.FC = () => {
           options={{
             title: 'Readhub Native',
             headerTitleAlign: 'left',
-            headerTitleStyle: {fontWeight: 'bold'},
-            headerTintColor: paperColor.blueText,
+            headerTintColor: paperColor.textForceLight,
             headerRight: () => <HomeHeaderRight />,
+            headerStyle: {backgroundColor: paperColor.primary, elevation: 0, shadowOpacity: 0},
           }}
         />
         <Stack.Screen
@@ -136,7 +136,6 @@ const App: React.FC = () => {
           options={{
             title: '欢迎',
             headerTransparent: true,
-            headerTintColor: paperColor.textForceLight,
             headerMode: 'screen',
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}

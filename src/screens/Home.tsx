@@ -14,6 +14,7 @@ import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 import {ReadhubnCtx} from '../utils/readhubnContext';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 
 type StackParamList = {
   DetailTopic: {id: string};
@@ -317,86 +318,90 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Tabs.Container
-      ref={tabRef}
-      headerContainerStyle={styles.tab_headerContainer}
-      renderTabBar={props => (
-        <MaterialTabBar
-          {...props}
-          scrollEnabled
-          labelStyle={styles.tab_label}
-          indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.blueRipple}]}
-          // activeColor={paperColor.text}
-          // inactiveColor={paperColor.textAccent}
-        />
-      )}>
-      <Tabs.Tab name="Topics" label="热门话题">
-        <Tabs.FlatList
-          data={topics}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <TopicsHeader />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleTopicRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextTopic()}
-        />
-      </Tabs.Tab>
-      <Tabs.Tab name="News" label="科技动态">
-        <Tabs.FlatList
-          data={news}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleNewsRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextNews()}
-        />
-      </Tabs.Tab>
-      <Tabs.Tab name="Tech" label="技术资讯">
-        <Tabs.FlatList
-          data={technews}
-          keyExtractor={(item, index: number) => index.toString()}
-          renderItem={renderCard}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.flatlist_header_root}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-          ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-          refreshControl={
-            <RefreshControl
-              colors={[paperColor.blueText]}
-              tintColor={paperColor.blueText}
-              refreshing={refreshing}
-              onRefresh={() => handleTechnewsRefresh()}
-            />
-          }
-          showsVerticalScrollIndicator={false}
-          onEndReached={() => getNextTechnews()}
-        />
-      </Tabs.Tab>
-    </Tabs.Container>
+    <>
+      <FocusAwareStatusBar barStyle="light-content" />
+      <Tabs.Container
+        ref={tabRef}
+        headerContainerStyle={styles.tab_headerContainer}
+        renderTabBar={props => (
+          <MaterialTabBar
+            {...props}
+            scrollEnabled
+            labelStyle={styles.tab_label}
+            indicatorStyle={[styles.tab_indicator, {backgroundColor: paperColor.blueRipple}]}
+            activeColor={paperColor.textForceLight}
+            inactiveColor={paperColor.textForceLightAccent}
+            style={{backgroundColor: paperColor.primary}}
+          />
+        )}>
+        <Tabs.Tab name="Topics" label="热门话题">
+          <Tabs.FlatList
+            data={topics}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <TopicsHeader />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleTopicRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextTopic()}
+          />
+        </Tabs.Tab>
+        <Tabs.Tab name="News" label="科技动态">
+          <Tabs.FlatList
+            data={news}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <View />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleNewsRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextNews()}
+          />
+        </Tabs.Tab>
+        <Tabs.Tab name="Tech" label="技术资讯">
+          <Tabs.FlatList
+            data={technews}
+            keyExtractor={(item, index: number) => index.toString()}
+            renderItem={renderCard}
+            ListHeaderComponent={() => <View />}
+            ListHeaderComponentStyle={styles.flatlist_header_root}
+            ListFooterComponent={() => <Loading />}
+            ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+            ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+            refreshControl={
+              <RefreshControl
+                colors={[paperColor.blueText]}
+                tintColor={paperColor.blueText}
+                refreshing={refreshing}
+                onRefresh={() => handleTechnewsRefresh()}
+              />
+            }
+            showsVerticalScrollIndicator={false}
+            onEndReached={() => getNextTechnews()}
+          />
+        </Tabs.Tab>
+      </Tabs.Container>
+    </>
   );
 };
 

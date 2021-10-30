@@ -10,9 +10,11 @@ declare global {
     interface ThemeColors {
       cardBackground: string;
       cardBackgroundAlreadyRead: string;
+      cardBackgroundAccent: string;
       textAccent: string;
       textAlreadyRead: string;
       textForceLight: string;
+      textForceLightAccent: string;
       ripple: string;
       rippleAccent: string;
       blueText: string;
@@ -29,15 +31,17 @@ export const paperLight = {
   colors: {
     ...PaperDefaultTheme.colors,
     primary: '#007498',
-    // accent: '',
+    accent: '#E8F6FE',
     // background: '',
     // surface: '',
     cardBackground: 'rgb(255,255,255)',
     cardBackgroundAlreadyRead: 'rgb(255,255,255)',
+    cardBackgroundAccent: 'rgba(255,255,255,0.2)',
     text: 'rgb(0,0,0)',
     textAccent: 'rgba(0,0,0,0.5)',
     textAlreadyRead: 'rgba(0,0,0,0.5)',
-    textForceLight: '#FFFFFF',
+    textForceLight: 'rgb(255,255,255)',
+    textForceLightAccent: 'rgba(255,255,255,0.5)',
     ripple: 'rgba(128,128,128,0.2)',
     rippleAccent: 'rgba(128,128,128,0.1)',
     blueText: '#007498',

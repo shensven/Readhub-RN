@@ -19,19 +19,19 @@ const HomeHeaderRight: React.FC = () => {
     <View style={styles.RNHeader_right}>
       <TouchableOpacity
         activeOpacity={0.6}
-        style={[styles.RNHeader_fakeinput, {backgroundColor: paperColor.rippleAccent}]}
+        style={[styles.RNHeader_fakeinput, {backgroundColor: paperColor.cardBackgroundAccent}]}
         onPress={() => navigation.navigate('Search')}>
-        <Text style={[styles.RNHeader_fakeinput_placeholder, {color: paperColor.textAccent}]}>搜索</Text>
+        <Text style={[styles.RNHeader_fakeinput_placeholder, {color: paperColor.textForceLight}]}>搜索</Text>
         <Ionicons
           name="search-outline"
           size={16}
-          color={paperColor.textAccent}
+          color={paperColor.textForceLight}
           style={styles.RNHeader_fakeinput_icon}
         />
       </TouchableOpacity>
       <IconButton
-        icon={() => <Ionicons name="cog-outline" size={24} />}
-        rippleColor={paperColor.ripple}
+        icon={() => <Ionicons name="cog-outline" size={24} color={paperColor.textForceLight} />}
+        rippleColor={paperColor.cardBackgroundAccent}
         onPress={() => navigation.navigate('Settings')}
       />
     </View>
