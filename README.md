@@ -80,3 +80,13 @@ cd android && chmod +x gradlew && ./gradlew test
 ```sh
 cd android && ./gradlew assembleRelease
 ```
+
+### BOOTSPLASH GENERATION
+
+```sh
+yarn react-native generate-bootsplash src/assets/Splash/bootsplash.png \
+  --background-color=E8F6FE \
+  --logo-width=256 \
+  --assets-path=assets \
+  --flavor=main
+```
