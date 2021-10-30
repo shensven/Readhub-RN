@@ -1,5 +1,14 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {ActivityIndicator, ListRenderItem, Platform, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
+import {
+  ActivityIndicator,
+  ListRenderItem,
+  Platform,
+  RefreshControl,
+  StatusBar,
+  StyleSheet,
+  Vibration,
+  View,
+} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -205,6 +214,7 @@ const Home: React.FC = () => {
 
   const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = ({item}: {item: any}) => {
     const goDetail = () => {
+      StatusBar.setBarStyle('dark-content', true);
       switch (tabRef.current?.getFocusedTab()) {
         case 'Topics':
           navigation.navigate('DetailTopic', {id: item.id});
@@ -331,10 +341,19 @@ const Home: React.FC = () => {
         HeaderComponent={() => (
           <Appbar.Header style={[styles.appbar, {marginTop: Platform.OS === 'android' ? insets.top : 0}]}>
             <Appbar.Content title="Readhub Native" titleStyle={styles.appbar_title} />
-            <Appbar.Action icon="magnify" onPress={() => navigation.navigate('Search')} />
+            <Appbar.Action
+              icon="magnify"
+              onPress={() => {
+                navigation.navigate('Search');
+                StatusBar.setBarStyle('dark-content', true);
+              }}
+            />
             <Appbar.Action
               icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
-              onPress={() => navigation.navigate('Settings')}
+              onPress={() => {
+                navigation.navigate('Settings');
+                StatusBar.setBarStyle('dark-content', true);
+              }}
             />
           </Appbar.Header>
         )}
