@@ -21,7 +21,6 @@ type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 const Settings: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
   const insets = useSafeAreaInsets();
-
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const {setListHasRead} = useContext(ReadhubnCtx);
