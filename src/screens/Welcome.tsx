@@ -8,7 +8,6 @@ const Welcome: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
   return (
     <View style={[styles.root, {backgroundColor: paperColor.accent}]}>
-      {/* <FocusAwareStatusBar barStyle="light-content" /> */}
       <Image source={require('.././assets/Splash/bootsplash.png')} style={styles.image} />
     </View>
   );

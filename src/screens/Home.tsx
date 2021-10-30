@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {ActivityIndicator, ListRenderItem, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
+import RNBootSplash from 'react-native-bootsplash';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
@@ -156,6 +157,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (topics.length > 0 && topics.length <= 20 && tabRef.current?.getFocusedTab() === 'Topics') {
       Vibration.vibrate([0, 45, 40, 40]);
+      RNBootSplash.hide({fade: true});
     }
   }, [topics]);
 

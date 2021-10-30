@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {Provider as PaperProvider, Text, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import RNBootSplash from 'react-native-bootsplash';
+// import RNBootSplash from 'react-native-bootsplash';
 import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView} from '@gorhom/bottom-sheet';
 import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -52,7 +52,7 @@ const App: React.FC = () => {
       onReady={() =>
         setTimeout(() => {
           initListHasRead();
-          RNBootSplash.hide({fade: true});
+          // RNBootSplash.hide({fade: true});
         }, 200)
       }>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -135,6 +135,7 @@ const App: React.FC = () => {
           component={Welcome}
           options={{
             title: '欢迎',
+            headerTintColor: paperColor.text,
             headerTransparent: true,
             headerMode: 'screen',
             ...TransitionPresets.ModalSlideFromBottomIOS,
