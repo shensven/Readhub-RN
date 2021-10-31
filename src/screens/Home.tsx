@@ -22,9 +22,9 @@ import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import appAxios from '../utils/appAxios';
 import Loading from './components/Loading/Loading';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import {NewsFeed, TechnewsFeed, TopicsFeed} from '../utils/type';
 import {ReadhubnCtx} from '../utils/readhubnContext';
-import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 
 type StackParamList = {
   Search: undefined;
