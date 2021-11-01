@@ -6491,10 +6491,10 @@ react-native-collapsible-tab-view@4.3.0:
   dependencies:
     use-deep-compare "^1.1.0"
 
-react-native-device-info@8.4.3:
-  version "8.4.3"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.3.tgz#b2e9ade45867ae9526f1a54d0c83d33a24ac7680"
-  integrity sha512-1MOMBpLNjeaLEjL3lNAAmgisdcGekZJxNBp0F9OuA0EzBtH52mBLxFl+g7wyenVlibbUZIxngWDtlhVwLswoWQ==
+react-native-device-info@8.4.4:
+  version "8.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.4.tgz#afd27e72de5e91b0d97c3c3b7f55c36c2c4af0f7"
+  integrity sha512-poTzcGYTodYdHIzstaQnl2ftsqg2G4ApRv7tG/Omhux3WlMyjlaXXSsIngAd354QyN4XRgOlQsev0eOUzGtu/Q==
 
 react-native-flipper@0.117.0:
   version "0.117.0"
