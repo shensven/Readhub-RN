@@ -21,7 +21,7 @@
 - 项目完全使用 [React Native](https://reactnative.dev) 编写
 - 项目的构建产物不收集您的任何隐私，且不夹杂任何私货
 - 项目使用 [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) 保持依赖在同一个大版本下始终最新
-- 项目的 Android 版本完全使用 [Github Workflow](https://github.com/shensven/Readhubn/actions) 进行单元测试和持续集成
+- 项目的 Android 版本完全使用 [Github Workflow](https://github.com/shensven/Readhubn/actions) 进行测试和持续集成
 - 项目启用了 [Hermes](https://hermesengine.dev)，因此推荐使用 [Flipper](https://fbflipper.com) 进行调试
 - 项目使用了 [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated)，一个 C++ 编写的高性能动画组件
 

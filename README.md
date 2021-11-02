@@ -21,7 +21,7 @@ English | [简体中文](./README-zh-cn.md)
 - The project is written entirely in [React Native](https://reactnative.dev)
 - The build product of the project does NOT collect any of your privacy, and does NOT contain any mix private goods
 - The project use [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to keep dependencies up to date under the same major version
-- The Android part of the project uses [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for unit testing and continuous integration
+- The Android part of the project uses [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for testing and continuous integration
 - The project has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
 - The project uses [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated), a high-performance animation component written in C++
 
