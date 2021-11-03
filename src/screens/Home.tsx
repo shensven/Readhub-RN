@@ -166,20 +166,35 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    if (topics.length > 0 && topics.length <= 20 && tabRef.current?.getFocusedTab() === 'Topics') {
+    if (
+      Platform.OS === 'android' &&
+      tabRef.current?.getFocusedTab() === 'Topics' &&
+      topics.length > 0 &&
+      topics.length <= 20
+    ) {
       Vibration.vibrate([0, 45, 40, 40]);
-      RNBootSplash.hide({fade: true});
     }
+    RNBootSplash.hide({fade: true});
   }, [topics]);
 
   useEffect(() => {
-    if (news.length > 0 && news.length <= 20 && tabRef.current?.getFocusedTab() === 'News') {
+    if (
+      Platform.OS === 'android' &&
+      tabRef.current?.getFocusedTab() === 'News' &&
+      news.length > 0 &&
+      news.length <= 20
+    ) {
       Vibration.vibrate([0, 45, 40, 40]);
     }
   }, [news]);
 
   useEffect(() => {
-    if (technews.length > 0 && technews.length <= 20 && tabRef.current?.getFocusedTab() === 'Tech') {
+    if (
+      Platform.OS === 'android' &&
+      tabRef.current?.getFocusedTab() === 'Tech' &&
+      technews.length > 0 &&
+      technews.length <= 20
+    ) {
       Vibration.vibrate([0, 45, 40, 40]);
     }
   }, [technews]);
