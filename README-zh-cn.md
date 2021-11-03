@@ -51,7 +51,7 @@ yarn install
 cd ios && pod install
 ```
 
-### 真机运行 & 模拟器运行
+### 模拟器运行
 
 ```sh
 yarn react-native run-android
@@ -59,6 +59,16 @@ yarn react-native run-android
 
 ```sh
 yarn react-native run-ios
+```
+
+### 真机运行
+
+```sh
+yarn react-native run-android
+```
+
+```sh
+yarn react-native run-ios --device
 ```
 
 ### 调试

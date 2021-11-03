@@ -51,7 +51,7 @@ yarn install
 cd ios && pod install
 ```
 
-### RUNNING ON DEVICE & SIMULATOR
+### RUNNING ON SIMULATOR
 
 ```sh
 yarn react-native run-android
@@ -59,6 +59,16 @@ yarn react-native run-android
 
 ```sh
 yarn react-native run-ios
+```
+
+### RUNNING ON DEVICE
+
+```sh
+yarn react-native run-android
+```
+
+```sh
+yarn react-native run-ios --device
 ```
 
 ### DEBUGGING
