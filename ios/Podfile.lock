@@ -296,7 +296,7 @@ PODS:
     - glog
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-flipper (0.117.0):
+  - react-native-flipper (0.118.0):
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
@@ -633,7 +633,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 8c0517dee5e8c70cd6c3066f20213ff7ce54f176
   React-logger: bfddd3418dc1d45b77b822958f3e31422e2c179b
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
-  react-native-flipper: cd9eabd8917104c1bbdca2621717cdca3b2addef
+  react-native-flipper: 5830e729e7d902021a0ade8f24ca10ab536de8f1
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: fcac6090a80e3d967791b4c7f1b1a017f9d4a398
   React-RCTActionSheet: caf5913d9f9e605f5467206cf9d1caa6d47d7ad6
