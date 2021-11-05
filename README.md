@@ -36,10 +36,11 @@ English | [简体中文](./README-zh-cn.md)
 - [Node 12](https://nodejs.org) or higher, [nvm](https://github.com/nvm-sh/nvm) is recommended for installation
 - The [yarn](https://yarnpkg.com/getting-started/install) package manager
 - [Watchman](https://formulae.brew.sh/formula/watchman)
-- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) or higher, [JDK 11](https://formulae.brew.sh/formula/openjdk@11) recommended
-- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms), recommended for installation via [android studio](https://developer.android.com/studio)
 - [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) or higher, [JDK 11](https://formulae.brew.sh/formula/openjdk@11) recommended
+- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms), recommended for installation via [android studio](https://developer.android.com/studio)
+- [Android SDK Build-Tools 30.0.2](https://developer.android.com/studio/releases/build-tools), recommended for installation via [android studio](https://developer.android.com/studio)
 
 ### GET STARTED
 
@@ -54,21 +55,21 @@ cd ios && pod install
 ### RUNNING ON SIMULATOR
 
 ```sh
-yarn react-native run-android
+yarn react-native run-ios
 ```
 
 ```sh
-yarn react-native run-ios
+yarn react-native run-android
 ```
 
 ### RUNNING ON DEVICE
 
 ```sh
-yarn react-native run-android
+yarn react-native run-ios --device
 ```
 
 ```sh
-yarn react-native run-ios --device
+yarn react-native run-android
 ```
 
 ### DEBUGGING

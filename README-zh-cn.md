@@ -36,10 +36,11 @@
 - [Node 12](https://nodejs.org) 或更高版本，推荐使用 [nvm](https://github.com/nvm-sh/nvm) 进行安装
 - [yarn](https://yarnpkg.com/getting-started/install) 包管理器
 - [Watchman](https://formulae.brew.sh/formula/watchman)
-- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) 或更高版本，推荐安装 [JDK 11](https://formulae.brew.sh/formula/openjdk@11)
-- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
 - [Xcode 10](https://developer.apple.com/xcode/resources) 或更高版本
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
+- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) 或更高版本，推荐安装 [JDK 11](https://formulae.brew.sh/formula/openjdk@11)
+- [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
+- [Android SDK Build-Tools 30.0.2](https://developer.android.com/studio/releases/build-tools)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
 
 ### 项目初始化
 
@@ -54,21 +55,21 @@ cd ios && pod install
 ### 模拟器运行
 
 ```sh
-yarn react-native run-android
+yarn react-native run-ios
 ```
 
 ```sh
-yarn react-native run-ios
+yarn react-native run-android
 ```
 
 ### 真机运行
 
 ```sh
-yarn react-native run-android
+yarn react-native run-ios --device
 ```
 
 ```sh
-yarn react-native run-ios --device
+yarn react-native run-android
 ```
 
 ### 调试
