@@ -4,6 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid, View} from 'react-native';
 import {List, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ReadhubnCtx} from '../utils/readhubnContext';
@@ -102,13 +103,16 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <FlatList
-      data={itemData}
-      renderItem={renderCard}
-      keyExtractor={(item, index) => index.toString()}
-      ListFooterComponent={() => <View />}
-      ListFooterComponentStyle={{height: insets.bottom}}
-    />
+    <>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <FlatList
+        data={itemData}
+        renderItem={renderCard}
+        keyExtractor={(item, index) => index.toString()}
+        ListFooterComponent={() => <View />}
+        ListFooterComponentStyle={{height: insets.bottom}}
+      />
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
@@ -57,6 +58,7 @@ const DetailNews: React.FC = () => {
     <ScrollView
       scrollIndicatorInsets={{right: 1}}
       contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
       <Text selectable={true} style={styles.title}>
         {title}
       </Text>

@@ -1,6 +1,7 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, useWindowDimensions, StyleSheet, ScrollView, StatusBar} from 'react-native';
+import {View, useWindowDimensions, StyleSheet, ScrollView} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import RenderHtml from 'react-native-render-html';
@@ -48,7 +49,7 @@ const Instant: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 16}]}>
-      <StatusBar barStyle="light-content" />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="transparent" />
       <Text style={{color: paperColor.textAccent}}>来源{' ' + instant.siteName}</Text>
       <View style={[styles.header_divider, {backgroundColor: paperColor.ripple}]} />
       <Text style={styles.title}>{instant.title}</Text>

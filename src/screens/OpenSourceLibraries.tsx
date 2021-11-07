@@ -2,6 +2,7 @@ import React from 'react';
 import {View, FlatList, StyleSheet, Linking} from 'react-native';
 import {List, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface PackageDetail {
@@ -52,13 +53,16 @@ const OpenSourceLibraries: React.FC = () => {
   };
 
   return (
-    <FlatList
-      data={openSourceLibrariesArr}
-      renderItem={renderTouchableRipple}
-      keyExtractor={(item, index) => index.toString()}
-      ListFooterComponent={() => <View />}
-      ListFooterComponentStyle={{height: insets.bottom}}
-    />
+    <>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <FlatList
+        data={openSourceLibrariesArr}
+        renderItem={renderTouchableRipple}
+        keyExtractor={(item, index) => index.toString()}
+        ListFooterComponent={() => <View />}
+        ListFooterComponentStyle={{height: insets.bottom}}
+      />
+    </>
   );
 };
 

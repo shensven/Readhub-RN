@@ -5,6 +5,8 @@ import {RouteProp, useIsFocused, useNavigation, useRoute} from '@react-navigatio
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Loading from './components/Loading/Loading';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
@@ -12,7 +14,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 import appAxios from '../utils/appAxios';
 import {Detail, NewsArray, Topics} from '../utils/type';
-import Loading from './components/Loading/Loading';
 
 // const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
@@ -93,6 +94,7 @@ const DetailTopic: React.FC = () => {
           <ScrollView
             scrollIndicatorInsets={{right: 1}}
             contentContainerStyle={[styles.root, {paddingBottom: insets.bottom + 24}]}>
+            <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
             <Text selectable={true} style={styles.title}>
               {detail.title}
             </Text>
@@ -210,6 +212,7 @@ const DetailTopic: React.FC = () => {
     default:
       return (
         <View style={styles.loading}>
+          <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
           <Loading />
         </View>
       );

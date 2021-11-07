@@ -55,7 +55,6 @@ const App: React.FC = () => {
           // RNBootSplash.hide({fade: true});
         }, 200)
       }>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
       <Stack.Navigator
         detachInactiveScreens={!__DEV__}
         initialRouteName="Home"

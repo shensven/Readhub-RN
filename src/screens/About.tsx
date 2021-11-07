@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, StyleSheet, PixelRatio, useWindowDimensions} from 'react-native';
 import {Text, useTheme as usePaperTheme} from 'react-native-paper';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
 
@@ -14,6 +15,7 @@ const About: React.FC = () => {
 
   return (
     <View style={styles.root}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
       <View style={styles.top}>
         {PixelRatio.get() === 1 && (
           <Image source={require('../assets/AppIcon/AppIcon60.png')} style={styles.app_logo} />

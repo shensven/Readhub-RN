@@ -10,7 +10,7 @@ interface FocusAwareStatusBarProps {
 
 const FocusAwareStatusBar: React.FC<FocusAwareStatusBarProps> = (props: any) => {
   const isFocused = useIsFocused();
-  return isFocused ? <StatusBar {...props} /> : null;
+  return isFocused ? <StatusBar {...props} backgroundColor="transparent" /> : null;
 };
 
 export default FocusAwareStatusBar;

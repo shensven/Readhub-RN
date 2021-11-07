@@ -5,11 +5,12 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {IconButton, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FocusAwareStatusBar from './components/FocusAwareStatusBar/FocusAwareStatusBar';
+import Loading from './components/Loading/Loading';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import {ReadhubnCtx} from '../utils/readhubnContext';
 import {SearchReault} from '../utils/type';
-import Loading from './components/Loading/Loading';
 
 type StackParamList = {
   Search: undefined;
@@ -159,37 +160,43 @@ const Search: React.FC = () => {
 
   if (searchResult.length === 0) {
     return (
-      <FlatList
-        data={suggest}
-        keyExtractor={(item, index: number) => index.toString()}
-        renderItem={renderSuggestList}
-        ListHeaderComponent={() => <View />}
-        ListHeaderComponentStyle={styles.suggest_list_header}
-        ListEmptyComponent={() =>
-          hasLoading ? (
-            <View style={styles.suggest_list_empty}>
-              <Loading />
-            </View>
-          ) : null
-        }
-        ItemSeparatorComponent={() => <View style={styles.suggest_list_separator} />}
-        showsVerticalScrollIndicator={false}
-      />
+      <>
+        <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
+        <FlatList
+          data={suggest}
+          keyExtractor={(item, index: number) => index.toString()}
+          renderItem={renderSuggestList}
+          ListHeaderComponent={() => <View />}
+          ListHeaderComponentStyle={styles.suggest_list_header}
+          ListEmptyComponent={() =>
+            hasLoading ? (
+              <View style={styles.suggest_list_empty}>
+                <Loading />
+              </View>
+            ) : null
+          }
+          ItemSeparatorComponent={() => <View style={styles.suggest_list_separator} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </>
     );
   }
 
   return (
-    <FlatList
-      data={searchResult}
-      keyExtractor={(item, index: number) => index.toString()}
-      renderItem={renderCard}
-      ListHeaderComponent={() => <View />}
-      ListHeaderComponentStyle={styles.flatlist_header}
-      ListFooterComponent={() => <Loading />}
-      ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
-      ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
-      onEndReached={() => goNextSearch()}
-    />
+    <>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <FlatList
+        data={searchResult}
+        keyExtractor={(item, index: number) => index.toString()}
+        renderItem={renderCard}
+        ListHeaderComponent={() => <View />}
+        ListHeaderComponentStyle={styles.flatlist_header}
+        ListFooterComponent={() => <Loading />}
+        ListFooterComponentStyle={[styles.flatlist_footer, {marginBottom: 16 + insets.bottom}]}
+        ItemSeparatorComponent={() => <View style={styles.flatlist_separator} />}
+        onEndReached={() => goNextSearch()}
+      />
+    </>
   );
 };
 
