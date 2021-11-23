@@ -1759,10 +1759,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-native@0.65.6":
-  version "0.65.6"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.65.6.tgz#5149f078ae6483dfd6e93f5fd3806be227a6ac2f"
-  integrity sha512-4LKqj82zFWT72udZTWnT8fdfP3jiob1FcqaLdV9muvxSTLPCmRGkZRGKUpkGY5H1hn18Dl9Ck4PtsZ+Anl2F3w==
+"@types/react-native@0.66.5":
+  version "0.66.5"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.66.5.tgz#a9bb2fdf6355c4a4426904eae95077d1a462f5c6"
+  integrity sha512-hTLfKfepd+A+jUpgj+OhHtW7UlIvhyHyQ4mOCnRfEjhxq4PGvspETIHIcTV2DEfnWNX3Gi9Q0gGINrU8AG7YeA==
   dependencies:
     "@types/react" "*"
 
