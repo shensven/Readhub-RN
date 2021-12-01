@@ -23,6 +23,9 @@ const About: React.FC = () => {
         {PixelRatio.get() === 2 && (
           <Image source={require('../assets/AppIcon/AppIcon120.png')} style={styles.app_logo} />
         )}
+        {PixelRatio.get() === 2.625 && (
+          <Image source={require('../assets/AppIcon/AppIcon158.png')} style={styles.app_logo} />
+        )}
         {PixelRatio.get() === 2.75 && (
           <Image source={require('../assets/AppIcon/AppIcon165.png')} style={styles.app_logo} />
         )}
@@ -36,7 +39,7 @@ const About: React.FC = () => {
       </View>
       <View style={[styles.bottom, {marginTop: windowHeight / 2, marginBottom: insets.bottom + 24}]}>
         {/* <Text style={styles.description}>{PixelRatio.get()}</Text> */}
-        <Text style={[styles.description, {color: paperColor.textAccent}]}>Made with ❤️ in Kunming by GenSven</Text>
+        <Text style={[styles.description, {color: paperColor.textAccent}]}>Made with ❤️ in Kunming by SvenFE</Text>
         <Text style={[styles.description, {color: paperColor.textAccent}]}>Thanks to readhub.cn</Text>
         <Text style={[styles.description, {color: paperColor.textAccent}]}>Powered by React Native</Text>
       </View>
