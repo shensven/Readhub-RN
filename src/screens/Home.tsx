@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {ActivityIndicator, ListRenderItem, Platform, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
-import RNBootSplash from 'react-native-bootsplash';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CollapsibleRef, MaterialTabBar, Tabs} from 'react-native-collapsible-tab-view';
@@ -141,6 +140,9 @@ const Home: React.FC = () => {
     setTopicLastCursor(undefined);
     getTopics();
     setRefreshing(false);
+    if (Platform.OS === 'android') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
   };
 
   const handleNewsRefresh = () => {
@@ -148,6 +150,9 @@ const Home: React.FC = () => {
     setNewsLastCursor(undefined);
     getNews();
     setRefreshing(false);
+    if (Platform.OS === 'android') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
   };
 
   const handleTechnewsRefresh = () => {
@@ -155,44 +160,10 @@ const Home: React.FC = () => {
     setTechnewsLastCursor(undefined);
     getTechnews();
     setRefreshing(false);
+    if (Platform.OS === 'android') {
+      Vibration.vibrate([0, 45, 40, 40]);
+    }
   };
-
-  useEffect(() => {
-    // console.log('topics');
-    if (
-      Platform.OS === 'android' &&
-      tabRef.current?.getFocusedTab() === 'Topics' &&
-      topics.length > 0 &&
-      topics.length <= 20
-    ) {
-      Vibration.vibrate([0, 45, 40, 40]);
-    }
-    RNBootSplash.hide({fade: true});
-  }, [topics]);
-
-  useEffect(() => {
-    // console.log('news');
-    if (
-      Platform.OS === 'android' &&
-      tabRef.current?.getFocusedTab() === 'News' &&
-      news.length > 0 &&
-      news.length <= 20
-    ) {
-      Vibration.vibrate([0, 45, 40, 40]);
-    }
-  }, [news]);
-
-  useEffect(() => {
-    // console.log('technews');
-    if (
-      Platform.OS === 'android' &&
-      tabRef.current?.getFocusedTab() === 'Tech' &&
-      technews.length > 0 &&
-      technews.length <= 20
-    ) {
-      Vibration.vibrate([0, 45, 40, 40]);
-    }
-  }, [technews]);
 
   //----------------------------------------------------------------------------
 

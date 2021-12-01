@@ -1,7 +1,8 @@
 import React, {useContext, useMemo} from 'react';
-import {Platform, StatusBar, StyleSheet, ToastAndroid, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, ToastAndroid, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import RNBootSplash from 'react-native-bootsplash';
 import {Provider as PaperProvider, Text, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import RNBootSplash from 'react-native-bootsplash';
@@ -52,7 +53,7 @@ const App: React.FC = () => {
       onReady={() =>
         setTimeout(() => {
           initListHasRead();
-          // RNBootSplash.hide({fade: true});
+          RNBootSplash.hide({fade: true});
         }, 200)
       }>
       <Stack.Navigator
