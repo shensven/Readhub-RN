@@ -1344,10 +1344,10 @@
     css-to-react-native "^3.0.0"
     csstype "^3.0.8"
 
-"@native-html/transient-render-engine@11.2.1":
-  version "11.2.1"
-  resolved "https://registry.yarnpkg.com/@native-html/transient-render-engine/-/transient-render-engine-11.2.1.tgz#2fc9d5886289bc98c2c6bd2601bba0d5ffcde36a"
-  integrity sha512-j4jg4izTSmvqpKoYzqkTT2BTEd+J+Jmtvc2IUnv8YG68cnfGGjz45BmH+lTgYuMJi5T4l0IP/0+4/JVsfqQjEQ==
+"@native-html/transient-render-engine@11.2.2":
+  version "11.2.2"
+  resolved "https://registry.yarnpkg.com/@native-html/transient-render-engine/-/transient-render-engine-11.2.2.tgz#e8c20ae7feabc013cf1c9a08908ed92713ae4577"
+  integrity sha512-z0LgQStGJf4gCIeuD8oJiPbk+sUEQ9FOzHlDWwK+uVam+1Q5mmh6PqblCdTCP3IRGBtPLzMM0VZ9njm1TEvb8Q==
   dependencies:
     "@native-html/css-processor" "1.11.0"
     "@types/ramda" "^0.27.44"
@@ -6523,14 +6523,14 @@ react-native-redash@^16.1.1:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
-react-native-render-html@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.3.0.tgz#2b2401ce9c4383960656c98863b5732313f12acb"
-  integrity sha512-ix/riwS+fGGIFe8w710x747aVSbzCPN56tQVKGo3jZjuh8grPaHYs0kW7up74DXJl9YdqP2hEM98fSu+a02bTQ==
+react-native-render-html@6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.3.1.tgz#04675c9f77e1a6f7e17ccea5880ff24962ad58c2"
+  integrity sha512-vEL3Q2JaxX1RtYw9R68qKUVCkSnjerms8ZrSNAnKbDTcm+PFrCCm8ko96GxZpmqt3t3I8Apkcz1zgEWBiXC8sg==
   dependencies:
     "@jsamr/counter-style" "^2.0.1"
     "@jsamr/react-native-li" "^2.3.0"
-    "@native-html/transient-render-engine" "11.2.1"
+    "@native-html/transient-render-engine" "11.2.2"
     "@types/ramda" "^0.27.40"
     "@types/urijs" "^1.19.15"
     prop-types "^15.5.7"
