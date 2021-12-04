@@ -10,7 +10,7 @@ import {BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomS
 import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Clipboard from '@react-native-clipboard/clipboard';
-import {ReadhubnCtx, ReadhubProvider} from './src/utils/readhubnContext';
+import {ReadhubnCtx, ReadhubnProvider} from './src/utils/readhubnContext';
 import {paperLight} from './src/theme/default';
 import Home from './src/screens/Home';
 // import HomeHeaderRight from './src/screens/components/HomeHeader/HomeHeaderRight';
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
 });
 
 export default () => (
-  <ReadhubProvider>
+  <ReadhubnProvider>
     <SafeAreaProvider>
       <PaperProvider theme={paperLight}>
         <BottomSheetModalProvider>
@@ -235,5 +235,5 @@ export default () => (
         </BottomSheetModalProvider>
       </PaperProvider>
     </SafeAreaProvider>
-  </ReadhubProvider>
+  </ReadhubnProvider>
 );

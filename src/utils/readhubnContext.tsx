@@ -47,7 +47,7 @@ export const ReadhubnCtx = createContext<CtxType>({
   setShareURL: () => null,
 });
 
-export const ReadhubProvider: React.FC = props => {
+export const ReadhubnProvider: React.FC = props => {
   const [inputVal, setInputVal] = useState<string>('');
   const [suggestVal, setSuggestVal] = useState<SuggestItem[]>([]);
   const [searchResultVal, setSearchResultVal] = useState<SearchReault[]>([]);
