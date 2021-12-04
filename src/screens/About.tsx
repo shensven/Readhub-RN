@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   },
   app_name: {
     marginTop: 16,
+    fontWeight: 'bold',
   },
   app_ver: {
     fontSize: 10,
