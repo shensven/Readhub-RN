@@ -783,10 +783,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@gorhom/bottom-sheet@4.1.4":
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.1.4.tgz#35c401ee94ea7d7440eaf3fed98c044f221184fc"
-  integrity sha512-e8GXz96HfcSqWc+3CYzyTkb2xb3SgynK81K8Z0sd1ExXVMAC+FaLcWf8XRFL4pzJkqgQR+R3JEgHWOJSzwe4EQ==
+"@gorhom/bottom-sheet@4.1.5":
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.1.5.tgz#35341d45799de28082c380db6639537b04fa0b26"
+  integrity sha512-3F5P8jK3NXwT2lGwkAdkdLwDVHaRvMZalUTXjK6Ogf0Tki6idffJ3TNlQZlg8k6+OnXAx0+i80f4XaI+J4GFrA==
   dependencies:
     "@gorhom/portal" "^1.0.11"
     invariant "^2.2.4"
