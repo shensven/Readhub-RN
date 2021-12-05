@@ -101,3 +101,7 @@ yarn react-native generate-bootsplash src/assets/Splash/bootsplash.png \
   --assets-path=assets \
   --flavor=main
 ```
+
+## 许可证合规性
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FReadhubn.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FReadhubn?ref=badge_large)
