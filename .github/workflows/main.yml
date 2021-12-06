@@ -4,10 +4,9 @@ on:
   push:
     branches: [main]
 
-  workflow_dispatch:
-
 jobs:
   release:
+    if: ${{ github.repository_owner == 'shensven' }}
     runs-on: ubuntu-latest
     container: reactnativecommunity/react-native-android
     steps:
