@@ -346,7 +346,7 @@ const Home: React.FC = () => {
         <Tabs.Tab name="Topics" label="热门话题">
           <Tabs.FlatList
             data={topics}
-            keyExtractor={(item, index: number) => index.toString()}
+            keyExtractor={(item: TopicsFeed) => item.id}
             renderItem={renderCard}
             ListHeaderComponent={() => <TopicsHeader />}
             ListHeaderComponentStyle={styles.flatlist_header_root}
@@ -369,7 +369,7 @@ const Home: React.FC = () => {
         <Tabs.Tab name="News" label="科技动态">
           <Tabs.FlatList
             data={news}
-            keyExtractor={(item, index: number) => index.toString()}
+            keyExtractor={(item: NewsFeed) => item.id.toString()}
             renderItem={renderCard}
             ListHeaderComponent={() => <View />}
             ListHeaderComponentStyle={styles.flatlist_header_root}
@@ -392,7 +392,7 @@ const Home: React.FC = () => {
         <Tabs.Tab name="Tech" label="技术资讯">
           <Tabs.FlatList
             data={technews}
-            keyExtractor={(item, index: number) => index.toString()}
+            keyExtractor={(item: TechnewsFeed) => item.id.toString()}
             renderItem={renderCard}
             ListHeaderComponent={() => <View />}
             ListHeaderComponentStyle={styles.flatlist_header_root}

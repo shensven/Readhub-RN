@@ -108,7 +108,7 @@ const Settings: React.FC = () => {
       <FlatList
         data={itemData}
         renderItem={renderCard}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item: SettingsItem) => item.title}
         ListFooterComponent={() => <View />}
         ListFooterComponentStyle={{height: insets.bottom}}
       />

@@ -164,7 +164,7 @@ const Search: React.FC = () => {
         <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
         <FlatList
           data={suggest}
-          keyExtractor={(item, index: number) => index.toString()}
+          keyExtractor={(item: SuggestItem) => item.entityId}
           renderItem={renderSuggestList}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.suggest_list_header}
@@ -187,7 +187,7 @@ const Search: React.FC = () => {
       <FocusAwareStatusBar barStyle="dark-content" backgroundColor="transparent" />
       <FlatList
         data={searchResult}
-        keyExtractor={(item, index: number) => index.toString()}
+        keyExtractor={(item: SearchReault) => item.topicId}
         renderItem={renderCard}
         ListHeaderComponent={() => <View />}
         ListHeaderComponentStyle={styles.flatlist_header}

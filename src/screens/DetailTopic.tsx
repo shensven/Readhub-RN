@@ -150,8 +150,8 @@ const DetailTopic: React.FC = () => {
                   <Ionicons name="newspaper-outline" size={16} />
                   <Text style={styles.bottom_title_text}>媒体报道</Text>
                 </View>
-                {detail?.newsArray?.map((newsReporterItem: NewsArray, newsReporterIndex: number) => (
-                  <View key={newsReporterIndex} style={styles.bottom_item}>
+                {detail?.newsArray?.map((newsReporterItem: NewsArray) => (
+                  <View key={newsReporterItem.id} style={styles.bottom_item}>
                     <Text>・</Text>
                     <View style={styles.bottom_item_right}>
                       <TouchableOpacity
@@ -181,8 +181,8 @@ const DetailTopic: React.FC = () => {
                   <Ionicons name="time-outline" size={16} />
                   <Text style={styles.bottom_title_text}>相关事件</Text>
                 </View>
-                {detail?.timeline?.topics?.map((topicsItem: Topics, topicIndex: number) => (
-                  <View key={topicIndex} style={styles.bottom_item}>
+                {detail?.timeline?.topics?.map((topicsItem: Topics) => (
+                  <View key={topicsItem.id} style={styles.bottom_item}>
                     <Text>・</Text>
                     <View style={styles.bottom_item_right}>
                       <TouchableOpacity
