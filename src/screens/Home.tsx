@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {ActivityIndicator, ListRenderItem, Platform, RefreshControl, StyleSheet, Vibration, View} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -194,7 +194,7 @@ const Home: React.FC = () => {
 
   //----------------------------------------------------------------------------
 
-  const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = ({item}: {item: any}) => {
+  const renderCard: ListRenderItem<TopicsFeed | NewsFeed | TechnewsFeed> = useCallback(({item}: {item: any}) => {
     const goDetail = () => {
       switch (tabRef.current?.getFocusedTab()) {
         case 'Topics':
@@ -286,7 +286,7 @@ const Home: React.FC = () => {
         </View>
       </TouchableRipple>
     );
-  };
+  }, []);
 
   const TopicsHeader: React.FC = () => {
     if (topicsNewCount === 0) {

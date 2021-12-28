@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View, FlatList, StyleSheet, Linking} from 'react-native';
 import {List, Text, TouchableRipple, useTheme as usePaperTheme} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -30,7 +30,7 @@ const OpenSourceLibraries: React.FC = () => {
   const {colors: paperColor} = usePaperTheme();
   const insets = useSafeAreaInsets();
 
-  const renderTouchableRipple = ({item}: {item: TouchableRippleProps}) => {
+  const renderTouchableRipple = useCallback(({item}: {item: TouchableRippleProps}) => {
     return (
       <TouchableRipple
         rippleColor={paperColor.ripple}
@@ -50,7 +50,7 @@ const OpenSourceLibraries: React.FC = () => {
         />
       </TouchableRipple>
     );
-  };
+  }, []);
 
   return (
     <>

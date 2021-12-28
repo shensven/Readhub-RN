@@ -57,7 +57,7 @@ const App: React.FC = () => {
         }, 200)
       }>
       <Stack.Navigator
-        detachInactiveScreens={!__DEV__}
+        // detachInactiveScreens={!__DEV__}
         initialRouteName="Home"
         screenOptions={{
           headerTintColor: paperColor.blueText,

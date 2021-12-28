@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Alert, FlatList, Linking, Platform, StyleSheet, ToastAndroid, View} from 'react-native';
@@ -87,7 +87,7 @@ const Settings: React.FC = () => {
     },
   ];
 
-  const renderCard = ({item}: {item: SettingsItem}) => {
+  const renderCard = useCallback(({item}: {item: SettingsItem}) => {
     return (
       <TouchableRipple rippleColor={paperColor.ripple} onPress={item.onPress}>
         <List.Item
@@ -100,7 +100,7 @@ const Settings: React.FC = () => {
         />
       </TouchableRipple>
     );
-  };
+  }, []);
 
   return (
     <>
