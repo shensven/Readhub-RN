@@ -6456,10 +6456,10 @@ react-native-background-timer@2.4.1:
   resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-2.4.1.tgz#a3bc1cafa8c1e3aeefd0611de120298b67978a0f"
   integrity sha512-TE4Kiy7jUyv+hugxDxitzu38sW1NqjCk4uE5IgU2WevLv7sZacaBc6PZKOShNRPGirLl1NWkaG3LDEkdb9Um5g==
 
-react-native-bootsplash@3.2.6:
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-3.2.6.tgz#610e476b1156ab29817aa394d5bb64871c1f1f42"
-  integrity sha512-zNEXIe2K1A06J45QOAg+OBo3wIyId9lZXOwITUcwNR2bQEg/3CO6uvcRB7MLuy2ct54R1PlbADHDZK/Ozt7mfA==
+react-native-bootsplash@3.2.7:
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-3.2.7.tgz#c14a3314069105ae2cb08d07dff65de4dbad9827"
+  integrity sha512-jc46lBuKeZerdUndY0yJw2mIbvX0kMHpkKsayxqJfjCiMorklSPZt0dyvaM9KyebCVop54udMJAySbnZVCEvIQ==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.0.0"
