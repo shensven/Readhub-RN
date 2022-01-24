@@ -6543,10 +6543,10 @@ react-native-redash@^16.1.1:
     normalize-svg-path "^1.0.1"
     parse-svg-path "^0.1.2"
 
-react-native-render-html@6.3.3:
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.3.3.tgz#3519ee4a3fb9281f2f44014c1c350dade00a9cd1"
-  integrity sha512-tGZw+QbZKgcQNuhVHivfnKBdNLDk6ACBftZeUgBOGoXlmtAIBp7sYqCT11upV2zsGlbP2aVFv5B7EAQJJSOroA==
+react-native-render-html@6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-render-html/-/react-native-render-html-6.3.4.tgz#01684897bed2de84829e540a1dbb3a7bdf9d0e57"
+  integrity sha512-H2jSMzZjidE+Wo3qCWPUMU1nm98Vs2SGCvQCz/i6xf0P3Y9uVtG/b0sDbG/cYFir2mSYBYCIlS1Dv0WC1LjYig==
   dependencies:
     "@jsamr/counter-style" "^2.0.1"
     "@jsamr/react-native-li" "^2.3.0"
