@@ -1,0 +1,20 @@
+{
+  "extends": ["config:base"],
+  "baseBranches": ["next"],
+  "semanticCommits": "enabled",
+  "major": false,
+  "packageRules": [
+    {
+      "groupName": "dependencies",
+      "matchDepTypes": ["dependencies"],
+      "enabled": false,
+      "excludePackageNames": ["react", "react-native"]
+    },
+    {
+      "groupName": "devDependencies",
+      "matchDepTypes": ["devDependencies"],
+      "enabled": false,
+      "excludePackageNames": []
+    }
+  ]
+}
