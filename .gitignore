@@ -29,11 +29,6 @@ build/
 local.properties
 *.iml
 *.hprof
-android/app/private_key.pepk
-android/app/release.keystore
-android/app/release.keystore.asc
-android/app/output-GooglePlayConsole.zip
-android/app/output-AppGalleryConnect.zip
 
 # node.js
 #
