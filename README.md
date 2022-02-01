@@ -38,7 +38,7 @@ English | [简体中文](./README-zh-cn.md)
 - [Watchman](https://formulae.brew.sh/formula/watchman)
 - [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
-- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) or higher, [JDK 11](https://formulae.brew.sh/formula/openjdk@11) recommended
+- [JDK 11](https://formulae.brew.sh/formula/openjdk@11) or higher
 - [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms), recommended for installation via [android studio](https://developer.android.com/studio)
 - [Android SDK Build-Tools 30.0.2](https://developer.android.com/studio/releases/build-tools), recommended for installation via [android studio](https://developer.android.com/studio)
 

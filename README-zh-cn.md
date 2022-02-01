@@ -38,7 +38,7 @@
 - [Watchman](https://formulae.brew.sh/formula/watchman)
 - [Xcode 10](https://developer.apple.com/xcode/resources) 或更高版本
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
-- [JDK 8](https://formulae.brew.sh/formula/openjdk@8) 或更高版本，推荐安装 [JDK 11](https://formulae.brew.sh/formula/openjdk@11)
+- [JDK 11](https://formulae.brew.sh/formula/openjdk@11) 或更高版本
 - [Android SDK Platform 30](https://developer.android.com/studio/releases/platforms)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
 - [Android SDK Build-Tools 30.0.2](https://developer.android.com/studio/releases/build-tools)，推荐通过 [android studio](https://developer.android.com/studio) 进行安装
 
