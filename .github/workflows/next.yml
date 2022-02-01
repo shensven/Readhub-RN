@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+    branches: [next]
+  pull_request:
+    branches: [next]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    container: reactnativecommunity/react-native-android
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Envinfo
+        run: npx envinfo
+
+      - name: Install yarn dependencies
+        run: yarn install
+
+      - name: Gradlew test
+        run: |
+          cd android && chmod +x gradlew 
+          ./gradlew test
+
+      - name: Jest
+        run: yarn jest
