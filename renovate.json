@@ -10,6 +10,7 @@
       "enabled": false,
       "excludePackageNames": [
         "@react-navigation/native",
+        "@react-navigation/native-stack",
         "react",
         "react-native",
         "react-native-safe-area-context",
