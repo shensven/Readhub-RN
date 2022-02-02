@@ -22,7 +22,11 @@
       "groupName": "devDependencies",
       "matchDepTypes": ["devDependencies"],
       "enabled": false,
-      "excludePackageNames": []
+      "excludePackageNames": [
+        "@types/jest",
+        "@types/react-native",
+        "@types/react-test-renderer"
+      ]
     }
   ]
 }
