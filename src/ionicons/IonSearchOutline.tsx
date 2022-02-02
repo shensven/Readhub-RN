@@ -10,12 +10,7 @@ const IonSearchOutline: React.FC<Props> = props => {
   const {size, color} = props;
 
   return (
-    <Svg
-      width={size}
-      height={size}
-      color={color}
-      viewBox="0 0 512 512"
-      {...props}>
+    <Svg width={size} height={size} color={color} viewBox="0 0 512 512" {...props}>
       <Path
         d="M221.09 64a157.09 157.09 0 1 0 157.09 157.09A157.1 157.1 0 0 0 221.09 64z"
         fill="none"
