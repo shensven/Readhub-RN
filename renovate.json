@@ -8,7 +8,13 @@
       "groupName": "dependencies",
       "matchDepTypes": ["dependencies"],
       "enabled": false,
-      "excludePackageNames": ["react", "react-native"]
+      "excludePackageNames": [
+        "@react-navigation/native",
+        "react",
+        "react-native",
+        "react-native-safe-area-context",
+        "react-native-screens"
+      ]
     },
     {
       "groupName": "devDependencies",
