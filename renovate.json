@@ -13,6 +13,7 @@
         "@react-navigation/native-stack",
         "react",
         "react-native",
+        "react-native-paper",
         "react-native-safe-area-context",
         "react-native-screens",
         "react-native-svg"
