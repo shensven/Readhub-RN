@@ -8,14 +8,12 @@ const Stack = createNativeStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer
-      onReady={() => console.log('NavigationContainer Ready')}>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Readhub Native"
           component={Home}
           options={{
-            headerTitleAlign: 'left',
             headerRight: () => <HomeRight />,
           }}
         />
