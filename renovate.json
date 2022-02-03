@@ -11,7 +11,6 @@
       "excludePackageNames": [
         "@react-native-masked-view/masked-view",
         "@react-navigation/native",
-        "@react-navigation/native-stack",
         "@react-navigation/stack",
         "react-native-gesture-handler",
         "react-native-paper",
