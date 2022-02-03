@@ -32,7 +32,6 @@
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 - [JDK 11](https://formulae.brew.sh/formula/openjdk@11) or higher
 - Android SDK
-
   - Build-Tools `30.0.2`
   - NDK `21.4.7075529`
 
