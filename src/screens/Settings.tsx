@@ -10,6 +10,14 @@ import IonShapesOutline from '../icons/IonShapesOutline';
 import IonChevronForwardOutline from '../icons/IonChevronForwardOutline';
 import IonOpenOutline from '../icons/IonOpenOutline';
 
+interface SettingsItem {
+  title: string;
+  description?: string;
+  leftIcon: React.ReactElement;
+  rightIcon: React.ReactElement;
+  onPress: () => void;
+}
+
 const Settings: React.FC = () => {
   const data = [
     {
@@ -51,7 +59,7 @@ const Settings: React.FC = () => {
     },
   ];
 
-  const renderCard = ({item}) => {
+  const renderCard = ({item}: {item: SettingsItem}) => {
     return (
       <TouchableRipple onPress={item.onPress} style={styles.item}>
         <List.Item
