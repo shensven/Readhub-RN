@@ -34,8 +34,8 @@ const App: React.FC = () => {
           name="Search"
           component={Search}
           options={{
-            headerTitle: '',
-            headerBackTitle: 'Back',
+            headerTitle: '搜索',
+            headerBackTitle: '返回',
           }}
         />
         <Stack.Screen
@@ -43,7 +43,7 @@ const App: React.FC = () => {
           component={Settings}
           options={{
             headerTitle: '设置',
-            headerBackTitle: 'Back',
+            headerBackTitle: '返回',
           }}
         />
       </Stack.Navigator>
