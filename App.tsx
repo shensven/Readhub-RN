@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
 import HomeRight from './src/headers/HomeRight';
@@ -30,6 +30,7 @@ const App: React.FC = () => {
           },
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
+          headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
         <Stack.Screen
           name="ReadhubNative"
