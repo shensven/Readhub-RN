@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E8F6FE',
   },
   image: {
-    marginTop: screenHeight / 2 - 192,
+    marginTop: screenHeight / 2 - 96,
     width: 192,
     height: 192,
   },

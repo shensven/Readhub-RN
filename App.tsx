@@ -28,6 +28,9 @@ const App: React.FC = () => {
             elevation: 0, // Android
             shadowOpacity: 0, // iOS
           },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
@@ -62,6 +65,9 @@ const App: React.FC = () => {
           component={Welcome}
           options={{
             headerTitle: '欢迎',
+            headerTitleStyle: {
+              display: 'none',
+            },
             headerMode: 'screen',
             headerTransparent: true,
             ...TransitionPresets.ModalSlideFromBottomIOS,
