@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    marginTop: screenHeight / 2 - 256,
-    width: 256,
-    height: 256,
+    marginTop: screenHeight / 2 - 192,
+    width: 192,
+    height: 192,
   },
 });
 

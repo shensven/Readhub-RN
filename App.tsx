@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
 import HomeRight from './src/headers/HomeRight';
 import Search from './src/screens/Search';
@@ -14,7 +15,12 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onReady={() =>
+        RNBootSplash.hide({
+          fade: true,
+        })
+      }>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
