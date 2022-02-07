@@ -62,6 +62,8 @@ const App: React.FC = () => {
           component={Welcome}
           options={{
             headerTitle: '欢迎',
+            headerMode: 'screen',
+            headerTransparent: true,
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
