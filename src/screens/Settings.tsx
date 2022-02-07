@@ -1,14 +1,24 @@
-import {FlatList, StyleSheet} from 'react-native';
 import React from 'react';
+import {FlatList, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 import {List, TouchableRipple} from 'react-native-paper';
-import IonPizzaOutline from '../icons/IonPizzaOutline';
-import IonTrashOutline from '../icons/IonTrashOutline';
-import IonShieldOutline from '../icons/IonShieldOutline';
-import IonCodeSlashOutline from '../icons/IonCodeSlashOutline';
-import IonBugOutline from '../icons/IonBugOutline';
-import IonShapesOutline from '../icons/IonShapesOutline';
-import IonChevronForwardOutline from '../icons/IonChevronForwardOutline';
-import IonOpenOutline from '../icons/IonOpenOutline';
+import IcRoundAutoAwesome from '../icons/IcRoundAutoAwesome';
+import IcRoundDelete from '../icons/IcRoundDelete';
+import IcRoundShield from '../icons/IcRoundShield';
+import IcRoundCode from '../icons/IcRoundCode';
+import IcRoundBugReport from '../icons/IcRoundBugReport';
+import IcRoundArticle from '../icons/IcRoundArticle';
+import IcRoundChevronRight from '../icons/IcRoundChevronRight';
+import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
+
+type StackParamList = {
+  Welcome: undefined;
+  PrivacyPolicy: undefined;
+  OpenSourceLibraries: undefined;
+  About: undefined;
+};
+type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 interface SettingsItem {
   title: string;
@@ -19,43 +29,45 @@ interface SettingsItem {
 }
 
 const Settings: React.FC = () => {
+  const navigation = useNavigation<ScreenNavigationProp>();
+
   const data = [
     {
       title: '欢迎',
-      leftIcon: <IonPizzaOutline size={23} />,
-      rightIcon: <IonChevronForwardOutline size={20} />,
-      onPress: () => {},
+      leftIcon: <IcRoundAutoAwesome />,
+      rightIcon: <IcRoundChevronRight />,
+      onPress: () => navigation.navigate('Welcome'),
     },
     {
       title: '重置阅读进度',
-      leftIcon: <IonTrashOutline size={23} />,
-      rightIcon: <IonChevronForwardOutline size={20} />,
+      leftIcon: <IcRoundDelete />,
+      rightIcon: <IcRoundChevronRight />,
       onPress: () => {},
     },
     {
       title: '隐私政策',
-      leftIcon: <IonShieldOutline size={22} />,
-      rightIcon: <IonChevronForwardOutline size={20} />,
-      onPress: () => {},
+      leftIcon: <IcRoundShield />,
+      rightIcon: <IcRoundChevronRight />,
+      onPress: () => navigation.navigate('PrivacyPolicy'),
     },
     {
       title: '开源库',
-      leftIcon: <IonCodeSlashOutline size={22} />,
-      rightIcon: <IonChevronForwardOutline size={20} />,
-      onPress: () => {},
+      leftIcon: <IcRoundCode />,
+      rightIcon: <IcRoundChevronRight />,
+      onPress: () => navigation.navigate('OpenSourceLibraries'),
     },
     {
       title: '反馈',
-      leftIcon: <IonBugOutline size={23} />,
-      rightIcon: <IonOpenOutline size={16} />,
       description: 'https://github.com/shensven/Readhubn/issues',
+      leftIcon: <IcRoundBugReport />,
+      rightIcon: <IcRoundOpenInNew size={16} />,
       onPress: () => {},
     },
     {
       title: '关于',
-      leftIcon: <IonShapesOutline size={22} />,
-      rightIcon: <IonChevronForwardOutline size={20} />,
-      onPress: () => {},
+      leftIcon: <IcRoundArticle />,
+      rightIcon: <IcRoundChevronRight />,
+      onPress: () => navigation.navigate('About'),
     },
   ];
 

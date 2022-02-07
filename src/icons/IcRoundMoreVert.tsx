@@ -6,22 +6,21 @@ interface Props {
   color?: string;
 }
 
-const MdiDotsHorizontal: React.FC<Props> = props => {
+const IcRoundMoreVert: React.FC<Props> = props => {
   const {size, color} = props;
-
   return (
     <Svg width={size} height={size} color={color} viewBox="0 0 24 24" {...props}>
       <Path
-        d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2z"
+        d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2z"
         fill="currentColor"
       />
     </Svg>
   );
 };
 
-MdiDotsHorizontal.defaultProps = {
+IcRoundMoreVert.defaultProps = {
   size: 24,
   color: '#000',
 };
 
-export default MdiDotsHorizontal;
+export default IcRoundMoreVert;

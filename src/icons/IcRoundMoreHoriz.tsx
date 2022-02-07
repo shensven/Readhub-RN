@@ -6,21 +6,21 @@ interface Props {
   color?: string;
 }
 
-const MdiMagnify: React.FC<Props> = props => {
+const IcRoundMoreHoriz: React.FC<Props> = props => {
   const {size, color} = props;
-
   return (
     <Svg width={size} height={size} color={color} viewBox="0 0 24 24" {...props}>
       <Path
-        d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5l-1.5 1.5l-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5z"
+        d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2z"
         fill="currentColor"
       />
     </Svg>
   );
 };
-MdiMagnify.defaultProps = {
+
+IcRoundMoreHoriz.defaultProps = {
   size: 24,
   color: '#000',
 };
 
-export default MdiMagnify;
+export default IcRoundMoreHoriz;

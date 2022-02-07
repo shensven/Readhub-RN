@@ -3,9 +3,9 @@ import {Platform, StyleSheet, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
-import MdiMagnify from '../icons/MdiMagnify';
-import MdiDotsVertical from '../icons/MdiDotsVertical';
-import MdiDotsHorizontal from '../icons/MdiDotsHorizontal';
+import IcRoundSearch from '../icons/IcRoundSearch';
+import IcRoundMoreVert from '../icons/IcRoundMoreVert';
+import IcRoundMoreHoriz from '../icons/IcRoundMoreHoriz';
 
 type StackParamList = {
   Search: undefined;
@@ -18,9 +18,9 @@ const HomeRight: React.FC = () => {
 
   return (
     <View style={styles.root}>
-      <IconButton icon={() => <MdiMagnify />} onPress={() => navigation.navigate('Search')} />
+      <IconButton icon={() => <IcRoundSearch />} onPress={() => navigation.navigate('Search')} />
       <IconButton
-        icon={() => (Platform.OS === 'ios' ? <MdiDotsHorizontal /> : <MdiDotsVertical />)}
+        icon={() => (Platform.OS === 'ios' ? <IcRoundMoreHoriz /> : <IcRoundMoreVert />)}
         onPress={() => navigation.navigate('Settings')}
       />
     </View>

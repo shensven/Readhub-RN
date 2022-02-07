@@ -6,22 +6,21 @@ interface Props {
   color?: string;
 }
 
-const MdiDotsVertical: React.FC<Props> = props => {
+const IcRoundShield: React.FC<Props> = props => {
   const {size, color} = props;
-
   return (
     <Svg width={size} height={size} color={color} viewBox="0 0 24 24" {...props}>
       <Path
-        d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2z"
+        d="M11.3 2.26l-6 2.25C4.52 4.81 4 5.55 4 6.39v4.7c0 4.83 3.13 9.37 7.43 10.75c.37.12.77.12 1.14 0c4.3-1.38 7.43-5.91 7.43-10.75v-4.7a2 2 0 0 0-1.3-1.87l-6-2.25c-.45-.18-.95-.18-1.4-.01z"
         fill="currentColor"
       />
     </Svg>
   );
 };
 
-MdiDotsVertical.defaultProps = {
+IcRoundShield.defaultProps = {
   size: 24,
   color: '#000',
 };
 
-export default MdiDotsVertical;
+export default IcRoundShield;
