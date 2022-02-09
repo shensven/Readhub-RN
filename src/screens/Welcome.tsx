@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#E8F6FE',
   },
   image: {
     marginTop: screenHeight / 2 - 96,

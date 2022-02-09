@@ -70,6 +70,9 @@ const App: React.FC = () => {
             },
             headerMode: 'screen',
             headerTransparent: true,
+            cardStyle: {
+              backgroundColor: '#E8F6FE',
+            },
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
@@ -92,6 +95,9 @@ const App: React.FC = () => {
           component={About}
           options={{
             headerTitle: '关于',
+            cardStyle: {
+              backgroundColor: '#fff',
+            },
           }}
         />
       </Stack.Navigator>

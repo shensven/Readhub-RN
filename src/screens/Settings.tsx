@@ -1,8 +1,9 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, Linking, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {List, TouchableRipple} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {List, TouchableRipple, useTheme} from 'react-native-paper';
 import IcRoundAutoAwesome from '../icons/IcRoundAutoAwesome';
 import IcRoundDelete from '../icons/IcRoundDelete';
 import IcRoundShield from '../icons/IcRoundShield';
@@ -29,6 +30,8 @@ interface SettingsItem {
 }
 
 const Settings: React.FC = () => {
+  const insets = useSafeAreaInsets();
+  const {colors} = useTheme();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const data = [
@@ -61,7 +64,7 @@ const Settings: React.FC = () => {
       description: 'https://github.com/shensven/Readhubn/issues',
       leftIcon: <IcRoundBugReport />,
       rightIcon: <IcRoundOpenInNew size={16} />,
-      onPress: () => {},
+      onPress: () => Linking.openURL('https://github.com/shensven/Readhubn/issues'),
     },
     {
       title: '关于',
@@ -73,11 +76,11 @@ const Settings: React.FC = () => {
 
   const renderCard = ({item}: {item: SettingsItem}) => {
     return (
-      <TouchableRipple onPress={item.onPress} style={styles.item}>
+      <TouchableRipple style={styles.item} onPress={item.onPress}>
         <List.Item
           title={item.title}
           description={item.description}
-          descriptionStyle={styles.description}
+          descriptionStyle={[styles.description, {color: colors.textAccent}]}
           left={() => <List.Icon icon={() => item.leftIcon} />}
           right={() => <List.Icon icon={() => item.rightIcon} />}
         />
@@ -85,7 +88,15 @@ const Settings: React.FC = () => {
     );
   };
 
-  return <FlatList data={data} renderItem={renderCard} keyExtractor={item => item.title} />;
+  return (
+    <FlatList
+      data={data}
+      renderItem={renderCard}
+      keyExtractor={item => item.title}
+      ListFooterComponent={<View />}
+      ListFooterComponentStyle={{height: insets.bottom}}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
