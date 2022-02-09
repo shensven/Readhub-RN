@@ -6,7 +6,7 @@ const screenHeight = Dimensions.get('screen').height;
 const Welcome: React.FC = () => {
   return (
     <View style={styles.root}>
-      <Image source={require('../splash/bootsplash.png')} style={styles.image} />
+      <Image source={require('../assets/splash/bootsplash.png')} style={styles.image} />
     </View>
   );
 };

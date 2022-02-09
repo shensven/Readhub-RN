@@ -88,7 +88,7 @@ cd android && ./gradlew assembleRelease
 ### BOOTSPLASH GENERATION
 
 ```sh
-yarn react-native generate-bootsplash src/splash/bootsplash.png \
+yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
   --background-color=E8F6FE \
   --logo-width=192 \
   --flavor=main
