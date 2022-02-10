@@ -14,7 +14,7 @@ const Aouut: React.FC = () => {
       <View style={styles.top}>
         <Avatar.Image
           size={68}
-          source={require('../assets/appIcon/AppIcon_alpha.png')}
+          source={require('../assets/appIcon/AppIconAlpha.png')}
           style={styles.appIcon}
           theme={{
             colors: {
