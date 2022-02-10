@@ -5013,7 +5013,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-license-compliance@^1.2.3:
+license-compliance@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/license-compliance/-/license-compliance-1.2.3.tgz#6ef1e237b015822ad0cf43c6c0442eea97a21b65"
   integrity sha512-YyQthhdBnMFV9txA+VocPTfWQVSh2U7j0FSpL4GqWJ4uSkfwK1nsYHgd0JfhzJQkTLz1UBC3Hz6V8vyPVvUF2g==
