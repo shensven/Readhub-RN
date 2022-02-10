@@ -58,6 +58,9 @@ yarn react-native run-android
 ### RUNNING ON DEVICE
 
 ```sh
+npm install -g ios-deploy
+```
+```sh
 yarn react-native run-ios --device
 ```
 
