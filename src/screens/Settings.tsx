@@ -1,5 +1,6 @@
 import React from 'react';
-import {FlatList, Linking, StyleSheet, View} from 'react-native';
+import {Linking, StyleSheet, View} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
