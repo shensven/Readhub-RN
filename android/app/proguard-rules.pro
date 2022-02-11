@@ -11,4 +11,6 @@
 
 -keep class com.facebook.hermes.unicode.** { *; }
 -keep class com.facebook.jni.** { *; }
+-keep class com.facebook.react.turbomodule.** { *; }
+-keep class com.swmansion.reanimated.** { *; }
 -keep public class com.horcrux.svg.** {*;}

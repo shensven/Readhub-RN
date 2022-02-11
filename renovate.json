@@ -16,6 +16,7 @@
         "react-native-bootsplash",
         "react-native-gesture-handler",
         "react-native-paper",
+        "react-native-reanimated",
         "react-native-safe-area-context",
         "react-native-screens",
         "react-native-svg"
