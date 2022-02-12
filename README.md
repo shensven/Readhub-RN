@@ -45,7 +45,7 @@ yarn install
 cd ios && pod install
 ```
 
-### RUNNING ON SIMULATOR
+### DEBUGGING ON THE SIMULATOR
 
 ```sh
 yarn react-native run-ios
@@ -55,11 +55,12 @@ yarn react-native run-ios
 yarn react-native run-android
 ```
 
-### RUNNING ON DEVICE
+### DEBUGGING ON THE DEVICE
 
 ```sh
 npm install -g ios-deploy
 ```
+
 ```sh
 yarn react-native run-ios --device
 ```
@@ -68,7 +69,7 @@ yarn react-native run-ios --device
 yarn react-native run-android
 ```
 
-### DEBUGGING
+### DEBUGGING TOOL
 
 Using [Flipper](https://fbflipper.com/) for debugging
 
@@ -80,6 +81,12 @@ yarn test
 
 ```sh
 cd android && chmod +x gradlew && ./gradlew test
+```
+
+### iOS DEPLOY
+
+```sh
+yarn react-native run-ios --configuration Release --device
 ```
 
 ### ASSEMBLE THE APK
