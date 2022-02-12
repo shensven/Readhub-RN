@@ -14,6 +14,7 @@
         "@react-navigation/stack",
         "react-native-bars",
         "react-native-bootsplash",
+        "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
         "react-native-paper",
         "react-native-reanimated",

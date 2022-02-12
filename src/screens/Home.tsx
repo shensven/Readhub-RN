@@ -1,47 +1,52 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, useTheme} from 'react-native-paper';
-import Animated, {Easing, useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
+import {View, StyleSheet, ListRenderItem} from 'react-native';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
-const Home: React.FC = () => {
-  const {colors} = useTheme();
-  const randomWidth = useSharedValue(10);
+const HEADER_HEIGHT = 250;
 
-  const config: any = {
-    duration: 500,
-    easing: Easing.bezier(0.5, 0.01, 0, 1),
-  };
+const DATA = [0, 1, 2, 3, 4];
+const identity = (v: unknown): string => v + '';
 
-  const style = useAnimatedStyle(() => {
-    return {
-      width: withTiming(randomWidth.value, config),
-      backgroundColor: colors.primary,
-    };
-  });
+const Header = () => {
+  return <View style={styles.header} />;
+};
+
+const Example: React.FC = () => {
+  const renderItem: ListRenderItem<number> = React.useCallback(({index}) => {
+    return <View style={[styles.box, index % 2 === 0 ? styles.boxB : styles.boxA]} />;
+  }, []);
 
   return (
-    <View style={styles.root}>
-      <Animated.View style={[styles.animated, style]} />
-      <Button style={styles.btn} onPress={() => (randomWidth.value = Math.random() * 350)}>
-        toggle
-      </Button>
-    </View>
+    <Tabs.Container
+      renderHeader={Header}
+      headerHeight={HEADER_HEIGHT} // optional
+    >
+      <Tabs.Tab name="A">
+        <Tabs.FlatList data={DATA} renderItem={renderItem} keyExtractor={identity} />
+      </Tabs.Tab>
+      <Tabs.Tab name="B">
+        <Tabs.FlatList data={DATA} renderItem={renderItem} keyExtractor={identity} />
+      </Tabs.Tab>
+    </Tabs.Container>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: 'column',
-    margin: 16,
+  box: {
+    height: 250,
+    width: '100%',
   },
-  animated: {
-    width: 100,
-    height: 80,
+  boxA: {
+    backgroundColor: 'white',
   },
-  btn: {
-    marginTop: 16,
+  boxB: {
+    backgroundColor: '#D8D8D8',
+  },
+  header: {
+    height: HEADER_HEIGHT,
+    width: '100%',
+    backgroundColor: '#2196f3',
   },
 });
 
-export default Home;
+export default Example;
