@@ -28,7 +28,7 @@ const OpenSourceLibraries: React.FC = () => {
 
   const renderTouchableRipple = ({item}: {item: TouchableRippleItem}) => {
     return (
-      <TouchableRipple style={styles.root} onPress={() => Linking.openURL(item.repository)}>
+      <TouchableRipple rippleColor={colors.ripple} style={styles.root} onPress={() => Linking.openURL(item.repository)}>
         <List.Item
           title={item.name}
           titleStyle={styles.title}

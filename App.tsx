@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
+import Detail from './src/screens/Detail';
 import HomeRight from './src/headers/HomeRight';
 import Search from './src/screens/Search';
 import Settings from './src/screens/Settings';
@@ -57,6 +58,14 @@ const App: React.FC = () => {
           component={Settings}
           options={{
             headerTitle: '设置',
+            headerBackTitle: '返回',
+          }}
+        />
+        <Stack.Screen
+          name="Detail"
+          component={Detail}
+          options={{
+            headerTitle: '话题详情',
             headerBackTitle: '返回',
           }}
         />

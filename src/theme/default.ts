@@ -4,6 +4,7 @@ declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
       textAccent: string;
+      ripple: string;
     }
   }
 }
@@ -13,7 +14,7 @@ export const paperDefault = {
   //   roundness: 2,
   colors: {
     ...PaperDefaultTheme.colors,
-    primary: '#387BA0',
+    primary: '#2D6687',
     accent: '#E8F6FE',
     // background: '',
     // surface: '',
@@ -23,6 +24,7 @@ export const paperDefault = {
     // backdrop: '',
     // onSurface: '',
     // notification: '',
+    ripple: 'rgba(0,0,0,0.1)',
   },
   fonts: {
     ...PaperDefaultTheme.fonts,

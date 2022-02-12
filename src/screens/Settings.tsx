@@ -31,8 +31,8 @@ interface SettingsItem {
 }
 
 const Settings: React.FC = () => {
-  const insets = useSafeAreaInsets();
   const {colors} = useTheme();
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const data = [
@@ -77,7 +77,7 @@ const Settings: React.FC = () => {
 
   const renderCard = ({item}: {item: SettingsItem}) => {
     return (
-      <TouchableRipple style={styles.item} onPress={item.onPress}>
+      <TouchableRipple rippleColor={colors.ripple} style={styles.item} onPress={item.onPress}>
         <List.Item
           title={item.title}
           description={item.description}
