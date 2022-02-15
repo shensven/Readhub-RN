@@ -13,6 +13,7 @@
         "@react-navigation/native",
         "@react-navigation/stack",
         "axios",
+        "dayjs",
         "react-native-bars",
         "react-native-bootsplash",
         "react-native-collapsible-tab-view",
