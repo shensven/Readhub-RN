@@ -11,6 +11,8 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
 jest.doMock('react-native-bootsplash', () => {
   return {
     hide: jest.fn().mockResolvedValueOnce(),
@@ -18,3 +20,5 @@ jest.doMock('react-native-bootsplash', () => {
     getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
   };
 });
+
+jest.mock('axios');
