@@ -67,6 +67,9 @@ const App: React.FC = () => {
           options={{
             headerTitle: '话题详情',
             headerBackTitle: '返回',
+            cardStyle: {
+              backgroundColor: '#fff',
+            },
           }}
         />
         <Stack.Screen
