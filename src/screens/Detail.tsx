@@ -1,5 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Dimensions} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -9,10 +10,12 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
 import feedAxios from '../utils/feedAxios';
-import {ScrollView} from 'react-native-gesture-handler';
+import Loading from '../animation/Loading/Loading';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
+
+const screenHeight = Dimensions.get('screen').height;
 
 type StackParamList = {
   Params: {id: string};
@@ -45,6 +48,7 @@ const Detail: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const {id} = route.params;
 
+  const [hasLoading, setHasloading] = useState<boolean>(true);
   const [detail, setDetail] = useState<IDetail>({
     title: '',
     publishDate: '',
@@ -58,14 +62,21 @@ const Detail: React.FC = () => {
   const getDetail = async () => {
     const resp: AxiosResponse = await feedAxios.get(`/topic/${id}`);
     console.log('getDetail', resp.data);
-    setDetail(resp.data);
+    if (resp.status === 200) {
+      setHasloading(false);
+      setDetail(resp.data);
+    }
   };
 
   useLayoutEffect(() => {
     getDetail();
   }, []);
 
-  return (
+  return hasLoading ? (
+    <View style={{marginTop: screenHeight / 4}}>
+      <Loading />
+    </View>
+  ) : (
     <ScrollView contentContainerStyle={{paddingBottom: insets.bottom}}>
       <View style={{margin: 20}}>
         <Text selectable style={{fontSize: 20, fontWeight: 'bold', lineHeight: 20 * 1.5}}>

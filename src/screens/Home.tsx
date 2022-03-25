@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useRef, useState} from 'react';
-import {View, StyleSheet, ListRenderItem, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, ListRenderItem, TouchableOpacity, Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -11,6 +11,7 @@ import 'dayjs/locale/zh-cn';
 import axios, {AxiosResponse} from 'axios';
 import feedAxios from '../utils/feedAxios';
 import IcRoundShare from '../icons/IcRoundShare';
+import Loading from '../animation/Loading/Loading';
 
 type StackParamList = {
   Detail: {id: string};
@@ -79,6 +80,8 @@ interface TopicsFeed {
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
+
+const screenHeight = Dimensions.get('screen').height;
 
 const Home: React.FC = () => {
   const {colors} = useTheme();
@@ -206,17 +209,22 @@ const Home: React.FC = () => {
         <Tabs.FlatList
           data={daily.daily}
           renderItem={renderDaily}
-          ListHeaderComponent={() => (
-            <View style={{marginLeft: 14, marginRight: 14, marginTop: 24, marginBottom: 24}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                {daily.ts !== 0 && dayjs(daily.ts * 1000).format('YYYY-MM-DD')}
-              </Text>
-              <Text style={{fontSize: 14, marginTop: 4, color: colors.textAccent}}>
-                {daily.ts !== 0 && dayjs(daily.ts * 1000).format('dddd')}
-              </Text>
-            </View>
-          )}
-          ListHeaderComponentStyle={{}}
+          ListHeaderComponent={() =>
+            daily.ts === 0 ? (
+              <View style={{marginTop: screenHeight / 4}}>
+                <Loading />
+              </View>
+            ) : (
+              <View style={{marginLeft: 14, marginRight: 14, marginBottom: 24}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  {daily.ts !== 0 && dayjs(daily.ts * 1000).format('YYYY-MM-DD')}
+                </Text>
+                <Text style={{fontSize: 14, marginTop: 4, color: colors.textAccent}}>
+                  {daily.ts !== 0 && dayjs(daily.ts * 1000).format('dddd')}
+                </Text>
+              </View>
+            )
+          }
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={{height: insets.bottom + 12}}
           ItemSeparatorComponent={() => <View style={{height: 24}} />}
@@ -231,8 +239,8 @@ const Home: React.FC = () => {
           renderItem={renderItem}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.list_header}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{height: insets.bottom + 12}}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
           ItemSeparatorComponent={() => <View style={styles.item_separator} />}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
@@ -244,8 +252,8 @@ const Home: React.FC = () => {
           renderItem={renderItem}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.list_header}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{height: insets.bottom + 12}}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
           ItemSeparatorComponent={() => <View style={styles.item_separator} />}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
@@ -257,8 +265,8 @@ const Home: React.FC = () => {
           renderItem={renderItem}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.list_header}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{height: insets.bottom + 12}}
+          ListFooterComponent={() => <Loading />}
+          ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
           ItemSeparatorComponent={() => <View style={styles.item_separator} />}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
