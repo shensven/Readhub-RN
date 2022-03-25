@@ -11,7 +11,7 @@ declare global {
 
 export const paperDefault = {
   ...PaperDefaultTheme,
-  //   roundness: 2,
+  roundness: 8,
   colors: {
     ...PaperDefaultTheme.colors,
     primary: '#2D6687',

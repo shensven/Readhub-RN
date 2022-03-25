@@ -3,7 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 import Home from './src/screens/Home';
-import Detail from './src/screens/Detail';
+import TopicDetail from './src/screens/TopicDetail';
+import StockFileDetail from './src/screens/StockFileDetail';
 import HomeRight from './src/headers/HomeRight';
 import Search from './src/screens/Search';
 import Settings from './src/screens/Settings';
@@ -62,10 +63,21 @@ const App: React.FC = () => {
           }}
         />
         <Stack.Screen
-          name="Detail"
-          component={Detail}
+          name="TopicDetail"
+          component={TopicDetail}
           options={{
             headerTitle: '话题详情',
+            headerBackTitle: '返回',
+            cardStyle: {
+              backgroundColor: '#fff',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="StockFileDetail"
+          component={StockFileDetail}
+          options={{
+            headerTitle: '文件详情',
             headerBackTitle: '返回',
             cardStyle: {
               backgroundColor: '#fff',

@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useRef, useState} from 'react';
-import {View, StyleSheet, ListRenderItem, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, ListRenderItem, TouchableOpacity, Dimensions, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -13,8 +13,14 @@ import feedAxios from '../utils/feedAxios';
 import IcRoundShare from '../icons/IcRoundShare';
 import Loading from '../animation/Loading/Loading';
 
+dayjs.locale('zh-cn');
+dayjs.extend(relativeTime);
+
+const screenHeight = Dimensions.get('screen').height;
+
 type StackParamList = {
-  Detail: {id: string};
+  TopicDetail: {id: string};
+  StockFileDetail: {id: string};
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
@@ -65,23 +71,22 @@ interface TopicsFeed {
   updatedAt: string;
 }
 
-// interface NewsFeed {
-//   authorName: string;
-//   id: number;
-//   language: string;
-//   mobileUrl: string;
-//   publishDate: string;
-//   siteName: string;
-//   summary: string;
-//   summaryAuto: string;
-//   title: string;
-//   url: string;
-// }
-
-dayjs.locale('zh-cn');
-dayjs.extend(relativeTime);
-
-const screenHeight = Dimensions.get('screen').height;
+interface StockFileRecommend {
+  companyNameFull: string;
+  exchangeDisplay: string;
+  fileName: string;
+  fileNameDisplay: string;
+  fileTagsDisplay: [];
+  fileTypeStr: string;
+  ossState: number;
+  publishDate: string;
+  stockExchangeName: string;
+  stockName: string;
+  stockSymbol: string;
+  titleDisplay: string;
+  typeDisplay: number;
+  uniqueId: string;
+}
 
 const Home: React.FC = () => {
   const {colors} = useTheme();
@@ -94,30 +99,55 @@ const Home: React.FC = () => {
     daily: [],
     ts: 0,
   });
+
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
-  // const [news, setNews] = useState<NewsFeed[]>([]);
+  const [topicLastCursor, setTopicLastCursor] = useState<number>();
+  const [topicRefreshing, setTopicRefreshing] = useState<boolean>(false);
+
+  const [stockFileRecommend, setStockFileRecommend] = useState<StockFileRecommend[]>([]);
+
+  //----------------------------------------------------------------------------
 
   const getDaily = async () => {
     const resp: AxiosResponse = await axios.get('https://readhub.cn/_next/data/ifz6UBjfA-J94X4idVCQH/daily.json');
-    console.log('getDaily', resp.data.pageProps);
     setDaily(resp.data.pageProps);
   };
 
+  //----------------------------------------------------------------------------
   const getTopics = async () => {
     const resp: AxiosResponse<{data: TopicsFeed[]}> = await feedAxios.get('/topic', {params: {pageSize: 20}});
-    // console.log('getTopics', resp.data);
     setTopics(resp.data.data);
+    setTopicLastCursor(resp.data.data[19].order);
   };
 
-  // const getNews = async () => {
-  //   const resp: AxiosResponse<{data: NewsFeed[]}> = await feedAxios.get('/news', {params: {pageSize: 20}});
-  //   setNews(resp.data.data);
-  // };
+  const getNextTopic = async () => {
+    const resp: AxiosResponse<{data: TopicsFeed[]}> = await feedAxios.get('/topic', {
+      params: {pageSize: 20, lastCursor: topicLastCursor},
+    });
+    setTopics([...topics, ...resp.data.data]);
+    setTopicLastCursor(resp.data.data[19].order);
+  };
+
+  const handleTopicRefresh = () => {
+    setTopicRefreshing(true);
+    setTopicLastCursor(undefined);
+    getTopics();
+    setTopicRefreshing(false);
+  };
+
+  //----------------------------------------------------------------------------
+
+  const getStockFile = async () => {
+    const resp: AxiosResponse<{data: any}> = await feedAxios.get('/stock_file/search_key/recommend/list', {
+      params: {type: 1},
+    });
+    setStockFileRecommend(resp.data.data.items);
+  };
 
   useLayoutEffect(() => {
     getDaily();
     getTopics();
-    // getNews();
+    getStockFile();
   }, []);
 
   const renderDaily: ListRenderItem<{title: string; uid: string}> = React.useCallback(
@@ -125,7 +155,7 @@ const Home: React.FC = () => {
       return (
         <View style={{flexDirection: 'row', marginLeft: 14, marginRight: 14}}>
           <Text style={{fontSize: 16, lineHeight: 16 * 1.5}}>・</Text>
-          <TouchableOpacity style={{flex: 1}} onPress={() => navigation.navigate('Detail', {id: item.uid})}>
+          <TouchableOpacity style={{flex: 1}} onPress={() => navigation.navigate('TopicDetail', {id: item.uid})}>
             <Text style={{fontSize: 16, fontWeight: 'bold', lineHeight: 16 * 1.5, opacity: 0.8}}>{item.title}</Text>
           </TouchableOpacity>
         </View>
@@ -134,14 +164,14 @@ const Home: React.FC = () => {
     [colors, navigation],
   );
 
-  const renderItem: ListRenderItem<TopicsFeed> = React.useCallback(
+  const renderTopicItem: ListRenderItem<TopicsFeed> = React.useCallback(
     ({item}) => {
       return (
         <TouchableRipple
           borderless
           rippleColor={colors.ripple}
           style={{marginLeft: 14, marginRight: 14, padding: 16, borderRadius: 12, backgroundColor: colors.surface}}
-          onPress={() => navigation.navigate('Detail', {id: item.id})}>
+          onPress={() => navigation.navigate('TopicDetail', {id: item.id})}>
           <>
             <Text style={{marginTop: 8, fontSize: 18, fontWeight: 'bold', textAlign: 'justify', lineHeight: 18 * 1.5}}>
               {item.title}
@@ -192,6 +222,59 @@ const Home: React.FC = () => {
     [colors, navigation],
   );
 
+  const renderStockFileItem: ListRenderItem<StockFileRecommend> = React.useCallback(
+    ({item}) => {
+      return (
+        <TouchableRipple
+          borderless
+          rippleColor={colors.ripple}
+          style={{marginLeft: 14, marginRight: 14, padding: 16, borderRadius: 12, backgroundColor: colors.surface}}
+          onPress={() => navigation.navigate('StockFileDetail', {id: item.uniqueId})}>
+          <>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{fontSize: 18}}>🏢</Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  textAlign: 'justify',
+                  lineHeight: 18 * 1.5,
+                  marginLeft: 4,
+                  color: colors.primary,
+                }}>
+                {item.companyNameFull}
+              </Text>
+            </View>
+            <Text style={{fontSize: 15, fontWeight: 'bold', textAlign: 'justify', marginTop: 8}}>
+              {item.fileNameDisplay}
+            </Text>
+            <View style={{flexDirection: 'row', marginTop: 16}}>
+              {item.fileTagsDisplay.map((tag, index) => (
+                <Text
+                  key={index}
+                  style={{
+                    color: '#E55C5C',
+                    backgroundColor: '#F9E4E0',
+                    paddingLeft: 8,
+                    paddingRight: 8,
+                    paddingTop: 2,
+                    paddingBottom: 2,
+                    marginRight: 8,
+                    borderRadius: 4,
+                  }}>
+                  {tag}
+                </Text>
+              ))}
+              <Text style={{color: colors.textAccent, marginRight: 8}}>{item.exchangeDisplay}</Text>
+              <Text style={{color: colors.textAccent}}>{dayjs(item.publishDate).format('YYYY-MM-DD')}</Text>
+            </View>
+          </>
+        </TouchableRipple>
+      );
+    },
+    [colors, navigation],
+  );
+
   return (
     <Tabs.Container
       ref={tabRef}
@@ -215,7 +298,7 @@ const Home: React.FC = () => {
                 <Loading />
               </View>
             ) : (
-              <View style={{marginLeft: 14, marginRight: 14, marginBottom: 24}}>
+              <View style={{marginLeft: 14, marginRight: 14, marginTop: 16, marginBottom: 24}}>
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                   {daily.ts !== 0 && dayjs(daily.ts * 1000).format('YYYY-MM-DD')}
                 </Text>
@@ -236,7 +319,7 @@ const Home: React.FC = () => {
       <Tabs.Tab name="Topics" label="🔥热门话题">
         <Tabs.FlatList
           data={topics}
-          renderItem={renderItem}
+          renderItem={renderTopicItem}
           ListHeaderComponent={() => <View />}
           ListHeaderComponentStyle={styles.list_header}
           ListFooterComponent={() => <Loading />}
@@ -244,34 +327,26 @@ const Home: React.FC = () => {
           ItemSeparatorComponent={() => <View style={styles.item_separator} />}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
+          onEndReached={() => getNextTopic()}
+          refreshControl={<RefreshControl refreshing={topicRefreshing} onRefresh={() => handleTopicRefresh()} />}
         />
       </Tabs.Tab>
-      <Tabs.Tab name="News" label="🚀科技动态">
+      {/* <Tabs.Tab name="StockFile" label="📃招股书">
         <Tabs.FlatList
-          data={topics}
-          renderItem={renderItem}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.list_header}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
+          data={stockFileRecommend}
+          renderItem={renderStockFileItem}
+          ListHeaderComponent={() => (
+            <View style={{marginLeft: 14, marginRight: 14, marginTop: 14, marginBottom: 12}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 1}}>近期热门推荐</Text>
+            </View>
+          )}
+          ListFooterComponent={() => <View />}
+          ListFooterComponentStyle={{marginBottom: insets.bottom}}
           ItemSeparatorComponent={() => <View style={styles.item_separator} />}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uniqueId}
           showsVerticalScrollIndicator={false}
         />
-      </Tabs.Tab>
-      <Tabs.Tab name="Tech" label="🔨开发者资讯">
-        <Tabs.FlatList
-          data={topics}
-          renderItem={renderItem}
-          ListHeaderComponent={() => <View />}
-          ListHeaderComponentStyle={styles.list_header}
-          ListFooterComponent={() => <Loading />}
-          ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
-          ItemSeparatorComponent={() => <View style={styles.item_separator} />}
-          keyExtractor={item => item.id}
-          showsVerticalScrollIndicator={false}
-        />
-      </Tabs.Tab>
+      </Tabs.Tab> */}
     </Tabs.Container>
   );
 };

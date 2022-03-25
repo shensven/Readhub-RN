@@ -19,7 +19,7 @@ const screenHeight = Dimensions.get('screen').height;
 
 type StackParamList = {
   Params: {id: string};
-  Detail: {id: string};
+  TopicDetail: {id: string};
 };
 type ScreenRouteProp = RouteProp<StackParamList, 'Params'>;
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
@@ -41,7 +41,7 @@ interface IDetail {
   };
 }
 
-const Detail: React.FC = () => {
+const TopicDetail: React.FC = () => {
   const {colors} = useTheme();
   const insets = useSafeAreaInsets();
   const route = useRoute<ScreenRouteProp>();
@@ -128,7 +128,7 @@ const Detail: React.FC = () => {
                   <View style={{flex: 1}}>
                     <TouchableOpacity
                       disabled={id === item.id}
-                      onPress={() => navigation.push('Detail', {id: item.id})}>
+                      onPress={() => navigation.push('TopicDetail', {id: item.id})}>
                       <Text
                         style={{
                           color: id === item.id ? colors.textAccent : colors.text,
@@ -153,4 +153,4 @@ const Detail: React.FC = () => {
   );
 };
 
-export default Detail;
+export default TopicDetail;
