@@ -3694,10 +3694,10 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
-  integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+fs-extra@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.1.tgz#27de43b4320e833f6867cc044bfce29fdf0ef3b8"
+  integrity sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -6256,13 +6256,13 @@ react-native-bars@1.1.2:
   resolved "https://registry.yarnpkg.com/react-native-bars/-/react-native-bars-1.1.2.tgz#db903925a0f7f1398fc3fde26214e38475ec14b4"
   integrity sha512-idyt+w0mgy6aA96x9qaNJuOUMAl6V5suoqeth2xWO1o6Pxec5Ewyml33vv660ooPFZsQ88TD3e4GcMWtCc0EPA==
 
-react-native-bootsplash@4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.1.3.tgz#380d82cfea28a7776e4ecd19dde651f520b31cef"
-  integrity sha512-mnXe/3N4MQsYmadiWrLGjqUOmm9j1FGMa6CyBQhNzjHSwF7+d+dgai+p8lHjTbNt/ua/3eTW92OxqYGps+N9Iw==
+react-native-bootsplash@4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.1.4.tgz#94fcbfd349e153fd37773df728a03415c4f13556"
+  integrity sha512-/A6FHh/eCoC8a/edBO81C6yy8beBaz97eT7NbYaFf/VuapeUVDUoeVwM6PSHb0Tb8n5SyG3fQXIVkq5pOI1MKQ==
   dependencies:
     chalk "^4.1.2"
-    fs-extra "^10.0.0"
+    fs-extra "^10.0.1"
     jimp "^0.16.1"
 
 react-native-codegen@^0.0.8:
