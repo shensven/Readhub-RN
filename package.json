@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "0.2.6",
-    "@react-navigation/native": "6.0.8",
-    "@react-navigation/stack": "6.1.1",
+    "@react-navigation/native": "6.0.10",
+    "@react-navigation/stack": "6.2.1",
     "axios": "0.26.1",
     "dayjs": "1.11.0",
     "lottie-ios": "3.2.3",
