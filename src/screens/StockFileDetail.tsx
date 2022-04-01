@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, Dimensions} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {View, Dimensions, ScrollView} from 'react-native';
+// import {ScrollView} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {Button, Text, useTheme} from 'react-native-paper';

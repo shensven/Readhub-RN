@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, TouchableOpacity, Dimensions} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {View, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
+// import {ScrollView} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';

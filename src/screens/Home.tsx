@@ -109,7 +109,7 @@ const Home: React.FC = () => {
   //----------------------------------------------------------------------------
 
   const getDaily = async () => {
-    const resp: AxiosResponse = await axios.get('https://readhub.cn/_next/data/ifz6UBjfA-J94X4idVCQH/daily.json');
+    const resp: AxiosResponse = await axios.get('https://readhub.cn/_next/data/KQCvRp7UfYHd1gLIySGqc/daily.json');
     setDaily(resp.data.pageProps);
   };
 
