@@ -25,14 +25,14 @@
 
 ### PREREQUISITES
 
-- [Node 12](https://nodejs.org) or higher
+- [Node 14](https://nodejs.org) or higher
 - The [yarn](https://yarnpkg.com/getting-started/install) package manager
 - [Watchman](https://formulae.brew.sh/formula/watchman)
 - [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 - [JDK 11](https://formulae.brew.sh/formula/openjdk@11) or higher
 - Android SDK
-  - Build-Tools `30.0.2`
+  - Build-Tools `31.0.0`
   - NDK `21.4.7075529`
 
 ### GET STARTED
