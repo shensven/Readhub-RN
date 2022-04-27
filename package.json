@@ -14,7 +14,7 @@
     "@react-native-masked-view/masked-view": "0.2.6",
     "@react-navigation/native": "6.0.10",
     "@react-navigation/stack": "6.2.1",
-    "axios": "0.26.1",
+    "axios": "0.27.2",
     "dayjs": "1.11.1",
     "lottie-ios": "3.2.3",
     "lottie-react-native": "5.0.1",
