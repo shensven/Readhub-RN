@@ -6470,10 +6470,10 @@ react-is@^16.13.0, react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-bars@1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-bars/-/react-native-bars-1.1.3.tgz#fd90e404507f2fd38316ac6d81c8b43a6cecf11b"
-  integrity sha512-yO35XV5dzsey8toV9UmgiIvQew5WvhTqEx+/WCIwb6fOECitRsgCwCdo3a9aoIjml+8/dBwvEBhwDD5rsAO/Gg==
+react-native-bars@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-bars/-/react-native-bars-1.1.4.tgz#64d124d7bd995c61e963e504888c454c19480905"
+  integrity sha512-tFuUOrBpwIBdIoqDsS56uHIfSdaJzJWvRmYqbbQ39+Jfb6XtgGbHQoXEXIkEkf05QWrAhrRPn9Keq67WuJnT4w==
 
 react-native-bootsplash@4.1.5:
   version "4.1.5"
