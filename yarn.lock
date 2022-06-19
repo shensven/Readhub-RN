@@ -6475,10 +6475,10 @@ react-native-bars@1.1.4:
   resolved "https://registry.yarnpkg.com/react-native-bars/-/react-native-bars-1.1.4.tgz#64d124d7bd995c61e963e504888c454c19480905"
   integrity sha512-tFuUOrBpwIBdIoqDsS56uHIfSdaJzJWvRmYqbbQ39+Jfb6XtgGbHQoXEXIkEkf05QWrAhrRPn9Keq67WuJnT4w==
 
-react-native-bootsplash@4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.1.5.tgz#c2911fd006bc3c555cc3803bc267d1aeafea6525"
-  integrity sha512-4daDemujTdfukHq1wIeEdRgdFALNAwGZDrGHkxkf9h4Rgjiiyckc5ulZMIYaZwp31z26uUjcGXVxU+H1WDNRvg==
+react-native-bootsplash@4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.1.6.tgz#7d2ca5e40d7822089511685fdf6ec3b3c8b55c91"
+  integrity sha512-9zewdvoxGJiCFgqk2M4gxAP2gD+0vcjEhethVrh7rGfNzJYrzrZbyrM0FnlyFU9GhYmBFa0vmtlATBGdVB9PcQ==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.1.0"
