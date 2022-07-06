@@ -3,13 +3,12 @@ import {View, TouchableOpacity, Dimensions} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {Text, useTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {AxiosResponse} from 'axios';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import coreColor from '../utils/coreColor';
-import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
 import feedAxios from '../utils/feedAxios';
 import Loading from '../animation/Loading/Loading';
 
@@ -43,7 +42,6 @@ interface IDetail {
 }
 
 const TopicDetail: React.FC = () => {
-  const {colors} = useTheme();
   const insets = useSafeAreaInsets();
   const route = useRoute<ScreenRouteProp>();
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -62,7 +60,7 @@ const TopicDetail: React.FC = () => {
 
   const getDetail = async () => {
     const resp: AxiosResponse = await feedAxios.get(`/topic/${id}`);
-    console.log('getDetail', resp.data);
+    // console.log('getDetail', resp.data);
     if (resp.status === 200) {
       setHasloading(false);
       setDetail(resp.data);

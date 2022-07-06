@@ -67,7 +67,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
-  const [topicLastCursor, setTopicLastCursor] = useState<number>();
+  const [topicLastCursor, setTopicLastCursor] = useState<number | undefined>(undefined);
   const [topicRefreshing, setTopicRefreshing] = useState<boolean>(false);
 
   const getTopics = async () => {
@@ -189,9 +189,9 @@ const Home: React.FC = () => {
     <FlatList
       data={topics}
       renderItem={renderTopicItem}
-      ListHeaderComponent={() => <View />}
+      ListHeaderComponent={<View />}
       ListHeaderComponentStyle={{height: 16}}
-      ListFooterComponent={() => <Loading />}
+      ListFooterComponent={<Loading />}
       ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
       ItemSeparatorComponent={() => <View style={{height: 16}} />}
       keyExtractor={item => item.id}
