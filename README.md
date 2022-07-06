@@ -6,16 +6,19 @@
 [![Test](https://github.com/shensven/Readhubn/actions/workflows/next.yml/badge.svg?branch=next)](https://github.com/shensven/Readhubn/actions/workflows/next.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/Readhubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhubn&utm_campaign=Badge_Grade_Settings)
 
-[readhub.cn](https://readhub.cn) implementation in React Native, Currently in refactoring...
+SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
+
+|                         iOS Home                         |                     iOS Topic Detail                     |
+| :------------------------------------------------------: | :------------------------------------------------------: |
+| ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) |
 
 ## INTRO
 
-- Written entirely in [React Native](https://reactnative.dev)
-- The build product of the project does NOT collect any of your privacy, and does NOT contain any mix private goods
-- Use [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to keep dependencies up to date under the same major version
-- Use [Github Workflow](https://github.com/shensven/Readhubn/actions) exclusively for testing and continuous integration
+- Written in [React Native](https://reactnative.dev)
+- does NOT collect any of your privacy data
+- To keep dependencies up to date under the same major version via [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate)
+- Testing and continuous integration via [Github Workflow](https://github.com/shensven/Readhubn/actions)
 - Has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
-- The project uses [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated), a high-performance animation component written in C++
 
 ## INSTALL
 
