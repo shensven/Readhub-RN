@@ -49,7 +49,7 @@ const OpenSourceLibraries: React.FC = () => {
       renderItem={renderTouchableRipple}
       keyExtractor={item => item.name}
       ListFooterComponent={<View />}
-      ListFooterComponentStyle={{height: insets.bottom, backgroundColor: '#fff'}}
+      ListFooterComponentStyle={{height: insets.bottom}}
     />
   );
 };
