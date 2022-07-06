@@ -99,7 +99,7 @@ cd android && ./gradlew assembleRelease
 
 ```sh
 yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
-  --background-color=E8F6FE \
+  --background-color=DAE5E3 \
   --logo-width=192 \
   --flavor=main
 ```
