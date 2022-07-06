@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, TouchableOpacity, Dimensions} from 'react-native';
+import {View, TouchableOpacity, Dimensions, Linking} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -31,6 +31,7 @@ interface IDetail {
   newsArray: {
     title: string;
     siteName: string;
+    mobileUrl: string;
   }[];
   timeline: {
     topics: {
@@ -97,6 +98,7 @@ const TopicDetail: React.FC = () => {
                 paddingLeft: 4,
                 paddingRight: 8,
                 backgroundColor: coreColor.secondaryContainer,
+                opacity: 0.8,
               }}>
               <Text style={{fontSize: 12}}>🕙</Text>
               <Text style={{marginLeft: 4, fontSize: 12, color: coreColor.onSecondaryContainer}}>
@@ -116,41 +118,6 @@ const TopicDetail: React.FC = () => {
             {detail.summary}
           </Text>
 
-          {detail.newsArray?.length > 0 && (
-            <>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  alignSelf: 'flex-start',
-                  marginTop: 24,
-                  borderRadius: 8,
-                  paddingVertical: 4,
-                  paddingLeft: 4,
-                  paddingRight: 8,
-                  backgroundColor: coreColor.secondaryContainer,
-                }}>
-                <Text style={{fontSize: 12}}>🔗</Text>
-                <Text style={{marginLeft: 4, fontWeight: 'bold', color: coreColor.onSurfaceVariant}}>媒体报道</Text>
-              </View>
-              <View>
-                {detail.newsArray.map((item, index) => (
-                  <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
-                    <Text style={{color: coreColor.onBackground}}>・</Text>
-                    <View style={{flex: 1}}>
-                      <TouchableOpacity>
-                        <Text style={{fontSize: 13, color: coreColor.onSecondaryContainer, lineHeight: 13 * 1.5}}>
-                          {item.title + ' - '}
-                          <Text style={{fontSize: 13, color: coreColor.tertiary}}>{item.siteName + ' '}</Text>
-                          <Text style={{fontSize: 11}}>🔗</Text>
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                ))}
-              </View>
-            </>
-          )}
           {detail.timeline?.topics.length > 0 && (
             <>
               <View
@@ -164,9 +131,10 @@ const TopicDetail: React.FC = () => {
                   paddingLeft: 4,
                   paddingRight: 8,
                   backgroundColor: coreColor.secondaryContainer,
+                  opacity: 0.8,
                 }}>
                 <Text style={{fontSize: 12}}>📰</Text>
-                <Text style={{marginLeft: 4, fontWeight: 'bold', color: coreColor.onSurfaceVariant}}>相关事件</Text>
+                <Text style={{marginLeft: 4, color: coreColor.onSurfaceVariant}}>相关事件</Text>
               </View>
               <View>
                 {detail.timeline.topics.map((item, index) => (
@@ -184,6 +152,42 @@ const TopicDetail: React.FC = () => {
                       <Text style={{marginTop: 2, fontSize: 10, color: coreColor.tertiary}}>
                         {dayjs(item.createdAt).format('YYYY-MM-DD')}
                       </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </>
+          )}
+
+          {detail.newsArray?.length > 0 && (
+            <>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignSelf: 'flex-start',
+                  marginTop: 24,
+                  borderRadius: 8,
+                  paddingVertical: 4,
+                  paddingLeft: 4,
+                  paddingRight: 8,
+                  backgroundColor: coreColor.secondaryContainer,
+                  opacity: 0.8,
+                }}>
+                <Text style={{fontSize: 12}}>🔗</Text>
+                <Text style={{marginLeft: 4, color: coreColor.onSurfaceVariant}}>媒体报道</Text>
+              </View>
+              <View>
+                {detail.newsArray.map((item, index) => (
+                  <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
+                    <Text style={{color: coreColor.onBackground}}>・</Text>
+                    <View style={{flex: 1}}>
+                      <TouchableOpacity onPress={() => Linking.openURL(item.mobileUrl)}>
+                        <Text style={{fontSize: 13, color: coreColor.onSecondaryContainer, lineHeight: 13 * 1.5}}>
+                          {item.title + ' - '}
+                          <Text style={{fontSize: 13, color: coreColor.tertiary}}>{item.siteName + ' '}</Text>
+                        </Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
                 ))}
