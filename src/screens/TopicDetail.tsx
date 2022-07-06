@@ -1,13 +1,14 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {View, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
-// import {ScrollView} from 'react-native-gesture-handler';
+import {View, TouchableOpacity, Dimensions} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Text, useTheme} from 'react-native-paper';
+import {ScrollView} from 'react-native-gesture-handler';
 import {AxiosResponse} from 'axios';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import coreColor from '../utils/coreColor';
 import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
 import feedAxios from '../utils/feedAxios';
 import Loading from '../animation/Loading/Loading';
@@ -72,83 +73,127 @@ const TopicDetail: React.FC = () => {
     getDetail();
   }, []);
 
-  return hasLoading ? (
-    <View style={{marginTop: screenHeight / 4}}>
-      <Loading />
-    </View>
-  ) : (
-    <ScrollView contentContainerStyle={{paddingBottom: insets.bottom}}>
-      <View style={{margin: 20}}>
-        <Text selectable style={{fontSize: 20, fontWeight: 'bold', lineHeight: 20 * 1.5}}>
-          {detail.title}
-        </Text>
-        {detail.publishDate.length > 0 && (
-          <View style={{marginTop: 16, flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={{fontSize: 12}}>🕙</Text>
-            <Text style={{marginLeft: 4, color: colors.textAccent}}>{dayjs(detail.publishDate).fromNow()}</Text>
-          </View>
-        )}
-        <Text selectable style={{marginTop: 20, fontSize: 16, textAlign: 'justify', lineHeight: 15 * 2}}>
-          {detail.summary}
-        </Text>
+  return (
+    <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={{paddingBottom: insets.bottom}}>
+      {hasLoading && (
+        <View style={{marginTop: screenHeight / 4}}>
+          <Loading />
+        </View>
+      )}
+      {!hasLoading && (
+        <View style={{margin: 20}}>
+          <Text
+            selectable
+            style={{fontSize: 20, fontWeight: 'bold', color: coreColor.onBackground, lineHeight: 20 * 1.5}}>
+            {detail.title}
+          </Text>
+          {detail.publishDate.length > 0 && (
+            <View
+              style={{
+                marginTop: 16,
+                flexDirection: 'row',
+                alignItems: 'center',
+                alignSelf: 'flex-start',
+                borderRadius: 8,
+                paddingVertical: 4,
+                paddingLeft: 4,
+                paddingRight: 8,
+                backgroundColor: coreColor.secondaryContainer,
+              }}>
+              <Text style={{fontSize: 12}}>🕙</Text>
+              <Text style={{marginLeft: 4, fontSize: 12, color: coreColor.onSecondaryContainer}}>
+                {dayjs(detail.publishDate).fromNow()}
+              </Text>
+            </View>
+          )}
+          <Text
+            selectable
+            style={{
+              marginTop: 20,
+              fontSize: 16,
+              textAlign: 'justify',
+              lineHeight: 15 * 2,
+              color: coreColor.onBackground,
+            }}>
+            {detail.summary}
+          </Text>
 
-        {detail.newsArray?.length > 0 && (
-          <>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 24, marginBottom: 4}}>
-              <Text style={{fontSize: 12}}>🔗</Text>
-              <Text style={{marginLeft: 8, fontSize: 16, fontWeight: 'bold'}}>媒体报道</Text>
-            </View>
-            <View>
-              {detail.newsArray.map((item, index) => (
-                <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
-                  <Text>・</Text>
-                  <View style={{flex: 1}}>
-                    <TouchableOpacity>
-                      <Text style={{fontSize: 13, lineHeight: 13 * 1.5}}>
-                        {item.title} <IcRoundOpenInNew size={13} color={colors.textAccent} />
-                      </Text>
-                    </TouchableOpacity>
-                    <Text style={{marginTop: 2, fontSize: 10, color: colors.textAccent}}>{item.siteName}</Text>
+          {detail.newsArray?.length > 0 && (
+            <>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignSelf: 'flex-start',
+                  marginTop: 24,
+                  borderRadius: 8,
+                  paddingVertical: 4,
+                  paddingLeft: 4,
+                  paddingRight: 8,
+                  backgroundColor: coreColor.secondaryContainer,
+                }}>
+                <Text style={{fontSize: 12}}>🔗</Text>
+                <Text style={{marginLeft: 4, fontWeight: 'bold', color: coreColor.onSurfaceVariant}}>媒体报道</Text>
+              </View>
+              <View>
+                {detail.newsArray.map((item, index) => (
+                  <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
+                    <Text style={{color: coreColor.onBackground}}>・</Text>
+                    <View style={{flex: 1}}>
+                      <TouchableOpacity>
+                        <Text style={{fontSize: 13, color: coreColor.onSecondaryContainer, lineHeight: 13 * 1.5}}>
+                          {item.title + ' - '}
+                          <Text style={{fontSize: 13, color: coreColor.tertiary}}>{item.siteName + ' '}</Text>
+                          <Text style={{fontSize: 11}}>🔗</Text>
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
-          </>
-        )}
-        {detail.timeline?.topics.length > 0 && (
-          <>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 24, marginBottom: 4}}>
-              <Text style={{fontSize: 12}}>📰</Text>
-              <Text style={{marginLeft: 8, fontSize: 16, fontWeight: 'bold'}}>相关事件</Text>
-            </View>
-            <View>
-              {detail.timeline.topics.map((item, index) => (
-                <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
-                  <Text>・</Text>
-                  <View style={{flex: 1}}>
-                    <TouchableOpacity
-                      disabled={id === item.id}
-                      onPress={() => navigation.push('TopicDetail', {id: item.id})}>
-                      <Text
-                        style={{
-                          color: id === item.id ? colors.textAccent : colors.text,
-                          fontSize: 13,
-                          lineHeight: 13 * 1.5,
-                        }}>
-                        {item.title}
-                        {id === item.id && <Text style={{color: colors.primary}}>（正在阅读）</Text>}
+                ))}
+              </View>
+            </>
+          )}
+          {detail.timeline?.topics.length > 0 && (
+            <>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignSelf: 'flex-start',
+                  marginTop: 24,
+                  borderRadius: 8,
+                  paddingVertical: 4,
+                  paddingLeft: 4,
+                  paddingRight: 8,
+                  backgroundColor: coreColor.secondaryContainer,
+                }}>
+                <Text style={{fontSize: 12}}>📰</Text>
+                <Text style={{marginLeft: 4, fontWeight: 'bold', color: coreColor.onSurfaceVariant}}>相关事件</Text>
+              </View>
+              <View>
+                {detail.timeline.topics.map((item, index) => (
+                  <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
+                    <Text style={{color: coreColor.onBackground}}>・</Text>
+                    <View style={{flex: 1}}>
+                      <TouchableOpacity
+                        disabled={id === item.id}
+                        onPress={() => navigation.push('TopicDetail', {id: item.id})}>
+                        <Text style={{fontSize: 13, lineHeight: 13 * 1.5, color: coreColor.onSecondaryContainer}}>
+                          {item.title}
+                          {id === item.id && <Text style={{color: coreColor.primary}}>（当前阅读）</Text>}
+                        </Text>
+                      </TouchableOpacity>
+                      <Text style={{marginTop: 2, fontSize: 10, color: coreColor.tertiary}}>
+                        {dayjs(item.createdAt).format('YYYY-MM-DD')}
                       </Text>
-                    </TouchableOpacity>
-                    <Text style={{marginTop: 2, fontSize: 10, color: colors.textAccent}}>
-                      {dayjs(item.createdAt).format('YYYY-MM-DD')}
-                    </Text>
+                    </View>
                   </View>
-                </View>
-              ))}
-            </View>
-          </>
-        )}
-      </View>
+                ))}
+              </View>
+            </>
+          )}
+        </View>
+      )}
     </ScrollView>
   );
 };

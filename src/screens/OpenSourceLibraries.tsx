@@ -1,9 +1,10 @@
 import React from 'react';
-import {FlatList, Linking, StyleSheet, View} from 'react-native';
-// import {FlatList} from 'react-native-gesture-handler';
-import {List, Text, TouchableRipple, useTheme} from 'react-native-paper';
+import {Linking, View} from 'react-native';
+import {List, Text, TouchableRipple} from 'react-native-paper';
+import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
+import coreColor from '../utils/coreColor';
 
 interface PackageDetail {
   license: string;
@@ -24,18 +25,17 @@ const data: PackageDetail[] = require('../assets/openSourceLibraries/licenseComp
 
 const OpenSourceLibraries: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const {colors} = useTheme();
 
   const renderTouchableRipple = ({item}: {item: TouchableRippleItem}) => {
     return (
-      <TouchableRipple rippleColor={colors.ripple} style={styles.root} onPress={() => Linking.openURL(item.repository)}>
+      <TouchableRipple onPress={() => Linking.openURL(item.repository)}>
         <List.Item
           title={item.name}
-          titleStyle={styles.title}
+          titleStyle={{fontSize: 12, color: coreColor.onBackground}}
           right={() => (
-            <View style={styles.right}>
-              <Text style={[styles.license, {color: colors.textAccent}]}>{item.license}</Text>
-              <IcRoundOpenInNew size={12} />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={{fontSize: 12, marginRight: 8, color: coreColor.primary}}>{item.license}</Text>
+              <IcRoundOpenInNew size={12} color={coreColor.secondary} />
             </View>
           )}
         />
@@ -49,32 +49,9 @@ const OpenSourceLibraries: React.FC = () => {
       renderItem={renderTouchableRipple}
       keyExtractor={item => item.name}
       ListFooterComponent={<View />}
-      ListFooterComponentStyle={[{height: insets.bottom}, styles.listFooter]}
+      ListFooterComponentStyle={{height: insets.bottom, backgroundColor: '#fff'}}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: '#FFF',
-  },
-  title: {
-    fontSize: 12,
-  },
-  right: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  license: {
-    fontSize: 12,
-    marginRight: 8,
-  },
-  icon: {
-    marginLeft: 8,
-  },
-  listFooter: {
-    backgroundColor: '#FFF',
-  },
-});
 
 export default OpenSourceLibraries;

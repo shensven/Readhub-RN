@@ -1,16 +1,17 @@
 import React from 'react';
-import {FlatList, Linking, StyleSheet, View} from 'react-native';
-// import {FlatList} from 'react-native-gesture-handler';
+import {Linking, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {List, TouchableRipple, useTheme} from 'react-native-paper';
+import {List, TouchableRipple} from 'react-native-paper';
+import {FlatList} from 'react-native-gesture-handler';
+import coreColor from '../utils/coreColor';
 import IcRoundAutoAwesome from '../icons/IcRoundAutoAwesome';
 import IcRoundDelete from '../icons/IcRoundDelete';
 import IcRoundShield from '../icons/IcRoundShield';
 import IcRoundCode from '../icons/IcRoundCode';
 import IcRoundBugReport from '../icons/IcRoundBugReport';
-import IcRoundArticle from '../icons/IcRoundArticle';
+import IcRoundInfo from '../icons/IcRoundInfo';
 import IcRoundChevronRight from '../icons/IcRoundChevronRight';
 import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
 
@@ -31,57 +32,57 @@ interface SettingsItem {
 }
 
 const Settings: React.FC = () => {
-  const {colors} = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const data = [
     {
       title: '欢迎',
-      leftIcon: <IcRoundAutoAwesome />,
-      rightIcon: <IcRoundChevronRight />,
+      leftIcon: <IcRoundAutoAwesome color={coreColor.onBackground} />,
+      rightIcon: <IcRoundChevronRight color={coreColor.secondary} />,
       onPress: () => navigation.navigate('Welcome'),
     },
     {
       title: '重置阅读进度',
-      leftIcon: <IcRoundDelete />,
-      rightIcon: <IcRoundChevronRight />,
+      leftIcon: <IcRoundDelete color={coreColor.onBackground} />,
+      rightIcon: <IcRoundChevronRight color={coreColor.secondary} />,
       onPress: () => {},
     },
     {
       title: '隐私政策',
-      leftIcon: <IcRoundShield />,
-      rightIcon: <IcRoundChevronRight />,
+      leftIcon: <IcRoundShield color={coreColor.onBackground} />,
+      rightIcon: <IcRoundChevronRight color={coreColor.secondary} />,
       onPress: () => navigation.navigate('PrivacyPolicy'),
     },
     {
       title: '开源库',
-      leftIcon: <IcRoundCode />,
-      rightIcon: <IcRoundChevronRight />,
+      leftIcon: <IcRoundCode color={coreColor.onBackground} />,
+      rightIcon: <IcRoundChevronRight color={coreColor.secondary} />,
       onPress: () => navigation.navigate('OpenSourceLibraries'),
     },
     {
       title: '反馈',
       description: 'https://github.com/shensven/Readhubn/issues',
-      leftIcon: <IcRoundBugReport />,
-      rightIcon: <IcRoundOpenInNew size={16} />,
+      leftIcon: <IcRoundBugReport color={coreColor.onBackground} />,
+      rightIcon: <IcRoundOpenInNew color={coreColor.secondary} size={16} />,
       onPress: () => Linking.openURL('https://github.com/shensven/Readhubn/issues'),
     },
     {
       title: '关于',
-      leftIcon: <IcRoundArticle />,
-      rightIcon: <IcRoundChevronRight />,
+      leftIcon: <IcRoundInfo color={coreColor.onBackground} />,
+      rightIcon: <IcRoundChevronRight color={coreColor.secondary} />,
       onPress: () => navigation.navigate('About'),
     },
   ];
 
   const renderCard = ({item}: {item: SettingsItem}) => {
     return (
-      <TouchableRipple rippleColor={colors.ripple} style={styles.item} onPress={item.onPress}>
+      <TouchableRipple style={{backgroundColor: coreColor.background}} onPress={item.onPress}>
         <List.Item
           title={item.title}
+          titleStyle={{color: coreColor.onBackground}}
           description={item.description}
-          descriptionStyle={[styles.description, {color: colors.textAccent}]}
+          descriptionStyle={{fontSize: 10, color: coreColor.secondary}}
           left={() => <List.Icon icon={() => item.leftIcon} />}
           right={() => <List.Icon icon={() => item.rightIcon} />}
         />
@@ -99,14 +100,5 @@ const Settings: React.FC = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#FFF',
-  },
-  description: {
-    fontSize: 10,
-  },
-});
 
 export default Settings;
