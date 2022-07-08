@@ -6,14 +6,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {List, TouchableRipple} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
 import coreColor from '../utils/coreColor';
-import IcRoundAutoAwesome from '../icons/IcRoundAutoAwesome';
-import IcRoundDelete from '../icons/IcRoundDelete';
-import IcRoundShield from '../icons/IcRoundShield';
-import IcRoundCode from '../icons/IcRoundCode';
-import IcRoundBugReport from '../icons/IcRoundBugReport';
-import IcRoundInfo from '../icons/IcRoundInfo';
-import IcRoundChevronRight from '../icons/IcRoundChevronRight';
-import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
+import IcRoundAutoAwesome from '../assets/icons/IcRoundAutoAwesome';
+import IcRoundDelete from '../assets/icons/IcRoundDelete';
+import IcRoundShield from '../assets/icons/IcRoundShield';
+import IcRoundCode from '../assets/icons/IcRoundCode';
+import IcRoundBugReport from '../assets/icons/IcRoundBugReport';
+import IcRoundInfo from '../assets/icons/IcRoundInfo';
+import IcRoundChevronRight from '../assets/icons/IcRoundChevronRight';
+import IcRoundOpenInNew from '../assets/icons/IcRoundOpenInNew';
 
 type StackParamList = {
   Welcome: undefined;

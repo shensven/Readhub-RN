@@ -10,7 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import {AxiosResponse} from 'axios';
 import feedAxios from '../utils/feedAxios';
-import IcRoundShare from '../icons/IcRoundShare';
+import IcRoundShare from '../assets/icons/IcRoundShare';
 import Loading from '../animation/Loading/Loading';
 import coreColor from '../utils/coreColor';
 

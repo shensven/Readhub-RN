@@ -3,7 +3,7 @@ import {Linking, View} from 'react-native';
 import {List, Text, TouchableRipple} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import IcRoundOpenInNew from '../icons/IcRoundOpenInNew';
+import IcRoundOpenInNew from '../assets/icons/IcRoundOpenInNew';
 import coreColor from '../utils/coreColor';
 
 interface PackageDetail {

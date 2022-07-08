@@ -1,4 +1,4 @@
-# Readhub Native
+# Readhub RN
 
 [![GitHub](https://img.shields.io/github/license/shensven/Readhubn)](./LICENSE)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhubn/react-native)](./package.json)

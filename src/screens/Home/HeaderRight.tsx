@@ -3,9 +3,9 @@ import {Platform, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
-import IcRoundSearch from '../icons/IcRoundSearch';
-import IcRoundMoreVert from '../icons/IcRoundMoreVert';
-import IcRoundMoreHoriz from '../icons/IcRoundMoreHoriz';
+import IcRoundSearch from '../../assets/icons/IcRoundSearch';
+import IcRoundMoreHoriz from '../../assets/icons/IcRoundMoreHoriz';
+import IcRoundMoreVert from '../../assets/icons/IcRoundMoreVert';
 
 type StackParamList = {
   Search: undefined;
@@ -13,7 +13,7 @@ type StackParamList = {
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
-const HomeRight: React.FC = () => {
+const HeaderRight: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
 
   return (
@@ -27,4 +27,4 @@ const HomeRight: React.FC = () => {
   );
 };
 
-export default HomeRight;
+export default HeaderRight;

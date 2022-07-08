@@ -5,15 +5,15 @@ import RNBootSplash from 'react-native-bootsplash';
 import {Provider as PaperProvider} from 'react-native-paper';
 import coreColor from './src/utils/coreColor';
 import Home from './src/screens/Home';
+import Readhub from './src/assets/title/Readhub';
 import TopicDetail from './src/screens/TopicDetail';
-import HomeRight from './src/headers/HomeRight';
 import Search from './src/screens/Search';
 import Settings from './src/screens/Settings';
 import Welcome from './src/screens/Welcome';
 import PrivacyPolicy from './src/screens/PrivacyPolicy';
 import OpenSourceLibraries from './src/screens/OpenSourceLibraries';
 import About from './src/screens/About';
-import {Platform} from 'react-native';
+import HeaderRight from './src/screens/Home/HeaderRight';
 
 const Stack = createStackNavigator();
 
@@ -40,25 +40,19 @@ const Router: React.FC = () => {
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
         <Stack.Screen
-          name="ReadhubNative"
+          name="Readhub"
           component={Home}
-          options={{
-            headerTitle: 'Readhub Native',
+          options={() => ({
+            headerTitle: () => <Readhub color={coreColor.primary} />,
             headerTitleAlign: 'left',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontFamily: Platform.OS === 'ios' ? 'American Typewriter' : 'monospace',
-              fontSize: Platform.OS === 'ios' ? 24 : 20,
-            },
-            headerRight: () => <HomeRight />,
-          }}
+            headerRight: () => <HeaderRight />,
+          })}
         />
         <Stack.Screen
           name="Search"
           component={Search}
           options={{
             headerTitle: '搜索',
-            headerBackTitle: '返回',
           }}
         />
         <Stack.Screen
@@ -66,7 +60,6 @@ const Router: React.FC = () => {
           component={Settings}
           options={{
             headerTitle: '设置',
-            headerBackTitle: '返回',
           }}
         />
         <Stack.Screen
@@ -74,7 +67,6 @@ const Router: React.FC = () => {
           component={TopicDetail}
           options={{
             headerTitle: '话题详情',
-            headerBackTitle: '返回',
           }}
         />
         <Stack.Screen

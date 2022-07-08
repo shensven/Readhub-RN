@@ -21,22 +21,19 @@ const Aouut: React.FC = () => {
           source={require('../assets/appIcon/AppIconAlpha.png')}
           style={{marginTop: 40, marginBottom: 8}}
           theme={{
-            colors: {
-              primary: 'transparent',
-            },
+            colors: {primary: 'transparent'},
           }}
         />
-        <Text style={{fontWeight: 'bold', color: coreColor.onBackground}}>Readhub Native</Text>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.secondary, marginTop: 4}}>
-          Version 2.0.0-rc (1)
+        <Text style={{fontWeight: 'bold', color: coreColor.primary}}>SvenFE implementation of Readhub</Text>
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 4}}>
+          Version 2.0.0(1)
         </Text>
       </View>
       <View style={{alignItems: 'center', marginBottom: 8}}>
-        <Text style={{fontSize: 10, fontWeight: 'bold', marginTop: 8}}>Made with ❤️ in Kunming by @SvenFE</Text>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.secondary, marginTop: 8}}>
-          Salute to readhub.cn
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 8}}>
+          Salute to https://readhub.cn
         </Text>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.secondary, marginTop: 8}}>
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 8}}>
           Powered by React Native
         </Text>
       </View>
