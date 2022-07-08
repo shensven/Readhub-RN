@@ -1,10 +1,10 @@
 # Readhub RN
 
-[![GitHub](https://img.shields.io/github/license/shensven/Readhubn)](./LICENSE)
-[![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhubn/react-native)](./package.json)
-[![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhubn/react)](./package.json)
-[![Test](https://github.com/shensven/Readhubn/actions/workflows/next.yml/badge.svg?branch=next)](https://github.com/shensven/Readhubn/actions/workflows/next.yml)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dbb74998402143fabf05c354f0984b32)](https://app.codacy.com/gh/shensven/Readhubn?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhubn&utm_campaign=Badge_Grade_Settings)
+[![GitHub](https://img.shields.io/github/license/shensven/Readhub-RN)](./LICENSE)
+[![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react-native)](./package.json)
+[![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react)](./package.json)
+[![Test](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml/badge.svg)](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/383f840768d947f5826e9de365d05bee)](https://www.codacy.com/gh/shensven/Readhub-RN/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shensven/Readhub-RN&amp;utm_campaign=Badge_Grade)
 
 SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
 
@@ -17,7 +17,7 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currentl
 - Written in [React Native](https://reactnative.dev)
 - does NOT collect any of your privacy data
 - To keep dependencies up to date under the same major version via [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate)
-- Testing and continuous integration via [Github Workflow](https://github.com/shensven/Readhubn/actions)
+- Testing and continuous integration via [Github Workflow](https://github.com/shensven/Readhub-RN/actions)
 - Has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
 
 ## INSTALL

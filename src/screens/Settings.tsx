@@ -62,10 +62,10 @@ const Settings: React.FC = () => {
     },
     {
       title: '反馈',
-      description: 'https://github.com/shensven/Readhubn/issues',
+      description: 'https://github.com/shensven/Readhub-RN/issues',
       leftIcon: <IcRoundBugReport color={coreColor.onBackground} />,
       rightIcon: <IcRoundOpenInNew color={coreColor.secondary} size={16} />,
-      onPress: () => Linking.openURL('https://github.com/shensven/Readhubn/issues'),
+      onPress: () => Linking.openURL('https://github.com/shensven/Readhub-RN/issues'),
     },
     {
       title: '关于',

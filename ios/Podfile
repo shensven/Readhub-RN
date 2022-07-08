@@ -4,7 +4,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Readhubn' do
+target 'readhub_rn' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -19,7 +19,7 @@ target 'Readhubn' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'ReadhubnTests' do
+  target 'readhub_rnTests' do
     inherit! :complete
     # Pods for testing
   end
