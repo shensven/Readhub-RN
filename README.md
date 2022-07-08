@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react-native)](./package.json)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react)](./package.json)
 [![Test](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml/badge.svg)](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/383f840768d947f5826e9de365d05bee)](https://www.codacy.com/gh/shensven/Readhub-RN/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shensven/Readhub-RN&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/383f840768d947f5826e9de365d05bee)](https://www.codacy.com/gh/shensven/Readhub-RN/dashboard?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhub-RN&utm_campaign=Badge_Grade)
 
 SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
 
@@ -109,4 +109,4 @@ yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
 
 ## LICENSE
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FReadhubn.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FReadhubn?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FReadhub-RN.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FReadhub-RN?ref=badge_large)
