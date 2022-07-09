@@ -1,4 +1,9 @@
-# Readhub RN
+<div align="center" >
+  <h1>
+    <img src="./src/assets/appIcon/AppIconAlpha.png" width="180px" height="180px" />
+    <p>Readhub RN</p>
+  </h1>
+</div>
 
 [![GitHub](https://img.shields.io/github/license/shensven/Readhub-RN)](./LICENSE)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react-native)](./package.json)
@@ -12,19 +17,19 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currentl
 | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 | ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) | ![Screenshot 4](src/assets/Screenshots/screenshot-4.png) | ![Screenshot 5](src/assets/Screenshots/screenshot-5.png) |
 
-## INTRO
+## 📦 INSTALLATION
+
+<a href='https://play.google.com/store/apps/details?id=com.shensven.readhubn'><img width="153" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
+## 🔨 BUILD
+
+### INTRO
 
 - Written in [React Native](https://reactnative.dev)
 - does NOT collect any of your privacy data
 - To keep dependencies up to date under the same major version via [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate)
 - Testing and continuous integration via [Github Workflow](https://github.com/shensven/Readhub-RN/actions)
 - Has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
-
-## INSTALL
-
-<a href='https://play.google.com/store/apps/details?id=com.shensven.readhubn'><img width="153" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-## BUILD
 
 ### PREREQUISITES
 
@@ -107,6 +112,6 @@ yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
   --flavor=main
 ```
 
-## LICENSE
+## 📜 LICENSE
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FReadhub-RN.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FReadhub-RN?ref=badge_large)
