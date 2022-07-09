@@ -8,9 +8,9 @@
 
 SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
 
-|                         iOS Home                         |                     iOS Topic Detail                     |
-| :------------------------------------------------------: | :------------------------------------------------------: |
-| ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) |
+|                         iOS Home                         |                     iOS Topic Detail                     |                       android Home                       |                   android Topic Detail                   |
+| :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
+| ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) | ![Screenshot 4](src/assets/Screenshots/screenshot-4.png) | ![Screenshot 5](src/assets/Screenshots/screenshot-5.png) |
 
 ## INTRO
 
