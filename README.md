@@ -8,7 +8,8 @@
 [![GitHub](https://img.shields.io/github/license/shensven/Readhub-RN)](./LICENSE)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react-native)](./package.json)
 [![](https://img.shields.io/github/package-json/dependency-version/shensven/Readhub-RN/react)](./package.json)
-[![Test](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml/badge.svg)](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml)
+[![Test](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml/badge.svg?branch=next)](https://github.com/shensven/Readhub-RN/actions/workflows/next.yml)
+[![Publish](https://github.com/shensven/Readhub-RN/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/shensven/Readhub-RN/actions/workflows/publish.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/383f840768d947f5826e9de365d05bee)](https://www.codacy.com/gh/shensven/Readhub-RN/dashboard?utm_source=github.com&utm_medium=referral&utm_content=shensven/Readhub-RN&utm_campaign=Badge_Grade)
 
 SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
