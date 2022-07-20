@@ -27,16 +27,6 @@ jobs:
         with:
           node-version: 16
 
-      - name: Cache yarn dependencies
-        uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Cache gradle dependencies
         uses: actions/cache@v3
         with:
@@ -46,6 +36,16 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/*.gradle', '**/android/*.properties', '**/android/gradle/wrapper/gradle-wrapper.properties', '**/android/app/*.gradle') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies
         run: |
