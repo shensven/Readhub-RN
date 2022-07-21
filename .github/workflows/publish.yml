@@ -60,7 +60,7 @@ jobs:
           APP_VERSION=$(node -e "console.log(require('./package.json').version)")
           echo ::set-output name=app_version::$APP_VERSION
 
-      - name: Release
+      - name: Release for Android & Play Store
         env:
           VERSION_CODE: ${{ github.run_number }}
           VERSION_NAME: ${{ steps.app_version.outputs.app_version }}
@@ -69,7 +69,7 @@ jobs:
           ./gradlew assembleRelease
           ./gradlew bundleRelease
 
-      - name: Upload apk
+      - name: Upload .apk to GitHub
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -79,12 +79,12 @@ jobs:
           draft: true
           artifacts: 'android/app/build/outputs/apk/release/*.*'
 
-      - name: Upload aab
+      - name: Backup .aab to GitHub
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: app-store
-          tag: app-store
+          name: App Store Backup
+          tag: app-store-backup
           allowUpdates: true
           draft: true
           artifacts: 'android/app/build/outputs/bundle/release/*.aab'
@@ -168,7 +168,7 @@ jobs:
           APP_VERSION=$(node -e "console.log(require('./package.json').version)")
           echo ::set-output name=app_version::$APP_VERSION
 
-      - name: Release
+      - name: Release for App Store & Upload to TestFlight
         run: |
           cd ios
           xcrun agvtool new-marketing-version ${{ steps.app_version.outputs.app_version }}
@@ -180,6 +180,7 @@ jobs:
             -configuration Release \
             -archivePath ${{ runner.temp }}/readhub_rn.xcarchive \
             -allowProvisioningUpdates \
+            -quiet \
             PROVISIONING_PROFILE_SPECIFIER="Readhub Distribution" \
             CODE_SIGN_STYLE="Manual" \
             CODE_SIGN_IDENTITY="iPhone Distribution"
@@ -189,14 +190,21 @@ jobs:
             -exportPath ${{ runner.temp }} \
             -exportOptionsPlist readhub_rn/ExportOptions.plist
             -allowProvisioningUpdates \
+            -quiet \
             | xcpretty
 
-      - name: Upload ipa
+          xcrun altool --upload-app \
+            --type ios \
+            --file "${{ runner.temp }}/readhub_rn.ipa" \
+            --username "${{ secrets.APPLE_ID }}" \
+            --password "${{ secrets.APPLE_ID_PASS }}" \
+
+      - name: Backup .ipa to GitHub
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: app-store
-          tag: app-store
+          name: App Store Backup
+          tag: app-store-backup
           allowUpdates: true
           draft: true
           artifacts: '${{ runner.temp }}/*.ipa'
