@@ -2,9 +2,13 @@ import React from 'react';
 import {Dimensions, View} from 'react-native';
 import {Avatar, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import DeviceInfo from 'react-native-device-info';
 import coreColor from '../utils/coreColor';
 
 const screenHeight = Dimensions.get('screen').height;
+
+const version = DeviceInfo.getVersion();
+const buildNumber = DeviceInfo.getBuildNumber();
 
 const Aouut: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -26,7 +30,7 @@ const Aouut: React.FC = () => {
         />
         <Text style={{fontWeight: 'bold', color: coreColor.primary}}>SvenFE implementation of Readhub</Text>
         <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 4}}>
-          Version 2.0.0(1)
+          Version {version} ({buildNumber})
         </Text>
       </View>
       <View style={{alignItems: 'center', marginBottom: 8}}>
