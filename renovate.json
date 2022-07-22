@@ -32,7 +32,7 @@
       "groupName": "devDependencies",
       "matchDepTypes": ["devDependencies"],
       "enabled": false,
-      "excludePackageNames": ["@types/jest", "@types/react-native", "@types/react-test-renderer", "license-compliance"]
+      "excludePackageNames": ["@types/jest", "@types/react-native", "@types/react-test-renderer"]
     }
   ]
 }
