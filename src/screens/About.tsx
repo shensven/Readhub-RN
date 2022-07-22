@@ -15,11 +15,7 @@ const Aouut: React.FC = () => {
 
   return (
     <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center', paddingBottom: insets.bottom}}>
-      <View
-        style={{
-          alignItems: 'center',
-          height: screenHeight * 0.75,
-        }}>
+      <View style={{alignItems: 'center', height: screenHeight * 0.75}}>
         <Avatar.Image
           size={68}
           source={require('../assets/appIcon/AppIconAlpha.png')}
