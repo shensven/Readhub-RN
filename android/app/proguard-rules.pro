@@ -9,8 +9,10 @@
 
 # Add any project specific keep options here:
 
+-keep class com.google.android.gms.common.** {*;}
 -keep class com.facebook.hermes.unicode.** { *; }
 -keep class com.facebook.jni.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
 -keep class com.swmansion.reanimated.** { *; }
 -keep public class com.horcrux.svg.** {*;}
+-keepclassmembers class com.android.installreferrer.api.** { *; }

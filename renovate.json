@@ -18,6 +18,7 @@
         "lottie-react-native",
         "react-native-bars",
         "react-native-bootsplash",
+        "react-native-device-info",
         "react-native-collapsible-tab-view",
         "react-native-gesture-handler",
         "react-native-paper",
