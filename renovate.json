@@ -2,11 +2,11 @@
   "extends": ["config:base"],
   "baseBranches": ["next"],
   "semanticCommits": "enabled",
-  "major": false,
   "packageRules": [
     {
       "groupName": "dependencies",
       "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
       "enabled": false,
       "excludePackageNames": [
         "@react-native-masked-view/masked-view",
@@ -31,6 +31,7 @@
     {
       "groupName": "devDependencies",
       "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
       "enabled": false,
       "excludePackageNames": ["@types/jest", "@types/react-native", "@types/react-test-renderer"]
     }
