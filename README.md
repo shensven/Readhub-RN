@@ -14,13 +14,19 @@
 
 SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currently in refactoring...
 
-|                         iOS Home                         |                     iOS Topic Detail                     |                       android Home                       |                   android Topic Detail                   |
+|                         iOS Home                         |                     iOS Topic Detail                     |                       Android Home                       |                   Android Topic Detail                   |
 | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: |
 | ![Screenshot 1](src/assets/Screenshots/screenshot-1.png) | ![Screenshot 2](src/assets/Screenshots/screenshot-2.png) | ![Screenshot 4](src/assets/Screenshots/screenshot-4.png) | ![Screenshot 5](src/assets/Screenshots/screenshot-5.png) |
 
-## 📦 INSTALLATION
+## 📦 DISTRIBUTION
 
-<a href='https://play.google.com/store/apps/details?id=com.shensven.readhubn'><img width="153" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+### iOS
+
+- Not released yet
+
+### Android
+
+- Download the apk via [GitHub Release](https://github.com/shensven/Readhub-RN/releases)
 
 ## 🔨 BUILD
 
@@ -48,20 +54,17 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currentl
 
 ```sh
 yarn install
-```
-
-```sh
 cd ios && pod install
 ```
 
 ### DEBUGGING ON THE SIMULATOR
 
 ```sh
-yarn react-native run-ios
+yarn ios
 ```
 
 ```sh
-yarn react-native run-android
+yarn android
 ```
 
 ### DEBUGGING ON THE DEVICE
@@ -71,16 +74,12 @@ npm install -g ios-deploy
 ```
 
 ```sh
-yarn react-native run-ios --device
+yarn ios --device
 ```
 
 ```sh
-yarn react-native run-android
+yarn android run-android
 ```
-
-### DEBUGGING TOOL
-
-Using [Flipper](https://fbflipper.com/) for debugging
 
 ### TEST
 
@@ -89,19 +88,22 @@ yarn test
 ```
 
 ```sh
-cd android && chmod +x gradlew && ./gradlew test
+cd android
+chmod +x gradlew
+./gradlew test
 ```
 
-### iOS DEPLOY
+### iPhone DEPLOY
 
 ```sh
-yarn react-native run-ios --configuration Release --device
+yarn ios --configuration Release --device
 ```
 
 ### ASSEMBLE THE APK
 
 ```sh
-cd android && ./gradlew assembleRelease
+cd android
+./gradlew assembleRelease
 ```
 
 ### BOOTSPLASH GENERATION
