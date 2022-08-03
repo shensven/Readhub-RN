@@ -21,6 +21,7 @@
         "react-native-bootsplash",
         "react-native-device-info",
         "react-native-gesture-handler",
+        "react-native-mmkv",
         "react-native-paper",
         "react-native-reanimated",
         "react-native-safe-area-context",
