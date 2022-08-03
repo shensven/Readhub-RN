@@ -1,5 +1,5 @@
 import React from 'react';
-import {Linking, View} from 'react-native';
+import {Alert, Linking, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -7,16 +7,19 @@ import {List, TouchableRipple, useTheme} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
 import color from 'color';
 import IcRoundAutoAwesome from '../assets/icons/IcRoundAutoAwesome';
+import IcRoundColorLens from '../assets/icons/IcRoundColorLens';
 import IcRoundDelete from '../assets/icons/IcRoundDelete';
 import IcRoundShield from '../assets/icons/IcRoundShield';
 import IcRoundCode from '../assets/icons/IcRoundCode';
 import IcRoundBugReport from '../assets/icons/IcRoundBugReport';
 import IcRoundInfo from '../assets/icons/IcRoundInfo';
 import IcRoundChevronRight from '../assets/icons/IcRoundChevronRight';
+import IcRoundOpenInFull from '../assets/icons/IcRoundOpenInFull';
 import IcRoundOpenInNew from '../assets/icons/IcRoundOpenInNew';
 
 type StackParamList = {
   Welcome: undefined;
+  Appearance: undefined;
   PrivacyPolicy: undefined;
   OpenSourceLibraries: undefined;
   About: undefined;
@@ -37,18 +40,31 @@ const Settings: React.FC = () => {
 
   const {colors} = useTheme();
 
+  const resetMark = () => {
+    Alert.alert('再次确认', '主页的已读标记将被重置', [
+      {text: '取消', style: 'cancel'},
+      {text: '确定', style: 'destructive'},
+    ]);
+  };
+
   const data = [
     {
-      title: '欢迎',
+      title: '欢迎光临',
       leftIcon: <IcRoundAutoAwesome color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
       onPress: () => navigation.navigate('Welcome'),
     },
     {
-      title: '重置阅读进度',
-      leftIcon: <IcRoundDelete color={color(colors.onBackground).alpha(0.9).toString()} />,
+      title: '外观',
+      leftIcon: <IcRoundColorLens color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      onPress: () => {},
+      onPress: () => navigation.navigate('Appearance'),
+    },
+    {
+      title: '重置已读标记',
+      leftIcon: <IcRoundDelete color={color(colors.onBackground).alpha(0.9).toString()} />,
+      rightIcon: <IcRoundOpenInFull color={color(colors.onBackground).alpha(0.7).toString()} size={17} />,
+      onPress: () => resetMark(),
     },
     {
       title: '隐私政策',

@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {IconButton} from 'react-native-paper';
+import {IconButton, useTheme} from 'react-native-paper';
 import IcRoundSearch from '../../assets/icons/IcRoundSearch';
 import IcRoundMoreHoriz from '../../assets/icons/IcRoundMoreHoriz';
 import IcRoundMoreVert from '../../assets/icons/IcRoundMoreVert';
@@ -16,11 +16,22 @@ type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 const HeaderRight: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
 
+  const {colors} = useTheme();
+
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <IconButton icon={() => <IcRoundSearch />} onPress={() => navigation.navigate('Search')} />
       <IconButton
-        icon={() => (Platform.OS === 'ios' ? <IcRoundMoreHoriz /> : <IcRoundMoreVert />)}
+        icon={() => <IcRoundSearch color={colors.onBackground} />}
+        onPress={() => navigation.navigate('Search')}
+      />
+      <IconButton
+        icon={() =>
+          Platform.OS === 'ios' ? (
+            <IcRoundMoreHoriz color={colors.onBackground} />
+          ) : (
+            <IcRoundMoreVert color={colors.onBackground} />
+          )
+        }
         onPress={() => navigation.navigate('Settings')}
       />
     </View>

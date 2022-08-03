@@ -109,9 +109,10 @@ const Home: React.FC = () => {
           backgroundColor: color(colors.secondary).alpha(0.12).toString(),
         }}
         onPress={() => navigation.navigate('TopicDetail', {id: item.id})}>
-        <>
+        <View>
           <Text
             style={{
+              marginHorizontal: 2,
               fontSize: 18,
               fontWeight: 'bold',
               textAlign: 'justify',
@@ -122,24 +123,22 @@ const Home: React.FC = () => {
           </Text>
           <View
             style={{
-              marginTop: 8,
+              alignSelf: 'flex-start',
               flexDirection: 'row',
               alignItems: 'center',
-              alignSelf: 'flex-start',
-              backgroundColor: colors.surface,
+              height: 24,
+              marginTop: 8,
+              paddingHorizontal: 8,
               borderRadius: 8,
-              paddingVertical: 4,
-              paddingLeft: 4,
-              paddingRight: 8,
-              opacity: 0.8,
+              backgroundColor: colors.surface,
             }}>
-            <Text style={{fontSize: 12, includeFontPadding: false}}>🕙</Text>
+            <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>🕙</Text>
             <Text
               style={{
-                marginLeft: 4,
                 fontSize: 12,
                 includeFontPadding: false,
-                color: colors.secondary,
+                marginLeft: 4,
+                color: color(colors.secondary).alpha(0.7).toString(),
               }}>
               {dayjs(item.publishDate).fromNow()}
             </Text>
@@ -147,7 +146,8 @@ const Home: React.FC = () => {
           <Text
             numberOfLines={5}
             style={{
-              marginTop: 16,
+              marginTop: 8,
+              marginHorizontal: 2,
               fontSize: 15,
               textAlign: 'justify',
               lineHeight: 15 * 1.8,
@@ -155,28 +155,23 @@ const Home: React.FC = () => {
             }}>
             {item.summary}
           </Text>
-          <View
-            style={{
-              marginTop: 8,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              opacity: 0.8,
-            }}>
+          <View style={{marginTop: 8, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <View
               style={{
-                display: 'flex',
                 flexDirection: 'row',
-                backgroundColor: colors.surface,
-                borderRadius: 8,
-                paddingVertical: 4,
+                alignItems: 'center',
+                height: 24,
                 paddingHorizontal: 8,
+                borderRadius: 8,
+                backgroundColor: colors.surface,
               }}>
               {item.newsArray.length === 1 && (
-                <Text style={{fontSize: 12, color: colors.secondary}}>{item.newsArray[0].siteName + ' 报道'}</Text>
+                <Text style={{fontSize: 12, color: color(colors.secondary).alpha(0.7).toString()}}>
+                  {item.newsArray[0].siteName + ' 报道'}
+                </Text>
               )}
               {item.newsArray.length > 1 && (
-                <Text style={{fontSize: 12, color: colors.secondary}}>
+                <Text style={{fontSize: 12, color: color(colors.secondary).alpha(0.7).toString()}}>
                   {item.newsArray[0].siteName + ' 等 ' + item.newsArray.length + ' 家媒体报道'}
                 </Text>
               )}
@@ -190,13 +185,13 @@ const Home: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingRight: 2,
-                backgroundColor: colors.secondary,
+                backgroundColor: color(colors.secondary).alpha(0.7).toString(),
               }}
               onPress={() => {}}>
               <IcRoundShare size={14} color={colors.onSecondary} />
             </TouchableRipple>
           </View>
-        </>
+        </View>
       </TouchableRipple>
     );
   };
@@ -204,6 +199,7 @@ const Home: React.FC = () => {
   return (
     <FlatList
       data={topics}
+      extraData={topics}
       renderItem={renderTopicItem}
       ListHeaderComponent={<View />}
       ListHeaderComponentStyle={{height: 16}}

@@ -83,30 +83,36 @@ const TopicDetail: React.FC = () => {
       )}
       {!hasLoading && (
         <View style={{margin: 20}}>
-          <Text selectable style={{fontSize: 20, fontWeight: 'bold', color: colors.onBackground, lineHeight: 20 * 1.5}}>
+          <Text
+            selectable
+            style={{
+              marginHorizontal: 2,
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: colors.onBackground,
+              lineHeight: 20 * 1.5,
+            }}>
             {detail.title}
           </Text>
           {detail.publishDate.length > 0 && (
             <View
               style={{
-                marginTop: 16,
+                alignSelf: 'flex-start',
                 flexDirection: 'row',
                 alignItems: 'center',
-                alignSelf: 'flex-start',
+                height: 24,
+                marginTop: 12,
+                paddingHorizontal: 8,
                 borderRadius: 8,
-                paddingVertical: 4,
-                paddingLeft: 4,
-                paddingRight: 8,
-                backgroundColor: color(colors.secondary).alpha(0.12).toString(),
-                opacity: 0.8,
+                backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
               }}>
-              <Text style={{fontSize: 12, includeFontPadding: false}}>🕙</Text>
+              <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>🕙</Text>
               <Text
                 style={{
-                  marginLeft: 4,
                   fontSize: 12,
-                  color: color(colors.onSurface).alpha(0.8).toString(),
                   includeFontPadding: false,
+                  marginLeft: 4,
+                  color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
                 }}>
                 {dayjs(detail.publishDate).fromNow()}
               </Text>
@@ -114,7 +120,14 @@ const TopicDetail: React.FC = () => {
           )}
           <Text
             selectable
-            style={{marginTop: 20, fontSize: 16, textAlign: 'justify', lineHeight: 15 * 2, color: colors.onBackground}}>
+            style={{
+              marginTop: 12,
+              marginHorizontal: 2,
+              fontSize: 16,
+              textAlign: 'justify',
+              lineHeight: 15 * 2,
+              color: colors.onBackground,
+            }}>
             {detail.summary}
           </Text>
 
@@ -122,24 +135,22 @@ const TopicDetail: React.FC = () => {
             <>
               <View
                 style={{
+                  alignSelf: 'flex-start',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  alignSelf: 'flex-start',
+                  height: 24,
                   marginTop: 24,
+                  paddingHorizontal: 8,
                   borderRadius: 8,
-                  paddingVertical: 4,
-                  paddingLeft: 4,
-                  paddingRight: 8,
-                  backgroundColor: color(colors.secondary).alpha(0.12).toString(),
-                  opacity: 0.8,
+                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
                 }}>
-                <Text style={{fontSize: 12, includeFontPadding: false}}>📰</Text>
+                <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>📰</Text>
                 <Text
                   style={{
-                    marginLeft: 4,
                     fontSize: 12,
-                    color: color(colors.onSurface).alpha(0.8).toString(),
                     includeFontPadding: false,
+                    marginLeft: 4,
+                    color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
                   }}>
                   相关事件
                 </Text>
@@ -147,17 +158,12 @@ const TopicDetail: React.FC = () => {
               <View>
                 {detail.timeline.topics.map((item, index) => (
                   <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
-                    <Text style={{color: color(colors.onBackground).alpha(0.8).toString()}}>・</Text>
+                    <Text style={{color: colors.tertiary}}>・</Text>
                     <View style={{flex: 1}}>
                       <TouchableOpacity
                         disabled={id === item.id}
                         onPress={() => navigation.push('TopicDetail', {id: item.id})}>
-                        <Text
-                          style={{
-                            fontSize: 13,
-                            lineHeight: 13 * 1.5,
-                            color: color(colors.onBackground).alpha(0.8).toString(),
-                          }}>
+                        <Text style={{fontSize: 13, lineHeight: 13 * 1.5, color: colors.tertiary}}>
                           {item.title}
                           {id === item.id && <Text style={{color: colors.primary}}>（当前阅读）</Text>}
                         </Text>
@@ -181,24 +187,22 @@ const TopicDetail: React.FC = () => {
             <>
               <View
                 style={{
+                  alignSelf: 'flex-start',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  alignSelf: 'flex-start',
+                  height: 24,
                   marginTop: 24,
+                  paddingHorizontal: 8,
                   borderRadius: 8,
-                  paddingVertical: 4,
-                  paddingLeft: 4,
-                  paddingRight: 8,
-                  backgroundColor: color(colors.secondary).alpha(0.12).toString(),
-                  opacity: 0.8,
+                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
                 }}>
-                <Text style={{fontSize: 12, includeFontPadding: false}}>🔗</Text>
+                <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>🔗</Text>
                 <Text
                   style={{
-                    marginLeft: 4,
                     fontSize: 12,
-                    color: color(colors.onSurface).alpha(0.8).toString(),
                     includeFontPadding: false,
+                    marginLeft: 4,
+                    color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
                   }}>
                   媒体报道
                 </Text>
@@ -206,23 +210,12 @@ const TopicDetail: React.FC = () => {
               <View>
                 {detail.newsArray.map((item, index) => (
                   <View key={index} style={{flexDirection: 'row', marginTop: 12}}>
-                    <Text style={{color: color(colors.onBackground).alpha(0.8).toString()}}>・</Text>
+                    <Text style={{color: colors.tertiary}}>・</Text>
                     <View style={{flex: 1}}>
                       <TouchableOpacity onPress={() => Linking.openURL(item.mobileUrl)}>
-                        <Text
-                          style={{
-                            fontSize: 13,
-                            color: color(colors.onBackground).alpha(0.8).toString(),
-                            lineHeight: 13 * 1.5,
-                          }}>
+                        <Text style={{fontSize: 13, lineHeight: 13 * 1.5, color: colors.tertiary}}>
                           {item.title + ' - '}
-                          <Text
-                            style={{
-                              fontSize: 13,
-                              color: color(colors.onBackground).alpha(0.8).toString(),
-                            }}>
-                            {item.siteName + ' '}
-                          </Text>
+                          <Text style={{fontSize: 13, color: colors.tertiary}}>{item.siteName + ' '}</Text>
                         </Text>
                       </TouchableOpacity>
                     </View>

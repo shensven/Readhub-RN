@@ -11,6 +11,7 @@ import Search from './screens/Search';
 import Settings from './screens/Settings';
 import TopicDetail from './screens/TopicDetail';
 import Welcome from './screens/Welcome';
+import Appearance from './screens/Appearance';
 import PrivacyPolicy from './screens/PrivacyPolicy';
 import OpenSourceLibraries from './screens/OpenSourceLibraries';
 import About from './screens/About';
@@ -56,6 +57,13 @@ const MainStack: React.FC = () => {
           })}
         />
         <Stack.Screen
+          name="TopicDetail"
+          component={TopicDetail}
+          options={{
+            headerTitle: '话题详情',
+          }}
+        />
+        <Stack.Screen
           name="Search"
           component={Search}
           options={{
@@ -67,13 +75,6 @@ const MainStack: React.FC = () => {
           component={Settings}
           options={{
             headerTitle: '设置',
-          }}
-        />
-        <Stack.Screen
-          name="TopicDetail"
-          component={TopicDetail}
-          options={{
-            headerTitle: '话题详情',
           }}
         />
         <Stack.Screen
@@ -90,6 +91,13 @@ const MainStack: React.FC = () => {
               backgroundColor: colors.surfaceVariant,
             },
             ...TransitionPresets.ModalSlideFromBottomIOS,
+          }}
+        />
+        <Stack.Screen
+          name="Appearance"
+          component={Appearance}
+          options={{
+            headerTitle: '外观',
           }}
         />
         <Stack.Screen

@@ -2,7 +2,10 @@ import {useColorScheme} from 'react-native';
 import {DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme} from 'react-native-paper';
 import {DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme} from '@react-navigation/native';
 import {useAtom} from 'jotai';
-import {atomAppearance} from '../atoms/appAtom';
+import {atomAppearance, atomStatusBarStyle} from '../atoms/appAtom';
+import type {Appearance, StatusBarStyle} from '../atoms/appAtom';
+import {storage} from '../../App';
+import {useEffect} from 'react';
 
 declare global {
   namespace ReactNativePaper {
@@ -22,7 +25,7 @@ declare global {
 
 const paperLightTheme = {
   ...PaperDefaultTheme,
-  roundness: 12,
+  roundness: 16,
   version: 2,
   colors: {
     ...PaperDefaultTheme.colors,
@@ -45,7 +48,7 @@ const paperLightTheme = {
 
 const paperDarkTheme = {
   ...PaperDarkTheme,
-  roundness: 12,
+  roundness: 16,
   version: 2,
   colors: {
     ...PaperDarkTheme.colors,
@@ -83,7 +86,34 @@ const navigationDarkTheme = {
 
 const useColorSystem = () => {
   const colorScheme = useColorScheme();
-  const [appearance] = useAtom(atomAppearance);
+  const [statusBarStyle, setStatusBarStyle] = useAtom(atomStatusBarStyle);
+  const [appearance, setAppearance] = useAtom(atomAppearance);
+
+  const updateStatusBarStyle = (_statusBarStyle?: StatusBarStyle) => {
+    if (_statusBarStyle && ['light-content', 'dark-content'].includes(_statusBarStyle)) {
+      setStatusBarStyle(_statusBarStyle);
+    } else {
+      if (appearance === 'light') {
+        setStatusBarStyle('dark-content');
+      } else if (appearance === 'dark') {
+        setStatusBarStyle('light-content');
+      } else {
+        setStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
+      }
+    }
+  };
+
+  const updateAppearance = (_appearance: Appearance) => {
+    if (_appearance === 'light') {
+      updateStatusBarStyle('dark-content');
+    } else if (_appearance === 'dark') {
+      updateStatusBarStyle('light-content');
+    } else {
+      updateStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
+    }
+    setAppearance(_appearance);
+    storage.set('@appearance', JSON.stringify(_appearance));
+  };
 
   const getPaperAppearance = () => {
     if (appearance === 'light') {
@@ -105,9 +135,16 @@ const useColorSystem = () => {
     }
   };
 
+  useEffect(() => {
+    updateStatusBarStyle();
+  }, [colorScheme]);
+
   return {
+    statusBarStyle,
+    appearance,
     getPaperAppearance,
     getNavigationAppearance,
+    updateAppearance,
   };
 };
 
