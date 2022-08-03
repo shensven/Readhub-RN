@@ -6,7 +6,7 @@
     {
       "groupName": "dependencies",
       "matchDepTypes": ["dependencies"],
-      "matchUpdateTypes": ["patch", "minor"],
+      "matchUpdateTypes": ["minor"],
       "enabled": false,
       "excludePackageNames": [
         "@react-native-masked-view/masked-view",
@@ -33,7 +33,7 @@
     {
       "groupName": "devDependencies",
       "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["patch", "minor"],
+      "matchUpdateTypes": ["minor"],
       "enabled": false,
       "excludePackageNames": ["@types/color", "@types/jest", "@types/react-native", "@types/react-test-renderer"]
     }
