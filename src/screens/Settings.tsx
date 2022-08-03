@@ -1,10 +1,12 @@
 import React from 'react';
-import {Alert, Linking, View} from 'react-native';
+import {Alert, Linking, NativeModules, Platform, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/elements';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {List, TouchableRipple, useTheme} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
+import {BlurView} from '@react-native-community/blur';
 import color from 'color';
 import IcRoundAutoAwesome from '../assets/icons/IcRoundAutoAwesome';
 import IcRoundColorLens from '../assets/icons/IcRoundColorLens';
@@ -16,6 +18,7 @@ import IcRoundInfo from '../assets/icons/IcRoundInfo';
 import IcRoundChevronRight from '../assets/icons/IcRoundChevronRight';
 import IcRoundOpenInFull from '../assets/icons/IcRoundOpenInFull';
 import IcRoundOpenInNew from '../assets/icons/IcRoundOpenInNew';
+import useColorSystem from '../utils/useColorSystem';
 
 type StackParamList = {
   Welcome: undefined;
@@ -35,10 +38,16 @@ interface SettingsItem {
 }
 
 const Settings: React.FC = () => {
+  const {StatusBarManager} = NativeModules;
+  const statusBarHeight = StatusBarManager.HEIGHT;
+
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation<ScreenNavigationProp>();
+  const headerHeight = useHeaderHeight();
 
   const {colors} = useTheme();
+  const {headerBlurType} = useColorSystem();
+
+  const navigation = useNavigation<ScreenNavigationProp>();
 
   const resetMark = () => {
     Alert.alert('再次确认', '主页的已读标记将被重置', [
@@ -109,13 +118,24 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <FlatList
-      data={data}
-      renderItem={renderCard}
-      keyExtractor={item => item.title}
-      ListFooterComponent={<View />}
-      ListFooterComponentStyle={{height: insets.bottom}}
-    />
+    <View style={{flex: 1}}>
+      <FlatList
+        data={data}
+        renderItem={renderCard}
+        keyExtractor={item => item.title}
+        ListFooterComponent={<View />}
+        ListFooterComponentStyle={{height: insets.bottom}}
+        scrollIndicatorInsets={{top: headerHeight - statusBarHeight}}
+        style={{paddingTop: Platform.OS === 'ios' ? headerHeight : 0}}
+      />
+      {Platform.OS === 'ios' && (
+        <BlurView
+          blurType={headerBlurType}
+          blurAmount={16}
+          style={{width: '100%', height: headerHeight, position: 'absolute', top: 0}}
+        />
+      )}
+    </View>
   );
 };
 

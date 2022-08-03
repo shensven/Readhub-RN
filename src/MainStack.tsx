@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
@@ -6,7 +7,7 @@ import {useTheme} from 'react-native-paper';
 import useColorSystem from './utils/useColorSystem';
 import Readhub from './assets/title/Readhub';
 import Home from './screens/Home';
-import HeaderRight from './screens/Home/HeaderRight';
+import HomeHeaderRight from './screens/components/HomeHeaderRight';
 import Search from './screens/Search';
 import Settings from './screens/Settings';
 import TopicDetail from './screens/TopicDetail';
@@ -31,15 +32,15 @@ const MainStack: React.FC = () => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
+          headerTintColor: colors.primary,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
           headerStyle: {
             elevation: 0, // Android
             shadowOpacity: 0, // iOS
             backgroundColor: colors.background,
           },
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTintColor: colors.primary,
           cardStyle: {
             backgroundColor: colors.background,
           },
@@ -51,9 +52,9 @@ const MainStack: React.FC = () => {
           name="Readhub"
           component={Home}
           options={() => ({
-            headerTitle: () => <Readhub color={colors.primary} />,
             headerTitleAlign: 'left',
-            headerRight: () => <HeaderRight />,
+            headerTitle: () => <Readhub color={colors.primary} />,
+            headerRight: () => <HomeHeaderRight />,
           })}
         />
         <Stack.Screen
@@ -61,6 +62,7 @@ const MainStack: React.FC = () => {
           component={TopicDetail}
           options={{
             headerTitle: '话题详情',
+            headerTransparent: Platform.OS === 'ios' ? true : false,
           }}
         />
         <Stack.Screen
@@ -75,6 +77,7 @@ const MainStack: React.FC = () => {
           component={Settings}
           options={{
             headerTitle: '设置',
+            headerTransparent: Platform.OS === 'ios' ? true : false,
           }}
         />
         <Stack.Screen
@@ -98,6 +101,7 @@ const MainStack: React.FC = () => {
           component={Appearance}
           options={{
             headerTitle: '外观',
+            headerTransparent: Platform.OS === 'ios' ? true : false,
           }}
         />
         <Stack.Screen
@@ -105,6 +109,7 @@ const MainStack: React.FC = () => {
           component={PrivacyPolicy}
           options={{
             headerTitle: '隐私政策',
+            headerTransparent: Platform.OS === 'ios' ? true : false,
           }}
         />
         <Stack.Screen
@@ -112,6 +117,7 @@ const MainStack: React.FC = () => {
           component={OpenSourceLibraries}
           options={{
             headerTitle: '开源库',
+            headerTransparent: Platform.OS === 'ios' ? true : false,
           }}
         />
         <Stack.Screen

@@ -13,7 +13,7 @@ type StackParamList = {
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
-const HeaderRight: React.FC = () => {
+const HomeHeaderRight: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
 
   const {colors} = useTheme();
@@ -38,4 +38,4 @@ const HeaderRight: React.FC = () => {
   );
 };
 
-export default HeaderRight;
+export default HomeHeaderRight;

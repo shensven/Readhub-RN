@@ -4,13 +4,13 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Text, useTheme} from 'react-native-paper';
-import {ScrollView} from 'react-native-gesture-handler';
 import {AxiosResponse} from 'axios';
 import dayjs from 'dayjs';
 import color from 'color';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import feedAxios from '../utils/feedAxios';
+import BlurScrollView from './components/BlurScrollView';
 import Loading from '../animation/Loading/Loading';
+import feedAxios from '../utils/feedAxios';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -75,14 +75,14 @@ const TopicDetail: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView scrollIndicatorInsets={{right: 1}} contentContainerStyle={{paddingBottom: insets.bottom}}>
+    <BlurScrollView>
       {hasLoading && (
         <View style={{marginTop: screenHeight / 4}}>
           <Loading />
         </View>
       )}
       {!hasLoading && (
-        <View style={{margin: 20}}>
+        <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 16 + insets.bottom}}>
           <Text
             selectable
             style={{
@@ -226,7 +226,7 @@ const TopicDetail: React.FC = () => {
           )}
         </View>
       )}
-    </ScrollView>
+    </BlurScrollView>
   );
 };
 

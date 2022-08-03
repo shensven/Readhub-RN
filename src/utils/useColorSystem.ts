@@ -2,8 +2,8 @@ import {useColorScheme} from 'react-native';
 import {DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme} from 'react-native-paper';
 import {DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme} from '@react-navigation/native';
 import {useAtom} from 'jotai';
-import {atomAppearance, atomStatusBarStyle} from '../atoms/appAtom';
-import type {Appearance, StatusBarStyle} from '../atoms/appAtom';
+import {atomAppearance, atomHeaderBlurType, atomStatusBarStyle} from '../atoms/appAtom';
+import type {Appearance, StatusBarStyle, HeaderBlurType} from '../atoms/appAtom';
 import {storage} from '../../App';
 import {useEffect} from 'react';
 
@@ -87,6 +87,7 @@ const navigationDarkTheme = {
 const useColorSystem = () => {
   const colorScheme = useColorScheme();
   const [statusBarStyle, setStatusBarStyle] = useAtom(atomStatusBarStyle);
+  const [headerBlurType, setHeaderBlurType] = useAtom(atomHeaderBlurType);
   const [appearance, setAppearance] = useAtom(atomAppearance);
 
   const updateStatusBarStyle = (_statusBarStyle?: StatusBarStyle) => {
@@ -103,13 +104,28 @@ const useColorSystem = () => {
     }
   };
 
+  const updateHeaderBlurType = (_headerBlurType?: HeaderBlurType) => {
+    if (_headerBlurType && ['light', 'dark'].includes(_headerBlurType)) {
+      setHeaderBlurType(_headerBlurType);
+    } else {
+      if (appearance === 'followSystem') {
+        setHeaderBlurType(colorScheme === 'dark' ? 'dark' : 'light');
+      } else {
+        setHeaderBlurType(appearance);
+      }
+    }
+  };
+
   const updateAppearance = (_appearance: Appearance) => {
     if (_appearance === 'light') {
       updateStatusBarStyle('dark-content');
+      updateHeaderBlurType('light');
     } else if (_appearance === 'dark') {
       updateStatusBarStyle('light-content');
+      updateHeaderBlurType('dark');
     } else {
       updateStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
+      updateHeaderBlurType(colorScheme === 'dark' ? 'dark' : 'light');
     }
     setAppearance(_appearance);
     storage.set('@appearance', JSON.stringify(_appearance));
@@ -137,10 +153,12 @@ const useColorSystem = () => {
 
   useEffect(() => {
     updateStatusBarStyle();
+    updateHeaderBlurType();
   }, [colorScheme]);
 
   return {
     statusBarStyle,
+    headerBlurType,
     appearance,
     getPaperAppearance,
     getNavigationAppearance,

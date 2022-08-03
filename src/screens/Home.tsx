@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, ListRenderItem, RefreshControl} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Text, TouchableRipple, useTheme} from 'react-native-paper';
@@ -9,10 +10,10 @@ import color from 'color';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
-import {AxiosResponse} from 'axios';
-import feedAxios from '../utils/feedAxios';
+import type {AxiosResponse} from 'axios';
 import IcRoundShare from '../assets/icons/IcRoundShare';
 import Loading from '../animation/Loading/Loading';
+import feedAxios from '../utils/feedAxios';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -102,8 +103,7 @@ const Home: React.FC = () => {
       <TouchableRipple
         borderless
         style={{
-          marginLeft: 16,
-          marginRight: 16,
+          marginHorizontal: 16,
           padding: 16,
           borderRadius: 16,
           backgroundColor: color(colors.secondary).alpha(0.12).toString(),
@@ -207,7 +207,6 @@ const Home: React.FC = () => {
       ListFooterComponentStyle={{marginTop: 24, marginBottom: 24 + insets.bottom}}
       ItemSeparatorComponent={() => <View style={{height: 16}} />}
       keyExtractor={item => item.id}
-      showsVerticalScrollIndicator={false}
       onEndReached={() => getNextTopic()}
       refreshControl={<RefreshControl refreshing={topicRefreshing} onRefresh={() => handleTopicRefresh()} />}
     />
