@@ -4,7 +4,8 @@ import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Text, TouchableRipple} from 'react-native-paper';
+import {Text, TouchableRipple, useTheme} from 'react-native-paper';
+import color from 'color';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
@@ -12,7 +13,6 @@ import {AxiosResponse} from 'axios';
 import feedAxios from '../utils/feedAxios';
 import IcRoundShare from '../assets/icons/IcRoundShare';
 import Loading from '../animation/Loading/Loading';
-import coreColor from '../utils/coreColor';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -66,6 +66,8 @@ const Home: React.FC = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
 
+  const {colors} = useTheme();
+
   const [topics, setTopics] = useState<TopicsFeed[]>([]);
   const [topicLastCursor, setTopicLastCursor] = useState<number | undefined>(undefined);
   const [topicRefreshing, setTopicRefreshing] = useState<boolean>(false);
@@ -104,7 +106,7 @@ const Home: React.FC = () => {
           marginRight: 16,
           padding: 16,
           borderRadius: 16,
-          backgroundColor: coreColor.surfaceVariant,
+          backgroundColor: color(colors.secondary).alpha(0.12).toString(),
         }}
         onPress={() => navigation.navigate('TopicDetail', {id: item.id})}>
         <>
@@ -114,7 +116,7 @@ const Home: React.FC = () => {
               fontWeight: 'bold',
               textAlign: 'justify',
               lineHeight: 18 * 1.5,
-              color: coreColor.onSurface,
+              color: color(colors.onSurface).alpha(0.9).toString(),
             }}>
             {item.title}
           </Text>
@@ -124,15 +126,21 @@ const Home: React.FC = () => {
               flexDirection: 'row',
               alignItems: 'center',
               alignSelf: 'flex-start',
-              backgroundColor: coreColor.surface,
+              backgroundColor: colors.surface,
               borderRadius: 8,
               paddingVertical: 4,
               paddingLeft: 4,
               paddingRight: 8,
               opacity: 0.8,
             }}>
-            <Text style={{fontSize: 12}}>🕙</Text>
-            <Text style={{marginLeft: 4, fontSize: 12, color: coreColor.secondary}}>
+            <Text style={{fontSize: 12, includeFontPadding: false}}>🕙</Text>
+            <Text
+              style={{
+                marginLeft: 4,
+                fontSize: 12,
+                includeFontPadding: false,
+                color: colors.secondary,
+              }}>
               {dayjs(item.publishDate).fromNow()}
             </Text>
           </View>
@@ -143,7 +151,7 @@ const Home: React.FC = () => {
               fontSize: 15,
               textAlign: 'justify',
               lineHeight: 15 * 1.8,
-              color: coreColor.onBackground,
+              color: color(colors.onSurface).alpha(0.8).toString(),
             }}>
             {item.summary}
           </Text>
@@ -159,16 +167,16 @@ const Home: React.FC = () => {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                backgroundColor: coreColor.surface,
+                backgroundColor: colors.surface,
                 borderRadius: 8,
                 paddingVertical: 4,
                 paddingHorizontal: 8,
               }}>
               {item.newsArray.length === 1 && (
-                <Text style={{fontSize: 12, color: coreColor.secondary}}>{item.newsArray[0].siteName + ' 报道'}</Text>
+                <Text style={{fontSize: 12, color: colors.secondary}}>{item.newsArray[0].siteName + ' 报道'}</Text>
               )}
               {item.newsArray.length > 1 && (
-                <Text style={{fontSize: 12, color: coreColor.secondary}}>
+                <Text style={{fontSize: 12, color: colors.secondary}}>
                   {item.newsArray[0].siteName + ' 等 ' + item.newsArray.length + ' 家媒体报道'}
                 </Text>
               )}
@@ -176,16 +184,16 @@ const Home: React.FC = () => {
             <TouchableRipple
               borderless
               style={{
-                width: 24,
-                height: 24,
+                width: 22,
+                height: 22,
                 borderRadius: 11,
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingRight: 2,
-                backgroundColor: coreColor.surface,
+                backgroundColor: colors.secondary,
               }}
               onPress={() => {}}>
-              <IcRoundShare size={14} color={coreColor.onBackground} />
+              <IcRoundShare size={14} color={colors.onSecondary} />
             </TouchableRipple>
           </View>
         </>

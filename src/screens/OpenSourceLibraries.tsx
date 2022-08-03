@@ -1,10 +1,10 @@
 import React from 'react';
 import {Linking, View} from 'react-native';
-import {List, Text, TouchableRipple} from 'react-native-paper';
+import {List, Text, TouchableRipple, useTheme} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import color from 'color';
 import IcRoundOpenInNew from '../assets/icons/IcRoundOpenInNew';
-import coreColor from '../utils/coreColor';
 
 interface PackageDetail {
   license: string;
@@ -26,16 +26,18 @@ const data: PackageDetail[] = require('../assets/openSourceLibraries/licenseComp
 const OpenSourceLibraries: React.FC = () => {
   const insets = useSafeAreaInsets();
 
+  const {colors} = useTheme();
+
   const renderTouchableRipple = ({item}: {item: TouchableRippleItem}) => {
     return (
       <TouchableRipple onPress={() => Linking.openURL(item.repository)}>
         <List.Item
           title={item.name}
-          titleStyle={{fontSize: 12, color: coreColor.onBackground}}
+          titleStyle={{fontSize: 12, color: colors.onBackground}}
           right={() => (
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={{fontSize: 12, marginRight: 8, color: coreColor.primary}}>{item.license}</Text>
-              <IcRoundOpenInNew size={12} color={coreColor.secondary} />
+              <Text style={{fontSize: 12, marginRight: 8, color: colors.primary}}>{item.license}</Text>
+              <IcRoundOpenInNew size={12} color={color(colors.onBackground).alpha(0.7).toString()} />
             </View>
           )}
         />

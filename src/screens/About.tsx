@@ -1,9 +1,8 @@
 import React from 'react';
 import {Dimensions, View} from 'react-native';
-import {Avatar, Text} from 'react-native-paper';
+import {Avatar, Text, useTheme} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
-import coreColor from '../utils/coreColor';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -12,6 +11,8 @@ const buildNumber = DeviceInfo.getBuildNumber();
 
 const Aouut: React.FC = () => {
   const insets = useSafeAreaInsets();
+
+  const {colors} = useTheme();
 
   return (
     <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center', paddingBottom: insets.bottom}}>
@@ -24,16 +25,16 @@ const Aouut: React.FC = () => {
             colors: {primary: 'transparent'},
           }}
         />
-        <Text style={{fontWeight: 'bold', color: coreColor.primary}}>SvenFE implementation of Readhub</Text>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 4}}>
+        <Text style={{fontWeight: 'bold', color: colors.primary}}>SvenFE implementation of Readhub</Text>
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: colors.onBackground, marginTop: 4}}>
           Version {version} ({buildNumber})
         </Text>
       </View>
       <View style={{alignItems: 'center', marginBottom: 8}}>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 8}}>
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: colors.secondary, marginTop: 8}}>
           Salute to https://readhub.cn
         </Text>
-        <Text style={{fontSize: 10, fontWeight: 'bold', color: coreColor.onBackground, marginTop: 8}}>
+        <Text style={{fontSize: 10, fontWeight: 'bold', color: colors.secondary, marginTop: 8}}>
           Powered by React Native
         </Text>
       </View>
