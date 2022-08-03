@@ -13,6 +13,7 @@
         "@react-navigation/native",
         "@react-navigation/stack",
         "axios",
+        "color",
         "dayjs",
         "jotai",
         "lottie-ios",
@@ -34,7 +35,7 @@
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch", "minor"],
       "enabled": false,
-      "excludePackageNames": ["@types/jest", "@types/react-native", "@types/react-test-renderer"]
+      "excludePackageNames": ["@types/color", "@types/jest", "@types/react-native", "@types/react-test-renderer"]
     }
   ]
 }
