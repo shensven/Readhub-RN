@@ -263,7 +263,7 @@ dependencies {
 
     implementation "androidx.core:core-splashscreen:1.0.0-rc1" // Add this line
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
