@@ -34,8 +34,8 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native, Currentl
 
 - Written in [React Native](https://reactnative.dev)
 - does NOT collect any of your privacy data
-- To keep dependencies up to date under the same major version via [WhiteSource Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate)
-- Testing and continuous integration via [Github Workflow](https://github.com/shensven/Readhub-RN/actions)
+- To keep dependencies up to date under the same major version via [Dependabot](https://github.com/features/security/software-supply-chain)
+- Testing and continuous integration via [Github Actions](https://github.com/shensven/Readhub-RN/actions)
 - Has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
 
 ### PREREQUISITES
