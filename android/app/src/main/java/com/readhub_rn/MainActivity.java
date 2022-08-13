@@ -4,14 +4,16 @@ import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import com.facebook.react.ReactActivityDelegate; // <- add this necessary import
 import com.zoontek.rnbootsplash.RNBootSplash; // <- add this necessary import
 import com.zoontek.rnbars.RNBars; // <- add this necessary import
 
 public class MainActivity extends ReactActivity {
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
+    RNBootSplash.init(this); // <- initialize the splash screen
+    super.onCreate(savedInstanceState);
+    RNBars.init(this, "dark-content"); // <- initialize with initial bars styles (could be light-content)
   }
 
   /**
@@ -26,19 +28,12 @@ public class MainActivity extends ReactActivity {
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
-   * you can specify the rendered you wish to use (Fabric or the older renderer).
+   * you can specify the renderer you wish to use - the new renderer (Fabric) or the old renderer
+   * (Paper).
    */
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
-    return new ReactActivityDelegate(this, getMainComponentName()) {
-
-      @Override
-      protected void loadApp(String appKey) {
-        RNBootSplash.init(MainActivity.this); // <- initialize the splash screen
-        super.loadApp(appKey);
-        RNBars.init(MainActivity.this, "dark-content"); // <- initialize with initial bars styles (could be light-content)
-      }
-    };
+    return new ReactActivityDelegate(this, getMainComponentName());
   }
 
   public static class MainActivityDelegate extends ReactActivityDelegate {
