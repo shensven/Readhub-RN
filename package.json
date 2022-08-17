@@ -18,7 +18,7 @@
     "color": "^4.2.3",
     "dayjs": "^1.11.5",
     "jotai": "^1.7.8",
-    "lottie-ios": "3.4.0",
+    "lottie-ios": "3.4.2",
     "lottie-react-native": "^5.1.4",
     "react": "18.0.0",
     "react-native": "0.69.4",
