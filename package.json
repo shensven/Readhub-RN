@@ -25,7 +25,7 @@
     "react-native-bars": "^1.2.2",
     "react-native-bootsplash": "^4.3.2",
     "react-native-device-info": "^10.0.2",
-    "react-native-gesture-handler": "^2.5.0",
+    "react-native-gesture-handler": "^2.6.0",
     "react-native-mmkv": "^2.4.3",
     "react-native-paper": "^4.12.4",
     "react-native-reanimated": "^2.10.0",
