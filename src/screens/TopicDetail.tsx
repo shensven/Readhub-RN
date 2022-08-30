@@ -5,8 +5,9 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Text, useTheme} from 'react-native-paper';
 import {AxiosResponse} from 'axios';
-import dayjs from 'dayjs';
+import {useRequest} from 'ahooks';
 import color from 'color';
+import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import BlurScrollView from './components/BlurScrollView';
 import Loading from '../animation/Loading/Loading';
@@ -51,7 +52,6 @@ const TopicDetail: React.FC = () => {
 
   const {colors} = useTheme();
 
-  const [hasLoading, setHasloading] = useState<boolean>(true);
   const [detail, setDetail] = useState<IDetail>({
     title: '',
     publishDate: '',
@@ -65,10 +65,13 @@ const TopicDetail: React.FC = () => {
   const getDetail = async () => {
     const resp: AxiosResponse = await feedAxios.get(`/topic/${id}`);
     if (resp.status === 200) {
-      setHasloading(false);
       setDetail(resp.data);
     }
   };
+
+  const {loading} = useRequest(getDetail, {
+    loadingDelay: 300,
+  });
 
   useLayoutEffect(() => {
     getDetail();
@@ -76,12 +79,12 @@ const TopicDetail: React.FC = () => {
 
   return (
     <BlurScrollView>
-      {hasLoading && (
+      {loading && (
         <View style={{marginTop: screenHeight / 4}}>
           <Loading />
         </View>
       )}
-      {!hasLoading && (
+      {!loading && (
         <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 16 + insets.bottom}}>
           <Text
             selectable
