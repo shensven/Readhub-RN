@@ -22,7 +22,7 @@
     "lottie-ios": "3.4.3",
     "lottie-react-native": "^5.1.4",
     "react": "18.1.0",
-    "react-native": "0.70.0",
+    "react-native": "0.70.1",
     "react-native-bars": "^1.2.2",
     "react-native-bootsplash": "^4.3.2",
     "react-native-device-info": "^10.2.0",
