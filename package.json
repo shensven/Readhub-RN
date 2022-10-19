@@ -14,7 +14,7 @@
     "@react-native-masked-view/masked-view": "^0.2.8",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.2",
-    "ahooks": "^3.7.1",
+    "ahooks": "^3.7.2",
     "axios": "^0.27.2",
     "color": "^4.2.3",
     "dayjs": "^1.11.5",
