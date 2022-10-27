@@ -312,7 +312,7 @@ PODS:
     - React-Core
   - react-native-flipper (0.172.0):
     - React-Core
-  - react-native-mmkv (2.4.3):
+  - react-native-mmkv (2.5.1):
     - MMKV (>= 1.2.13)
     - React-Core
   - react-native-safe-area-context (4.4.1):
@@ -663,7 +663,7 @@ SPEC CHECKSUMS:
   React-logger: cffcc09e8aba8a3014be8d18da7f922802e9f19e
   react-native-blur: 3e9c8e8e9f7d17fa1b94e1a0ae9fd816675f5382
   react-native-flipper: 43ecd19174184c24aba5e1ef75ae13106af871e3
-  react-native-mmkv: 1265a348a4711097ba29c8bcefd5971f48220f2b
+  react-native-mmkv: 69b9c003f10afdd01addf7c6ee784ce42ee2eff3
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   React-perflogger: 082b4293f0b3914ff41da35a6c06ac4490fcbcc8
   React-RCTActionSheet: 83da3030deb5dea54b398129f56540a44e64d3ae
