@@ -18,7 +18,7 @@
     "axios": "^0.27.2",
     "color": "^4.2.3",
     "dayjs": "^1.11.6",
-    "jotai": "^1.10.0",
+    "jotai": "^1.11.0",
     "lottie-ios": "3.4.3",
     "lottie-react-native": "^5.1.4",
     "react": "18.1.0",
