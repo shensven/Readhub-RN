@@ -15,7 +15,7 @@
     "@react-navigation/native": "^6.0.16",
     "@react-navigation/stack": "^6.3.7",
     "ahooks": "^3.7.2",
-    "axios": "^0.27.2",
+    "axios": "^1.2.2",
     "color": "^4.2.3",
     "dayjs": "^1.11.6",
     "jotai": "^1.11.1",
