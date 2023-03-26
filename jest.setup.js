@@ -1,10 +1,9 @@
 import {jest} from '@jest/globals';
-import 'react-native-gesture-handler/jestSetup';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
 
 jest.useFakeTimers();
 
-global.__reanimatedWorkletInit = () => {};
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
@@ -14,14 +13,17 @@ jest.mock('react-native-reanimated', () => {
 
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
-
-jest.doMock('react-native-bootsplash', () => {
+jest.mock('@react-navigation/stack', () => {
   return {
-    hide: jest.fn().mockResolvedValueOnce(),
-    show: jest.fn().mockResolvedValueOnce(),
-    getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
+    createStackNavigator: jest.fn().mockReturnValue({
+      Navigator: 'Navigator',
+      Screen: 'Screen',
+    }),
+    TransitionPresets: {
+      SlideFromRightIOS: 'SlideFromRightIOS',
+    },
+    HeaderStyleInterpolators: {
+      forUIKit: 'forUIKit',
+    },
   };
 });
-
-jest.mock('axios');

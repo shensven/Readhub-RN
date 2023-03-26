@@ -1,22 +1,19 @@
 import React from 'react';
 import {Provider as PaperProvider} from 'react-native-paper';
-import {MMKV} from 'react-native-mmkv';
 import {StatusBar} from 'react-native-bars';
-import useColorSystem from './src/utils/useColorSystem';
-import MainStack from './src/MainStack';
+import {useAppearance} from '@/utils/appearance';
+import AppStack from './src/AppStack';
+import 'react-native-gesture-handler';
 
-export const storage = new MMKV();
-export const mmkvAppearance = storage.getString('@appearance');
-
-const App: React.FC = () => {
-  const {statusBarStyle, getPaperAppearance} = useColorSystem();
+function App() {
+  const {statusBarStyle, paperTheme} = useAppearance();
 
   return (
-    <PaperProvider theme={getPaperAppearance()}>
+    <PaperProvider theme={paperTheme}>
       <StatusBar animated={true} barStyle={statusBarStyle} />
-      <MainStack />
+      <AppStack />
     </PaperProvider>
   );
-};
+}
 
 export default App;
