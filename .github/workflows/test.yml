@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - uses: actions/cache@v3
         with:
@@ -51,6 +51,9 @@ jobs:
           echo "MYAPP_UPLOAD_STORE_PASSWORD=test" >> gradle.properties
           echo "MYAPP_UPLOAD_KEY_PASSWORD=test" >> gradle.properties
           ./gradlew test
+
+      - name: Lint
+        run: yarn lint
 
       - name: Jest
         run: yarn test

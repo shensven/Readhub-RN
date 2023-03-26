@@ -1,24 +1,13 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
 
-const Loading: React.FC = () => {
+function Loading() {
   return (
-    <View style={styles.root}>
-      <LottieView source={require('./Bodymovin_export/data.json')} autoPlay loop style={styles.lottie} />
+    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <LottieView source={require('./Bodymovin_export/data.json')} autoPlay loop style={{width: 36, height: 36}} />
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  root: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  lottie: {
-    width: 36,
-    height: 36,
-  },
-});
+}
 
 export default Loading;

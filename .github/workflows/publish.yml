@@ -9,25 +9,51 @@ concurrency:
   group: ${{ github.ref }}
 
 jobs:
+  get-semantic-version:
+    if: ${{ github.repository_owner == 'shensven' }}
+    runs-on: ubuntu-latest
+    outputs:
+      SEMANTIC_VERSION: ${{ steps.console-semantic-version.outputs.SEMANTIC_VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Console semantic version
+        id: console-semantic-version
+        run: |
+          SEMANTIC_VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "SEMANTIC_VERSION=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+
   publish_android:
     name: Publish Android
-    if: ${{ github.repository_owner == 'shensven' }}
-
+    needs: get-semantic-version
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-java@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: 11
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
-      - uses: actions/cache@v3
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -36,7 +62,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - uses: actions/cache@v3
+      - name: Restore node_modules
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: |
@@ -49,18 +76,23 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Genarate license compliance
-        run: npx -y license-compliance --direct --report detailed --format json > ./src/assets/openSourceLibraries/licenseCompliance.json
+        run: npx -y license-compliance --direct --report detailed --format json > ./src/screen/OpenSourceLibraries/licenseCompliance.json
 
-      - name: Get app version
-        id: app_version
+      - name: Setting up Gradle variables
         run: |
-          APP_VERSION=$(node -e "console.log(require('./package.json').version)")
-          echo ::set-output name=app_version::$APP_VERSION
+          cd android
+          echo "MYAPP_UPLOAD_STORE_PASSWORD=${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}" >> gradle.properties
+          echo "MYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}" >> gradle.properties
+
+      - name: Restore jks
+        run: |
+          cd android/app
+          echo -n "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
 
       - name: Release for Android & Play Store
         env:
           VERSION_CODE: ${{ github.run_number }}
-          VERSION_NAME: ${{ steps.app_version.outputs.app_version }}
+          VERSION_NAME: ${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
         run: |
           cd android && chmod +x gradlew
           ./gradlew assembleRelease
@@ -69,8 +101,8 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: v${{ steps.app_version.outputs.app_version }}
-          tag: v${{ steps.app_version.outputs.app_version }}
+          name: v${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
+          tag: v${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
           allowUpdates: true
           draft: true
           artifacts: 'android/app/build/outputs/apk/release/*.*'
@@ -86,18 +118,20 @@ jobs:
 
   publish_ios:
     name: Publish iOS
-    if: ${{ github.repository_owner == 'shensven' }}
-
+    needs: get-semantic-version
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
-      - uses: actions/cache@v3
+      - name: Restore CocoaPods
+        uses: actions/cache@v3
         with:
           path: |
             ~/Library/Caches/CocoaPods
@@ -106,7 +140,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
 
-      - uses: actions/cache@v3
+      - name: Restore DerivedData
+        uses: actions/cache@v3
         with:
           path: |
             ~/Library/Developer/Xcode/DerivedData
@@ -114,7 +149,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-derivedData-
 
-      - uses: actions/cache@v3
+      - name: Restore node_modules
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: |
@@ -153,18 +189,14 @@ jobs:
           cd ios && pod install --repo-update
 
       - name: Genarate license compliance
-        run: npx -y license-compliance --direct --report detailed --format json > ./src/assets/openSourceLibraries/licenseCompliance.json
-
-      - name: Get app version
-        id: app_version
-        run: |
-          APP_VERSION=$(node -e "console.log(require('./package.json').version)")
-          echo ::set-output name=app_version::$APP_VERSION
+        run: npx -y license-compliance --direct --report detailed --format json > ./src/screen/OpenSourceLibraries/licenseCompliance.json
 
       - name: Release for App Store & Upload to TestFlight
+        env:
+          NO_FLIPPER: '1'
         run: |
           cd ios
-          xcrun agvtool new-marketing-version ${{ steps.app_version.outputs.app_version }}
+          xcrun agvtool new-marketing-version ${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
           xcrun agvtool new-version -all ${{ github.run_number }}
 
           xcodebuild archive \
@@ -188,7 +220,7 @@ jobs:
 
           xcrun altool --upload-app \
             --type ios \
-            --file "${{ runner.temp }}/readhub_rn.ipa" \
+            --file "${{ runner.temp }}/Readhub.ipa" \
             --username "${{ secrets.APPLE_ID }}" \
             --password "${{ secrets.APPLE_ID_PASS }}" \
 
