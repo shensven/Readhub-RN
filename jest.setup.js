@@ -27,3 +27,9 @@ jest.mock('@react-navigation/stack', () => {
     },
   };
 });
+
+jest.mock('@react-navigation/devtools', () => {
+  return {
+    useFlipper: jest.fn(),
+  };
+});

@@ -1,7 +1,8 @@
 import React, {useCallback} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
+import {useFlipper} from '@react-navigation/devtools';
 import {useAppearance} from './utils/appearance';
 import {HeaderLeft, HeaderRight, Home} from './screen/Home';
 import {Search} from './screen/Search';
@@ -16,6 +17,9 @@ import {About} from './screen/About';
 const {Navigator, Screen} = createStackNavigator();
 
 function AppStack() {
+  const navigationRef = useNavigationContainerRef();
+  useFlipper(navigationRef);
+
   const {navigationTheme} = useAppearance();
 
   const HomeHeaderLeft = useCallback(
@@ -26,6 +30,7 @@ function AppStack() {
 
   return (
     <NavigationContainer
+      ref={navigationRef}
       theme={navigationTheme}
       onReady={() => {
         RNBootSplash.hide({fade: true});
