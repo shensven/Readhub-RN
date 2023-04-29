@@ -11,6 +11,12 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+jest.mock('react-native-flipper', () => {
+  return {
+    addPlugin: jest.fn(),
+  };
+});
+
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 
 jest.mock('@react-navigation/stack', () => {
