@@ -189,7 +189,7 @@ jobs:
           cd ios && pod install --repo-update
 
       - name: Genarate license compliance
-        run: npx -y license-compliance --direct --report detailed --format json > ./src/screen/OpenSourceLibraries/licenseCompliance.json
+        run: yarn lcGen
 
       - name: Release for App Store & Upload to TestFlight
         env:

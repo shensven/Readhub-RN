@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "lcGen": "license-compliance --direct --report detailed --format json > ./src/screen/OpenSourceLibraries/licenseCompliance.json"
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.9",
@@ -51,6 +52,7 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^8.19.0",
     "jest": "^29.2.1",
+    "license-compliance": "^1.2.5",
     "metro-react-native-babel-preset": "0.73.9",
     "prettier": "^2.4.1",
     "react-native-flipper": "^0.164.0",
