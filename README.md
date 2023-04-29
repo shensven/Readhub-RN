@@ -26,22 +26,15 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native
 
 ### Android
 
-- Download the apk via [GitHub Release](https://github.com/shensven/Readhub-RN/releases)
+- [GitHub Release](https://github.com/shensven/Readhub-RN/releases)
 
-## 🔨 BUILD
+## 🔨 Build
 
-### INTRO
+### Prequisites
 
-- Written in [React Native](https://reactnative.dev)
-- To keep dependencies up to date under the same major version via [Dependabot](https://github.com/features/security/software-supply-chain)
-- Testing and continuous integration via [Github Actions](https://github.com/shensven/Readhub-RN/actions)
-- Has [Hermes](https://hermesengine.dev) enabled, so it is recommended to use [Flipper](https://fbflipper.com) for debugging
-
-### PREREQUISITES
-
-- [Node 18](https://nodejs.org) or higher
-- The [yarn](https://yarnpkg.com/getting-started/install) package manager
-- [Watchman](https://formulae.brew.sh/formula/watchman)
+- [Node 14](https://nodejs.org) or higher
+- [yarn](https://yarnpkg.com/getting-started/install)
+- [Watchman](https://facebook.github.io/watchman)
 - [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 - [JDK 11](https://formulae.brew.sh/formula/openjdk@11) or higher
@@ -49,63 +42,34 @@ SvenFE implementation of [Readhub](https://readhub.cn) in React Native
   - Build-Tools `33.0.0`
   - NDK `23.1.7779620`
 
-### GET STARTED
+For more detailed environment configuration, please refer to the official React Native documentation.👇
+https://reactnative.dev/docs/environment-setup
+
+### Get Started
 
 ```sh
 yarn install
 cd ios && pod install
 ```
 
-### DEBUGGING ON THE SIMULATOR
-
-```sh
-yarn ios
-```
-
-```sh
-yarn android
-```
-
-### DEBUGGING ON THE DEVICE
-
-```sh
-npm install -g ios-deploy
-```
-
-```sh
-yarn ios --device
-```
-
-```sh
-yarn android run-android
-```
-
-### TEST
-
-```sh
-yarn test
-```
-
-```sh
-cd android
-chmod +x gradlew
-./gradlew test
-```
-
-### iPhone DEPLOY
+### iOS Deployment
 
 ```sh
 yarn ios --configuration Release --device
 ```
 
-### ASSEMBLE THE APK
+### Assem the APK
 
 ```sh
-cd android
+cd android && chmod +x gradlew
 ./gradlew assembleRelease
 ```
 
-### BOOTSPLASH GENERATION
+### Debug
+
+We recommend you to use [Flipper](https://fbflipper.com/) to debug the app.
+
+### Generate the Splash Screen
 
 ```sh
 yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
