@@ -45,14 +45,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile.
 
+      - name: Gradlew lint
+        run: |
+          cd android && chmod +x gradlew
+          ./gradlew lint
+
       - name: Gradlew test
         run: |
-          cd android && chmod +x gradlew 
-          echo "MYAPP_UPLOAD_STORE_PASSWORD=test" >> gradle.properties
-          echo "MYAPP_UPLOAD_KEY_PASSWORD=test" >> gradle.properties
-          ./gradlew test
+          cd android
+          ./gradlew testDebugUnitTest
 
-      - name: Lint
+      - name: ESLint
         run: yarn lint
 
       - name: Jest
