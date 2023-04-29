@@ -5,7 +5,7 @@
     "name": "@babel/core",
     "path": "node_modules/@babel/core",
     "repository": "https://github.com/babel/babel",
-    "version": "7.21.3"
+    "version": "7.21.4"
   },
   {
     "license": "MIT",
@@ -13,7 +13,7 @@
     "name": "@babel/preset-env",
     "path": "node_modules/@babel/preset-env",
     "repository": "https://github.com/babel/babel",
-    "version": "7.20.2"
+    "version": "7.21.4"
   },
   {
     "license": "MIT",
@@ -36,7 +36,15 @@
     "name": "@react-native-masked-view/masked-view",
     "path": "node_modules/@react-native-masked-view/masked-view",
     "repository": "https://github.com/react-native-masked-view/masked-view",
-    "version": "0.2.8"
+    "version": "0.2.9"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/@react-navigation/devtools/LICENSE",
+    "name": "@react-navigation/devtools",
+    "path": "node_modules/@react-navigation/devtools",
+    "repository": "https://github.com/react-navigation/react-navigation",
+    "version": "6.0.18"
   },
   {
     "license": "MIT",
@@ -61,6 +69,14 @@
     "path": "node_modules/@react-navigation/stack",
     "repository": "https://github.com/react-navigation/react-navigation",
     "version": "6.3.16"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/@shopify/flash-list/LICENSE.md",
+    "name": "@shopify/flash-list",
+    "path": "node_modules/@shopify/flash-list",
+    "repository": "https://github.com/Shopify/flash-list",
+    "version": "1.4.3"
   },
   {
     "license": "MIT",
@@ -92,7 +108,7 @@
     "name": "@types/react",
     "path": "node_modules/@types/react",
     "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
-    "version": "18.0.29"
+    "version": "18.0.33"
   },
   {
     "license": "MIT",
@@ -123,7 +139,7 @@
     "name": "axios",
     "path": "node_modules/axios",
     "repository": "https://github.com/axios/axios",
-    "version": "1.3.4"
+    "version": "1.4.0"
   },
   {
     "license": "MIT",
@@ -132,6 +148,14 @@
     "path": "node_modules/babel-jest",
     "repository": "https://github.com/facebook/jest",
     "version": "29.5.0"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/babel-plugin-inline-import/LICENSE",
+    "name": "babel-plugin-inline-import",
+    "path": "node_modules/babel-plugin-inline-import",
+    "repository": "Quadric/babel-plugin-inline-import",
+    "version": "3.0.0"
   },
   {
     "license": "MIT",
@@ -163,7 +187,7 @@
     "name": "eslint",
     "path": "node_modules/eslint",
     "repository": "eslint/eslint",
-    "version": "8.36.0"
+    "version": "8.37.0"
   },
   {
     "license": "MIT",
@@ -179,7 +203,15 @@
     "name": "jotai",
     "path": "node_modules/jotai",
     "repository": "https://github.com/pmndrs/jotai",
-    "version": "2.0.3"
+    "version": "2.0.4"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/license-compliance/LICENSE",
+    "name": "license-compliance",
+    "path": "node_modules/license-compliance",
+    "repository": "https://github.com/tmorell/license-compliance",
+    "version": "1.2.5"
   },
   {
     "license": "Apache-2.0",
@@ -202,7 +234,7 @@
     "name": "metro-react-native-babel-preset",
     "path": "node_modules/metro-react-native-babel-preset",
     "repository": "git@github.com:facebook/metro",
-    "version": "0.73.8"
+    "version": "0.73.9"
   },
   {
     "license": "MIT",
@@ -226,7 +258,7 @@
     "name": "react-native",
     "path": "node_modules/react-native",
     "repository": "https://github.com/facebook/react-native",
-    "version": "0.71.4"
+    "version": "0.71.7"
   },
   {
     "license": "MIT",
@@ -234,7 +266,7 @@
     "name": "react-native-bars",
     "path": "node_modules/react-native-bars",
     "repository": "https://github.com/zoontek/react-native-bars",
-    "version": "1.3.0"
+    "version": "2.2.0"
   },
   {
     "license": "MIT",
@@ -242,7 +274,7 @@
     "name": "react-native-bootsplash",
     "path": "node_modules/react-native-bootsplash",
     "repository": "https://github.com/zoontek/react-native-bootsplash",
-    "version": "4.5.3"
+    "version": "4.6.0"
   },
   {
     "license": "MIT",
@@ -250,7 +282,15 @@
     "name": "react-native-device-info",
     "path": "node_modules/react-native-device-info",
     "repository": "https://github.com/react-native-device-info/react-native-device-info",
-    "version": "10.4.0"
+    "version": "10.6.0"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/react-native-flipper/LICENSE",
+    "name": "react-native-flipper",
+    "path": "node_modules/react-native-flipper",
+    "repository": "https://github.com/facebook/flipper",
+    "version": "0.164.0"
   },
   {
     "license": "MIT",
@@ -266,7 +306,7 @@
     "name": "react-native-paper",
     "path": "node_modules/react-native-paper",
     "repository": "https://github.com/callstack/react-native-paper",
-    "version": "5.5.1"
+    "version": "5.7.0"
   },
   {
     "license": "MIT",
@@ -282,7 +322,7 @@
     "name": "react-native-safe-area-context",
     "path": "node_modules/react-native-safe-area-context",
     "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
-    "version": "4.5.0"
+    "version": "4.5.1"
   },
   {
     "license": "MIT",
@@ -298,7 +338,15 @@
     "name": "react-native-svg",
     "path": "node_modules/react-native-svg",
     "repository": "https://github.com/react-native-community/react-native-svg",
-    "version": "13.8.0"
+    "version": "13.9.0"
+  },
+  {
+    "license": "MIT",
+    "licenseFile": "node_modules/react-native-svg-transformer/LICENSE",
+    "name": "react-native-svg-transformer",
+    "path": "node_modules/react-native-svg-transformer",
+    "repository": "https://github.com/kristerkari/react-native-svg-transformer",
+    "version": "1.0.0"
   },
   {
     "license": "MIT",

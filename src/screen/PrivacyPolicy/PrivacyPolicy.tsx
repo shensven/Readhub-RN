@@ -1,9 +1,10 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {Text, useTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
+import {useAppearance} from '@/utils/appearance';
 
 function PrivacyPolicy() {
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   return (
     <ScrollView>

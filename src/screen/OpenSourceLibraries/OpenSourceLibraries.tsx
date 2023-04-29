@@ -1,10 +1,10 @@
 import React from 'react';
 import {Linking, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlashList} from '@shopify/flash-list';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useTheme} from 'react-native-paper';
-import color from 'color';
 import {IcRoundOpenInNew} from '@/component/Icon';
+import {useAppearance} from '@/utils/appearance';
+import color from 'color';
 import Item from './Item';
 
 type LicenseCompliance = {
@@ -26,23 +26,26 @@ const data: LicenseCompliance[] = require('./licenseCompliance.json');
 
 function OpenSourceLibraries() {
   const insets = useSafeAreaInsets();
-  const {colors} = useTheme();
+  const {paperTheme} = useAppearance();
 
   const renderItem = ({item}: {item: RenderItemProps}) => {
     return (
       <Item
         name={item.name}
         license={item.license}
-        rightIcon={<IcRoundOpenInNew width={14} height={14} color={color(colors.onBackground).alpha(0.7).hexa()} />}
+        rightIcon={
+          <IcRoundOpenInNew width={14} height={14} color={color(paperTheme.colors.onBackground).alpha(0.7).hexa()} />
+        }
         onPress={() => Linking.openURL(item.repository)}
       />
     );
   };
 
   return (
-    <FlatList
+    <FlashList
       data={data}
       renderItem={renderItem}
+      estimatedItemSize={40}
       keyExtractor={(item, index) => item.name + index}
       ListFooterComponent={<View />}
       ListFooterComponentStyle={{height: insets.bottom}}

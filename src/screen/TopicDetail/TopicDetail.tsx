@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Dimensions, Linking, ScrollView} from 'react-nat
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {Text, useTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {AxiosResponse} from 'axios';
 import {useRequest} from 'ahooks';
 import color from 'color';
@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import Loading from '@/animation/Loading/Loading';
 import feedAxios from '@/utils/feedAxios';
+import {useAppearance} from '@/utils/appearance';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -49,7 +50,7 @@ function TopicDetail() {
 
   const {id} = route.params;
 
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   const [detail, setDetail] = useState<IDetail>({
     title: '',

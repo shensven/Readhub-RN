@@ -1,7 +1,8 @@
 import React from 'react';
 import color from 'color';
 import {View} from 'react-native';
-import {Text, TouchableRipple, useTheme} from 'react-native-paper';
+import {Text, TouchableRipple} from 'react-native-paper';
+import {useAppearance} from '@/utils/appearance';
 import {IcRoundShare} from '@/component/Icon';
 import type {Feed} from './Home';
 
@@ -16,7 +17,7 @@ type Props = {
 function TopicCard(props: Props) {
   const {title, publishDate, summary, newsArray, onPress} = props;
 
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   return (
     <TouchableRipple borderless style={{marginHorizontal: 16, borderRadius: 16}} onPress={onPress}>

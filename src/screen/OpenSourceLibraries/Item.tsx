@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Text, TouchableRipple, useTheme} from 'react-native-paper';
+import {Text, TouchableRipple} from 'react-native-paper';
+import {useAppearance} from '@/utils/appearance';
 
 type ItemProps = {
   name: string;
@@ -11,7 +12,7 @@ type ItemProps = {
 
 function Item(props: ItemProps) {
   const {name, license, rightIcon, onPress} = props;
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   return (
     <TouchableRipple style={{paddingHorizontal: 16, paddingVertical: 12}} onPress={onPress}>
