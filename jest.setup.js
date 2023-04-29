@@ -28,6 +28,10 @@ jest.mock('@react-navigation/stack', () => {
   };
 });
 
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
+
 jest.mock('@react-navigation/devtools', () => {
   return {
     useFlipper: jest.fn(),

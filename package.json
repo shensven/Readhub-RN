@@ -11,6 +11,7 @@
     "lcGen": "license-compliance --direct --report detailed --format json > ./src/screen/OpenSourceLibraries/licenseCompliance.json"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-masked-view/masked-view": "^0.2.9",
     "@react-navigation/elements": "^1.3.17",
     "@react-navigation/native": "^6.1.6",
@@ -69,7 +70,8 @@
     ],
     "setupFiles": [
       "<rootDir>/jest.setup.js",
-      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js",
+      "<rootDir>/node_modules/@shopify/flash-list/jestSetup.js"
     ],
     "moduleNameMapper": {
       "\\.svg": "<rootDir>/__mocks__/svgMock.js"
