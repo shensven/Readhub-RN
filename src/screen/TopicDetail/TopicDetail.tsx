@@ -106,7 +106,7 @@ function TopicDetail() {
                 marginTop: 12,
                 paddingHorizontal: 8,
                 borderRadius: 8,
-                backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
+                backgroundColor: color(colors.secondaryContainer).alpha(0.5).hexa(),
               }}>
               <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>🕙</Text>
               <Text
@@ -114,7 +114,7 @@ function TopicDetail() {
                   fontSize: 12,
                   includeFontPadding: false,
                   marginLeft: 4,
-                  color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
+                  color: color(colors.onSecondaryContainer).alpha(0.5).hexa(),
                 }}>
                 {dayjs(detail.publishDate).fromNow()}
               </Text>
@@ -144,7 +144,7 @@ function TopicDetail() {
                   marginTop: 24,
                   paddingHorizontal: 8,
                   borderRadius: 8,
-                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
+                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).hexa(),
                 }}>
                 <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>📰</Text>
                 <Text
@@ -152,7 +152,7 @@ function TopicDetail() {
                     fontSize: 12,
                     includeFontPadding: false,
                     marginLeft: 4,
-                    color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
+                    color: color(colors.onSecondaryContainer).alpha(0.5).hexa(),
                   }}>
                   相关事件
                 </Text>
@@ -174,7 +174,7 @@ function TopicDetail() {
                         style={{
                           marginTop: 2,
                           fontSize: 10,
-                          color: color(colors.onBackground).alpha(0.5).toString(),
+                          color: color(colors.onBackground).alpha(0.5).hexa(),
                         }}>
                         {dayjs(item.createdAt).format('YYYY-MM-DD')}
                       </Text>
@@ -196,7 +196,7 @@ function TopicDetail() {
                   marginTop: 24,
                   paddingHorizontal: 8,
                   borderRadius: 8,
-                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).toString(),
+                  backgroundColor: color(colors.secondaryContainer).alpha(0.5).hexa(),
                 }}>
                 <Text style={{fontSize: 12, includeFontPadding: false, marginLeft: -2}}>🔗</Text>
                 <Text
@@ -204,7 +204,7 @@ function TopicDetail() {
                     fontSize: 12,
                     includeFontPadding: false,
                     marginLeft: 4,
-                    color: color(colors.onSecondaryContainer).alpha(0.5).toString(),
+                    color: color(colors.onSecondaryContainer).alpha(0.5).hexa(),
                   }}>
                   媒体报道
                 </Text>

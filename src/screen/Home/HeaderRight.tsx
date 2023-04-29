@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
-import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundSearch} from '@/component/icon';
+import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundSearch} from '@/component/Icon';
 
 type StackParamList = {
   Search: undefined;
@@ -17,15 +17,15 @@ function HeaderRight() {
   const {navigationTheme} = useAppearance();
 
   const IconButtonSearch = useCallback(
-    () => <IcRoundSearch color={navigationTheme.colors.text} />,
+    () => <IcRoundSearch color={navigationTheme.colors.text} width={24} height={24} />,
     [navigationTheme.dark],
   );
 
   const IconButtonMore = useCallback(
     () => (
       <>
-        {Platform.OS === 'ios' && <IcRoundMoreHoriz color={navigationTheme.colors.text} />}
-        {Platform.OS === 'android' && <IcRoundMoreVert color={navigationTheme.colors.text} />}
+        {Platform.OS === 'ios' && <IcRoundMoreHoriz color={navigationTheme.colors.text} width={24} height={24} />}
+        {Platform.OS === 'android' && <IcRoundMoreVert color={navigationTheme.colors.text} width={24} height={24} />}
       </>
     ),
     [navigationTheme.dark],

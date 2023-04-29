@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {createStackNavigator, HeaderStyleInterpolators, TransitionPresets} from '@react-navigation/stack';
 import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
 import {useFlipper} from '@react-navigation/devtools';
 import {useAppearance} from './utils/appearance';
-import {HeaderLeft, HeaderRight, Home} from './screen/Home';
+import {HeaderTitle, HeaderRight, Home} from './screen/Home';
 import {Search} from './screen/Search';
 import {Settings} from './screen/Settings';
 import {TopicDetail} from './screen/TopicDetail';
@@ -17,16 +17,9 @@ import {About} from './screen/About';
 const {Navigator, Screen} = createStackNavigator();
 
 function AppStack() {
+  const {navigationTheme} = useAppearance();
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
-
-  const {navigationTheme} = useAppearance();
-
-  const HomeHeaderLeft = useCallback(
-    () => <HeaderLeft color={navigationTheme.colors.primary} />,
-    [navigationTheme.dark],
-  );
-  const HomeHeaderRight = useCallback(() => <HeaderRight />, [navigationTheme.dark]);
 
   return (
     <NavigationContainer
@@ -59,8 +52,8 @@ function AppStack() {
           component={Home}
           options={() => ({
             headerTitleAlign: 'left',
-            headerTitle: HomeHeaderLeft,
-            headerRight: HomeHeaderRight,
+            headerTitle: HeaderTitle,
+            headerRight: HeaderRight,
           })}
         />
         <Screen name="TopicDetail" component={TopicDetail} options={{headerTitle: '话题详情'}} />

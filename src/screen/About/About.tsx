@@ -1,8 +1,10 @@
 import React from 'react';
-import {Dimensions, View} from 'react-native';
-import {Avatar, Text, useTheme} from 'react-native-paper';
+import {Image, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
+import {useAppearance} from '@/utils/appearance';
+import color from 'color';
 
 declare const global: {
   HermesInternal: null | {
@@ -12,11 +14,9 @@ declare const global: {
   };
 };
 
-const screenHeight = Dimensions.get('screen').height;
-
 function Aouut() {
   const insets = useSafeAreaInsets();
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   const hermeVersion = global.HermesInternal?.getRuntimeProperties?.()['OSS Release Version'] ?? '';
 
@@ -25,26 +25,26 @@ function Aouut() {
 
   return (
     <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center', paddingBottom: insets.bottom}}>
-      <View style={{alignItems: 'center', height: screenHeight * 0.75}}>
-        <Avatar.Image
-          size={68}
+      <View style={{alignItems: 'center'}}>
+        <Image
           source={require('@/assets/appIcon/AppIconAlpha.png')}
-          style={{marginTop: 40, marginBottom: 8}}
-          theme={{
-            colors: {primary: 'transparent'},
-          }}
+          style={{width: 90, height: 90, marginTop: 40, marginBottom: 8}}
         />
+
         <Text variant="titleMedium" style={{color: colors.primary}}>
           SvenFE implementation of Readhub
         </Text>
-        <Text variant="bodySmall" style={{fontWeight: 'bold', color: colors.secondary, marginTop: 4}}>
+        <Text variant="bodySmall" style={{color: colors.onBackground, fontSize: 10}}>
           Version {version} ({buildNumber})
         </Text>
       </View>
-      <View style={{alignItems: 'center', marginBottom: 8}}>
-        <Text
-          variant="labelSmall"
-          style={{color: colors.onBackground, marginTop: 8}}>{`Engine: Hermes ${hermeVersion}`}</Text>
+      <View style={{alignItems: 'center', paddingBottom: 48}}>
+        <Text variant="bodySmall" style={{color: colors.onPrimaryContainer, fontSize: 10}}>
+          Made with ❤️ in Kunming by SvenFE
+        </Text>
+        <Text variant="bodySmall" style={{color: color(colors.onBackground).alpha(0.5).hexa(), marginTop: 8}}>
+          Engine: Hermes {hermeVersion}
+        </Text>
       </View>
     </View>
   );
