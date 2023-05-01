@@ -42,7 +42,7 @@
     "@babel/runtime": "^7.20.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-navigation/devtools": "^6.0.18",
-    "@tsconfig/react-native": "^2.0.2",
+    "@tsconfig/react-native": "^3.0.0",
     "@types/color": "^3.0.3",
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.33",
