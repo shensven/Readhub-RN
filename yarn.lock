@@ -1988,10 +1988,10 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
-"@tsconfig/react-native@^2.0.2":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@tsconfig/react-native/-/react-native-2.0.3.tgz#79ad8efc6d3729152da6cb23725b6c364a7349b2"
-  integrity sha512-jE58snEKBd9DXfyR4+ssZmYJ/W2mOSnNrvljR0aLyQJL9JKX6vlWELHkRjb3HBbcM9Uy0hZGijXbqEAjOERW2A==
+"@tsconfig/react-native@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/react-native/-/react-native-3.0.1.tgz#56967588bb607bd10e9bb0828a60766944035c81"
+  integrity sha512-7C4WVvuKjATN8DU4+l9nuauakWFwNks4ZDNzM00asa3SBdywzqpVrXbN5nwlneivs3Y+98Nk//HNRlIzSMWEBw==
 
 "@types/babel__core@^7.1.14":
   version "7.20.0"
