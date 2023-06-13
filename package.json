@@ -56,7 +56,7 @@
     "license-compliance": "^1.2.5",
     "metro-react-native-babel-preset": "0.73.9",
     "prettier": "^2.4.1",
-    "react-native-flipper": "^0.164.0",
+    "react-native-flipper": "^0.195.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
