@@ -37,7 +37,7 @@
     "react-native-svg": "^13.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
+    "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.21.4",
     "@babel/runtime": "^7.20.0",
     "@react-native-community/eslint-config": "^3.2.0",
